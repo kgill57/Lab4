@@ -6,7 +6,7 @@ using System.Web;
 
 public class User
 {
-    private int UID;
+    private int userID;
     private String fName;
     private char MI;
     private String lName;
@@ -18,9 +18,9 @@ public class User
     private DateTime lastUpdated;
 
     // Setters
-    public void setUID(int UID)
+    public void setUserID(int userID)
     {
-        this.UID = UID;
+        this.userID = userID;
     }
     
     public void setFName(String fName)
@@ -69,9 +69,9 @@ public class User
     }
 
     // Getters
-    public int getUID()
+    public int getUserID()
     {
-        return this.UID;
+        return this.userID;
     }
 
     public String getFName()

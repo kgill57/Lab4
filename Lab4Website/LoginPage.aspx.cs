@@ -25,5 +25,9 @@ public partial class LoginPage : System.Web.UI.Page
         {
             Response.Redirect("AdminPage.aspx");
         }
+        else
+        {
+            lblError.Text = "Invalid username and/or password.";
+        }
     }
 }

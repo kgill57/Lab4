@@ -3,10 +3,11 @@
     margin-right:auto;
     text-align: center;
     width: 50%;
+    background-color:lightyellow;
 }
 
 h1 {
-    color: red;
+    color: forestgreen;
 }
 
 .table {

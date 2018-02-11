@@ -11,4 +11,9 @@ public partial class LoginPage : System.Web.UI.Page
     {
 
     }
+
+    protected void btnExit_Click(object sender, EventArgs e)
+    {
+        Environment.Exit(0);
+    }
 }

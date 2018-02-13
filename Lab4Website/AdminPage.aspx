@@ -16,13 +16,11 @@
         <ul>
             <li>User Options</li>
             <li>View Rewards</li>
-            <li>Add Reward Providers</li>
+            <li>View Reward Providers</li>
             <li>Add Community Events</li>
         </ul>
     </div>
-    <div class="liveFeed">
-
-    </div>
+    
 </asp:Content>
 
 

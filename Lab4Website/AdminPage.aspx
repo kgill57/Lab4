@@ -20,6 +20,9 @@
             <li>Add Community Events</li>
         </ul>
     </div>
+    <div class="liveFeed">
+
+    </div>
 </asp:Content>
 
 

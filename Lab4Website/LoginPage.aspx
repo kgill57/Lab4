@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <header>
         <link href="Style/desktop.css" rel="stylesheet" />
-        <h1>Elk Company Reward System</h1>
+        
     </header>
     <div class="table">
         <table class="auto-style1">

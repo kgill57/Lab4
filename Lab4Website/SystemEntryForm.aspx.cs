@@ -180,5 +180,51 @@ public partial class SystemEntryForm : System.Web.UI.Page
 
         }
     }
+
+    protected void projectGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        Project newProject = new Project((projectGridView.FooterRow.FindControl("ProjectNametxt") as TextBox).Text,
+            (projectGridView.FooterRow.FindControl("ProjectDescriptiontxt") as TextBox).Text,
+            "Hoyns", 
+            DateTime.Now.ToString());
+
+
+        //try/catch for emptying the Project table, adding the array elements to the Project table and updating the
+
+        //Project table with the needed null values
+        try
+        {
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = "Data Source=DESKTOP-08HFDJ7\\localhost;Initial Catalog=lab3;Integrated Security=True";
+
+            sc.Open();
+
+            // insert Employee values from the Employee array
+            System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("insert into [dbo].[Project] values(@ProjectName, @ProjectDescription," +
+                " @LastUpdatedBy, @LastUpdated);");
+            insert.Connection = sc;
+            insert.Parameters.AddWithValue("@ProjectName", newProject.getprojectName().ToString().ToLower());
+            insert.Parameters.AddWithValue("@ProjectDescription", newProject.getprojectDescription().ToString());
+            insert.Parameters.AddWithValue("@LastUpdatedBy", newProject.getLastUpdatedBy().ToString());
+            insert.Parameters.AddWithValue("@LastUpdated", newProject.getLastUpdated().ToString());
+            insert.ExecuteNonQuery();
+
+            ProjectInsertSuccess.Visible = true;
+            ProjectInsertSuccess.Text = "Success commiting to the database";
+
+
+
+
+            sc.Close();
+
+
+
+        }
+        catch (Exception err)
+        {
+            ProjectInsertSuccess.Visible = true;
+            ProjectInsertSuccess.Text = "Error commiting to the database";
+        }
+    }
 }
 

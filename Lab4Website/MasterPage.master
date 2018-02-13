@@ -16,17 +16,7 @@
         </asp:ContentPlaceHolder>
     </div>
     </form>
-    <div class="liveFeed">
-        <asp:GridView ID="GridView1" runat="server">
-            <Columns>
-                <asp:TemplateField HeaderText="Reward Giver">
-                    <ItemTemplate>
-                        <asp:Label ID="lblGiverName" runat="server" Text='<%# Bind("FirstName"%>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
-    </div>
+    
     <footer>
         <p>Kyle McGill</p>
     </footer>

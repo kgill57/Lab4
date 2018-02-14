@@ -11,24 +11,24 @@ public partial class LoginPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //SqlConnection con = new SqlConnection();
-        //con.ConnectionString = "Server=localhost;Database=Lab4;Trusted_Connection=Yes;";
-        //con.Open();
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.Open();
 
-        //SqlCommand select = new SqlCommand();
-        //select.Connection = con;
+        SqlCommand select = new SqlCommand();
+        select.Connection = con;
 
-        //select.CommandText = "INSERT INTO [dbo].[User] VALUES('Chris', 'J', 'Bennsky', 'Bennskych@gmail.com', 'admin', NULL, 1, NULL, 'Bennsky', '2018-01-01')";
-        //select.ExecuteNonQuery();
+        select.CommandText = "INSERT INTO [dbo].[User] VALUES('Chris', 'J', 'Bennsky', 'Bennskych@gmail.com', 'admin', NULL, 1, NULL, 'Bennsky', '2018-01-01')";
+        select.ExecuteNonQuery();
 
-        //string password = "password";
+        string password = "password";
 
-        //string passwordHashNew =
-        //           SimpleHash.ComputeHash(password, "MD5", null);
+        string passwordHashNew =
+                   SimpleHash.ComputeHash(password, "MD5", null);
 
-        //select.CommandText = "INSERT INTO[dbo].[Password] Values (2, '" + passwordHashNew + "')";
-        //select.ExecuteNonQuery();
-        //con.Close();
+        select.CommandText = "INSERT INTO[dbo].[Password] Values (1, '" + passwordHashNew + "')";
+        select.ExecuteNonQuery();
+        con.Close();
     }
 
     protected void btnExit_Click(object sender, EventArgs e)
@@ -42,7 +42,7 @@ public partial class LoginPage : System.Web.UI.Page
         String password = txtPassword.Text;
 
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = "Server=localhost;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand select = new SqlCommand();

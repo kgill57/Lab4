@@ -8,9 +8,9 @@
     
 </head>
 <body>
-    <h1>Elk Logistics Rewards System</h1>
+    <h1 style="color:forestgreen">Elk Logistics Rewards System</h1>
     <form id="form1" runat="server">
-    <div>
+    <div style="height: 664px">
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
             
         </asp:ContentPlaceHolder>

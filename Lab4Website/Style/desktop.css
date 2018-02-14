@@ -17,10 +17,11 @@ h1 {
 }
 
 *{
-    margin:0px;
     padding:0px;
     font-family: sans-serif;
-
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
 }
 
 #sidebar{

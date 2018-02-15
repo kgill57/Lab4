@@ -7,7 +7,12 @@
             <td>
                 <asp:Label ID="lblSearch" runat="server" Text="Search for a Reward Provider:"></asp:Label>
             </td>
-            <td>&nbsp;</td>
+            <td>
+                <asp:Button ID="btnAddProvider" runat="server" OnClick="btnAddProvider_Click" Text="Add Provider" />
+                <asp:TextBox ID="txtNewProviderID" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtNewProviderName" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtNewProviderEmail" runat="server"></asp:TextBox>
+            </td>
         </tr>
         <tr>
             <td>

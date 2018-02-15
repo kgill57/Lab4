@@ -131,57 +131,57 @@ public partial class AddRewardProviders : System.Web.UI.Page
         }
     }
 
-    protected void btnSearch_Click(object sender, EventArgs e)
-    {
-        Boolean textError = true;
-        //Check if the project name Text box is empty
-        if (String.IsNullOrEmpty(txtSearch.Text))
-        {
-            try
-            {
-                System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+    //protected void btnSearch_Click(object sender, EventArgs e)
+    //{
+    //    Boolean textError = true;
+    //    //Check if the project name Text box is empty
+    //    if (String.IsNullOrEmpty(txtSearch.Text))
+    //    {
+    //        try
+    //        {
+    //            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+    //            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
-                sc.Open();
-                //Declare the query string.
+    //            sc.Open();
+    //            //Declare the query string.
 
-                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT *" +
-                    " FROM RewardProvider;", sc);
-                del.ExecuteNonQuery();
+    //            System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT *" +
+    //                " FROM RewardProvider;", sc);
+    //            del.ExecuteNonQuery();
 
-                grdProviders.DataSource = del.ExecuteReader();
-                grdProviders.DataBind();
-                sc.Close();
-            }
-            catch
-            {
+    //            grdProviders.DataSource = del.ExecuteReader();
+    //            grdProviders.DataBind();
+    //            sc.Close();
+    //        }
+    //        catch
+    //        {
 
-            }
-        }
-        else
-        {
-            try
-        {
+    //        }
+    //    }
+    //    else
+    //    {
+    //        try
+    //    {
 
-            SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
-            sc.Open();
-            // Declare the query string.
+    //        SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+    //        sc.Open();
+    //        // Declare the query string.
 
-            System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM RewardProvider WHERE ProviderName LIKE '%' + @ProviderName;", sc);
-            del.Parameters.AddWithValue("@ProviderName", txtSearch.Text);
-            del.ExecuteNonQuery();
+    //        System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM RewardProvider WHERE ProviderName LIKE '%' + @ProviderName;", sc);
+    //        del.Parameters.AddWithValue("@ProviderName", txtSearch.Text);
+    //        del.ExecuteNonQuery();
 
-            grdProviders.DataSource = del.ExecuteReader();
-            grdProviders.DataBind();
-            sc.Close();
+    //        grdProviders.DataSource = del.ExecuteReader();
+    //        grdProviders.DataBind();
+    //        sc.Close();
 
-        }
-        catch
-        {
+    //    }
+    //    catch
+    //    {
 
-        }
-        }
-    }
+    //    }
+    //    }
+    //}
 
     protected void btnAddProvider_Click(object sender, EventArgs e)
     {
@@ -198,5 +198,27 @@ public partial class AddRewardProviders : System.Web.UI.Page
         insert.ExecuteNonQuery();
 
         fillGridView();
+    }
+
+    protected void btnAddProvider_Click1(object sender, EventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+
+        sc.Open();
+        //Declare the query string.
+
+        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("INSERT INTO RewardProvider (ProviderName, ProviderEmail) VALUES (@providerName, @providerEmail)", sc);
+        insert.Parameters.AddWithValue("@providerName", txtNewProviderName.Text);
+        insert.Parameters.AddWithValue("@providerEmail", txtNewProviderEmail.Text);
+
+        insert.ExecuteNonQuery();
+
+        fillGridView();
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+
     }
 }

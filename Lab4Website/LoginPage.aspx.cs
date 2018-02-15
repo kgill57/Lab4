@@ -71,13 +71,13 @@ public partial class LoginPage : System.Web.UI.Page
         select.Connection = con;
 
         select.CommandText = "SELECT UserName FROM [dbo].[User] WHERE UserName = 'admin'";
-        String existingUserName = (String)select.ExecuteScalar();
-        if (existingUserName.Equals("admin"))
+        String existingUserName;
+        existingUserName = (String)select.ExecuteScalar();
+        if (existingUserName == null)
         {
-            lblError.Text = "This username is already taken";
-        }
-        else
-        {
+            select.CommandText = "INSERT INTO [dbo].[Employer] VALUES('Elk Logistics')";
+            select.ExecuteNonQuery();
+
             select.CommandText = "INSERT INTO [dbo].[User] VALUES('Chris', 'J', 'Bennsky', 'Bennskych@gmail.com', 'admin', NULL, 1, NULL, 1, 'Bennsky', '2018-01-01')";
             select.ExecuteNonQuery();
 
@@ -89,6 +89,11 @@ public partial class LoginPage : System.Web.UI.Page
             select.CommandText = "INSERT INTO[dbo].[Password] Values (1, '" + passwordHashNew + "')";
             select.ExecuteNonQuery();
         }
+        else
+        {
+            lblError.Text = "This username is already taken";
+        }
+        
         
         con.Close();
     }

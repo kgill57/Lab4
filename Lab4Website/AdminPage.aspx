@@ -15,7 +15,7 @@
         <ul>
             <li>User Options</li>
             <li>View Rewards</li>
-            <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
+            <li> <a href ="/ViewRewardProviders.aspx">View Reward Providers</a></li>
             <li>Add Community Events</li>
         </ul>
     </div>

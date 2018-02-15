@@ -78,8 +78,10 @@ public partial class AddRewardProviders : System.Web.UI.Page
             textError = false;
         }
 
-        string name = (grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString().ToLower();
-        Console.WriteLine();
+        RewardProvider newProvider = new RewardProvider();
+        newProvider.setName((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString().ToLower());
+        newProvider.setEmail((grdProviders.Rows[e.RowIndex].FindControl("txtProviderEmail") as TextBox).Text.ToString());
+        newProvider.setProviderID(Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
 
         if (textError)
         {
@@ -89,9 +91,9 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE RewardProvider SET ProviderName=@providerName, " +
                     "ProviderEmail=@providerEmail WHERE ProviderID=@providerID", sc);
-                del.Parameters.AddWithValue("@providerName", (grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString().ToLower());
-                del.Parameters.AddWithValue("@providerEmail", (grdProviders.Rows[e.RowIndex].FindControl("txtProviderEmail") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
+                del.Parameters.AddWithValue("@providerName", newProvider.getName());
+                del.Parameters.AddWithValue("@providerEmail", newProvider.getEmail());
+                del.Parameters.AddWithValue("@providerID", newProvider.getProviderID());
                 del.ExecuteNonQuery();
                 sc.Close();
                 grdProviders.EditIndex = -1;
@@ -185,23 +187,21 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     protected void btnAddProvider_Click(object sender, EventArgs e)
     {
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        
 
-        sc.Open();
-        //Declare the query string.
-
-        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("INSERT INTO RewardProvider (ProviderName, ProviderEmail) VALUES (@providerName, @providerEmail)", sc);
-        insert.Parameters.AddWithValue("@providerName", txtNewProviderName.Text);
-        insert.Parameters.AddWithValue("@providerEmail", txtNewProviderEmail.Text);
-
-        insert.ExecuteNonQuery();
-
-        fillGridView();
     }
 
     protected void btnAddProvider_Click1(object sender, EventArgs e)
     {
+        lblProviderName.Visible = true;
+        lblProviderEmail.Visible = true;
+        txtNewProviderName.Visible = true;
+        txtNewProviderEmail.Visible = true;
+        btnAdd.Visible = true;
+    }
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
@@ -217,8 +217,8 @@ public partial class AddRewardProviders : System.Web.UI.Page
         fillGridView();
     }
 
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void btnClear_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect(Request.RawUrl);
     }
 }

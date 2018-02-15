@@ -5,14 +5,14 @@ using System.Web;
 
 public class RewardProvider
 {
-    private int companyID;
+    private int providerID;
     private String name;
     private String email;
 
     // Setters
-    public void setCompanyID(int companyID)
+    public void setProviderID(int providerID)
     {
-        this.companyID = companyID;
+        this.providerID = providerID;
     }
 
     public void setName(String name)
@@ -26,9 +26,9 @@ public class RewardProvider
     }
 
     // Getters
-    public int getCompanyID()
+    public int getProviderID()
     {
-        return this.companyID;
+        return this.providerID;
     }
 
     public String getName()

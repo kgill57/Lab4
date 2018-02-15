@@ -1,25 +1,32 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AddRewardProviders.aspx.cs" Inherits="AddRewardProviders" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    
+
+    <link href="Style/desktop.css" rel="stylesheet" />
+    <script src="Scripts/Sidebar.js"></script>
+    <div id ="sidebar">
+        <div class="toggle-btn" onclick="toggleSidebar();">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li>User Options</li>
+            <li>View Rewards</li>
+            <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
+            <li>Add Community Events</li>
+        </ul>
+    </div>
+
+
     <table style="width: 100%">
         <tr>
-            <td>
+            <td style="width: 241px">
                 <asp:Label ID="lblSearch" runat="server" Text="Search for a Reward Provider:"></asp:Label>
             </td>
             <td>
-                <asp:Button ID="btnAddProvider" runat="server" OnClick="btnAddProvider_Click" Text="Add Provider" />
-                <asp:TextBox ID="txtNewProviderID" runat="server"></asp:TextBox>
-                <asp:TextBox ID="txtNewProviderName" runat="server"></asp:TextBox>
-                <asp:TextBox ID="txtNewProviderEmail" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
-            </td>
-            <td>
-                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
+            &nbsp;<asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
             </td>
         </tr>
     </table>
@@ -67,8 +74,33 @@
                         </EmptyDataTemplate>
                         </asp:GridView>
     </div>
-
     <asp:Label ID="lblResult" runat="server"></asp:Label>
-    
+
+    <div>
+
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 208px">Add New Reward Provider</td>
+                <td>
+                    <asp:Label ID="lblProviderName" runat="server" Text="Name"></asp:Label>
+                <asp:TextBox ID="txtNewProviderName" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 208px">&nbsp;</td>
+                <td>
+                    <asp:Label ID="lblProviderEmail" runat="server" Text="Email"></asp:Label>
+                <asp:TextBox ID="txtNewProviderEmail" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 208px">&nbsp;</td>
+                <td>
+                <asp:Button ID="btnAddProvider" runat="server" OnClick="btnAddProvider_Click" Text="Add Provider" />
+                </td>
+            </tr>
+        </table>
+
+    </div>
 </asp:Content>
 

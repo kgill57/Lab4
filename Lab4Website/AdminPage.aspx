@@ -6,7 +6,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <link href="Style/desktop.css" rel="stylesheet" />
     <script src="Scripts/Sidebar.js"></script>
-
     <div id ="sidebar">
         <div class="toggle-btn" onclick="toggleSidebar();">
             <span></span>
@@ -16,7 +15,7 @@
         <ul>
             <li>User Options</li>
             <li>View Rewards</li>
-            <li>View Reward Providers</li>
+            <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
             <li>Add Community Events</li>
         </ul>
     </div>

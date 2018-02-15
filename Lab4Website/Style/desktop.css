@@ -46,15 +46,15 @@ h1 {
 
 #sidebar .toggle-btn{
     position: absolute;
-    left: 230px;
-    top:20px;
+    left: 238px;
+    top:134px;
 
 }
 
 #sidebar .toggle-btn span {
     display: block;
     width: 30px;
-    height: 5px;
+    height: 11px;
     background: #151719;
     margin: 5px 0px;
 }

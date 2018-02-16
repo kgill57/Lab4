@@ -16,7 +16,9 @@
         </asp:ContentPlaceHolder>
     </div>
     </form>
-    
+    <br />
+    <br />
+    <br />
     <footer>
         <p>Kyle McGill</p>
     </footer>

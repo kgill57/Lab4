@@ -223,7 +223,7 @@ public partial class ViewRewards : System.Web.UI.Page
         insert.Parameters.AddWithValue("@rewardQuantity", Convert.ToInt32(txtRewardQuantity.Text));
         insert.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(txtRewardAmount.Text));
         insert.Parameters.AddWithValue("@providerID", findProviderID(drpRewardProvider.SelectedItem.Text));
-        insert.Parameters.AddWithValue("@adminID", 1);
+        insert.Parameters.AddWithValue("@adminID", (int)Session["UserID"]);
         insert.Parameters.AddWithValue("@dateAdded", DateTime.Today);
 
 

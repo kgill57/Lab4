@@ -11,8 +11,9 @@
             <span></span>
         </div>
         <ul>
-            <li>User Options</li>
-            <li>View Rewards</li>
+            <li> <asp:Label ID="lblUser" runat="server" Text=""></asp:Label></li>
+            <li> <a href ="/UserOptions.aspx">User Options</a></li>
+            <li> <a href="/ViewRewards.aspx">View Rewards</a></li>
             <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
             <li>Add Community Events</li>
         </ul>

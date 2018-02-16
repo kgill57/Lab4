@@ -11,7 +11,7 @@ public partial class UserOptions : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
     }
 
     protected void btnInsertUser_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ public partial class UserOptions : System.Web.UI.Page
             {
                 insertString += "@MI, ";
             }
-            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", 1, @EmployerID, 'Bennsky', '2018-01-01')";
+            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, '" + (String)Session["LName"] + "', '2018-01-01')";
 
             select.CommandText = insertString;
 

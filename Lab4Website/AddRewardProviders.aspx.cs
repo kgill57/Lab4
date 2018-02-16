@@ -18,6 +18,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
     {
         if(!IsPostBack)
             fillGridView();
+        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
     }
 
     protected void fillGridView()

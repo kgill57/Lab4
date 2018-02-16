@@ -19,9 +19,12 @@
     </div>
 
     <div style="height: 610px">
+
         <br /><br />
+
         <h2><asp:Label ID="lblPostFeed" runat="server" style="font-weight: 700; font-size: xx-large;" Text="Recent Posts"></asp:Label></h2>        
-        <asp:GridView ID="gvPostFeed" runat="server" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="Horizontal">
+
+        <asp:GridView ID="gvPostFeed" runat="server" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="5" CellSpacing="5" DataSourceID="database">
             <FooterStyle BackColor="White" ForeColor="#333333" />
             <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="#336666" ForeColor="White" HorizontalAlign="Center" />
@@ -32,6 +35,11 @@
             <SortedDescendingCellStyle BackColor="#E5E5E5" />
             <SortedDescendingHeaderStyle BackColor="#275353" />
         </asp:GridView>
+
+        <asp:SqlDataSource ID="database" ConnectionString="Server=Localhost\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;" runat="server"
+            SelectCommand = "SELECT * FROM [Transaction]">
+        </asp:SqlDataSource>
+
     </div>
 </asp:Content>
 

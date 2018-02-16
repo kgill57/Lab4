@@ -13,8 +13,8 @@
             <span></span>
         </div>
         <ul>
-            <li>Reward Employee</li>
-            <li>Buy Rewards</li>
+            <a href="RewardTeamMember.aspx"><li>Reward Team Member</li></a>
+            <a href="#"><li>Buy Rewards</li></a>
         </ul>
     </div>
 
@@ -36,7 +36,7 @@
             <SortedDescendingHeaderStyle BackColor="#275353" />
         </asp:GridView>
 
-        <asp:SqlDataSource ID="database" ConnectionString="Server=Localhost\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;" runat="server"
+        <asp:SqlDataSource ID="database" ConnectionString="Server=Localhost;Database=Lab4;Trusted_Connection=Yes;" runat="server"
             SelectCommand = "SELECT * FROM [Transaction]">
         </asp:SqlDataSource>
 

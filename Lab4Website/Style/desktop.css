@@ -19,7 +19,7 @@ h1 {
 *{
     padding:0px;
     font-family: sans-serif;
-    margin-left: 0px;
+    margin-left: 7px;
     margin-right: 0px;
     margin-top: 0px;
 }
@@ -46,8 +46,8 @@ h1 {
 
 #sidebar .toggle-btn{
     position: absolute;
-    left: 238px;
-    top:134px;
+    left: 231px;
+    top:-9px;
 
 }
 

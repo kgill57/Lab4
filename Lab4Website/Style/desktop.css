@@ -1,11 +1,9 @@
-﻿<<<<<<< HEAD
-
-﻿body {
-    margin-left:auto;
-    margin-right:auto;
+body {
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
     width: 50%;
-    background-color:lightyellow;
+    background-color: lightyellow;
 }
 
 h1 {
@@ -13,113 +11,47 @@ h1 {
 }
 
 .table {
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
-    width:30%;
+    width: 30%;
 }
 
-*{
-    margin:0px;
-    padding:0px;
+* {
+    margin: 0px;
+    padding: 0px;
     font-family: sans-serif;
-
 }
 
-#sidebar{
+#sidebar {
     position: fixed;
     width: 200px;
-    height:100%;
+    height: 100%;
     background: #151719;
     left: -200px;
     transition: all 500ms linear;
 }
 
-#sidebar.active {
-    left: 0px;
-}
+    #sidebar.active {
+        left: 0px;
+    }
 
-#sidebar ul li {
-    color:rgba(230, 230, 230, 0.9);
-    list-style: none;
-    padding: 15px 10px;
-    border-bottom: 1px solid rgba(100,100,100,0.3);
-}
+    #sidebar ul li {
+        color: rgba(230, 230, 230, 0.9);
+        list-style: none;
+        padding: 15px 10px;
+        border-bottom: 1px solid rgba(100,100,100,0.3);
+    }
 
-#sidebar .toggle-btn{
-    position: absolute;
-    left: 230px;
-    top:20px;
+    #sidebar .toggle-btn {
+        position: absolute;
+        left: 230px;
+        top: 20px;
+    }
 
-}
-
-#sidebar .toggle-btn span {
-    display: block;
-    width: 30px;
-    height: 5px;
-    background: #151719;
-    margin: 5px 0px;
-}
-
-=======
-﻿body {
-    margin-left:auto;
-    margin-right:auto;
-    text-align: center;
-    width: 50%;
-    background-color:lightyellow;
-}
-
-h1 {
-    color: forestgreen;
-}
-
-.table {
-    margin-left:auto;
-    margin-right: auto;
-    width:30%;
-}
-
-*{
-    padding:0px;
-    font-family: sans-serif;
-    margin-left: 7px;
-    margin-right: 0px;
-    margin-top: 0px;
-}
-
-#sidebar{
-    position: fixed;
-    width: 200px;
-    height:100%;
-    background: #151719;
-    left: -200px;
-    transition: all 500ms linear;
-}
-
-#sidebar.active {
-    left: 0px;
-}
-
-#sidebar ul li {
-    color:rgba(230, 230, 230, 0.9);
-    list-style: none;
-    padding: 15px 10px;
-    border-bottom: 1px solid rgba(100,100,100,0.3);
-}
-
-#sidebar .toggle-btn{
-    position: absolute;
-    left: 231px;
-    top:-9px;
-
-}
-
-#sidebar .toggle-btn span {
-    display: block;
-    width: 30px;
-    height: 11px;
-    background: #151719;
-    margin: 5px 0px;
-}
-
->>>>>>> SeungBranch
+        #sidebar .toggle-btn span {
+            display: block;
+            width: 30px;
+            height: 5px;
+            background: #151719;
+            margin: 5px 0px;
+        }

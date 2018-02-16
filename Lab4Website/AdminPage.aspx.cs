@@ -9,6 +9,7 @@ public partial class AdminPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        lblSession.Text = Convert.ToString((int)Session["UserID"]);
+        lbl1.Text = Convert.ToString(Session["FName"]);
     }
 }

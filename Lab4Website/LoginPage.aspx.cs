@@ -46,6 +46,8 @@ public partial class LoginPage : System.Web.UI.Page
 
         if (verify)
         {
+            getUser(txtUsername.Text);
+
             if(admin)
             {
                 Response.Redirect("AdminPage.aspx");
@@ -59,6 +61,38 @@ public partial class LoginPage : System.Web.UI.Page
         {
             lblError.Text = "Invalid username and/or password.";
         }
+
+    }
+
+    public void getUser(string username)
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.Open();
+
+        SqlCommand select = new SqlCommand();
+        select.Connection = con;
+
+        select.Parameters.AddWithValue("@username", username);
+
+        select.CommandText = "SELECT UserID  FROM [User] WHERE UserName = @username";
+        Session["UserID"] = (int)select.ExecuteScalar();
+
+        select.CommandText = "SELECT FName FROM [User] WHERE UserName = @username";
+        Session["FName"] = (String)(select.ExecuteScalar());
+
+        select.CommandText = "SELECT LName FROM [User] WHERE UserName = @username";
+        Session["LName"] = (String)(select.ExecuteScalar());
+
+        select.CommandText = "SELECT UserName FROM [User] WHERE UserName = @username";
+        Session["UserName"] = (String)(select.ExecuteScalar());
+
+        select.CommandText = "SELECT Admin FROM [User] WHERE UserName = @username";
+        Session["Admin"] = Convert.ToInt32(select.ExecuteScalar());
+
+        select.CommandText = "SELECT EmployerID FROM [User] WHERE UserName = @username";
+        Session["EmployerID"] = (int)(select.ExecuteScalar());
+
 
     }
 

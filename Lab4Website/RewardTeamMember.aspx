@@ -43,19 +43,19 @@
 
         <asp:Label ID="lblRewardValue" runat="server" Text="Reward Value: " style="font-weight: 700"></asp:Label>      
         <asp:DropDownList ID="ddlRewardValue" runat="server">
-            <asp:ListItem>$10</asp:ListItem>
-            <asp:ListItem>$25</asp:ListItem>
-            <asp:ListItem>$50</asp:ListItem>
+            <asp:ListItem Value="10">$10</asp:ListItem>
+            <asp:ListItem Value="25">$25</asp:ListItem>
+            <asp:ListItem Value="50">$50</asp:ListItem>
         </asp:DropDownList>
 
         <br /><br /><br />
 
         <asp:Label ID="lblReceiver" runat="server" Text="Team Member Being Rewarded: " style="font-weight: 700"></asp:Label>      
-        <asp:TextBox ID="txtReceiver" runat="server" OnTextChanged="txtReceiver_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="txtReceiver" runat="server"></asp:TextBox>
 
         <br /><br /><br /><br /><br />
           
-        <asp:Button ID="btnSubmit" runat="server" Text="Submit Reward" />
+        <asp:Button ID="btnSubmit" runat="server" Text="Submit Reward" OnClick="btnSubmit_Click" />
 
     </div>
 </asp:Content>

@@ -36,7 +36,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
             cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RewardValue", post.getRewardValue()));
             cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@TransactionDate", post.getPostDate()));
             cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Private", 1));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@GiverID", 1));
+            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@GiverID", (int)Session["UserID"]));
             cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ReceiverID", 2));
             cmdInsert.ExecuteNonQuery();
         }

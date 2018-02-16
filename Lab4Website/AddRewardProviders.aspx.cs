@@ -25,7 +25,10 @@ public partial class AddRewardProviders : System.Web.UI.Page
         try
         {
 
-            SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+
             sc.Open();
             // Declare the query string.
 
@@ -62,6 +65,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
+
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString()))
         {
@@ -78,22 +82,17 @@ public partial class AddRewardProviders : System.Web.UI.Page
             textError = false;
         }
 
-        RewardProvider newProvider = new RewardProvider();
-        newProvider.setName((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString().ToLower());
-        newProvider.setEmail((grdProviders.Rows[e.RowIndex].FindControl("txtProviderEmail") as TextBox).Text.ToString());
-        newProvider.setProviderID(Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
-
         if (textError)
         {
             sc.Open();
             // Declare the query string.
             try
             {
-                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE RewardProvider SET ProviderName=@providerName, " +
-                    "ProviderEmail=@providerEmail WHERE ProviderID=@providerID", sc);
-                del.Parameters.AddWithValue("@providerName", newProvider.getName());
-                del.Parameters.AddWithValue("@providerEmail", newProvider.getEmail());
-                del.Parameters.AddWithValue("@providerID", newProvider.getProviderID());
+                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE RewardProvider SET ProviderName=@newProvName, " +
+                    "ProviderEmail=@newProvEmail WHERE ProviderID=@providerID", sc);
+                del.Parameters.AddWithValue("@newProvName", (grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString().ToLower());
+                del.Parameters.AddWithValue("@projectDescription", (grdProviders.Rows[e.RowIndex].FindControl("txtProviderEmail") as TextBox).Text.ToString());
+                del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
                 del.ExecuteNonQuery();
                 sc.Close();
                 grdProviders.EditIndex = -1;
@@ -104,6 +103,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
 
             }
+
         }
 
 

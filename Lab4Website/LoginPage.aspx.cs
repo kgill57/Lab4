@@ -11,7 +11,7 @@ public partial class LoginPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+
     }
 
     protected void btnExit_Click(object sender, EventArgs e)
@@ -60,7 +60,6 @@ public partial class LoginPage : System.Web.UI.Page
             lblError.Text = "Invalid username and/or password.";
         }
 
-        Session["loggedIn"] = e.Authenticated.ToString();
     }
 
     protected void btnCreateAdmin_Click(object sender, EventArgs e)
@@ -98,5 +97,6 @@ public partial class LoginPage : System.Web.UI.Page
         
         
         con.Close();
+
     }
 }

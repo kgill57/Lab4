@@ -74,6 +74,15 @@
                         </EmptyDataTemplate>
                         </asp:GridView>
                 </td>
+                <td>
+                    <asp:Label ID="lblSearch" runat="server" Text="Search for a project: "></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
+                </td>
                 
             </tr>
         </table>
@@ -102,7 +111,7 @@
                         <asp:TextBox ID="txtNewProviderEmail" runat="server" Visible="False"></asp:TextBox>
                     </td>
                     <td style="width: 145px">
-                        <asp:Button ID="btnCommit" runat="server" OnClick="Button1_Click" Text="Add" Visible="False" />
+                        <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click1" Text="Add" />
                     </td>
                 </tr>
             </table>

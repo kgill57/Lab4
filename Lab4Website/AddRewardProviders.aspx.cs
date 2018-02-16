@@ -16,13 +16,15 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        fillGridView();
+        if(!IsPostBack)
+            fillGridView();
     }
 
     protected void fillGridView()
     {
         try
         {
+
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
             sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
@@ -48,27 +50,21 @@ public partial class AddRewardProviders : System.Web.UI.Page
     {
         grdProviders.EditIndex = e.NewEditIndex;
         fillGridView();
-
-        TextBox provName = (TextBox)grdProviders.Rows[e.NewEditIndex].Cells[1].FindControl("txtProviderName");
-        oldProvName = provName.Text;
-
-        System.Diagnostics.Debug.WriteLine(oldProvName);
-        System.Diagnostics.Debug.WriteLine("");
-
-        TextBox provEmail = (TextBox)grdProviders.Rows[e.NewEditIndex].Cells[2].FindControl("txtProviderEmail");
-        oldProvEmail = provEmail.Text;
     }
 
     protected void grdProviders_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
-        Response.Redirect(Request.RawUrl);
+        grdProviders.EditIndex = -1;
+        fillGridView();
     }
 
     protected void grdProviders_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
+
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString()))
@@ -107,49 +103,119 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
 
             }
+
         }
 
 
 
-        //TextBox upProvName = (TextBox)grdProviders.Rows[e.RowIndex].Cells[1].FindControl("txtProviderName");
-        //newProvName = upProvName.Text;
+    }
 
-        //System.Diagnostics.Debug.WriteLine(newProvName);
-        //Console.WriteLine();
+    protected void grdProviders_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        try
+        {
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
-        //TextBox upProvEmail = (TextBox)grdProviders.Rows[e.RowIndex].Cells[2].FindControl("txtProviderEmail");
-        //newProvEmail = upProvEmail.Text;
+            sc.Open();
+            //Declare the query string.
 
-        ////Creates a new sql connection and links the application to the lab 3 database
-        //System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        //sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+            System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("DELETE" +
+                " FROM RewardProvider WHERE ProviderID = @providerID;", sc);
+            del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
+            del.ExecuteNonQuery();
+            sc.Close();
+            fillGridView();
+        }
+        catch
+        {
 
-        ////Opens the sql connection
-        //sc.Open();
-        ////Creates a new sql insert command to insert 
-        //System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+        }
+    }
 
-        //insert.Connection = sc;
+    protected void btnAddProvider_Click1(object sender, EventArgs e)
+    {
+        lblProviderName.Visible = true;
+        lblProviderEmail.Visible = true;
+        txtNewProviderName.Visible = true;
+        txtNewProviderEmail.Visible = true;
+        btnAdd.Visible = true;
+    }
 
-        //RewardProvider updateProvider = new RewardProvider();
-        //updateProvider.setName(newProvName);
-        //updateProvider.setEmail(newProvEmail);
+    
 
-        //insert.Parameters.AddWithValue("@oldProvName", oldProvName);
-        //insert.Parameters.AddWithValue("@oldProvEmail", oldProvEmail);
-        //insert.Parameters.AddWithValue("@newProvName", updateProvider.getName());
-        //insert.Parameters.AddWithValue("@newProvEmail", updateProvider.getEmail());
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        Response.Redirect(Request.RawUrl);
+    }
 
-        //insert.CommandText = "UPDATE RewardProvider SET ProviderName = @newProvName, ProviderEmail = @newProvEmail WHERE ProviderName LIKE @oldProvName";
 
-        //System.Diagnostics.Debug.WriteLine(insert.CommandText);
-        //System.Diagnostics.Debug.WriteLine(oldProvName);
-        //System.Diagnostics.Debug.WriteLine(oldProvEmail);
-        //System.Diagnostics.Debug.WriteLine(updateProvider.getName());
-        //System.Diagnostics.Debug.WriteLine(updateProvider.getEmail());
-        //Console.WriteLine();
-        //insert.ExecuteNonQuery();
+    protected void btnAdd_Click1(object sender, EventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
-        //lblResult.Text = "Project Updated.";
+        sc.Open();
+        //Declare the query string.
+
+        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("INSERT INTO RewardProvider (ProviderName, ProviderEmail) VALUES (@providerName, @providerEmail)", sc);
+        insert.Parameters.AddWithValue("@providerName", txtNewProviderName.Text);
+        insert.Parameters.AddWithValue("@providerEmail", txtNewProviderEmail.Text);
+
+        insert.ExecuteNonQuery();
+
+        fillGridView();
+    }
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        Boolean textError = true;
+        //Check if the project name Text box is empty
+        if (String.IsNullOrEmpty(txtSearch.Text))
+        {
+            try
+            {
+                System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+
+                sc.Open();
+                //Declare the query string.
+
+                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT *" +
+                    " FROM RewardProvider;", sc);
+                del.ExecuteNonQuery();
+
+                grdProviders.DataSource = del.ExecuteReader();
+                grdProviders.DataBind();
+                sc.Close();
+            }
+            catch
+            {
+
+            }
+        }
+        else
+        {
+            try
+            {
+
+                SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+                sc.Open();
+                // Declare the query string.
+
+                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM RewardProvider WHERE ProviderName LIKE '%' + @ProviderName;", sc);
+                del.Parameters.AddWithValue("@ProviderName", txtSearch.Text);
+                del.ExecuteNonQuery();
+
+                grdProviders.DataSource = del.ExecuteReader();
+                grdProviders.DataBind();
+                sc.Close();
+
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

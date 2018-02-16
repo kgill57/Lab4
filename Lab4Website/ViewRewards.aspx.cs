@@ -20,7 +20,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
 
-            SqlConnection sc = new SqlConnection(@"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab4;Integrated Security=True");
+            SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
             sc.Open();
             // Declare the query string.
 
@@ -40,7 +40,7 @@ public partial class ViewRewards : System.Web.UI.Page
 
     protected void fillDropDown()
     {
-        SqlConnection sc = new SqlConnection(@"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab4;Integrated Security=True");
+        SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
         sc.Open();
         // Declare the query string.
 
@@ -69,7 +69,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab4;Integrated Security=True";
+            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
             sc.Open();
             //Declare the query string.
@@ -91,7 +91,7 @@ public partial class ViewRewards : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.ToString()))
@@ -155,7 +155,7 @@ public partial class ViewRewards : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab4;Integrated Security=True";
+                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
                 sc.Open();
                 //Declare the query string.
@@ -178,7 +178,7 @@ public partial class ViewRewards : System.Web.UI.Page
             try
             {
 
-                SqlConnection sc = new SqlConnection(@"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab4;Integrated Security=True");
+                SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
                 sc.Open();
                 // Declare the query string.
 
@@ -207,5 +207,41 @@ public partial class ViewRewards : System.Web.UI.Page
     protected void btnClear_Click(object sender, EventArgs e)
     {
         Response.Redirect(Request.RawUrl);
+    }
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+
+        sc.Open();
+        //Declare the query string.
+
+        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("INSERT INTO Reward (RewardName, RewardQuantity, RewardAmount, " +
+            "ProviderID, AdminID, DateAdded) VALUES (@rewardName, @rewardQuantity, @rewardAmount, @providerID, @adminID, @dateAdded)", sc);
+        insert.Parameters.AddWithValue("@rewardName", txtRewardName.Text);
+        insert.Parameters.AddWithValue("@rewardQuantity", Convert.ToInt32(txtRewardQuantity.Text));
+        insert.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(txtRewardAmount.Text));
+        insert.Parameters.AddWithValue("@providerID", findProviderID(drpRewardProvider.SelectedItem.Text));
+        insert.Parameters.AddWithValue("@adminID", 1);
+        insert.Parameters.AddWithValue("@dateAdded", DateTime.Today);
+
+
+        insert.ExecuteNonQuery();
+
+        fillGridView();
+    }
+
+    public int findProviderID(string providerName)
+    {
+        SqlConnection sc = new SqlConnection();
+        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.Open();
+        SqlCommand select = new SqlCommand("SELECT ProviderID FROM RewardProvider WHERE ProviderName LIKE '%' + @providerName", sc);
+        select.Parameters.AddWithValue("@providerName", providerName);
+
+        int providerID = Convert.ToInt32(select.ExecuteScalar());
+
+        return providerID;
     }
 }

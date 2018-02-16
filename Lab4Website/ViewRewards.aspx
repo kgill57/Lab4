@@ -158,6 +158,9 @@
                 <td>
                     <asp:DropDownList ID="drpRewardProvider" runat="server"></asp:DropDownList>
                 </td>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                </td>
             </tr>
         </table>
     </asp:Panel>

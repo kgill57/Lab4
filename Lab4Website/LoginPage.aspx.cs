@@ -59,6 +59,8 @@ public partial class LoginPage : System.Web.UI.Page
         {
             lblError.Text = "Invalid username and/or password.";
         }
+
+        Session["loggedIn"] = e.Authenticated.ToString();
     }
 
     protected void btnCreateAdmin_Click(object sender, EventArgs e)

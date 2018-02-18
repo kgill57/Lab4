@@ -26,30 +26,35 @@
                 <td style="width: 151px">First Name</td>
                 <td>
                     <asp:TextBox ID="txtFName" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqFName" ControlToValidate="txtFName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
                 <td style="width: 151px">MI</td>
                 <td>
-                    <asp:TextBox ID="txtMI" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtMI" runat="server" MaxLength="1"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqMI" ControlToValidate="txtMI" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
                 <td style="width: 151px">Last Name</td>
                 <td>
                     <asp:TextBox ID="txtLName" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqLName" ControlToValidate="txtLName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
                 <td style="width: 151px">Email</td>
                 <td>
-                    <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
                 <td style="width: 151px; height: 20px">Username</td>
                 <td style="height: 20px">
                     <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqUsername" ControlToValidate="txtUsername" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
@@ -64,7 +69,8 @@
             <tr>
                 <td style="width: 151px">Company</td>
                 <td>
-                    <asp:TextBox ID="txtCompany" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtCompany" runat="server" TextMode="Number"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqCompany" ControlToValidate="txtCompany" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             

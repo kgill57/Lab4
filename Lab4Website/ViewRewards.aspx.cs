@@ -21,7 +21,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
 
-            SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+            SqlConnection sc = new SqlConnection(@"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True");
             sc.Open();
             // Declare the query string.
 
@@ -41,7 +41,7 @@ public partial class ViewRewards : System.Web.UI.Page
 
     protected void fillDropDown()
     {
-        SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+        SqlConnection sc = new SqlConnection(@"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True");
         sc.Open();
         // Declare the query string.
 
@@ -70,7 +70,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+            sc.ConnectionString = @"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True";
 
             sc.Open();
             //Declare the query string.
@@ -92,7 +92,7 @@ public partial class ViewRewards : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = @"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True";
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.ToString()))
@@ -156,7 +156,7 @@ public partial class ViewRewards : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+                sc.ConnectionString = @"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True";
 
                 sc.Open();
                 //Declare the query string.
@@ -179,7 +179,7 @@ public partial class ViewRewards : System.Web.UI.Page
             try
             {
 
-                SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+                SqlConnection sc = new SqlConnection(@"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True");
                 sc.Open();
                 // Declare the query string.
 
@@ -213,7 +213,7 @@ public partial class ViewRewards : System.Web.UI.Page
     protected void btnAdd_Click(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = @"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True";
 
         sc.Open();
         //Declare the query string.
@@ -236,7 +236,7 @@ public partial class ViewRewards : System.Web.UI.Page
     public int findProviderID(string providerName)
     {
         SqlConnection sc = new SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = @"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True";
         sc.Open();
         SqlCommand select = new SqlCommand("SELECT ProviderID FROM RewardProvider WHERE ProviderName LIKE '%' + @providerName", sc);
         select.Parameters.AddWithValue("@providerName", providerName);

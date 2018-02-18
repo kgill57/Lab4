@@ -28,22 +28,25 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
             sc.Open();
 
-            System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand("RewardInsert", sc);
-            cmdInsert.CommandType = System.Data.CommandType.StoredProcedure;
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@CompanyValue", post.getValue()));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Category", post.getCategory()));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Description", post.getDescription()));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RewardValue", post.getRewardValue()));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@TransactionDate", post.getPostDate()));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Private", 1));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@GiverID", (int)Session["UserID"]));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ReceiverID", 2));
+            System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
+            cmdInsert.Connection = sc;
+            cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
+                + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
+                " @GiverID, @ReceiverID)";
+            cmdInsert.Parameters.AddWithValue("@CompanyValue", post.getValue());
+            cmdInsert.Parameters.AddWithValue("@Category", post.getCategory());
+            cmdInsert.Parameters.AddWithValue("@Description", post.getDescription());
+            cmdInsert.Parameters.AddWithValue("@RewardValue", post.getRewardValue());
+            cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
+            cmdInsert.Parameters.AddWithValue("@Private", 1);
+            cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
+            cmdInsert.Parameters.AddWithValue("@ReceiverID", 2);
             cmdInsert.ExecuteNonQuery();
         }
 
         catch
         {
-            Response.Write("Did not work");
+
         }
     }
 }

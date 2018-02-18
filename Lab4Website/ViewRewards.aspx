@@ -11,10 +11,13 @@
             <span></span>
         </div>
         <ul>
-            <li>User Options</li>
-            <li>View Rewards</li>
+            <li> <asp:Label ID="lblUser" runat="server" Text=""></asp:Label></li>
+            <li><a href="AdminPage.aspx">Home</a></li>
+            <li> <a href ="/UserOptions.aspx">User Options</a></li>
+            <li> <a href="/ViewRewards.aspx">View Rewards</a></li>
             <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
             <li>Add Community Events</li>
+            <li><a href ="LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
 
@@ -60,9 +63,9 @@
                 <FooterTemplate>
                     <asp:TextBox ID="txtRewardID" runat="server" ReadOnly="True" Text='<%# Eval("RewardID") %>'></asp:TextBox>
                 </FooterTemplate>
-                <asp:ItemTemplate>
+                <ItemTemplate>
                     <asp:Label ID="lblRewardAmount" runat="server" Text='<%# Eval("RewardAmount") %>'></asp:Label>
-                </asp:ItemTemplate>
+                </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="ProviderID">
                 <EditItemTemplate>
@@ -71,9 +74,9 @@
                 <FooterTemplate>
                     <asp:TextBox ID="txtRewardID" runat="server" ReadOnly="True" Text='<%# Eval("RewardID") %>'></asp:TextBox>
                 </FooterTemplate>
-                <asp:ItemTemplate>
+                <ItemTemplate>
                     <asp:Label ID="lblProviderID" runat="server" Text='<%# Eval("ProviderID") %>'></asp:Label>
-                </asp:ItemTemplate>
+                </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="AdminID">
                 <EditItemTemplate>
@@ -82,9 +85,9 @@
                 <FooterTemplate>
                     <asp:TextBox ID="txtRewardID" runat="server" ReadOnly="True" Text='<%# Eval("RewardID") %>'></asp:TextBox>
                 </FooterTemplate>
-                <asp:ItemTemplate>
+                <ItemTemplate>
                     <asp:Label ID="lblAdminID" runat="server" Text='<%# Eval("AdminID") %>'></asp:Label>
-                </asp:ItemTemplate>
+                </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="DateAdded">
                 <EditItemTemplate>
@@ -93,9 +96,9 @@
                 <FooterTemplate>
                     <asp:TextBox ID="txtRewardID" runat="server" ReadOnly="True" Text='<%# Eval("RewardID") %>'></asp:TextBox>
                 </FooterTemplate>
-                <asp:ItemTemplate>
+                <ItemTemplate>
                     <asp:Label ID="lblDateAdded" runat="server" Text='<%# Eval("DateAdded") %>'></asp:Label>
-                </asp:ItemTemplate>
+                </ItemTemplate>
             </asp:TemplateField>
         </Columns>
         <EmptyDataTemplate>

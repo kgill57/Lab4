@@ -30,6 +30,7 @@
         <br />
         <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" />
         <asp:Button ID="btnExit" runat="server" OnClick="btnExit_Click" Text="Exit" />
+        <asp:Button ID="btnCreateAdmin" runat="server" OnClick="btnCreateAdmin_Click" Text="Create Admin" />
     </div>
         <asp:Label ID="lblError" runat="server"></asp:Label>
         <br />

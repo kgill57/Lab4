@@ -28,7 +28,7 @@ public partial class SystemEntryForm : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = "Data Source=DESKTOP-08HFDJ7\\localhost;Initial Catalog=lab3;Integrated Security=True";
+                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab3;Integrated Security=True";
 
                 sc.Open();
                 //Declare the query string.
@@ -51,7 +51,7 @@ public partial class SystemEntryForm : System.Web.UI.Page
             try
         {
 
-            SqlConnection sc = new SqlConnection("Data Source=DESKTOP-08HFDJ7\\localhost;Initial Catalog=lab3;Integrated Security=True");
+            SqlConnection sc = new SqlConnection(@"Data Source=DESKTOP-08HFDJ7\\LOCALHOST;Initial Catalog=lab3;Integrated Security=True");
             sc.Open();
             // Declare the query string.
 
@@ -83,7 +83,7 @@ public partial class SystemEntryForm : System.Web.UI.Page
         try
         {
 
-            SqlConnection sc = new SqlConnection("Data Source=DESKTOP-08HFDJ7\\localhost;Initial Catalog=lab3;Integrated Security=True");
+            SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab3;Integrated Security=True");
             sc.Open();
             // Declare the query string.
 
@@ -107,7 +107,7 @@ public partial class SystemEntryForm : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = "Data Source=DESKTOP-08HFDJ7\\localhost;Initial Catalog=lab3;Integrated Security=True";
+        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab3;Integrated Security=True";
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((projectGridView.Rows[e.RowIndex].FindControl("ProjectNametxt") as TextBox).Text.ToString()))
@@ -125,6 +125,8 @@ public partial class SystemEntryForm : System.Web.UI.Page
             textError = false;
         }
 
+        string name = (projectGridView.Rows[e.RowIndex].FindControl("ProjectNametxt") as TextBox).Text.ToString().ToLower();
+        Console.WriteLine();
         if (textError)
         {
             sc.Open();
@@ -163,7 +165,7 @@ public partial class SystemEntryForm : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = "Data Source=DESKTOP-08HFDJ7\\localhost;Initial Catalog=lab3;Integrated Security=True";
+            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab3;Integrated Security=True";
 
             sc.Open();
             //Declare the query string.

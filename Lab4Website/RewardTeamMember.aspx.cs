@@ -44,7 +44,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
             cmdInsert.Parameters.AddWithValue("@Description", post.getDescription());
             cmdInsert.Parameters.AddWithValue("@RewardValue", post.getRewardValue());
             cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
-            cmdInsert.Parameters.AddWithValue("@Private", 1);
+            cmdInsert.Parameters.AddWithValue("@Private", Convert.ToByte(chkPrivate.Checked));
             cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
             cmdInsert.Parameters.AddWithValue("@ReceiverID", getRecieverID(txtReceiver.Text));
 
@@ -66,10 +66,10 @@ public partial class RewardTeamMember : System.Web.UI.Page
         }
     }
 
-    public Boolean checkTransactionDate(string username)
-    {
+    //public Boolean checkTransactionDate(string username)
+    //{
 
-    }
+    //}
 
     public int getRecieverID(String username)
     {

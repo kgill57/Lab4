@@ -21,7 +21,7 @@ public class Post
     {
 
     }
-    public Post(int pID, String value, String category, String description, double rewardValue, String postDate, int giverID, int receiverID)
+    public Post(int pID, String value, String category, String description, double rewardValue, String postDate, bool isPrivate, int giverID, int receiverID)
     {
         setPID(pID);
         setValue(value);
@@ -29,6 +29,7 @@ public class Post
         setDescription(description);
         setRewardValue(rewardValue);
         setPostDate(postDate);
+        setIsPrivate(isPrivate);
         setGiverID(giverID);
         setReceiverID(receiverID);
     }
@@ -63,6 +64,11 @@ public class Post
     public void setPostDate(String postDate)
     {
         this.postDate = postDate;
+    }
+
+    public void setIsPrivate(bool isPrivate)
+    {
+        this.isPrivate = isPrivate;
     }
 
     public void setGiverID(int giverID)
@@ -104,6 +110,11 @@ public class Post
     public String getPostDate()
     {
         return this.postDate;
+    }
+
+    public bool getIsPrivate()
+    {
+        return this.isPrivate;
     }
 
     public int getGiverID()

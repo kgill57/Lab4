@@ -27,6 +27,16 @@ public partial class RewardTeamMember : System.Web.UI.Page
         post.setRewardValue(Convert.ToDouble(ddlRewardValue.SelectedValue));
         post.setPostDate(Convert.ToString(DateTime.Now));
 
+        if (Convert.ToByte(chkPrivate.Checked) == 0)
+        {
+            post.setIsPrivate(false);
+        }
+
+        else if (Convert.ToByte(chkPrivate.Checked) == 1)
+        {
+            post.setIsPrivate(true);
+        }
+
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
@@ -44,7 +54,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
             cmdInsert.Parameters.AddWithValue("@Description", post.getDescription());
             cmdInsert.Parameters.AddWithValue("@RewardValue", post.getRewardValue());
             cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
-            cmdInsert.Parameters.AddWithValue("@Private", Convert.ToByte(chkPrivate.Checked));
+            cmdInsert.Parameters.AddWithValue("@Private", post.getIsPrivate());
             cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
             cmdInsert.Parameters.AddWithValue("@ReceiverID", getRecieverID(txtReceiver.Text));
 

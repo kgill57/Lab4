@@ -9,14 +9,19 @@ public partial class RewardTeamMember : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!IsPostBack)
+        {
+            ddlCompanyValue.ClearSelection();
+            ddlCategory.ClearSelection();
+            ddlRewardValue.ClearSelection();
+        }      
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Post post = new Post();
-        post.setValue(txtCompanyValue.Text);
-        post.setCategory(txtCategory.Text);
+        post.setValue(ddlCompanyValue.SelectedValue);
+        post.setCategory(ddlCategory.SelectedValue);
         post.setDescription(txtDescription.Text);
         post.setRewardValue(Convert.ToDouble(ddlRewardValue.SelectedValue));
         post.setPostDate(Convert.ToDateTime(DateTime.Now));

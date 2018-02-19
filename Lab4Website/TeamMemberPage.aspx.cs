@@ -31,7 +31,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
         while (reader.Read())
         {
             transaction[arrayCounter] = new Post(Convert.ToInt32(reader.GetValue(0)), Convert.ToString(reader.GetValue(1)), 
-                Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(3)), Convert.ToDouble(reader.GetValue(4)), Convert.ToString(reader.GetValue(5)), Convert.ToInt32(reader.GetValue(7)), Convert.ToInt32(reader.GetValue(8)));
+                Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(3)), Convert.ToDouble(reader.GetValue(4)), Convert.ToString(reader.GetValue(5)), Convert.ToBoolean(reader.GetValue(6)), Convert.ToInt32(reader.GetValue(7)), Convert.ToInt32(reader.GetValue(8)));
             arrayCounter++;
         }
         con.Close();
@@ -41,7 +41,15 @@ public partial class TeamMemberPage : System.Web.UI.Page
         {
             test[i] = new Label();
 
-            test[i].Text = (transaction[i].getGiverID() + " gifted " + transaction[i].getReceiverID());
+            if (transaction[i].getIsPrivate() == true)
+            {
+                test[i].Text = ("Anonymous" + " gifted " + "Anonymous");
+            }
+
+            else if (transaction[i].getIsPrivate() == false)
+            {
+                test[i].Text = (transaction[i].getGiverID() + " gifted " + transaction[i].getReceiverUsername(transaction[i].getReceiverID()));
+            }
 
             Panel1.Controls.Add(test[i]);
             Panel1.Controls.Add(new LiteralControl("<br />"));

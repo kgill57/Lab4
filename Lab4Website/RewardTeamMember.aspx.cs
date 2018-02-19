@@ -28,6 +28,16 @@ public partial class RewardTeamMember : System.Web.UI.Page
         post.setPostDate(Convert.ToString(DateTime.Now));
         post.setGiverID((int)Session["UserID"]);
 
+        if (Convert.ToByte(chkPrivate.Checked) == 0)
+        {
+            post.setIsPrivate(false);
+        }
+
+        else if (Convert.ToByte(chkPrivate.Checked) == 1)
+        {
+            post.setIsPrivate(true);
+        }
+
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
@@ -37,6 +47,10 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
             System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
             cmdInsert.Connection = sc;
+
+            if (checkTransactionDate(post.getGiverID()) == false)
+                return;
+
             cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
                 + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
                 " @GiverID, @ReceiverID)";
@@ -45,7 +59,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
             cmdInsert.Parameters.AddWithValue("@Description", post.getDescription());
             cmdInsert.Parameters.AddWithValue("@RewardValue", post.getRewardValue());
             cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
-            cmdInsert.Parameters.AddWithValue("@Private", Convert.ToByte(chkPrivate.Checked));
+            cmdInsert.Parameters.AddWithValue("@Private", post.getIsPrivate());
             cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
             cmdInsert.Parameters.AddWithValue("@ReceiverID", getRecieverID(txtReceiver.Text));
 
@@ -58,8 +72,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
             lblResult.Text = "Reward Sent.";
 
-            checkTransactionDate(post.getGiverID());
-
+            
             sc.Close();
         }
 
@@ -69,8 +82,10 @@ public partial class RewardTeamMember : System.Web.UI.Page
         }
     }
 
-    public void checkTransactionDate(int giverID)
+    public Boolean checkTransactionDate(int giverID)
     {
+
+        Boolean valid = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
@@ -86,9 +101,15 @@ public partial class RewardTeamMember : System.Web.UI.Page
         System.Diagnostics.Debug.WriteLine(transDate);
 
         if (transDate == DateTime.Today)
+        {
             lblResult.Text = "Cannot make 2 transactions in one day.";
+            valid = false;
+        }
+            
 
-       
+        sc.Close();
+
+        return valid;
     }
 
     public int getRecieverID(String username)

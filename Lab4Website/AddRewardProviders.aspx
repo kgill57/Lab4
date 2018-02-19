@@ -12,10 +12,12 @@
         </div>
         <ul>
             <li> <asp:Label ID="lblUser" runat="server" Text=""></asp:Label></li>
+            <li><a href="AdminPage.aspx">Home</a></li>
             <li> <a href ="/UserOptions.aspx">User Options</a></li>
             <li> <a href="/ViewRewards.aspx">View Rewards</a></li>
             <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
             <li>Add Community Events</li>
+            <li><a href="LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
 
@@ -82,7 +84,7 @@
                     <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
                 </td>
                 <td>
-                    <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
+                    <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CausesValidation="False" />
                 </td>
                 
             </tr>
@@ -93,7 +95,10 @@
             <table  style="width: 100%">
                 <tr>
                     <td style="width: 115px">
-                        <asp:Button ID="btnAddProvider" runat="server" OnClick="btnAddProvider_Click1" Text="Add Reward Provider" />
+                        <asp:Button ID="btnAddProvider" runat="server" OnClick="btnAddProvider_Click1" Text="Add Reward Provider" CausesValidation="False" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnClear" runat="server" Text="Clear" CausesValidation="False" OnClick="btnClear_Click1" />
                     </td>
                 </tr>
                 <tr>
@@ -102,6 +107,7 @@
                     </td>
                     <td style="width: 80px">
                         <asp:TextBox ID="txtNewProviderName" runat="server" style="margin-left: 0px" Visible="False"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="reqProviderName" ControlToValidate="txtNewProviderName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -109,10 +115,11 @@
                         <asp:Label ID="lblProviderEmail" runat="server" Text="Provider Email: " Visible="False"></asp:Label>
                     </td>
                     <td style="width: 20px">
-                        <asp:TextBox ID="txtNewProviderEmail" runat="server" Visible="False"></asp:TextBox>
+                        <asp:TextBox ID="txtNewProviderEmail" runat="server" Visible="False" TextMode="Email"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="reqProviderEmail" ControlToValidate="txtNewProviderEmail" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                     </td>
                     <td style="width: 145px">
-                        <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click1" Text="Add" />
+                        <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click1" Text="Add" Visible="False" />
                     </td>
                 </tr>
             </table>

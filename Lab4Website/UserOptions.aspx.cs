@@ -20,7 +20,7 @@ public partial class UserOptions : System.Web.UI.Page
     protected void btnInsertUser_Click(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=KYLEPC\SQLEXPRESS01;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand select = new SqlCommand();
@@ -49,7 +49,7 @@ public partial class UserOptions : System.Web.UI.Page
             {
                 insertString += "@MI, ";
             }
-            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, '" + (String)Session["LName"] + "', '2018-01-01')";
+            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, '" + (String)Session["LName"] + "', '2018-01-01', 0)";
 
             select.CommandText = insertString;
 
@@ -105,7 +105,7 @@ public partial class UserOptions : System.Web.UI.Page
 
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server =KYLEPC\SQLEXPRESS01;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
             sc.Open();
             // Declare the query string.
@@ -139,7 +139,7 @@ public partial class UserOptions : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Data Source=KYLEPC\SQLEXPRESS01;Initial Catalog=lab4;Integrated Security=True";
+            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
             sc.Open();
             //Declare the query string.
@@ -163,7 +163,7 @@ public partial class UserOptions : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=KYLEPC\SQLEXPRESS01;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
 
         //Check if the project name Text box is empty

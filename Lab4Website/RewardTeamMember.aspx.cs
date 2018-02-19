@@ -9,6 +9,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + Session["AccountBalance"];
         if (!IsPostBack)
         {
             ddlCompanyValue.ClearSelection();
@@ -25,11 +26,12 @@ public partial class RewardTeamMember : System.Web.UI.Page
         post.setDescription(txtDescription.Text);
         post.setRewardValue(Convert.ToDouble(ddlRewardValue.SelectedValue));
         post.setPostDate(Convert.ToString(DateTime.Now));
+        post.setGiverID((int)Session["UserID"]);
 
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server =KYLEPC\SQLEXPRESS01;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
             sc.Open();
 
@@ -44,15 +46,67 @@ public partial class RewardTeamMember : System.Web.UI.Page
             cmdInsert.Parameters.AddWithValue("@RewardValue", post.getRewardValue());
             cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
             cmdInsert.Parameters.AddWithValue("@Private", 1);
-            cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
-            cmdInsert.Parameters.AddWithValue("@ReceiverID", 2);
+            cmdInsert.Parameters.AddWithValue("@GiverID", post.getGiverID());
+            cmdInsert.Parameters.AddWithValue("@ReceiverID", getRecieverID(txtReceiver.Text));
 
             cmdInsert.ExecuteNonQuery();
+
+            cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance - @RewardValue WHERE UserID=@GiverID";
+            cmdInsert.ExecuteNonQuery();
+            cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance + @RewardValue WHERE UserID=@ReceiverID";
+            cmdInsert.ExecuteNonQuery();
+
+            lblResult.Text = "Reward Sent.";
+
+            checkTransactionDate(post.getGiverID());
+
+            sc.Close();
         }
 
         catch
         {
 
         }
+    }
+
+    public void checkTransactionDate(int giverID)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
+        cmdInsert.Connection = sc;
+
+        cmdInsert.CommandText = "SELECT TransactionDate FROM [Transaction] WHERE TransID = (SELECT MAX(TransID) FROM [Transaction] WHERE GiverID=@giverID)";
+        cmdInsert.Parameters.AddWithValue("@giverID", giverID);
+        DateTime transDate = Convert.ToDateTime(cmdInsert.ExecuteScalar());
+
+        System.Diagnostics.Debug.WriteLine(transDate);
+
+        if (transDate == DateTime.Today)
+            lblResult.Text = "Cannot make 2 transactions in one day.";
+
+       
+    }
+
+    public int getRecieverID(String username)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
+        cmdInsert.Connection = sc;
+        cmdInsert.CommandText = "SELECT UserID FROM [User] WHERE Username = @username";
+
+        cmdInsert.Parameters.AddWithValue("@username", username);
+
+        int userID = (int)cmdInsert.ExecuteScalar();
+
+        sc.Close();
+        return userID;
     }
 }

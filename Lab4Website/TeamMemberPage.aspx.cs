@@ -12,10 +12,10 @@ public partial class TeamMemberPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
 
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=KYLEPC\SQLEXPRESS01;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION]", con);
@@ -41,7 +41,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
         {
             test[i] = new Label();
 
-            test[i].Text = (transaction[i].getGiverID() + " gifted " + transaction[i].getRecieverID());
+            test[i].Text = (transaction[i].getGiverID() + " gifted " + transaction[i].getReceiverID());
 
             Panel1.Controls.Add(test[i]);
             Panel1.Controls.Add(new LiteralControl("<br />"));

@@ -24,7 +24,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
         post.setCategory(ddlCategory.SelectedValue);
         post.setDescription(txtDescription.Text);
         post.setRewardValue(Convert.ToDouble(ddlRewardValue.SelectedValue));
-        post.setPostDate(Convert.ToDateTime(DateTime.Now));
+        post.setPostDate(Convert.ToString(DateTime.Now));
 
         try
         {

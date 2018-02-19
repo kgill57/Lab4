@@ -49,7 +49,8 @@ public partial class UserOptions : System.Web.UI.Page
             {
                 insertString += "@MI, ";
             }
-            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, '" + (String)Session["LName"] + "', '2018-01-01', 0)";
+
+            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, @AccountBalance, '" + (String)Session["LName"] + "', '2018-01-01')";
 
             select.CommandText = insertString;
 
@@ -68,10 +69,11 @@ public partial class UserOptions : System.Web.UI.Page
             select.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar));
             select.Parameters["@Email"].Value = txtEmail.Text;
 
-
-
             select.Parameters.Add(new SqlParameter("@EmployerID", SqlDbType.Int));
             select.Parameters["@EmployerID"].Value = txtCompany.Text;
+
+            select.Parameters.Add(new SqlParameter("@AccountBalance", SqlDbType.Money));
+            select.Parameters["@AccountBalance"].Value = 100;
 
             select.ExecuteNonQuery();
 

@@ -49,6 +49,7 @@ public partial class UserOptions : System.Web.UI.Page
             {
                 insertString += "@MI, ";
             }
+
             insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, @AccountBalance, '" + (String)Session["LName"] + "', '2018-01-01')";
 
             select.CommandText = insertString;

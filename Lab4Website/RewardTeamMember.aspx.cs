@@ -26,6 +26,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
         post.setDescription(txtDescription.Text);
         post.setRewardValue(Convert.ToDouble(ddlRewardValue.SelectedValue));
         post.setPostDate(Convert.ToString(DateTime.Now));
+        post.setGiverID((int)Session["UserID"]);
 
         try
         {
@@ -57,6 +58,8 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
             lblResult.Text = "Reward Sent.";
 
+            checkTransactionDate(post.getGiverID());
+
             sc.Close();
         }
 
@@ -66,10 +69,27 @@ public partial class RewardTeamMember : System.Web.UI.Page
         }
     }
 
-    //public Boolean checkTransactionDate(string username)
-    //{
+    public void checkTransactionDate(int giverID)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
-    //}
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
+        cmdInsert.Connection = sc;
+
+        cmdInsert.CommandText = "SELECT TransactionDate FROM [Transaction] WHERE TransID = (SELECT MAX(TransID) FROM [Transaction] WHERE GiverID=@giverID)";
+        cmdInsert.Parameters.AddWithValue("@giverID", giverID);
+        DateTime transDate = Convert.ToDateTime(cmdInsert.ExecuteScalar());
+
+        System.Diagnostics.Debug.WriteLine(transDate);
+
+        if (transDate == DateTime.Today)
+            lblResult.Text = "Cannot make 2 transactions in one day.";
+
+       
+    }
 
     public int getRecieverID(String username)
     {

@@ -20,7 +20,7 @@ public partial class UserOptions : System.Web.UI.Page
     protected void btnInsertUser_Click(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=Localhost;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand select = new SqlCommand();

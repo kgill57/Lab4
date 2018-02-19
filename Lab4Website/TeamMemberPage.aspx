@@ -43,6 +43,12 @@
             SelectCommand = "SELECT * FROM [Transaction]">
         </asp:SqlDataSource>
 
+        <div>
+
+            <asp:Panel ID="Panel1" runat="server">
+            </asp:Panel>
+
+        </div>
     </div>
 
 <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>

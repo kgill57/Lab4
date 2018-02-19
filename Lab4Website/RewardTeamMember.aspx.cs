@@ -9,14 +9,19 @@ public partial class RewardTeamMember : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        if (!IsPostBack)
+        {
+            ddlCompanyValue.ClearSelection();
+            ddlCategory.ClearSelection();
+            ddlRewardValue.ClearSelection();
+        }     
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Post post = new Post();
-        post.setValue(txtCompanyValue.Text);
-        post.setCategory(txtCategory.Text);
+        post.setValue(ddlCompanyValue.SelectedValue);
+        post.setCategory(ddlCategory.SelectedValue);
         post.setDescription(txtDescription.Text);
         post.setRewardValue(Convert.ToDouble(ddlRewardValue.SelectedValue));
         post.setPostDate(Convert.ToDateTime(DateTime.Now));
@@ -28,22 +33,26 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
             sc.Open();
 
-            System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand("RewardInsert", sc);
-            cmdInsert.CommandType = System.Data.CommandType.StoredProcedure;
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@CompanyValue", post.getValue()));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Category", post.getCategory()));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Description", post.getDescription()));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RewardValue", post.getRewardValue()));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@TransactionDate", post.getPostDate()));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Private", 1));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@GiverID", (int)Session["UserID"]));
-            cmdInsert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ReceiverID", 2));
+            System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
+            cmdInsert.Connection = sc;
+            cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
+                + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
+                " @GiverID, @ReceiverID)";
+            cmdInsert.Parameters.AddWithValue("@CompanyValue", post.getValue());
+            cmdInsert.Parameters.AddWithValue("@Category", post.getCategory());
+            cmdInsert.Parameters.AddWithValue("@Description", post.getDescription());
+            cmdInsert.Parameters.AddWithValue("@RewardValue", post.getRewardValue());
+            cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
+            cmdInsert.Parameters.AddWithValue("@Private", 1);
+            cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
+            cmdInsert.Parameters.AddWithValue("@ReceiverID", 2);
+
             cmdInsert.ExecuteNonQuery();
         }
 
         catch
         {
-            Response.Write("Did not work");
+
         }
     }
 }

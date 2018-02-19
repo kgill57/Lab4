@@ -54,7 +54,7 @@ public partial class LoginPage : System.Web.UI.Page
             }
             else
             {
-                Response.Redirect("TeamMemberPage.aspx");
+                //Send to user page
             }
         }
         else

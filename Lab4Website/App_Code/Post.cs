@@ -2,36 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data;
-using System.Data.SqlClient;
 
 public class Post
 {
     private int PID;
     private String value;
     private String category;
+    private String title;
     private String description;
     private double rewardValue;
-    private String postDate;
-    private bool isPrivate;
-    private int giverID;
-    private int receiverID;
-
-    public Post()
-    {
-
-    }
-    public Post(int pID, String value, String category, String description, double rewardValue, String postDate, int giverID, int receiverID)
-    {
-        setPID(pID);
-        setValue(value);
-        setCategory(category);
-        setDescription(description);
-        setRewardValue(rewardValue);
-        setPostDate(postDate);
-        setGiverID(giverID);
-        setReceiverID(receiverID);
-    }
+    private DateTime postDate;
 
     // Setters
     public void setPID(int PID)
@@ -49,7 +29,11 @@ public class Post
         this.category = category;
     }
 
-    
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
     public void setDescription(String description)
     {
         this.description = description;
@@ -60,21 +44,12 @@ public class Post
         this.rewardValue = rewardValue;
     }
 
-    public void setPostDate(String postDate)
+    public void setPostDate(DateTime postDate)
     {
         this.postDate = postDate;
     }
 
-    public void setGiverID(int giverID)
-    {
-        this.giverID = giverID;
-    }
-    public void setReceiverID(int receiverID)
-    {
-        this.receiverID = receiverID;
-    }
-
-    // Getters
+    // Setters
     public int getPID()
     {
         return this.PID;
@@ -90,6 +65,10 @@ public class Post
         return this.category;
     }
 
+    public String getTitle()
+    {
+        return this.title;
+    }
 
     public String getDescription()
     {
@@ -101,46 +80,13 @@ public class Post
         return this.rewardValue;
     }
 
-    public String getPostDate()
+    public DateTime getPostDate()
     {
         return this.postDate;
     }
 
-    public int getGiverID()
+    public Post()
     {
-        return this.giverID;
+       
     }
-    
-    public int getReceiverID()
-    {
-        return this.receiverID;
-    }
-
-    public string getGiverUsername(int giverID)
-    {
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-        con.Open();
-
-        SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);
-        cmd.Parameters.AddWithValue("@userID", giverID);
-
-        string username = (String)cmd.ExecuteScalar();
-        return username;
-    }
-
-    public string getReceiverUsername(int receiverID)
-    {
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-        con.Open();
-
-        SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);
-        cmd.Parameters.AddWithValue("@userID", receiverID);
-
-        string username = (String)cmd.ExecuteScalar();
-        return username;
-    }
-
-    
 }

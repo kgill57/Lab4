@@ -1,9 +1,13 @@
 
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
 <head runat="server">
     <title></title>
     
 </head>
-<html>
 <body>
     <h1>Elk Logistics Rewards System</h1>
     <form id="form1" runat="server">

@@ -219,9 +219,4 @@ public partial class AddRewardProviders : System.Web.UI.Page
             }
         }
     }
-
-    protected void btnClear_Click1(object sender, EventArgs e)
-    {
-        Response.Redirect(Request.RawUrl);
-    }
 }

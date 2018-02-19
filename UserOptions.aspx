@@ -54,8 +54,8 @@
                 <td style="width: 151px">Account Type</td>
                 <td>
                     <asp:DropDownList ID="ddlAccountType" runat="server">
-                        <asp:ListItem Value="0">User</asp:ListItem>
-                        <asp:ListItem Value="1">Admin</asp:ListItem>
+                        <asp:ListItem Value="1">User</asp:ListItem>
+                        <asp:ListItem Value="0">Admin</asp:ListItem>
                     </asp:DropDownList>
                 </td>
             </tr>

@@ -72,16 +72,6 @@ public partial class UserOptions : System.Web.UI.Page
 
             select.ExecuteNonQuery();
 
-            //Create Password
-            string password = "password";
-
-            string passwordHashNew =
-                       SimpleHash.ComputeHash(password, "MD5", null);
-            select.CommandText = "SELECT [UserID] FROM [USER] WHERE [UserName] = @UserName";
-            int userID = (int)select.ExecuteScalar();
-            select.CommandText = "INSERT INTO[dbo].[Password] Values ("+ userID +", '" + passwordHashNew + "')";
-            select.ExecuteNonQuery();
-            
             
         }
         else

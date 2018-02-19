@@ -8,10 +8,28 @@ public class Post
     private int PID;
     private String value;
     private String category;
-    private String title;
     private String description;
     private double rewardValue;
-    private DateTime postDate;
+    private String postDate;
+    private bool isPrivate;
+    private int giverID;
+    private int recieverID;
+
+    public Post()
+    {
+
+    }
+    public Post(int pID, String value, String category, String description, double rewardValue, String postDate, int giverID, int recieverID)
+    {
+        setPID(pID);
+        setValue(value);
+        setCategory(category);
+        setDescription(description);
+        setRewardValue(rewardValue);
+        setPostDate(postDate);
+        setGiverID(giverID);
+        setRecieverID(recieverID);
+    }
 
     // Setters
     public void setPID(int PID)
@@ -29,11 +47,7 @@ public class Post
         this.category = category;
     }
 
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-
+    
     public void setDescription(String description)
     {
         this.description = description;
@@ -44,12 +58,21 @@ public class Post
         this.rewardValue = rewardValue;
     }
 
-    public void setPostDate(DateTime postDate)
+    public void setPostDate(String postDate)
     {
         this.postDate = postDate;
     }
 
-    // Setters
+    public void setGiverID(int giverID)
+    {
+        this.giverID = giverID;
+    }
+    public void setRecieverID(int recieverID)
+    {
+        this.recieverID = recieverID;
+    }
+
+    // Getters
     public int getPID()
     {
         return this.PID;
@@ -65,10 +88,6 @@ public class Post
         return this.category;
     }
 
-    public String getTitle()
-    {
-        return this.title;
-    }
 
     public String getDescription()
     {
@@ -80,13 +99,20 @@ public class Post
         return this.rewardValue;
     }
 
-    public DateTime getPostDate()
+    public String getPostDate()
     {
         return this.postDate;
     }
 
-    public Post()
+    public int getGiverID()
     {
-       
+        return this.giverID;
     }
+    
+    public int getRecieverID()
+    {
+        return this.recieverID;
+    }
+
+    
 }

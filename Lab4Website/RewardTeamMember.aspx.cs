@@ -24,12 +24,12 @@ public partial class RewardTeamMember : System.Web.UI.Page
         post.setCategory(ddlCategory.SelectedValue);
         post.setDescription(txtDescription.Text);
         post.setRewardValue(Convert.ToDouble(ddlRewardValue.SelectedValue));
-        post.setPostDate(Convert.ToDateTime(DateTime.Now));
+        post.setPostDate(Convert.ToString(DateTime.Now));
 
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server =Localhost;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = @"Server =KYLEPC\SQLEXPRESS01;Database=Lab4;Trusted_Connection=Yes;";
 
             sc.Open();
 

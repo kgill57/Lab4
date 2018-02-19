@@ -12,8 +12,10 @@ public partial class TeamMemberPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=KYLEPC\SQLEXPRESS01;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION]", con);

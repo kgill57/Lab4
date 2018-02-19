@@ -13,6 +13,10 @@
             <span></span>
         </div>
         <ul>
+            <li><asp:Label ID="lblUser" runat="server" Text="Label"></asp:Label></li>
+            <a href="TeamMemberPage.aspx"><li>Home</li></a>
+            <a href="#"><li>Buy Rewards</li></a>
+            <a href="LoginPage.aspx"><li>Logout</li></a>
             <a href="TeamMemberPage.aspx"><li>See Reward Posts</li></a>
             <a href="#"><li>Buy Rewards</li></a>
         </ul>
@@ -74,11 +78,12 @@
             <asp:ListItem Value="50">$50</asp:ListItem>
         </asp:DropDownList>
 
-        <br /> 
+
 
         <asp:RequiredFieldValidator ID="reqRewardValue" ControlToValidate="ddlRewardValue" Text="(Required)" Display="Dynamic" runat ="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
 
         <br /><br />
+
 
         <asp:Label ID="lblReceiver" runat="server" Text="Team Member Being Rewarded: " style="font-weight: 700"></asp:Label>      
         <asp:TextBox ID="txtReceiver" runat="server"></asp:TextBox>

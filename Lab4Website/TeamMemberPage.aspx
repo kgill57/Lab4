@@ -13,8 +13,11 @@
             <span></span>
         </div>
         <ul>
+            <li><asp:Label ID="lblUser" runat="server" Text=""></asp:Label></li>
+            <a href="TeamMemberPage.aspx"><li>Home</li></a>
             <a href="RewardTeamMember.aspx"><li>Reward Team Member</li></a>
             <a href="#"><li>Buy Rewards</li></a>
+            <a href="/LoginPage.aspx"><li>Logout</li></a>
         </ul>
     </div>
 
@@ -47,6 +50,14 @@
 
         </div>
     </div>
+
+<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+<asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+<asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
+<asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+<asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
+<asp:Label ID="Label7" runat="server" Text="Label"></asp:Label>
 </asp:Content>
 
 

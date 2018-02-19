@@ -12,10 +12,12 @@
         </div>
         <ul>
             <li> <asp:Label ID="lblUser" runat="server" Text=""></asp:Label></li>
+            <li><a href="AdminPage.aspx">Home</a></li>
             <li> <a href ="/UserOptions.aspx">User Options</a></li>
             <li> <a href="/ViewRewards.aspx">View Rewards</a></li>
             <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
             <li>Add Community Events</li>
+            <li><a href ="LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
 
@@ -61,9 +63,9 @@
                 <FooterTemplate>
                     <asp:TextBox ID="txtRewardID" runat="server" ReadOnly="True" Text='<%# Eval("RewardID") %>'></asp:TextBox>
                 </FooterTemplate>
-                <asp:ItemTemplate>
+                <ItemTemplate>
                     <asp:Label ID="lblRewardAmount" runat="server" Text='<%# Eval("RewardAmount") %>'></asp:Label>
-                </asp:ItemTemplate>
+                </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="ProviderID">
                 <EditItemTemplate>
@@ -72,9 +74,9 @@
                 <FooterTemplate>
                     <asp:TextBox ID="txtRewardID" runat="server" ReadOnly="True" Text='<%# Eval("RewardID") %>'></asp:TextBox>
                 </FooterTemplate>
-                <asp:ItemTemplate>
+                <ItemTemplate>
                     <asp:Label ID="lblProviderID" runat="server" Text='<%# Eval("ProviderID") %>'></asp:Label>
-                </asp:ItemTemplate>
+                </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="AdminID">
                 <EditItemTemplate>
@@ -83,9 +85,9 @@
                 <FooterTemplate>
                     <asp:TextBox ID="txtRewardID" runat="server" ReadOnly="True" Text='<%# Eval("RewardID") %>'></asp:TextBox>
                 </FooterTemplate>
-                <asp:ItemTemplate>
+                <ItemTemplate>
                     <asp:Label ID="lblAdminID" runat="server" Text='<%# Eval("AdminID") %>'></asp:Label>
-                </asp:ItemTemplate>
+                </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="DateAdded">
                 <EditItemTemplate>
@@ -94,9 +96,9 @@
                 <FooterTemplate>
                     <asp:TextBox ID="txtRewardID" runat="server" ReadOnly="True" Text='<%# Eval("RewardID") %>'></asp:TextBox>
                 </FooterTemplate>
-                <asp:ItemTemplate>
+                <ItemTemplate>
                     <asp:Label ID="lblDateAdded" runat="server" Text='<%# Eval("DateAdded") %>'></asp:Label>
-                </asp:ItemTemplate>
+                </ItemTemplate>
             </asp:TemplateField>
         </Columns>
         <EmptyDataTemplate>
@@ -109,10 +111,10 @@
     <table id="tblAddReward">
         <tr>
             <td>
-                <asp:Button ID="btnAddReward" runat="server" Text="Add Reward" OnClick="btnAddReward_Click" />
+                <asp:Button ID="btnAddReward" runat="server" Text="Add Reward" OnClick="btnAddReward_Click" CausesValidation="False" />
             </td>
             <td>
-                <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" CausesValidation="False" />
             </td>
         </tr>
         <tr>
@@ -120,10 +122,10 @@
                 <asp:Label ID="lblSearch" runat="server" Text="Search for a Reward: "></asp:Label>
             </td>
             <td>
-                <asp:TextBox ID="txtSearch" runat="server" ></asp:TextBox>
+                <asp:TextBox ID="txtSearch" runat="server"  ></asp:TextBox>
             </td>
             <td>
-                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
+                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CausesValidation="False" />
             </td>
         </tr>
     </table>
@@ -143,7 +145,21 @@
                     <asp:Label ID="lblRewardQuantity" runat="server" Text="Reward Quantity: "></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="txtRewardQuantity" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtRewardQuantity" runat="server" TextMode="Number"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator id="reqRewardName" ControlToValidate="txtRewardName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator id="reqRewardQuantity" ControlToValidate="txtRewardQuantity" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
@@ -151,7 +167,8 @@
                     <asp:Label ID="lblRewardAmount" runat="server" Text="Reward Amount: "></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="txtRewardAmount" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtRewardAmount" runat="server" TextMode="Number"></asp:TextBox>
+                    <asp:CompareValidator ID="cmpRewardAmount" ControlToValidate="txtRewardAmount" Type="Currency" Operator="DatatypeCheck" Text="(Invalid Format)" runat="server"></asp:CompareValidator>
                 </td>
                 <td>
                     <asp:Label ID="lblRewardProvider" runat="server" Text="Reward Provider: "></asp:Label>
@@ -161,6 +178,20 @@
                 </td>
                 <td>
                     <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator id="reqRewardAmount" ControlToValidate="txtRewardAmount" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator id="reqRewardProvider" ControlToValidate="drpRewardProvider" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
         </table>

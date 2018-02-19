@@ -14,7 +14,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
             ddlCompanyValue.ClearSelection();
             ddlCategory.ClearSelection();
             ddlRewardValue.ClearSelection();
-        }      
+        }     
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -46,6 +46,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
             cmdInsert.Parameters.AddWithValue("@Private", 1);
             cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
             cmdInsert.Parameters.AddWithValue("@ReceiverID", 2);
+
             cmdInsert.ExecuteNonQuery();
         }
 

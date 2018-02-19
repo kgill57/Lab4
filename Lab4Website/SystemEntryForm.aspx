@@ -1,6 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="SystemEntryForm.aspx.cs" Inherits="SystemEntryForm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+    <link href="Style/desktop.css" rel="stylesheet" />
+    <script src="Scripts/Sidebar.js"></script>
+    <div id ="sidebar">
+        <div class="toggle-btn" onclick="toggleSidebar();">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li> <asp:Label ID="lblUser" runat="server" Text=""></asp:Label></li>
+            <li> <a href ="/UserOptions.aspx">User Options</a></li>
+            <li> <a href="/ViewRewards.aspx">View Rewards</a></li>
+            <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
+            <li>Add Community Events</li>
+            <li><a href="LoginPage.aspx"></a></li>
+        </ul>
+    </div>
                 <p style="width: 643px">
                 &nbsp;&nbsp;&nbsp;&nbsp;Search Users&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:textbox runat="server" id="projectNameSearch" type="text" MaxLength="10"/>
                 <asp:Button ID="Button1" runat="server" Height="24px" OnClick="TrigSearchProject" style="margin-left: 0px" Text="Search" Width="135px" />

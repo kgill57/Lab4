@@ -14,12 +14,16 @@
         </div>
         <ul>
             <li> <asp:Label ID="lblUser" runat="server" Text=""></asp:Label></li>
+            <li><a href="AdminPage.aspx">Home</a></li>
             <li> <a href ="/UserOptions.aspx">User Options</a></li>
             <li> <a href="/ViewRewards.aspx">View Rewards</a></li>
             <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
             <li>Add Community Events</li>
+            <li><a href="/LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
+
+    <asp:Panel ID="Panel1" runat="server"></asp:Panel>
 
     <asp:Label ID="lblSession" runat="server" Text=""></asp:Label>
     <asp:Label ID="lbl1" runat="server" Text="Label"></asp:Label>

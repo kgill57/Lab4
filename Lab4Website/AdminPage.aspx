@@ -23,6 +23,8 @@
         </ul>
     </div>
 
+    <asp:Panel ID="Panel1" runat="server"></asp:Panel>
+
     <asp:Label ID="lblSession" runat="server" Text=""></asp:Label>
     <asp:Label ID="lbl1" runat="server" Text="Label"></asp:Label>
     <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>

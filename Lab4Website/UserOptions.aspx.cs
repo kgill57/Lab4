@@ -20,7 +20,7 @@ public partial class UserOptions : System.Web.UI.Page
     protected void btnInsertUser_Click(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=Localhost;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand select = new SqlCommand();
@@ -49,7 +49,7 @@ public partial class UserOptions : System.Web.UI.Page
             {
                 insertString += "@MI, ";
             }
-            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, '" + (String)Session["LName"] + "', '2018-01-01')";
+            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, '" + (String)Session["LName"] + "', '2018-01-01', 0)";
 
             select.CommandText = insertString;
 
@@ -95,6 +95,7 @@ public partial class UserOptions : System.Web.UI.Page
         }
 
         con.Close();
+        fillGridView();
     }
 
     protected void fillGridView()

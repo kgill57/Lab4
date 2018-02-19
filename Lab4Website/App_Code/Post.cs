@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
+using System.Data.SqlClient;
 
 public class Post
 {
@@ -13,13 +15,13 @@ public class Post
     private String postDate;
     private bool isPrivate;
     private int giverID;
-    private int recieverID;
+    private int receiverID;
 
     public Post()
     {
 
     }
-    public Post(int pID, String value, String category, String description, double rewardValue, String postDate, int giverID, int recieverID)
+    public Post(int pID, String value, String category, String description, double rewardValue, String postDate, int giverID, int receiverID)
     {
         setPID(pID);
         setValue(value);
@@ -28,7 +30,7 @@ public class Post
         setRewardValue(rewardValue);
         setPostDate(postDate);
         setGiverID(giverID);
-        setRecieverID(recieverID);
+        setReceiverID(receiverID);
     }
 
     // Setters
@@ -67,9 +69,9 @@ public class Post
     {
         this.giverID = giverID;
     }
-    public void setRecieverID(int recieverID)
+    public void setReceiverID(int receiverID)
     {
-        this.recieverID = recieverID;
+        this.receiverID = receiverID;
     }
 
     // Getters
@@ -109,9 +111,35 @@ public class Post
         return this.giverID;
     }
     
-    public int getRecieverID()
+    public int getReceiverID()
     {
-        return this.recieverID;
+        return this.receiverID;
+    }
+
+    public string getGiverUsername(int giverID)
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.Open();
+
+        SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);
+        cmd.Parameters.AddWithValue("@userID", giverID);
+
+        string username = (String)cmd.ExecuteScalar();
+        return username;
+    }
+
+    public string getReceiverUsername(int receiverID)
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.Open();
+
+        SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);
+        cmd.Parameters.AddWithValue("@userID", receiverID);
+
+        string username = (String)cmd.ExecuteScalar();
+        return username;
     }
 
     

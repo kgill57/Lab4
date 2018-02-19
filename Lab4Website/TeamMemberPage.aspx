@@ -39,7 +39,7 @@
             <SortedDescendingHeaderStyle BackColor="#275353" />
         </asp:GridView>
 
-        <asp:SqlDataSource ID="database" ConnectionString="Server=Localhost;Database=Lab4;Trusted_Connection=Yes;" runat="server"
+        <asp:SqlDataSource ID="database" ConnectionString="Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;" runat="server"
             SelectCommand = "SELECT * FROM [Transaction]">
         </asp:SqlDataSource>
 

@@ -28,7 +28,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server =Localhost;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
             sc.Open();
             // Declare the query string.
@@ -64,7 +64,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
 
         //Check if the project name Text box is empty
@@ -116,7 +116,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True";
+            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
             sc.Open();
             //Declare the query string.
@@ -154,7 +154,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
     protected void btnAdd_Click1(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
         sc.Open();
         //Declare the query string.
@@ -177,7 +177,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True";
+                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
                 sc.Open();
                 //Declare the query string.
@@ -200,7 +200,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
 
-                SqlConnection sc = new SqlConnection(@"Data Source=Localhost;Initial Catalog=lab4;Integrated Security=True");
+                SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
                 sc.Open();
                 // Declare the query string.
 

@@ -92,6 +92,8 @@
           
         <asp:Button ID="btnSubmit" runat="server" Text="Submit Reward" OnClick="btnSubmit_Click" />
 
+        <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+
     </div>
 </asp:Content>
 

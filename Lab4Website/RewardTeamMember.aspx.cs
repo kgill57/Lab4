@@ -9,6 +9,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + Session["AccountBalance"];
         if (!IsPostBack)
         {
             ddlCompanyValue.ClearSelection();
@@ -29,7 +30,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server =Localhost;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
             sc.Open();
 
@@ -45,14 +46,47 @@ public partial class RewardTeamMember : System.Web.UI.Page
             cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
             cmdInsert.Parameters.AddWithValue("@Private", 1);
             cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
-            cmdInsert.Parameters.AddWithValue("@ReceiverID", 2);
+            cmdInsert.Parameters.AddWithValue("@ReceiverID", getRecieverID(txtReceiver.Text));
 
             cmdInsert.ExecuteNonQuery();
+
+            cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance - @RewardValue WHERE UserID=@GiverID";
+            cmdInsert.ExecuteNonQuery();
+            cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance + @RewardValue WHERE UserID=@ReceiverID";
+            cmdInsert.ExecuteNonQuery();
+
+            lblResult.Text = "Reward Sent.";
+
+            sc.Close();
         }
 
         catch
         {
 
         }
+    }
+
+    public Boolean checkTransactionDate(string username)
+    {
+
+    }
+
+    public int getRecieverID(String username)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
+        cmdInsert.Connection = sc;
+        cmdInsert.CommandText = "SELECT UserID FROM [User] WHERE Username = @username";
+
+        cmdInsert.Parameters.AddWithValue("@username", username);
+
+        int userID = (int)cmdInsert.ExecuteScalar();
+
+        sc.Close();
+        return userID;
     }
 }

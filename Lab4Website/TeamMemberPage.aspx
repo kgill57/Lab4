@@ -40,6 +40,12 @@
             SelectCommand = "SELECT * FROM [Transaction]">
         </asp:SqlDataSource>
 
+        <div>
+
+            <asp:Panel ID="Panel1" runat="server">
+            </asp:Panel>
+
+        </div>
     </div>
 </asp:Content>
 

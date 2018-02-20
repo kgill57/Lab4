@@ -82,6 +82,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
             cmdInsert.Connection = sc;
 
+
             if (checkTransactionDate(post.getGiverID()) == true)
             {
 
@@ -143,7 +144,9 @@ public partial class RewardTeamMember : System.Web.UI.Page
         }
             
 
+
         sc.Close();
+
 
         return valid;
     }
@@ -165,5 +168,10 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
         sc.Close();
         return userID;
+    }
+
+    protected void AutoFillRewardSendID_Click(object sender, EventArgs e)
+    {
+        txtDescription.Text = "Very good job!";
     }
 }

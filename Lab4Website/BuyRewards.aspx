@@ -21,6 +21,8 @@
         </ul>
     </div>
 
+    <asp:Button ID="btnBuy" runat="server" Text="Buy Items" OnClick="btnBuy_Click" />
+
     <asp:Panel ID="Panel1" runat="server">
             </asp:Panel>
 

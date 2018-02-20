@@ -38,7 +38,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
         while (reader.Read())
         {
             transaction[arrayCounter] = new Post(Convert.ToInt32(reader.GetValue(0)), Convert.ToString(reader.GetValue(1)), 
-                Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(3)), Convert.ToDouble(reader.GetValue(4)), Convert.ToString(reader.GetValue(5)), Convert.ToBoolean(reader.GetValue(6)), Convert.ToInt32(reader.GetValue(7)), Convert.ToInt32(reader.GetValue(8)));
+                Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(3)), Convert.ToDouble(reader.GetValue(4)), Convert.ToDateTime(reader.GetValue(5)), Convert.ToBoolean(reader.GetValue(6)), Convert.ToInt32(reader.GetValue(7)), Convert.ToInt32(reader.GetValue(8)));
             arrayCounter++;
         }
         con.Close();
@@ -91,14 +91,8 @@ public partial class TeamMemberPage : System.Web.UI.Page
             panelPost[i].Controls.Add(new LiteralControl("<br />"));
 
             labelPost[4] = new Label();
-            if (Convert.ToDateTime(transaction[i].getPostDate()) == DateTime.Today)
-            {
-                labelPost[4].Text = "Posted Today";
-            }
-            else
-            {
-                labelPost[4].Text = "Date Doesn't Work";
-            }
+            TimeSpan difference = DateTime.Now - transaction[i].getPostDate();
+            labelPost[4].Text = "Posted " + Convert.ToString((int)difference.TotalMinutes) + " Minutes Ago";
             panelPost[i].Controls.Add(labelPost[4]);
 
             panelPost[i].BorderStyle = BorderStyle.Solid;

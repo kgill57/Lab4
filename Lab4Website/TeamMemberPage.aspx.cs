@@ -91,8 +91,10 @@ public partial class TeamMemberPage : System.Web.UI.Page
             panelPost[i].Controls.Add(new LiteralControl("<br />"));
 
             labelPost[4] = new Label();
+
             TimeSpan difference = DateTime.Now - transaction[i].getPostDate();
             labelPost[4].Text = "Posted " + Convert.ToString((int)difference.TotalMinutes) + " Minutes Ago";
+
             panelPost[i].Controls.Add(labelPost[4]);
 
             panelPost[i].BorderStyle = BorderStyle.Solid;

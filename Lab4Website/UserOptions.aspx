@@ -69,8 +69,11 @@
             <tr>
                 <td style="width: 151px">Company</td>
                 <td>
-                    <asp:TextBox ID="txtCompany" runat="server" TextMode="Number" ValidationGroup="validEmp"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqCompany" ControlToValidate="txtCompany" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
+                    <%--                    <asp:TextBox ID="txtCompany" runat="server" TextMode="Number" ValidationGroup="validEmp"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqCompany" ControlToValidate="txtCompany" Text="(Required)" runat="server"></asp:RequiredFieldValidator>--%>
+                    <asp:DropDownList ID="CompanyDropdown" runat="server" DataSourceID="SqlDataSource1" DataTextField="CompanyName" DataValueField="CompanyName">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:lab4ConnectionString %>" SelectCommand="SELECT [CompanyName] FROM [Employer]"></asp:SqlDataSource>
                 </td>
             </tr>
             
@@ -78,6 +81,9 @@
             <div>
 
                 <asp:Button ID="btnInsertUser" runat="server" OnClick="btnInsertUser_Click" Text="Insert User" ValidationGroup="ValidEmp" />
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="AutoFillUser" runat="server" OnClick="Button1_Click" Text="AutoFill User" />
 
             </div>
         <div>

@@ -15,10 +15,10 @@
         <ul>
             <li><asp:Label ID="lblUser" runat="server" Text="Label"></asp:Label></li>
             <a href="TeamMemberPage.aspx"><li>Home</li></a>
-            <a href="#"><li>Buy Rewards</li></a>
+            <a href="RewardTeamMember.aspx"><li>Reward Team Member</li></a>
+            <a href="BuyRewards.aspx"><li>Buy Rewards</li></a>
             <a href="LoginPage.aspx"><li>Logout</li></a>
-            <a href="TeamMemberPage.aspx"><li>See Reward Posts</li></a>
-            <a href="#"><li>Buy Rewards</li></a>
+        </ul>
         </ul>
     </div>
 
@@ -94,6 +94,9 @@
         </asp:DropDownList>
 
         <br /><br /><br /><br /><br />
+          
+        &nbsp;&nbsp;&nbsp;
+        <asp:Button ID="AutoFillRewardSendID" runat="server" OnClick="AutoFillRewardSendID_Click" Text="AutoFillRewardSend" />
           
         <asp:Button ID="btnSubmit" runat="server" Text="Submit Reward" OnClick="btnSubmit_Click" />
 

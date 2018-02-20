@@ -227,6 +227,7 @@ public partial class ViewRewards : System.Web.UI.Page
         insert.Parameters.AddWithValue("@adminID", (int)Session["UserID"]);
         insert.Parameters.AddWithValue("@dateAdded", DateTime.Today);
 
+
         insert.ExecuteNonQuery();
 
         fillGridView();

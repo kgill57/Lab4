@@ -23,7 +23,9 @@
         </ul>
     </div>
 
-    <asp:Panel ID="Panel1" runat="server"></asp:Panel>
+    <asp:Panel ID="Panel1" runat="server">
+        <asp:Label ID="Label5" runat="server" Text="The Company Account Balance is below $500"></asp:Label>
+    </asp:Panel>
 
     <asp:Label ID="lblSession" runat="server" Text=""></asp:Label>
     <asp:Label ID="lbl1" runat="server" Text="Label"></asp:Label>

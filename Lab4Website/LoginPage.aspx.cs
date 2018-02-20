@@ -113,7 +113,7 @@ public partial class LoginPage : System.Web.UI.Page
         existingUserName = (String)select.ExecuteScalar();
         if (existingUserName == null)
         {
-            select.CommandText = "INSERT INTO [dbo].[Employer] VALUES('Elk Logistics', 5000)";
+            select.CommandText = "INSERT INTO [dbo].[Employer] VALUES('Elk Logistics')";
             select.ExecuteNonQuery();
 
             select.CommandText = "INSERT INTO [dbo].[User] VALUES('Chris', 'J', 'Bennsky', 'Bennskych@gmail.com', 'admin', NULL, 1, NULL, 1, 100, 'Bennsky', '2018-01-01')";

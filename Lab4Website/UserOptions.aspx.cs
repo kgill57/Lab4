@@ -73,7 +73,7 @@ public partial class UserOptions : System.Web.UI.Page
             select.Parameters["@EmployerID"].Value = CompanyDropdown.SelectedIndex + 1;
 
             select.Parameters.Add(new SqlParameter("@AccountBalance", SqlDbType.Money));
-            select.Parameters["@AccountBalance"].Value = 100;
+            select.Parameters["@AccountBalance"].Value = 0;
 
             select.ExecuteNonQuery();
 

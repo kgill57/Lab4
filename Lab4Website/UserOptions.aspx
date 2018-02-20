@@ -25,7 +25,7 @@
             <tr>
                 <td style="width: 151px">First Name</td>
                 <td>
-                    <asp:TextBox ID="txtFName" runat="server" ValidationGroup="validEmp"></asp:TextBox>
+                    <asp:TextBox ID="txtFName" runat="server" ValidationGroup="validEmp">Carey</asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqFName" ControlToValidate="txtFName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
@@ -39,21 +39,21 @@
             <tr>
                 <td style="width: 151px">Last Name</td>
                 <td>
-                    <asp:TextBox ID="txtLName" runat="server" ValidationGroup="validEmp"></asp:TextBox>
+                    <asp:TextBox ID="txtLName" runat="server" ValidationGroup="validEmp">Cole</asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqLName" ControlToValidate="txtLName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
                 <td style="width: 151px">Email</td>
                 <td>
-                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" ValidationGroup="validEmp"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" ValidationGroup="validEmp">CCole@ElkLogistics.com</asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
                 <td style="width: 151px; height: 20px">Username</td>
                 <td style="height: 20px">
-                    <asp:TextBox ID="txtUsername" runat="server" ValidationGroup="validEmp"></asp:TextBox>
+                    <asp:TextBox ID="txtUsername" runat="server" ValidationGroup="validEmp">CCole</asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqUsername" ControlToValidate="txtUsername" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
@@ -83,8 +83,7 @@
                 <asp:Button ID="btnInsertUser" runat="server" OnClick="btnInsertUser_Click" Text="Insert User" ValidationGroup="ValidEmp" />
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="AutoFillUser" runat="server" OnClick="Button1_Click" Text="AutoFill User" />
-
+                
             </div>
         <div>
             <asp:Label ID="lblError" runat="server" Text="No Error"></asp:Label>

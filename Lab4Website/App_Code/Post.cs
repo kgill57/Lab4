@@ -12,7 +12,7 @@ public class Post
     private String category;
     private String description;
     private double rewardValue;
-    private DateTime postDate;
+    private String postDate;
     private bool isPrivate;
     private int giverID;
     private int receiverID;
@@ -21,7 +21,7 @@ public class Post
     {
 
     }
-    public Post(int pID, String value, String category, String description, double rewardValue, DateTime postDate, bool isPrivate, int giverID, int receiverID)
+    public Post(int pID, String value, String category, String description, double rewardValue, String postDate, bool isPrivate, int giverID, int receiverID)
     {
         setPID(pID);
         setValue(value);
@@ -61,7 +61,7 @@ public class Post
         this.rewardValue = rewardValue;
     }
 
-    public void setPostDate(DateTime postDate)
+    public void setPostDate(String postDate)
     {
         this.postDate = postDate;
     }
@@ -107,7 +107,7 @@ public class Post
         return this.rewardValue;
     }
 
-    public DateTime getPostDate()
+    public String getPostDate()
     {
         return this.postDate;
     }

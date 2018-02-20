@@ -67,7 +67,7 @@
         <br /><br />
 
         <asp:Label ID="lblDescription" runat="server" Text="Description: " style="font-weight: 700"></asp:Label>      
-        <asp:TextBox ID="txtDescription" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine">Very good job with your suggested driver safety guidelines.</asp:TextBox>
 
         <br /><br />
 
@@ -90,14 +90,12 @@
 
         <asp:Label ID="lblReceiver" runat="server" Text="Team Member Being Rewarded: " style="font-weight: 700"></asp:Label>      
 
-        <asp:DropDownList ID="drpUsernames" runat="server">
-        </asp:DropDownList>
+        <asp:TextBox ID="txtReceiver" runat="server"></asp:TextBox>
 
         <br /><br /><br /><br /><br />
           
         &nbsp;&nbsp;&nbsp;
-        <asp:Button ID="AutoFillRewardSendID" runat="server" OnClick="AutoFillRewardSendID_Click" Text="AutoFillRewardSend" />
-          
+                  
         <asp:Button ID="btnSubmit" runat="server" Text="Submit Reward" OnClick="btnSubmit_Click" />
 
         <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>

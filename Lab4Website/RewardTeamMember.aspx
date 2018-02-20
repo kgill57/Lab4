@@ -90,7 +90,8 @@
 
         <asp:Label ID="lblReceiver" runat="server" Text="Team Member Being Rewarded: " style="font-weight: 700"></asp:Label>      
 
-        <asp:TextBox ID="txtReceiver" runat="server"></asp:TextBox>
+        <asp:DropDownList ID="drpUsernames" runat="server">
+        </asp:DropDownList>
 
         <br /><br /><br /><br /><br />
           

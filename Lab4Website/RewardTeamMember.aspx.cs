@@ -4,18 +4,52 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
 
 public partial class RewardTeamMember : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + Session["AccountBalance"];
-        if (!IsPostBack)
+        try
         {
-            ddlCompanyValue.ClearSelection();
-            ddlCategory.ClearSelection();
-            ddlRewardValue.ClearSelection();
-        }     
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + Session["AccountBalance"];
+            if (!IsPostBack)
+            {
+                ddlCompanyValue.ClearSelection();
+                ddlCategory.ClearSelection();
+                ddlRewardValue.ClearSelection();
+                loadDropDown();
+            }
+        }
+        catch (Exception)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
+
+    }
+
+    public void loadDropDown()
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
+        cmdInsert.Connection = sc;
+
+        cmdInsert.CommandText = "SELECT Username FROM [User] WHERE [Admin] != 1 AND UserID != " + Convert.ToString((int)Session["UserID"]);
+
+        SqlDataAdapter da = new SqlDataAdapter(cmdInsert);
+        DataTable dt = new DataTable();
+
+        da.Fill(dt);
+
+        drpUsernames.DataSource = dt;
+        drpUsernames.DataTextField = "Username";
+        drpUsernames.DataBind();
+        sc.Close();
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -25,7 +59,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
         post.setCategory(ddlCategory.SelectedValue);
         post.setDescription(txtDescription.Text);
         post.setRewardValue(Convert.ToDouble(ddlRewardValue.SelectedValue));
-        post.setPostDate(Convert.ToString(DateTime.Now));
+        post.setPostDate(DateTime.Now);
         post.setGiverID((int)Session["UserID"]);
 
         if (Convert.ToByte(chkPrivate.Checked) == 0)
@@ -48,32 +82,34 @@ public partial class RewardTeamMember : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
             cmdInsert.Connection = sc;
 
-            if (checkTransactionDate(post.getGiverID()) == false)
-                return;
+            if (checkTransactionDate(post.getGiverID()) == true)
+            {
 
-            cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
-                + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
-                " @GiverID, @ReceiverID)";
-            cmdInsert.Parameters.AddWithValue("@CompanyValue", post.getValue());
-            cmdInsert.Parameters.AddWithValue("@Category", post.getCategory());
-            cmdInsert.Parameters.AddWithValue("@Description", post.getDescription());
-            cmdInsert.Parameters.AddWithValue("@RewardValue", post.getRewardValue());
-            cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
-            cmdInsert.Parameters.AddWithValue("@Private", post.getIsPrivate());
-            cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
-            cmdInsert.Parameters.AddWithValue("@ReceiverID", getRecieverID(txtReceiver.Text));
+                cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
+                    + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
+                    " @GiverID, @ReceiverID)";
+                cmdInsert.Parameters.AddWithValue("@CompanyValue", post.getValue());
+                cmdInsert.Parameters.AddWithValue("@Category", post.getCategory());
+                cmdInsert.Parameters.AddWithValue("@Description", post.getDescription());
+                cmdInsert.Parameters.AddWithValue("@RewardValue", post.getRewardValue());
+                cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
+                cmdInsert.Parameters.AddWithValue("@Private", post.getIsPrivate());
+                cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
+                cmdInsert.Parameters.AddWithValue("@ReceiverID", getRecieverID(drpUsernames.SelectedItem.Text));
 
-            cmdInsert.ExecuteNonQuery();
+                cmdInsert.ExecuteNonQuery();
 
-            cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance - @RewardValue WHERE UserID=@GiverID";
-            cmdInsert.ExecuteNonQuery();
-            cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance + @RewardValue WHERE UserID=@ReceiverID";
-            cmdInsert.ExecuteNonQuery();
+                cmdInsert.CommandText = "UPDATE [Employer] SET TotalBalance = TotalBalance - @RewardValue WHERE EmployerID=1";
+                cmdInsert.ExecuteNonQuery();
+                cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance + @RewardValue WHERE UserID=@ReceiverID";
+                cmdInsert.ExecuteNonQuery();
 
-            lblResult.Text = "Reward Sent.";
+                lblResult.Text = "Reward Sent.";
 
-            
-            sc.Close();
+
+                sc.Close();
+                loadDropDown();
+            }
         }
 
         catch
@@ -99,8 +135,8 @@ public partial class RewardTeamMember : System.Web.UI.Page
         DateTime transDate = Convert.ToDateTime(cmdInsert.ExecuteScalar());
 
         System.Diagnostics.Debug.WriteLine(transDate);
-
-        if (transDate == DateTime.Today)
+        DateTime today = DateTime.Today.Date;
+        if (transDate.Date == today)
         {
             lblResult.Text = "Cannot make 2 transactions in one day.";
             valid = false;

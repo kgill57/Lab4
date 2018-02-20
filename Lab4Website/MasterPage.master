@@ -4,20 +4,17 @@
     
 </head>
 <html>
-<body>
+<body style="margin-bottom: 0px">
     <h1>Elk Logistics Rewards System</h1>
     <form id="form1" runat="server">
-    <div>
+    <div style="height: 19px; margin-top: 25px">
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
             
         </asp:ContentPlaceHolder>
     </div>
     </form>
-    <br />
-    <br />
-    <br />
-    <footer>
-        <p>Kyle McGill</p>
+    <footer class="footer">
+        <p style="margin-top: 0px; margin-bottom: 0px">Kyle McGill</p>
     </footer>
 </body>
     

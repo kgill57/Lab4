@@ -12,13 +12,20 @@ public partial class TeamMemberPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+        catch (Exception)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
 
         SqlConnection con = new SqlConnection();
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
-        SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION]", con);
+        SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] ORDER BY [TransID] DESC", con);
 
         //Create Scaler to see how many transactions there are
         SqlCommand scaler = new SqlCommand("SELECT COUNT(TransID) FROM [dbo].[TRANSACTION]", con);
@@ -35,27 +42,75 @@ public partial class TeamMemberPage : System.Web.UI.Page
             arrayCounter++;
         }
         con.Close();
-        Label[] test = new Label[arraySize];
+        Panel[] panelPost = new Panel[arraySize];
+        con.Open();
 
         for (int i = 0; i < arraySize; i++)
         {
-            test[i] = new Label();
+            panelPost[i] = new Panel();
+
+            Label[] labelPost = new Label[5];
+
+            labelPost[0] = new Label();
 
             if (transaction[i].getIsPrivate() == true)
             {
-                test[i].Text = ("Anonymous" + " gifted " + "Anonymous");
+                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
             }
-
-            else if (transaction[i].getIsPrivate() == false)
+            else
             {
-                test[i].Text = (transaction[i].getGiverID() + " gifted " + transaction[i].getReceiverUsername(transaction[i].getReceiverID()));
+                
+                SqlCommand select = new SqlCommand("SELECT [FName] + ' ' + [LName] FROM [dbo].[User] WHERE [UserID] = " + transaction[i].getGiverID(), con);
+                String giver = (String)select.ExecuteScalar();
+
+                select.CommandText = "SELECT [FName] + ' ' + [LName] FROM [dbo].[User] WHERE [UserID] = " + transaction[i].getReceiverID();
+                String reciever = (String)select.ExecuteScalar();
+
+                labelPost[0].Text = (giver + " gifted " + reciever + " $" + transaction[i].getRewardValue());
             }
+            panelPost[i].Controls.Add(labelPost[0]);
 
-            Panel1.Controls.Add(test[i]);
-            Panel1.Controls.Add(new LiteralControl("<br />"));
+            panelPost[i].Controls.Add(new LiteralControl("<br />"));
+
+            labelPost[1] = new Label();
+            labelPost[1].Text = ("Value: " + transaction[i].getValue());
+            panelPost[i].Controls.Add(labelPost[1]);
+
+            panelPost[i].Controls.Add(new LiteralControl("<br />"));
+
+            labelPost[2] = new Label();
+            labelPost[2].Text = ("Category: " + transaction[i].getCategory());
+            panelPost[i].Controls.Add(labelPost[2]);
+
+            panelPost[i].Controls.Add(new LiteralControl("<br />"));
+
+            labelPost[3] = new Label();
+            labelPost[3].Text = ("Description: " + transaction[i].getDescription());
+            panelPost[i].Controls.Add(labelPost[3]);
+
+            panelPost[i].Controls.Add(new LiteralControl("<br />"));
+
+            labelPost[4] = new Label();
+            if (Convert.ToDateTime(transaction[i].getPostDate()) == DateTime.Today)
+            {
+                labelPost[4].Text = "Posted Today";
+            }
+            else
+            {
+                labelPost[4].Text = "Date Doesn't Work";
+            }
+            panelPost[i].Controls.Add(labelPost[4]);
+
+            panelPost[i].BorderStyle = BorderStyle.Solid;
+
+            panelPost[i].CssClass = "postCSS";
+
+
+            Panel1.Controls.Add(panelPost[i]);
+            
         }
-        
 
+        con.Close();
 
     }
 

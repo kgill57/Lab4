@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
 
 public partial class RewardTeamMember : System.Web.UI.Page
 {
@@ -15,7 +17,32 @@ public partial class RewardTeamMember : System.Web.UI.Page
             ddlCompanyValue.ClearSelection();
             ddlCategory.ClearSelection();
             ddlRewardValue.ClearSelection();
-        }     
+        }
+
+        loadDropDown();
+    }
+
+    public void loadDropDown()
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
+        cmdInsert.Connection = sc;
+
+        cmdInsert.CommandText = "SELECT Username FROM [User] WHERE UserID >= 2";
+
+        SqlDataAdapter da = new SqlDataAdapter(cmdInsert);
+        DataTable dt = new DataTable();
+
+        da.Fill(dt);
+
+        drpUsernames.DataSource = dt;
+        drpUsernames.DataTextField = "Username";
+        drpUsernames.DataBind();
+        sc.Close();
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -25,7 +52,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
         post.setCategory(ddlCategory.SelectedValue);
         post.setDescription(txtDescription.Text);
         post.setRewardValue(Convert.ToDouble(ddlRewardValue.SelectedValue));
-        post.setPostDate(Convert.ToString(DateTime.Now));
+        post.setPostDate(Convert.ToString(DateTime.Now.TimeOfDay));
         post.setGiverID((int)Session["UserID"]);
 
         if (Convert.ToByte(chkPrivate.Checked) == 0)
@@ -48,8 +75,8 @@ public partial class RewardTeamMember : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
             cmdInsert.Connection = sc;
 
-            if (checkTransactionDate(post.getGiverID()) == false)
-                return;
+            //if (checkTransactionDate(post.getGiverID()) == false)
+            //    return;
 
             cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
                 + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
@@ -61,11 +88,11 @@ public partial class RewardTeamMember : System.Web.UI.Page
             cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
             cmdInsert.Parameters.AddWithValue("@Private", post.getIsPrivate());
             cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
-            cmdInsert.Parameters.AddWithValue("@ReceiverID", getRecieverID(txtReceiver.Text));
+            cmdInsert.Parameters.AddWithValue("@ReceiverID", getRecieverID(drpUsernames.SelectedItem.Text));
 
             cmdInsert.ExecuteNonQuery();
 
-            cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance - @RewardValue WHERE UserID=@GiverID";
+            cmdInsert.CommandText = "UPDATE [Employer] SET TotalBalance = TotalBalance - @RewardValue WHERE EmployerID=1";
             cmdInsert.ExecuteNonQuery();
             cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance + @RewardValue WHERE UserID=@ReceiverID";
             cmdInsert.ExecuteNonQuery();

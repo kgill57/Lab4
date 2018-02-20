@@ -10,9 +10,9 @@ public class Reward
     private int rewardQuantity;
     private double rewardAmount;
     private int companyID;
-    private int adminID;
     private DateTime dateAdded;
-    
+    private int adminID;
+
     // Setters
     public void setRewardID(int rewardID)
     {
@@ -39,14 +39,14 @@ public class Reward
         this.companyID = companyID;
     }
 
-    public void setAdminID(int adminID)
-    {
-        this.adminID = adminID;
-    }
-
     public void setDateAdded(DateTime dateAdded)
     {
         this.dateAdded = dateAdded;
+    }
+
+    public void setAdminID(int adminID)
+    {
+        this.adminID = adminID;
     }
 
     // Getters
@@ -75,29 +75,18 @@ public class Reward
         return this.companyID;
     }
 
-    public int getAdminID()
-    {
-        return this.adminID;
-    }
-
     public DateTime getDateAdded()
     {
         return this.dateAdded;
     }
 
+    public int getAdminID()
+    {
+        return this.adminID;
+    }
+ 
     public Reward()
     {
-
-    }
-
-    public Reward(int rewardID, String rewardName, int rewardQuantity, double rewardAmount, int companyID, int adminID, DateTime dateAdded)
-    {
-        setRewardID(rewardID);
-        setRewardName(rewardName);
-        setRewardQuantity(rewardQuantity);
-        setRewardAmount(rewardAmount);
-        setCompanyID(companyID);
-        setAdminID(adminID);
-        setDateAdded(dateAdded);
+        
     }
 }

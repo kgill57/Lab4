@@ -17,7 +17,7 @@
             <a href="TeamMemberPage.aspx"><li>Home</li></a>
             <a href="RewardTeamMember.aspx"><li>Reward Team Member</li></a>
             <a href="BuyRewards.aspx"><li>Buy Rewards</li></a>
-            <a href="/LoginPage.aspx"><li>Logout</li></a>
+            <a href="LoginPage.aspx"><li>Logout</li></a>
         </ul>
     </div>
 
@@ -25,7 +25,6 @@
 
     <asp:Panel ID="Panel1" runat="server">
             </asp:Panel>
-
     <br />
     <br />
     

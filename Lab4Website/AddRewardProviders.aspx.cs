@@ -16,7 +16,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
             fillGridView();
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
     }
@@ -111,29 +111,6 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     }
 
-    protected void grdProviders_RowDeleting(object sender, GridViewDeleteEventArgs e)
-    {
-        try
-        {
-            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
-
-            sc.Open();
-            //Declare the query string.
-
-            System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("DELETE" +
-                " FROM RewardProvider WHERE ProviderID = @providerID;", sc);
-            del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
-            del.ExecuteNonQuery();
-            sc.Close();
-            fillGridView();
-        }
-        catch
-        {
-
-        }
-    }
-
     protected void btnAddProvider_Click1(object sender, EventArgs e)
     {
         lblProviderName.Visible = true;
@@ -143,7 +120,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         btnAdd.Visible = true;
     }
 
-    
+
 
     protected void btnClear_Click(object sender, EventArgs e)
     {

@@ -70,7 +70,7 @@ public partial class UserOptions : System.Web.UI.Page
             select.Parameters["@Email"].Value = txtEmail.Text;
 
             select.Parameters.Add(new SqlParameter("@EmployerID", SqlDbType.Int));
-            select.Parameters["@EmployerID"].Value = txtCompany.Text;
+            select.Parameters["@EmployerID"].Value = CompanyDropdown.SelectedIndex + 1;
 
             select.Parameters.Add(new SqlParameter("@AccountBalance", SqlDbType.Money));
             select.Parameters["@AccountBalance"].Value = 100;
@@ -247,5 +247,14 @@ public partial class UserOptions : System.Web.UI.Page
     {
         grdUsers.EditIndex = -1;
         fillGridView();
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        txtFName.Text = "Carey";
+        txtMI.Text = "";
+        txtLName.Text = "Cole";
+        txtEmail.Text = "Carey_Cole@jmu.edu";
+        txtUsername.Text = "CCole";
     }
 }

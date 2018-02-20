@@ -55,3 +55,10 @@ h1 {
             background: #151719;
             margin: 5px 0px;
         }
+
+.postCSS {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    background-color:white;
+    text-align:left;
+}

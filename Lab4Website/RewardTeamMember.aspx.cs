@@ -47,6 +47,10 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
             System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
             cmdInsert.Connection = sc;
+
+            if (checkTransactionDate(post.getGiverID()) == false)
+                return;
+
             cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
                 + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
                 " @GiverID, @ReceiverID)";
@@ -68,8 +72,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
             lblResult.Text = "Reward Sent.";
 
-            checkTransactionDate(post.getGiverID());
-
+            
             sc.Close();
         }
 
@@ -79,8 +82,10 @@ public partial class RewardTeamMember : System.Web.UI.Page
         }
     }
 
-    public void checkTransactionDate(int giverID)
+    public Boolean checkTransactionDate(int giverID)
     {
+
+        Boolean valid = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
@@ -96,9 +101,15 @@ public partial class RewardTeamMember : System.Web.UI.Page
         System.Diagnostics.Debug.WriteLine(transDate);
 
         if (transDate == DateTime.Today)
+        {
             lblResult.Text = "Cannot make 2 transactions in one day.";
+            valid = false;
+        }
+            
 
-       
+        sc.Close();
+
+        return valid;
     }
 
     public int getRecieverID(String username)
@@ -118,5 +129,10 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
         sc.Close();
         return userID;
+    }
+
+    protected void AutoFillRewardSendID_Click(object sender, EventArgs e)
+    {
+        txtDescription.Text = "Very good job!";
     }
 }

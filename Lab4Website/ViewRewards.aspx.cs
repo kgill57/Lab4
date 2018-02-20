@@ -183,7 +183,7 @@ public partial class ViewRewards : System.Web.UI.Page
                 sc.Open();
                 // Declare the query string.
 
-                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM Reward WHERE RewardName LIKE '%' + @rewardName;", sc);
+                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM Reward WHERE LOWER(RewardName) LIKE LOWER('%' + @rewardName + '%');", sc);
                 del.Parameters.AddWithValue("@rewardName", txtSearch.Text);
                 del.ExecuteNonQuery();
 
@@ -244,5 +244,13 @@ public partial class ViewRewards : System.Web.UI.Page
         int providerID = Convert.ToInt32(select.ExecuteScalar());
 
         return providerID;
+    }
+
+    protected void RewardAutoFillID_Click(object sender, EventArgs e)
+    {
+        txtRewardName.Text = "Hardworking";
+        txtRewardQuantity.Text = "50";
+        txtRewardAmount.Text = "50";
+
     }
 }

@@ -204,7 +204,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
                 sc.Open();
                 // Declare the query string.
 
-                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM RewardProvider WHERE ProviderName LIKE '%' + @ProviderName;", sc);
+                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM RewardProvider WHERE LOWER(ProviderName) LIKE LOWER('%' + @ProviderName + '%');", sc);
                 del.Parameters.AddWithValue("@ProviderName", txtSearch.Text);
                 del.ExecuteNonQuery();
 
@@ -223,5 +223,11 @@ public partial class AddRewardProviders : System.Web.UI.Page
     protected void btnClear_Click1(object sender, EventArgs e)
     {
         Response.Redirect(Request.RawUrl);
+    }
+
+    protected void AutoFillRewardProviderID_Click(object sender, EventArgs e)
+    {
+        txtNewProviderName.Text = "Starbucks";
+        txtNewProviderEmail.Text = "Starbucks@gmail.com";
     }
 }

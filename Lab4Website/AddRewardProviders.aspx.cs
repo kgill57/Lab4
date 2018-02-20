@@ -201,4 +201,10 @@ public partial class AddRewardProviders : System.Web.UI.Page
     {
         Response.Redirect(Request.RawUrl);
     }
+
+    protected void AutoFillRewardProviderID_Click(object sender, EventArgs e)
+    {
+        txtNewProviderName.Text = "Starbucks";
+        txtNewProviderEmail.Text = "Starbucks@gmail.com";
+    }
 }

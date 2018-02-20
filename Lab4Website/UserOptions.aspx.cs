@@ -248,4 +248,13 @@ public partial class UserOptions : System.Web.UI.Page
         grdUsers.EditIndex = -1;
         fillGridView();
     }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        txtFName.Text = "Carey";
+        txtMI.Text = "";
+        txtLName.Text = "Cole";
+        txtEmail.Text = "Carey_Cole@jmu.edu";
+        txtUsername.Text = "CCole";
+    }
 }

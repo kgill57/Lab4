@@ -83,7 +83,8 @@
                 <asp:Button ID="btnInsertUser" runat="server" OnClick="btnInsertUser_Click" Text="Insert User" ValidationGroup="ValidEmp" />
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                
+                <asp:Button ID="AutoFillUser" runat="server" OnClick="Button1_Click" Text="AutoFill User" />
+
             </div>
         <div>
             <asp:Label ID="lblError" runat="server" Text="No Error"></asp:Label>

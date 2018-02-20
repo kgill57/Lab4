@@ -95,7 +95,9 @@
         <br /><br /><br /><br /><br />
           
         &nbsp;&nbsp;&nbsp;
-                  
+
+        <asp:Button ID="AutoFillRewardSendID" runat="server" OnClick="AutoFillRewardSendID_Click" Text="AutoFillRewardSend" />
+          
         <asp:Button ID="btnSubmit" runat="server" Text="Submit Reward" OnClick="btnSubmit_Click" />
 
         <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>

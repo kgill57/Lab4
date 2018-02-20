@@ -48,8 +48,21 @@ public partial class RewardTeamMember : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
             cmdInsert.Connection = sc;
 
-            if (checkTransactionDate(post.getGiverID()) == false)
-                return;
+
+            if (checkTransactionDate(post.getGiverID()) == true)
+            {
+
+                cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
+                    + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
+                    " @GiverID, @ReceiverID)";
+                cmdInsert.Parameters.AddWithValue("@CompanyValue", post.getValue());
+                cmdInsert.Parameters.AddWithValue("@Category", post.getCategory());
+                cmdInsert.Parameters.AddWithValue("@Description", post.getDescription());
+                cmdInsert.Parameters.AddWithValue("@RewardValue", post.getRewardValue());
+                cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
+                cmdInsert.Parameters.AddWithValue("@Private", post.getIsPrivate());
+                cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
+                cmdInsert.Parameters.AddWithValue("@ReceiverID", getRecieverID(drpUsernames.SelectedItem.Text));
 
             cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
                 + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
@@ -107,7 +120,9 @@ public partial class RewardTeamMember : System.Web.UI.Page
         }
             
 
+
         sc.Close();
+
 
         return valid;
     }
@@ -129,5 +144,10 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
         sc.Close();
         return userID;
+    }
+
+    protected void AutoFillRewardSendID_Click(object sender, EventArgs e)
+    {
+        txtDescription.Text = "Very good job!";
     }
 }

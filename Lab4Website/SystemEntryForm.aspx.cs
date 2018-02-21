@@ -28,7 +28,7 @@ public partial class SystemEntryForm : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab3;Integrated Security=True";
+                sc.ConnectionString = @"Data Source=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Initial Catalog=lab3;Integrated Security=True";
 
                 sc.Open();
                 //Declare the query string.

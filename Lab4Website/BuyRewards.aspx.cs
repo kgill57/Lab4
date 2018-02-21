@@ -22,7 +22,7 @@ public partial class BuyRewards : System.Web.UI.Page
         
         
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[Reward] ORDER BY [RewardID] DESC", con);
@@ -122,7 +122,7 @@ public partial class BuyRewards : System.Web.UI.Page
 
         //testing update to the database
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
         con.Open();
 
         SqlCommand cmd = new SqlCommand("UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @rewardID", con);
@@ -164,7 +164,8 @@ public partial class BuyRewards : System.Web.UI.Page
     protected void btnBuy_Click(object sender, EventArgs e)
     {
 
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
         con.Open();
 
         SqlCommand cmd = new SqlCommand();
@@ -194,6 +195,17 @@ public partial class BuyRewards : System.Web.UI.Page
                 cmd.ExecuteNonQuery();
             }
         }
+
+        for(int i=0; i<arraySize; i++)
+        {
+            if(chkBuy[i].Checked == true)
+            {
+
+            }
+        }
+
+        cmd.ExecuteNonQuery();
+        lblResult.Text = "Reward Claimed!";
 
         
         

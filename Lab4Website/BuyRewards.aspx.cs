@@ -10,8 +10,6 @@ using System.IO;
 
 public partial class BuyRewards : System.Web.UI.Page
 {
-    public SqlConnection con = new SqlConnection();
-
     public static Panel[] panelPost;
     public static CheckBox[] chkBuy;
     public static Reward[] reward;
@@ -135,11 +133,11 @@ public partial class BuyRewards : System.Web.UI.Page
     protected void btnBuy_Click(object sender, EventArgs e)
     {
 
+        SqlConnection con = new SqlConnection();
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand cmd = new SqlCommand();
-        cmd.Connection = con;
 
         double total = 0;
         for(int i = 0; i < arraySize; i++)
@@ -150,27 +148,20 @@ public partial class BuyRewards : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
                 cmd.Parameters.AddWithValue("@rewardID", reward[i].getRewardID());
                 cmd.Parameters.AddWithValue("@dateClaimed", DateTime.Today);
-                cmd.ExecuteNonQuery();
             }
         }
 
-        
-
-        for (int i=0; i<arraySize; i++)
+        for(int i=0; i<arraySize; i++)
         {
             if(chkBuy[i].Checked == true)
             {
-                cmd.CommandText = "UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @reward";
-                cmd.Parameters.AddWithValue("@reward", reward[i].getRewardID());
-                cmd.ExecuteNonQuery();
+
             }
         }
 
-        
-        
+        cmd.ExecuteNonQuery();
         lblResult.Text = "Reward Claimed!";
 
-        con.Close();
         
     }
 }

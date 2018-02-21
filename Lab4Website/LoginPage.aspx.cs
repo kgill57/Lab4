@@ -81,11 +81,25 @@ public partial class LoginPage : System.Web.UI.Page
         select.CommandText = "SELECT FName FROM [User] WHERE UserName = @username";
         Session["FName"] = (String)(select.ExecuteScalar());
 
+        try
+        {
+            select.CommandText = "SELECT MI FROM [User] WHERE UserName = @username";
+            Session["MI"] = (String)select.ExecuteScalar();
+        }
+        catch (Exception)
+        {
+            Session["MI"] = "";
+        }
+        
+
         select.CommandText = "SELECT LName FROM [User] WHERE UserName = @username";
         Session["LName"] = (String)(select.ExecuteScalar());
 
         select.CommandText = "SELECT UserName FROM [User] WHERE UserName = @username";
         Session["UserName"] = (String)(select.ExecuteScalar());
+
+        select.CommandText = "SELECT Email FROM [User] WHERE UserName = @username";
+        Session["Email"] = (String)(select.ExecuteScalar());
 
         select.CommandText = "SELECT Admin FROM [User] WHERE UserName = @username";
         Session["Admin"] = Convert.ToInt32(select.ExecuteScalar());

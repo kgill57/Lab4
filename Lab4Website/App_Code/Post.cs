@@ -130,7 +130,7 @@ public class Post
     public string getGiverUsername(int giverID)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
         con.Open();
 
         SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);
@@ -143,7 +143,7 @@ public class Post
     public string getReceiverUsername(int receiverID)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
         con.Open();
 
         SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);

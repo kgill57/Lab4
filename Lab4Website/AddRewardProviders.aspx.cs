@@ -28,7 +28,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
 
             sc.Open();
             // Declare the query string.
@@ -64,7 +64,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
 
 
         //Check if the project name Text box is empty
@@ -116,7 +116,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+            sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
 
             sc.Open();
             //Declare the query string.
@@ -154,7 +154,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
     protected void btnAdd_Click1(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
 
         sc.Open();
         //Declare the query string.
@@ -177,7 +177,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+                sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
 
                 sc.Open();
                 //Declare the query string.
@@ -200,7 +200,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
 
-                SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+                SqlConnection sc = new SqlConnection(@"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;");
                 sc.Open();
                 // Declare the query string.
 

@@ -16,7 +16,7 @@ public partial class AdminPage : System.Web.UI.Page
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
 
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] ORDER BY [TransID] DESC", con);

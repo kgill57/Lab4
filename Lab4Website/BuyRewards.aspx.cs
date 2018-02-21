@@ -18,9 +18,11 @@ public partial class BuyRewards : System.Web.UI.Page
     public static int arraySize;
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        
         
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[Reward] ORDER BY [RewardID] DESC", con);
@@ -92,6 +94,8 @@ public partial class BuyRewards : System.Web.UI.Page
             Panel1.Controls.Add(panelPost[i]);
         }
         con.Close();
+
+        checkFunds();
     }
 
     private void BuyRewards_CheckedChanged(object sender, EventArgs e)
@@ -118,7 +122,7 @@ public partial class BuyRewards : System.Web.UI.Page
 
         //testing update to the database
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand cmd = new SqlCommand("UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @rewardID", con);
@@ -131,11 +135,36 @@ public partial class BuyRewards : System.Web.UI.Page
 
     }
 
+    public void checkFunds()
+    {
+        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.Open();
+
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = con;
+
+        cmd.CommandText = "SELECT AccountBalance FROM [User] WHERE UserID = @userID";
+        cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
+        double balance = Convert.ToDouble(cmd.ExecuteScalar());
+
+        for(int i =0; i < reward.Length; i++)
+        {
+            if(balance < reward[i].getRewardAmount())
+            {
+                btnBuy.Enabled = false;
+                lblResult.Text = "insufficient Funds.";
+            }
+        }
+
+
+
+    }
+
 
     protected void btnBuy_Click(object sender, EventArgs e)
     {
 
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand cmd = new SqlCommand();

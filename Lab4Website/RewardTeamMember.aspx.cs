@@ -32,7 +32,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
     public void loadDropDown()
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = @"Server =DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
 
         sc.Open();
 
@@ -75,7 +75,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = @"Server =DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
 
             sc.Open();
 
@@ -124,7 +124,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
         Boolean valid = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = @"Server =DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
 
         sc.Open();
 
@@ -154,7 +154,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
     public int getRecieverID(String username)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = @"Server =DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
 
         sc.Open();
 

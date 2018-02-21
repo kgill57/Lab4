@@ -25,7 +25,7 @@ public partial class LoginPage : System.Web.UI.Page
         String password = txtPassword.Text;
 
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand select = new SqlCommand();
@@ -67,7 +67,7 @@ public partial class LoginPage : System.Web.UI.Page
     public void getUser(string username)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand select = new SqlCommand();
@@ -102,7 +102,7 @@ public partial class LoginPage : System.Web.UI.Page
     protected void btnCreateAdmin_Click(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand select = new SqlCommand();

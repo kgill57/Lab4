@@ -10,16 +10,12 @@ using System.IO;
 
 public partial class BuyRewards : System.Web.UI.Page
 {
-    public SqlConnection con = new SqlConnection();
-
     public static Panel[] panelPost;
     public static CheckBox[] chkBuy;
     public static Reward[] reward;
     public static int arraySize;
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        
         
         SqlConnection con = new SqlConnection();
         con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
@@ -94,8 +90,6 @@ public partial class BuyRewards : System.Web.UI.Page
             Panel1.Controls.Add(panelPost[i]);
         }
         con.Close();
-
-        checkFunds();
     }
 
     private void BuyRewards_CheckedChanged(object sender, EventArgs e)
@@ -135,31 +129,6 @@ public partial class BuyRewards : System.Web.UI.Page
 
     }
 
-    public void checkFunds()
-    {
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
-        con.Open();
-
-        SqlCommand cmd = new SqlCommand();
-        cmd.Connection = con;
-
-        cmd.CommandText = "SELECT AccountBalance FROM [User] WHERE UserID = @userID";
-        cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
-        double balance = Convert.ToDouble(cmd.ExecuteScalar());
-
-        for(int i =0; i < reward.Length; i++)
-        {
-            if(balance < reward[i].getRewardAmount())
-            {
-                btnBuy.Enabled = false;
-                lblResult.Text = "insufficient Funds.";
-            }
-        }
-
-
-
-    }
-
 
     protected void btnBuy_Click(object sender, EventArgs e)
     {
@@ -169,7 +138,6 @@ public partial class BuyRewards : System.Web.UI.Page
         con.Open();
 
         SqlCommand cmd = new SqlCommand();
-        cmd.Connection = con;
 
         double total = 0;
         for(int i = 0; i < arraySize; i++)
@@ -180,19 +148,6 @@ public partial class BuyRewards : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
                 cmd.Parameters.AddWithValue("@rewardID", reward[i].getRewardID());
                 cmd.Parameters.AddWithValue("@dateClaimed", DateTime.Today);
-                cmd.ExecuteNonQuery();
-            }
-        }
-
-        
-
-        for (int i=0; i<arraySize; i++)
-        {
-            if(chkBuy[i].Checked == true)
-            {
-                cmd.CommandText = "UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @reward";
-                cmd.Parameters.AddWithValue("@reward", reward[i].getRewardID());
-                cmd.ExecuteNonQuery();
             }
         }
 
@@ -207,11 +162,6 @@ public partial class BuyRewards : System.Web.UI.Page
         cmd.ExecuteNonQuery();
         lblResult.Text = "Reward Claimed!";
 
-        
-        
-        lblResult.Text = "Reward Claimed!";
-
-        con.Close();
         
     }
 }

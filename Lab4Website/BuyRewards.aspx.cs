@@ -167,7 +167,6 @@ public partial class BuyRewards : System.Web.UI.Page
         con.Open();
 
         SqlCommand cmd = new SqlCommand();
-        cmd.Connection = con;
 
         cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
 

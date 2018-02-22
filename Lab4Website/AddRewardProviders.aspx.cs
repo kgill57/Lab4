@@ -31,6 +31,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
             sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
 
+
             sc.Open();
             // Declare the query string.
 
@@ -158,6 +159,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = @"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab4;Integrated Security=True";
 
+
         sc.Open();
         //Declare the query string.
 
@@ -180,6 +182,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
                 sc.ConnectionString = @"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab4;Integrated Security=True";
+
 
                 sc.Open();
                 //Declare the query string.

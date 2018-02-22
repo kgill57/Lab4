@@ -181,7 +181,6 @@ public partial class ViewRewards : System.Web.UI.Page
 
                 SqlConnection sc = new SqlConnection(@"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;");
 
-
                 sc.Open();
                 // Declare the query string.
 

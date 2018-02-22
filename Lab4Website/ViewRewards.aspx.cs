@@ -21,7 +21,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
 
-            SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
+            SqlConnection sc = new SqlConnection(@"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;");
             sc.Open();
             // Declare the query string.
 
@@ -41,7 +41,7 @@ public partial class ViewRewards : System.Web.UI.Page
 
     protected void fillDropDown()
     {
-        SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
+        SqlConnection sc = new SqlConnection(@"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;");
         sc.Open();
         // Declare the query string.
 
@@ -70,7 +70,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
 
             sc.Open();
             //Declare the query string.
@@ -92,7 +92,7 @@ public partial class ViewRewards : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.ToString()))
@@ -156,7 +156,7 @@ public partial class ViewRewards : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+                sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
                 sc.Open();
                 //Declare the query string.
 
@@ -179,7 +179,7 @@ public partial class ViewRewards : System.Web.UI.Page
             {
 
 
-                SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
+                SqlConnection sc = new SqlConnection(@"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;");
 
 
                 sc.Open();
@@ -217,7 +217,7 @@ public partial class ViewRewards : System.Web.UI.Page
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
 
-        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
 
 
         sc.Open();
@@ -240,7 +240,7 @@ public partial class ViewRewards : System.Web.UI.Page
     public int findProviderID(string providerName)
     {
         SqlConnection sc = new SqlConnection();
-        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
         sc.Open();
         SqlCommand select = new SqlCommand("SELECT ProviderID FROM RewardProvider WHERE ProviderName LIKE '%' + @providerName", sc);
         select.Parameters.AddWithValue("@providerName", providerName);

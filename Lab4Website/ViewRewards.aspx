@@ -115,11 +115,8 @@
             </td>
             <td>
                 <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" CausesValidation="False" />
-<<<<<<< HEAD
-=======
             &nbsp;
                 <asp:Button ID="RewardAutoFillID" runat="server" OnClick="RewardAutoFillID_Click" Text="AutoFill Reward" />
->>>>>>> master
             </td>
         </tr>
         <tr>

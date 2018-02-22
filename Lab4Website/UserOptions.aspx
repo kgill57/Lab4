@@ -152,7 +152,6 @@
                         <asp:ListItem Value="0">User</asp:ListItem>
                         <asp:ListItem Value="1">Admin</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="reqgvAdmin" ControlToValidate="ddlgvAdmin" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblAdmin" runat="server" Text='<%# Eval("Admin") %>'></asp:Label>

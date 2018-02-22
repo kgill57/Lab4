@@ -99,11 +99,8 @@
                     </td>
                     <td>
                         <asp:Button ID="btnClear" runat="server" Text="Clear" CausesValidation="False" OnClick="btnClear_Click1" />
-<<<<<<< HEAD
-=======
                     &nbsp;&nbsp;
                         <asp:Button ID="AutoFillRewardProviderID" runat="server" OnClick="AutoFillRewardProviderID_Click" Text="AutoFillRewardProvider" Width="167px" />
->>>>>>> master
                     </td>
                 </tr>
                 <tr>

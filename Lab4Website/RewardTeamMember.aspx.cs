@@ -4,13 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+<<<<<<< HEAD
+=======
 using System.Data;
 using System.Data.SqlClient;
+>>>>>>> master
 
 public partial class RewardTeamMember : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+<<<<<<< HEAD
+        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + Session["AccountBalance"];
+        if (!IsPostBack)
+        {
+            ddlCompanyValue.ClearSelection();
+            ddlCategory.ClearSelection();
+            ddlRewardValue.ClearSelection();
+        }     
+=======
         try
         {
             lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + Session["AccountBalance"];
@@ -50,6 +62,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
         drpUsernames.DataTextField = "Username";
         drpUsernames.DataBind();
         sc.Close();
+>>>>>>> master
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -59,8 +72,12 @@ public partial class RewardTeamMember : System.Web.UI.Page
         post.setCategory(ddlCategory.SelectedValue);
         post.setDescription(txtDescription.Text);
         post.setRewardValue(Convert.ToDouble(ddlRewardValue.SelectedValue));
+<<<<<<< HEAD
+        post.setPostDate(Convert.ToString(DateTime.Now));
+=======
         post.setPostDate(DateTime.Now);
         post.setGiverID((int)Session["UserID"]);
+>>>>>>> master
 
         if (Convert.ToByte(chkPrivate.Checked) == 0)
         {
@@ -75,12 +92,40 @@ public partial class RewardTeamMember : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+<<<<<<< HEAD
+            sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+=======
             sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
+>>>>>>> master
 
             sc.Open();
 
             System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
             cmdInsert.Connection = sc;
+<<<<<<< HEAD
+            cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
+                + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
+                " @GiverID, @ReceiverID)";
+            cmdInsert.Parameters.AddWithValue("@CompanyValue", post.getValue());
+            cmdInsert.Parameters.AddWithValue("@Category", post.getCategory());
+            cmdInsert.Parameters.AddWithValue("@Description", post.getDescription());
+            cmdInsert.Parameters.AddWithValue("@RewardValue", post.getRewardValue());
+            cmdInsert.Parameters.AddWithValue("@TransactionDate", post.getPostDate());
+            cmdInsert.Parameters.AddWithValue("@Private", post.getIsPrivate());
+            cmdInsert.Parameters.AddWithValue("@GiverID", (int)Session["UserID"]);
+            cmdInsert.Parameters.AddWithValue("@ReceiverID", getRecieverID(txtReceiver.Text));
+
+            cmdInsert.ExecuteNonQuery();
+
+            cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance - @RewardValue WHERE UserID=@GiverID";
+            cmdInsert.ExecuteNonQuery();
+            cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance + @RewardValue WHERE UserID=@ReceiverID";
+            cmdInsert.ExecuteNonQuery();
+
+            lblResult.Text = "Reward Sent.";
+
+            sc.Close();
+=======
 
 
             if (checkTransactionDate(post.getGiverID()) == true)
@@ -111,6 +156,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
                 sc.Close();
                 loadDropDown();
             }
+>>>>>>> master
         }
 
         catch
@@ -119,6 +165,12 @@ public partial class RewardTeamMember : System.Web.UI.Page
         }
     }
 
+<<<<<<< HEAD
+    //public Boolean checkTransactionDate(string username)
+    //{
+
+    //}
+=======
     public Boolean checkTransactionDate(int giverID)
     {
 
@@ -150,11 +202,16 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
         return valid;
     }
+>>>>>>> master
 
     public int getRecieverID(String username)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+<<<<<<< HEAD
+        sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+=======
         sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
+>>>>>>> master
 
         sc.Open();
 
@@ -169,9 +226,12 @@ public partial class RewardTeamMember : System.Web.UI.Page
         sc.Close();
         return userID;
     }
+<<<<<<< HEAD
+=======
 
     protected void AutoFillRewardSendID_Click(object sender, EventArgs e)
     {
         txtDescription.Text = "Very good job!";
     }
+>>>>>>> master
 }

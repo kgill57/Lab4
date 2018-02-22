@@ -16,10 +16,17 @@ public partial class AdminPage : System.Web.UI.Page
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
 
         SqlConnection con = new SqlConnection();
+<<<<<<< HEAD
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.Open();
+
+        SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION]", con);
+=======
         con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] ORDER BY [TransID] DESC", con);
+>>>>>>> master
 
         //Create Scaler to see how many transactions there are
         SqlCommand scaler = new SqlCommand("SELECT COUNT(TransID) FROM [dbo].[TRANSACTION]", con);
@@ -32,6 +39,23 @@ public partial class AdminPage : System.Web.UI.Page
         while (reader.Read())
         {
             transaction[arrayCounter] = new Post(Convert.ToInt32(reader.GetValue(0)), Convert.ToString(reader.GetValue(1)),
+<<<<<<< HEAD
+                Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(3)), Convert.ToDouble(reader.GetValue(4)), Convert.ToString(reader.GetValue(5)), Convert.ToBoolean(reader.GetValue(6)), Convert.ToInt32(reader.GetValue(7)), Convert.ToInt32(reader.GetValue(8)));
+            arrayCounter++;
+        }
+        con.Close();
+        Label[] test = new Label[arraySize];
+
+        for (int i = 0; i < arraySize; i++)
+        {
+            test[i] = new Label();
+
+            test[i].Text = (transaction[i].getGiverUsername(transaction[i].getGiverID()) + " gifted " + transaction[i].getReceiverUsername(transaction[i].getReceiverID()));
+
+            Panel1.Controls.Add(test[i]);
+            Panel1.Controls.Add(new LiteralControl("<br />"));
+        }
+=======
                 Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(3)), Convert.ToDouble(reader.GetValue(4)), Convert.ToDateTime(reader.GetValue(5)), Convert.ToBoolean(reader.GetValue(6)), Convert.ToInt32(reader.GetValue(7)), Convert.ToInt32(reader.GetValue(8)));
             arrayCounter++;
         }
@@ -100,5 +124,6 @@ public partial class AdminPage : System.Web.UI.Page
 
         con.Close();
 
+>>>>>>> master
     }
 }

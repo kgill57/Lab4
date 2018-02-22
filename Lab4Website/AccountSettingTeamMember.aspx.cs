@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,7 +18,7 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
         lblCurrentEmail.Text = (String)Session["Email"];
 
         con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
     }
 
     protected void btnEditFName_Click(object sender, EventArgs e)

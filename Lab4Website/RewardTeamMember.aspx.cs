@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-
 public partial class RewardTeamMember : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -110,7 +109,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
                 sc.Close();
                 loadDropDown();
-            //}
+            }
         }
 
         catch
@@ -118,6 +117,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
         }
     }
+
 
     public Boolean checkTransactionDate(int giverID)
     {
@@ -169,6 +169,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
         sc.Close();
         return userID;
     }
+
 
     protected void AutoFillRewardSendID_Click(object sender, EventArgs e)
     {

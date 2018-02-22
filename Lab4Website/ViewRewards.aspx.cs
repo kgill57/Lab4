@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -157,7 +157,6 @@ public partial class ViewRewards : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
                 sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-
                 sc.Open();
                 //Declare the query string.
 
@@ -179,11 +178,15 @@ public partial class ViewRewards : System.Web.UI.Page
             try
             {
 
+
                 SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
+
+
                 sc.Open();
                 // Declare the query string.
 
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM Reward WHERE LOWER(RewardName) LIKE LOWER('%' + @rewardName + '%');", sc);
+
                 del.Parameters.AddWithValue("@rewardName", txtSearch.Text);
                 del.ExecuteNonQuery();
 
@@ -213,7 +216,9 @@ public partial class ViewRewards : System.Web.UI.Page
     protected void btnAdd_Click(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+
         sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+
 
         sc.Open();
         //Declare the query string.

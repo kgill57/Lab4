@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,8 +10,6 @@ using System.IO;
 
 public partial class BuyRewards : System.Web.UI.Page
 {
-    public SqlConnection con = new SqlConnection();
-
     public static Panel[] panelPost;
     public static CheckBox[] chkBuy;
     public static Reward[] reward;
@@ -92,7 +90,6 @@ public partial class BuyRewards : System.Web.UI.Page
             Panel1.Controls.Add(panelPost[i]);
         }
         con.Close();
-
         //checkFunds();
     }
 
@@ -178,7 +175,6 @@ public partial class BuyRewards : System.Web.UI.Page
         con.Open();
 
         SqlCommand cmd = new SqlCommand();
-        cmd.Connection = con;
 
         cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
 
@@ -220,6 +216,7 @@ public partial class BuyRewards : System.Web.UI.Page
         lblResult.Text = "Reward Claimed!";
 
         con.Close();
+
 
     }
 }

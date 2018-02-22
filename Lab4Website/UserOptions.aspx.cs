@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -41,7 +41,7 @@ public partial class UserOptions : System.Web.UI.Page
             String insertString;
 
             insertString = "INSERT INTO [dbo].[User] VALUES(@FName, ";
-            if (txtMI.Text.Equals(""))
+            if (String.IsNullOrWhiteSpace(txtMI.Text) == true)
             {
                 insertString += "NULL,";
             }
@@ -57,7 +57,7 @@ public partial class UserOptions : System.Web.UI.Page
             select.Parameters.Add(new SqlParameter("@FName", SqlDbType.VarChar));
             select.Parameters["@FName"].Value = txtFName.Text;
 
-            if (!txtMI.Text.Equals(""))
+            if (String.IsNullOrWhiteSpace(txtMI.Text) == false)
             {
                 select.Parameters.Add(new SqlParameter("@MI", SqlDbType.Char));
                 select.Parameters["@MI"].Value = txtMI.Text;
@@ -165,11 +165,10 @@ public partial class UserOptions : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-
+        sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
 
         //Check if the project name Text box is empty
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtFName") as TextBox).Text.ToString()))
+        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvFName") as TextBox).Text.ToString()))
         {
             //projectNameError.Visible = true;
             //projectNameError.Text = "The project name cannot be empty";
@@ -177,50 +176,41 @@ public partial class UserOptions : System.Web.UI.Page
         }
 
         //Check if the Project Description Text box is empty
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtLName") as TextBox).Text.ToString()))
+        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvLName") as TextBox).Text.ToString()))
         {
             //projectDescriptionErrror.Visible = true;
             //projectDescriptionErrror.Text = "Field cannot be empty";
             textError = false;
         }
 
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtMI") as TextBox).Text.ToString()))
+        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvEmail") as TextBox).Text.ToString()))
         {
             //projectDescriptionErrror.Visible = true;
             //projectDescriptionErrror.Text = "Field cannot be empty";
             textError = false;
         }
 
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtEmail") as TextBox).Text.ToString()))
+        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvUsername") as TextBox).Text.ToString()))
         {
             //projectDescriptionErrror.Visible = true;
             //projectDescriptionErrror.Text = "Field cannot be empty";
             textError = false;
         }
 
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtUsername") as TextBox).Text.ToString()))
+        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvAdmin") as TextBox).Text.ToString()))
         {
             //projectDescriptionErrror.Visible = true;
             //projectDescriptionErrror.Text = "Field cannot be empty";
             textError = false;
         }
-
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtAdmin") as TextBox).Text.ToString()))
-        {
-            //projectDescriptionErrror.Visible = true;
-            //projectDescriptionErrror.Text = "Field cannot be empty";
-            textError = false;
-        }
-
-        
 
         
 
         if (textError)
         {
-
-
+            var ddl = grdUsers.Rows[e.RowIndex].FindControl("ddlgvAdmin") as DropDownList;
             var ddlEmployed = grdUsers.Rows[e.RowIndex].FindControl("drpStatus") as DropDownList;
+         
             sc.Open();
             // Declare the query string.
             try
@@ -234,12 +224,13 @@ public partial class UserOptions : System.Web.UI.Page
                 del.Parameters.AddWithValue("@newUsername", (grdUsers.Rows[e.RowIndex].FindControl("txtUsername") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@newAdmin", (grdUsers.Rows[e.RowIndex].FindControl("txtAdmin") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@employedStatus", ddlEmployed.SelectedValue);
+                del.Parameters.AddWithValue("@newAdmin", ddl.SelectedValue);
                 del.Parameters.AddWithValue("@userID", Convert.ToInt32(grdUsers.DataKeys[e.RowIndex].Value.ToString()));
                 del.ExecuteNonQuery();
                 sc.Close();
                 grdUsers.EditIndex = -1;
-
                 fillGridView();
+                
             }
             catch
             {
@@ -255,7 +246,7 @@ public partial class UserOptions : System.Web.UI.Page
         fillGridView();
     }
 
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void btnAutoFillUser_Click(object sender, EventArgs e)
     {
         txtFName.Text = "Carey";
         txtMI.Text = "";

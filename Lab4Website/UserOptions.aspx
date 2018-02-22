@@ -146,12 +146,11 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Admin">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtgvAdmin" runat="server" Text='<%# Eval("Admin") %>'></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqgvAdmin" ControlToValidate="txtgvAdmin" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
                     <asp:DropDownList ID="ddlgvAdmin" runat="server" SelectedValue='<%# Bind("Admin") %>'>
                         <asp:ListItem Value="0">User</asp:ListItem>
                         <asp:ListItem Value="1">Admin</asp:ListItem>
                     </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="reqgvAdmin" ControlToValidate="ddlgvAdmin" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblAdmin" runat="server" Text='<%# Eval("Admin") %>'></asp:Label>

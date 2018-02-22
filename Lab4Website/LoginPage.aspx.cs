@@ -33,9 +33,21 @@ public partial class LoginPage : System.Web.UI.Page
         SqlCommand select = new SqlCommand();
         select.Connection = con;
 
-        select.CommandText = "SELECT [PasswordHash] FROM [dbo].[Password] WHERE [UserID] = (SELECT [UserID] FROM [dbo].[User] WHERE [UserName] = @UserName)";
+        
         select.Parameters.Add(new System.Data.SqlClient.SqlParameter("@UserName", System.Data.SqlDbType.VarChar));
         select.Parameters["@UserName"].Value = txtUsername.Text;
+
+        select.CommandText = "SELECT EmployedStatus FROM [User] WHERE Username = @UserName";
+
+
+        bool status = Convert.ToBoolean(select.ExecuteScalar());
+        if (status == false)
+        {
+            lblError.Text = "Username does not exist";
+            return;
+        }
+
+        select.CommandText = "SELECT [PasswordHash] FROM [dbo].[Password] WHERE [UserID] = (SELECT [UserID] FROM [dbo].[User] WHERE [UserName] = @UserName)";
 
         String hash = (String)select.ExecuteScalar();
 

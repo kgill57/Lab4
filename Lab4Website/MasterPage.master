@@ -5,6 +5,7 @@
 </head>
 <html>
 <body style="margin-bottom: 0px">
+    <asp:Image id = "headerIMG" runat ="server" ImageUrl ="~/Images/Header.png" width ="100%"/>
     <h1>Elk Logistics Rewards System</h1>
     <form id="form1" runat="server">
     <div style="height: 19px; margin-top: 25px">

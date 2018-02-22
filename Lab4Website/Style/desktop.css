@@ -26,11 +26,11 @@ h1 {
     text-align: center;
 }
 
-* {
+/** {
     margin: 0px 0px 0px 6px;
     padding: 0px;
     font-family: sans-serif;
-}
+}*/
 
 #sidebar {
     position: fixed;
@@ -41,34 +41,40 @@ h1 {
     transition: all 500ms linear;
 }
 
-    #sidebar.active {
-        left: 0px;
-    }
+#sidebar.active {
+    left: 0px;
+}
 
-    #sidebar ul li {
-        color: rgba(230, 230, 230, 0.9);
-        list-style: none;
-        padding: 15px 10px;
-        border-bottom: 1px solid rgba(100,100,100,0.3);
-    }
+#sidebar ul li {
+    color: rgba(230, 230, 230, 0.9);
+    list-style: none;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(100,100,100,0.3);
+}
 
-    #sidebar .toggle-btn {
-        position: absolute;
-        left: 230px;
-        top: 20px;
-    }
+#sidebar .toggle-btn {
+    position: absolute;
+    left: 230px;
+    top: 20px;
+}
 
-        #sidebar .toggle-btn span {
-            display: block;
-            width: 30px;
-            height: 5px;
-            background: #151719;
-            margin: 5px 0px;
-        }
+#sidebar .toggle-btn span {
+    display: block;
+    width: 30px;
+    height: 5px;
+    background: #151719;
+    margin: 5px 0px;
+}
 
 .postCSS {
     margin-top: 4px;
     margin-bottom: 4px;
     background-color:white;
     text-align:left;
+}
+
+.gridview {
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
 }

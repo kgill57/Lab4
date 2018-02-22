@@ -50,7 +50,7 @@ public partial class UserOptions : System.Web.UI.Page
                 insertString += "@MI, ";
             }
 
-            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, @AccountBalance, '" + (String)Session["LName"] + "', '2018-01-01')";
+            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, @AccountBalance, 1, '" + (String)Session["LName"] + "', '2018-01-01')";
 
             select.CommandText = insertString;
 
@@ -113,7 +113,7 @@ public partial class UserOptions : System.Web.UI.Page
             // Declare the query string.
 
             System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT UserID, FName, LName, MI, Email, " +
-                "Username, Admin FROM [User];", sc);
+                "Username, Admin, EmployedStatus FROM [User];", sc);
             del.ExecuteNonQuery();
 
             grdUsers.DataSource = del.ExecuteReader();
@@ -214,20 +214,26 @@ public partial class UserOptions : System.Web.UI.Page
 
         
 
+        
+
         if (textError)
         {
+
+
+            var ddlEmployed = grdUsers.Rows[e.RowIndex].FindControl("drpStatus") as DropDownList;
             sc.Open();
             // Declare the query string.
             try
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE [User] SET FName=@newFName, " +
-                    "LName=@newLName, MI=@newMI, Email=@newEmail, Username=@newUsername, Admin=@newAdmin WHERE UserID=@userID", sc);
+                    "LName=@newLName, MI=@newMI, Email=@newEmail, Username=@newUsername, Admin=@newAdmin, EmployedStatus=@employedStatus WHERE UserID=@userID", sc);
                 del.Parameters.AddWithValue("@newFName", (grdUsers.Rows[e.RowIndex].FindControl("txtFName") as TextBox).Text.ToString().ToLower());
                 del.Parameters.AddWithValue("@newLName", (grdUsers.Rows[e.RowIndex].FindControl("txtLName") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@newMI", (grdUsers.Rows[e.RowIndex].FindControl("txtMI") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@newEmail", (grdUsers.Rows[e.RowIndex].FindControl("txtEmail") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@newUsername", (grdUsers.Rows[e.RowIndex].FindControl("txtUsername") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@newAdmin", (grdUsers.Rows[e.RowIndex].FindControl("txtAdmin") as TextBox).Text.ToString());
+                del.Parameters.AddWithValue("@employedStatus", ddlEmployed.SelectedValue);
                 del.Parameters.AddWithValue("@userID", Convert.ToInt32(grdUsers.DataKeys[e.RowIndex].Value.ToString()));
                 del.ExecuteNonQuery();
                 sc.Close();

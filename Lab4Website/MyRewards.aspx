@@ -24,33 +24,30 @@
     
     <br />
 
+    <h3>My Rewards</h3>
 
-
-
-     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False">
-         <Columns>
-             <asp:TemplateField HeaderText="Reward Name">
-                 <ItemTemplate>
-                     <asp:Label ID="lblRewardName" runat="server" Text="Label"></asp:Label>
-                 </ItemTemplate>
-             </asp:TemplateField>
-             <asp:TemplateField HeaderText="Reward Amount">
-                 <ItemTemplate>
-                     <asp:Label ID="lblRewardAmount" runat="server" Text="Label"></asp:Label>
-                 </ItemTemplate>
-             </asp:TemplateField>
-             <asp:TemplateField HeaderText="Reward Quantity">
-                 <ItemTemplate>
-                     <asp:Label ID="lblRewardQuantity" runat="server" Text="Label"></asp:Label>
-                 </ItemTemplate>
-             </asp:TemplateField>
-             <asp:TemplateField HeaderText="Date Purchased">
-                 <ItemTemplate>
-                     <asp:Label ID="lblDatePurchased" runat="server" Text="Label"></asp:Label>
-                 </ItemTemplate>
-             </asp:TemplateField>
-         </Columns>
-     </asp:GridView>
+    <div class="gridview">
+        <asp:GridView ID="grdMyRewards" runat="server" AutoGenerateColumns="False">
+             <Columns>
+                 <asp:TemplateField HeaderText="Reward Name">
+                     <ItemTemplate>
+                         <asp:Label ID="lblRewardName" runat="server" Text='<%# Eval("RewardName") %>'></asp:Label>
+                     </ItemTemplate>
+                 </asp:TemplateField>
+                 <asp:TemplateField HeaderText="Reward Amount">
+                     <ItemTemplate>
+                         <asp:Label ID="lblRewardAmount" runat="server" Text='<%# Eval("RewardAmount") %>'></asp:Label>
+                     </ItemTemplate>
+                 </asp:TemplateField>
+                 <asp:TemplateField HeaderText="Date Purchased">
+                     <ItemTemplate>
+                         <asp:Label ID="lblDatePurchased" runat="server" Text='<%# Eval("DateClaimed") %>'></asp:Label>
+                     </ItemTemplate>
+                 </asp:TemplateField>
+             </Columns>
+        </asp:GridView>
+    </div>
+     
 
 
 

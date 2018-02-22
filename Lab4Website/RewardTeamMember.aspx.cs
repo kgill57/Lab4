@@ -83,8 +83,8 @@ public partial class RewardTeamMember : System.Web.UI.Page
             cmdInsert.Connection = sc;
 
 
-            if (checkTransactionDate(post.getGiverID()) == true)
-            {
+            //if (checkTransactionDate(post.getGiverID()) == true)
+            //{
 
                 cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
                     + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
@@ -110,7 +110,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
                 sc.Close();
                 loadDropDown();
-            }
+            //}
         }
 
         catch

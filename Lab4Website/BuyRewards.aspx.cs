@@ -189,7 +189,7 @@ public partial class BuyRewards : System.Web.UI.Page
             {
                 cmd.CommandText = "INSERT INTO RewardEarned (UserID, RewardID, DateClaimed) VALUES (@userID, @rewardID, @dateClaimed)";
                 cmd.Parameters.AddWithValue("@rewardID", reward[i].getRewardID());
-                cmd.Parameters.AddWithValue("@dateClaimed", DateTime.Today);
+                cmd.Parameters.AddWithValue("@dateClaimed", DateTime.Today.Date);
                 cmd.ExecuteNonQuery();
             }
         }

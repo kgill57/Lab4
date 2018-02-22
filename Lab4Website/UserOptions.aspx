@@ -25,7 +25,7 @@
             <tr>
                 <td style="width: 151px">First Name</td>
                 <td>
-                    <asp:TextBox ID="txtFName" runat="server" ValidationGroup="validEmp"></asp:TextBox>
+                    <asp:TextBox ID="txtFName" runat="server" ValidationGroup="validEmp" MaxLength="30"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqFName" ControlToValidate="txtFName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
@@ -42,21 +42,21 @@
             <tr>
                 <td style="width: 151px">Last Name</td>
                 <td>
-                    <asp:TextBox ID="txtLName" runat="server" ValidationGroup="validEmp"></asp:TextBox>
+                    <asp:TextBox ID="txtLName" runat="server" ValidationGroup="validEmp" MaxLength="30"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqLName" ControlToValidate="txtLName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
                 <td style="width: 151px">Email</td>
                 <td>
-                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" ValidationGroup="validEmp"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" ValidationGroup="validEmp" MaxLength="50"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
                 <td style="width: 151px; height: 20px">Username</td>
                 <td style="height: 20px">
-                    <asp:TextBox ID="txtUsername" runat="server" ValidationGroup="validEmp"></asp:TextBox>
+                    <asp:TextBox ID="txtUsername" runat="server" ValidationGroup="validEmp" MaxLength="50"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqUsername" ControlToValidate="txtUsername" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </td>
             </tr>
@@ -123,7 +123,11 @@
                     <asp:TextBox ID="txtFName" runat="server" Text='<%# Eval("FName") %>'></asp:TextBox>
 =======
                     <asp:TextBox ID="txtgvFName" runat="server" Text='<%# Eval("FName") %>'></asp:TextBox>
+<<<<<<< HEAD
                     <asp:RequiredFieldValidator ID="reqgvFName" ControlToValidate="txtgvFName" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+>>>>>>> master
+=======
+                    <asp:RequiredFieldValidator ID="reqgvFName" ControlToValidate="txtgvFName" MaxLength="30" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
 >>>>>>> master
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -136,7 +140,11 @@
                     <asp:TextBox ID="txtLName" runat="server" Text='<%# Eval("LName") %>'></asp:TextBox>
 =======
                     <asp:TextBox ID="txtgvLName" runat="server" Text='<%# Eval("LName") %>'></asp:TextBox>
+<<<<<<< HEAD
                     <asp:RequiredFieldValidator ID="reqgvLName" ControlToValidate="txtgvLName" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+>>>>>>> master
+=======
+                    <asp:RequiredFieldValidator ID="reqgvLName" ControlToValidate="txtgvLName" MaxLength="30" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
 >>>>>>> master
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -146,9 +154,13 @@
             <asp:TemplateField HeaderText="MI">
                 <EditItemTemplate>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <asp:TextBox ID="txtMI" runat="server" Text='<%# Eval("MI") %>'></asp:TextBox>
 =======
                     <asp:TextBox ID="txtgvMI" runat="server" Text='<%# Eval("MI") %>'></asp:TextBox>
+>>>>>>> master
+=======
+                    <asp:TextBox ID="txtgvMI" runat="server" MaxLength="1" Text='<%# Eval("MI") %>'></asp:TextBox>
 >>>>>>> master
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -161,7 +173,11 @@
                     <asp:TextBox ID="txtEmail" runat="server" Text='<%# Eval("Email") %>'></asp:TextBox>
 =======
                     <asp:TextBox ID="txtgvEmail" runat="server" Text='<%# Eval("Email") %>'></asp:TextBox>
+<<<<<<< HEAD
                     <asp:RequiredFieldValidator ID="reqgvEmail" ControlToValidate="txtgvEmail" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+>>>>>>> master
+=======
+                    <asp:RequiredFieldValidator ID="reqgvEmail" ControlToValidate="txtgvEmail" MaxLength="50" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
 >>>>>>> master
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -174,7 +190,11 @@
                     <asp:TextBox ID="txtUsername" runat="server" Text='<%# Eval("Username") %>'></asp:TextBox>
 =======
                     <asp:TextBox ID="txtgvUsername" runat="server" Text='<%# Eval("Username") %>'></asp:TextBox>
+<<<<<<< HEAD
                     <asp:RequiredFieldValidator ID="reqgvUsername" ControlToValidate="txtgvUsername" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+>>>>>>> master
+=======
+                    <asp:RequiredFieldValidator ID="reqgvUsername" ControlToValidate="txtgvUsername" MaxLength="50" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
 >>>>>>> master
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -184,10 +204,18 @@
             <asp:TemplateField HeaderText="Admin">
                 <EditItemTemplate>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <asp:TextBox ID="txtAdmin" runat="server" Text='<%# Eval("Admin") %>'></asp:TextBox>
 =======
                     <asp:TextBox ID="txtgvAdmin" runat="server" Text='<%# Eval("Admin") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqgvAdmin" ControlToValidate="txtgvAdmin" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+>>>>>>> master
+=======
+                    <asp:DropDownList ID="ddlgvAdmin" runat="server" SelectedValue='<%# Bind("Admin") %>'>
+                        <asp:ListItem Value="0">User</asp:ListItem>
+                        <asp:ListItem Value="1">Admin</asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="reqgvAdmin" ControlToValidate="ddlgvAdmin" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
 >>>>>>> master
                 </EditItemTemplate>
                 <ItemTemplate>

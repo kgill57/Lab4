@@ -6,12 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-<<<<<<< HEAD
-=======
 using System.Net;
 using System.Net.Mail;
 
->>>>>>> BranchJohn
 public partial class RewardTeamMember : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -37,11 +34,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
     public void loadDropDown()
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-<<<<<<< HEAD
         sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
-=======
-        sc.ConnectionString = "Data Source = localhost; Initial Catalog = lab4; Integrated Security = True";
->>>>>>> BranchJohn
 
         sc.Open();
 
@@ -84,28 +77,17 @@ public partial class RewardTeamMember : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-<<<<<<< HEAD
-            sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
-=======
             sc.ConnectionString = "Data Source = localhost; Initial Catalog = lab4; Integrated Security = True";
->>>>>>> BranchJohn
 
             sc.Open();
 
             System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
             cmdInsert.Connection = sc;
 
-<<<<<<< HEAD
-
-            //if (checkTransactionDate(post.getGiverID()) == true)
-            //{
-
-=======
 
             if (checkTransactionDate(post.getGiverID()) == true)
             {
 
->>>>>>> BranchJohn
                 cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
                     + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
                     " @GiverID, @ReceiverID)";
@@ -126,8 +108,6 @@ public partial class RewardTeamMember : System.Web.UI.Page
                 cmdInsert.ExecuteNonQuery();
 
                 lblResult.Text = "Reward Sent.";
-<<<<<<< HEAD
-=======
 
 
                 sc.Close();
@@ -153,7 +133,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
                     if (totalBalance < 500)
                     {
-                        var fromAddress = new MailAddress("sdbasketball96@aol.com", "Johnathon Hoyns");
+                        var fromAddress = new MailAddress("elklogisticsmanagement@gmail.com", "Johnathon Hoyns");
                         var toAddress = new MailAddress("johnathonhoyns@gmail.com", "Administrator");
                         const string fromPassword = "Daisydoo#1pet";
                         const string subject = "Reward balance is below 500 dollars";
@@ -188,13 +168,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
                 loadDropDown();
             }
         }
->>>>>>> BranchJohn
 
-
-                sc.Close();
-                loadDropDown();
-            //}
-        }
         catch
         {
 
@@ -202,16 +176,13 @@ public partial class RewardTeamMember : System.Web.UI.Page
     }
 
 
+
     public Boolean checkTransactionDate(int giverID)
     {
 
         Boolean valid = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-<<<<<<< HEAD
         sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
-=======
-        sc.ConnectionString = "Data Source = localhost; Initial Catalog = lab4; Integrated Security = True";
->>>>>>> BranchJohn
 
         sc.Open();
 
@@ -235,21 +206,13 @@ public partial class RewardTeamMember : System.Web.UI.Page
         sc.Close();
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> BranchJohn
         return valid;
     }
 
     public int getRecieverID(String username)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-<<<<<<< HEAD
         sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
-=======
-        sc.ConnectionString = "Data Source = localhost; Initial Catalog = lab4; Integrated Security = True";
->>>>>>> BranchJohn
 
         sc.Open();
 
@@ -265,10 +228,6 @@ public partial class RewardTeamMember : System.Web.UI.Page
         return userID;
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> BranchJohn
     protected void AutoFillRewardSendID_Click(object sender, EventArgs e)
     {
         txtDescription.Text = "Very good job!";

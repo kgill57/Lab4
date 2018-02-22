@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,11 +21,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
 
-<<<<<<< HEAD
-            SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
-=======
-            SqlConnection sc = new SqlConnection(@"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;");
->>>>>>> master
+            SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
             sc.Open();
             // Declare the query string.
 
@@ -45,11 +41,7 @@ public partial class ViewRewards : System.Web.UI.Page
 
     protected void fillDropDown()
     {
-<<<<<<< HEAD
-        SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
-=======
-        SqlConnection sc = new SqlConnection(@"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;");
->>>>>>> master
+        SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
         sc.Open();
         // Declare the query string.
 
@@ -78,11 +70,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-<<<<<<< HEAD
-            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
-=======
-            sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
->>>>>>> master
+            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
             sc.Open();
             //Declare the query string.
@@ -104,11 +92,7 @@ public partial class ViewRewards : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-<<<<<<< HEAD
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
-=======
-        sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
->>>>>>> master
+        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.ToString()))
@@ -172,12 +156,7 @@ public partial class ViewRewards : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-<<<<<<< HEAD
-                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
-=======
-                sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
->>>>>>> master
-
+                sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
                 sc.Open();
                 //Declare the query string.
 
@@ -199,19 +178,15 @@ public partial class ViewRewards : System.Web.UI.Page
             try
             {
 
-<<<<<<< HEAD
-                SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
-                sc.Open();
-                // Declare the query string.
 
-                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM Reward WHERE RewardName LIKE '%' + @rewardName;", sc);
-=======
-                SqlConnection sc = new SqlConnection(@"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;");
+                SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
+
+
                 sc.Open();
                 // Declare the query string.
 
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM Reward WHERE LOWER(RewardName) LIKE LOWER('%' + @rewardName + '%');", sc);
->>>>>>> master
+
                 del.Parameters.AddWithValue("@rewardName", txtSearch.Text);
                 del.ExecuteNonQuery();
 
@@ -241,11 +216,9 @@ public partial class ViewRewards : System.Web.UI.Page
     protected void btnAdd_Click(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-<<<<<<< HEAD
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
-=======
-        sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
->>>>>>> master
+
+        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+
 
         sc.Open();
         //Declare the query string.
@@ -259,10 +232,6 @@ public partial class ViewRewards : System.Web.UI.Page
         insert.Parameters.AddWithValue("@adminID", (int)Session["UserID"]);
         insert.Parameters.AddWithValue("@dateAdded", DateTime.Today);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
         insert.ExecuteNonQuery();
 
         fillGridView();
@@ -271,11 +240,7 @@ public partial class ViewRewards : System.Web.UI.Page
     public int findProviderID(string providerName)
     {
         SqlConnection sc = new SqlConnection();
-<<<<<<< HEAD
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
-=======
-        sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
->>>>>>> master
+        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         sc.Open();
         SqlCommand select = new SqlCommand("SELECT ProviderID FROM RewardProvider WHERE ProviderName LIKE '%' + @providerName", sc);
         select.Parameters.AddWithValue("@providerName", providerName);
@@ -284,8 +249,6 @@ public partial class ViewRewards : System.Web.UI.Page
 
         return providerID;
     }
-<<<<<<< HEAD
-=======
 
     protected void RewardAutoFillID_Click(object sender, EventArgs e)
     {
@@ -294,5 +257,4 @@ public partial class ViewRewards : System.Web.UI.Page
         txtRewardAmount.Text = "50";
 
     }
->>>>>>> master
 }

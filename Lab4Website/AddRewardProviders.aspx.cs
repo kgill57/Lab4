@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,7 +28,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
+            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
             sc.Open();
             // Declare the query string.
@@ -64,11 +64,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-<<<<<<< HEAD
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
-=======
-        sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
->>>>>>> master
+        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
 
         //Check if the project name Text box is empty
@@ -109,7 +105,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
             }
 
-<<<<<<< HEAD
+
         }
 
 
@@ -121,7 +117,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
             sc.Open();
             //Declare the query string.
@@ -136,8 +132,6 @@ public partial class AddRewardProviders : System.Web.UI.Page
         catch
         {
 
-=======
->>>>>>> master
         }
     }
 
@@ -175,7 +169,6 @@ public partial class AddRewardProviders : System.Web.UI.Page
         fillGridView();
     }
 
-<<<<<<< HEAD
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         Boolean textError = true;
@@ -231,7 +224,6 @@ public partial class AddRewardProviders : System.Web.UI.Page
     protected void btnClear_Click1(object sender, EventArgs e)
     {
         Response.Redirect(Request.RawUrl);
-=======
     }
 
     protected void grdProviders_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -277,7 +269,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
     protected void btnAdd_Click1(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
+        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
         sc.Open();
         //Declare the query string.
@@ -300,7 +292,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
+                sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
                 sc.Open();
                 //Declare the query string.
@@ -323,7 +315,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
 
-                SqlConnection sc = new SqlConnection(@"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;");
+                SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
                 sc.Open();
                 // Declare the query string.
 
@@ -352,6 +344,5 @@ public partial class AddRewardProviders : System.Web.UI.Page
     {
         txtNewProviderName.Text = "Starbucks";
         txtNewProviderEmail.Text = "Starbucks@gmail.com";
->>>>>>> master
     }
 }

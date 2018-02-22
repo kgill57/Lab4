@@ -19,6 +19,7 @@
             <a href="BuyRewards.aspx"><li>Buy Rewards</li></a>
             <a href="AccountSettingTeamMember.aspx"><li>Account Settings</li></a>
             <a href="LoginPage.aspx"><li>Logout</li></a>
+            <a href="MyRewards.aspx"><li>My Rewards</li></a>
         </ul>
     </div>
 
@@ -36,13 +37,7 @@
         </div>
     </div>
 
-<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-<asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
-<asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
-<asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
-<asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
-<asp:Label ID="Label7" runat="server" Text="Label"></asp:Label>
+
 </asp:Content>
 
 

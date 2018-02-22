@@ -25,7 +25,11 @@ public partial class LoginPage : System.Web.UI.Page
         String password = txtPassword.Text;
 
         SqlConnection con = new SqlConnection();
+<<<<<<< HEAD
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+=======
+        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
+>>>>>>> master
         con.Open();
 
         SqlCommand select = new SqlCommand();
@@ -67,7 +71,11 @@ public partial class LoginPage : System.Web.UI.Page
     public void getUser(string username)
     {
         SqlConnection con = new SqlConnection();
+<<<<<<< HEAD
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+=======
+        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
+>>>>>>> master
         con.Open();
 
         SqlCommand select = new SqlCommand();
@@ -81,12 +89,32 @@ public partial class LoginPage : System.Web.UI.Page
         select.CommandText = "SELECT FName FROM [User] WHERE UserName = @username";
         Session["FName"] = (String)(select.ExecuteScalar());
 
+<<<<<<< HEAD
+=======
+        try
+        {
+            select.CommandText = "SELECT MI FROM [User] WHERE UserName = @username";
+            Session["MI"] = (String)select.ExecuteScalar();
+        }
+        catch (Exception)
+        {
+            Session["MI"] = "";
+        }
+        
+
+>>>>>>> master
         select.CommandText = "SELECT LName FROM [User] WHERE UserName = @username";
         Session["LName"] = (String)(select.ExecuteScalar());
 
         select.CommandText = "SELECT UserName FROM [User] WHERE UserName = @username";
         Session["UserName"] = (String)(select.ExecuteScalar());
 
+<<<<<<< HEAD
+=======
+        select.CommandText = "SELECT Email FROM [User] WHERE UserName = @username";
+        Session["Email"] = (String)(select.ExecuteScalar());
+
+>>>>>>> master
         select.CommandText = "SELECT Admin FROM [User] WHERE UserName = @username";
         Session["Admin"] = Convert.ToInt32(select.ExecuteScalar());
 
@@ -102,7 +130,11 @@ public partial class LoginPage : System.Web.UI.Page
     protected void btnCreateAdmin_Click(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection();
+<<<<<<< HEAD
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+=======
+        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
+>>>>>>> master
         con.Open();
 
         SqlCommand select = new SqlCommand();
@@ -113,7 +145,11 @@ public partial class LoginPage : System.Web.UI.Page
         existingUserName = (String)select.ExecuteScalar();
         if (existingUserName == null)
         {
+<<<<<<< HEAD
             select.CommandText = "INSERT INTO [dbo].[Employer] VALUES('Elk Logistics')";
+=======
+            select.CommandText = "INSERT INTO [dbo].[Employer] VALUES('Elk Logistics', 5000)";
+>>>>>>> master
             select.ExecuteNonQuery();
 
             select.CommandText = "INSERT INTO [dbo].[User] VALUES('Chris', 'J', 'Bennsky', 'Bennskych@gmail.com', 'admin', NULL, 1, NULL, 1, 100, 'Bennsky', '2018-01-01')";

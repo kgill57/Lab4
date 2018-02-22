@@ -41,7 +41,7 @@ public partial class UserOptions : System.Web.UI.Page
             String insertString;
 
             insertString = "INSERT INTO [dbo].[User] VALUES(@FName, ";
-            if (txtMI.Text.Equals(""))
+            if (String.IsNullOrWhiteSpace(txtMI.Text) == true)
             {
                 insertString += "NULL,";
             }
@@ -57,7 +57,7 @@ public partial class UserOptions : System.Web.UI.Page
             select.Parameters.Add(new SqlParameter("@FName", SqlDbType.VarChar));
             select.Parameters["@FName"].Value = txtFName.Text;
 
-            if (!txtMI.Text.Equals(""))
+            if (String.IsNullOrWhiteSpace(txtMI.Text) == false)
             {
                 select.Parameters.Add(new SqlParameter("@MI", SqlDbType.Char));
                 select.Parameters["@MI"].Value = txtMI.Text;
@@ -197,15 +197,10 @@ public partial class UserOptions : System.Web.UI.Page
             textError = false;
         }
 
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvAdmin") as TextBox).Text.ToString()))
-        {
-            //projectDescriptionErrror.Visible = true;
-            //projectDescriptionErrror.Text = "Field cannot be empty";
-            textError = false;
-        }
-
         if (textError)
         {
+            var ddl = grdUsers.Rows[e.RowIndex].FindControl("ddlgvAdmin") as DropDownList;
+         
             sc.Open();
             // Declare the query string.
             try
@@ -213,17 +208,16 @@ public partial class UserOptions : System.Web.UI.Page
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE [User] SET FName=@newFName, " +
                     "LName=@newLName, MI=@newMI, Email=@newEmail, Username=@newUsername, Admin=@newAdmin WHERE UserID=@userID", sc);
                 del.Parameters.AddWithValue("@newFName", (grdUsers.Rows[e.RowIndex].FindControl("txtgvFName") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newLName", (grdUsers.Rows[e.RowIndex].FindControl("txtgvLName") as TextBox).Text.ToString());                            
+                del.Parameters.AddWithValue("@newLName", (grdUsers.Rows[e.RowIndex].FindControl("txtgvLName") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@newMI", (grdUsers.Rows[e.RowIndex].FindControl("txtgvMI") as TextBox).Text.ToString());              
                 del.Parameters.AddWithValue("@newEmail", (grdUsers.Rows[e.RowIndex].FindControl("txtgvEmail") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@newUsername", (grdUsers.Rows[e.RowIndex].FindControl("txtgvUsername") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newAdmin", (grdUsers.Rows[e.RowIndex].FindControl("txtgvAdmin") as TextBox).Text.ToString());
+                del.Parameters.AddWithValue("@newAdmin", ddl.SelectedValue);
                 del.Parameters.AddWithValue("@userID", Convert.ToInt32(grdUsers.DataKeys[e.RowIndex].Value.ToString()));
                 del.ExecuteNonQuery();
                 sc.Close();
                 grdUsers.EditIndex = -1;
-                fillGridView();
-                
+                fillGridView();                
             }
             catch
             {

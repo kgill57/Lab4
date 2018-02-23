@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Configuration;
 public partial class UserOptions : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -23,8 +23,8 @@ public partial class UserOptions : System.Web.UI.Page
 <<<<<<< HEAD
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 =======
-        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
->>>>>>> master
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+>>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
         con.Open();
 
         SqlCommand select = new SqlCommand();
@@ -53,41 +53,31 @@ public partial class UserOptions : System.Web.UI.Page
             {
                 insertString += "@MI, ";
             }
-<<<<<<< HEAD
-=======
 
->>>>>>> master
-            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, @AccountBalance, '" + (String)Session["LName"] + "', '2018-01-01')";
+            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, @AccountBalance, 1, '" + (String)Session["LName"] + "', '2018-01-01')";
 
             select.CommandText = insertString;
 
             select.Parameters.Add(new SqlParameter("@FName", SqlDbType.VarChar));
-            select.Parameters["@FName"].Value = txtFName.Text;
+            select.Parameters["@FName"].Value = char.ToUpper(txtFName.Text[0]) + txtFName.Text.Substring(1);
 
             if (String.IsNullOrWhiteSpace(txtMI.Text) == false)
             {
                 select.Parameters.Add(new SqlParameter("@MI", SqlDbType.Char));
-                select.Parameters["@MI"].Value = txtMI.Text;
+                select.Parameters["@MI"].Value = char.ToUpper(txtMI.Text[0]);
             }
 
             select.Parameters.Add(new SqlParameter("@LName", SqlDbType.VarChar));
-            select.Parameters["@LName"].Value = txtLName.Text;
+            select.Parameters["@LName"].Value = char.ToUpper(txtLName.Text[0]) + txtLName.Text.Substring(1);
 
             select.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar));
             select.Parameters["@Email"].Value = txtEmail.Text;
 
             select.Parameters.Add(new SqlParameter("@EmployerID", SqlDbType.Int));
-<<<<<<< HEAD
-            select.Parameters["@EmployerID"].Value = txtCompany.Text;
-
-            select.Parameters.Add(new SqlParameter("@AccountBalance", SqlDbType.Money));
-            select.Parameters["@AccountBalance"].Value = 100;
-=======
             select.Parameters["@EmployerID"].Value = CompanyDropdown.SelectedIndex + 1;
 
             select.Parameters.Add(new SqlParameter("@AccountBalance", SqlDbType.Money));
             select.Parameters["@AccountBalance"].Value = 0;
->>>>>>> master
 
             select.ExecuteNonQuery();
 
@@ -122,16 +112,16 @@ public partial class UserOptions : System.Web.UI.Page
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
 <<<<<<< HEAD
-            sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 =======
-            sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
->>>>>>> master
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+>>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
 
             sc.Open();
             // Declare the query string.
 
             System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT UserID, FName, LName, MI, Email, " +
-                "Username, Admin FROM [User];", sc);
+                "Username, Admin, EmployedStatus FROM [User];", sc);
             del.ExecuteNonQuery();
 
             grdUsers.DataSource = del.ExecuteReader();
@@ -160,10 +150,10 @@ public partial class UserOptions : System.Web.UI.Page
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
 <<<<<<< HEAD
-            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 =======
-            sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
->>>>>>> master
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+>>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
 
             sc.Open();
             //Declare the query string.
@@ -188,17 +178,13 @@ public partial class UserOptions : System.Web.UI.Page
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
 <<<<<<< HEAD
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
-
-
-        //Check if the project name Text box is empty
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtFName") as TextBox).Text.ToString()))
+        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 =======
-        sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+>>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvFName") as TextBox).Text.ToString()))
->>>>>>> master
         {
             //projectNameError.Visible = true;
             //projectNameError.Text = "The project name cannot be empty";
@@ -206,109 +192,55 @@ public partial class UserOptions : System.Web.UI.Page
         }
 
         //Check if the Project Description Text box is empty
-<<<<<<< HEAD
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtLName") as TextBox).Text.ToString()))
-=======
         if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvLName") as TextBox).Text.ToString()))
->>>>>>> master
         {
             //projectDescriptionErrror.Visible = true;
             //projectDescriptionErrror.Text = "Field cannot be empty";
             textError = false;
         }
 
-<<<<<<< HEAD
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtMI") as TextBox).Text.ToString()))
-=======
         if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvEmail") as TextBox).Text.ToString()))
->>>>>>> master
         {
             //projectDescriptionErrror.Visible = true;
             //projectDescriptionErrror.Text = "Field cannot be empty";
             textError = false;
         }
 
-<<<<<<< HEAD
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtEmail") as TextBox).Text.ToString()))
-=======
         if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvUsername") as TextBox).Text.ToString()))
->>>>>>> master
         {
             //projectDescriptionErrror.Visible = true;
             //projectDescriptionErrror.Text = "Field cannot be empty";
             textError = false;
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtUsername") as TextBox).Text.ToString()))
-=======
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvAdmin") as TextBox).Text.ToString()))
->>>>>>> master
-        {
-            //projectDescriptionErrror.Visible = true;
-            //projectDescriptionErrror.Text = "Field cannot be empty";
-            textError = false;
-        }
-
-<<<<<<< HEAD
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtAdmin") as TextBox).Text.ToString()))
-        {
-            //projectDescriptionErrror.Visible = true;
-            //projectDescriptionErrror.Text = "Field cannot be empty";
-            textError = false;
-        }
 
         
 
-=======
->>>>>>> master
-=======
->>>>>>> master
         if (textError)
         {
             var ddl = grdUsers.Rows[e.RowIndex].FindControl("ddlgvAdmin") as DropDownList;
+            var ddlEmployed = grdUsers.Rows[e.RowIndex].FindControl("drpStatus") as DropDownList;
          
             sc.Open();
             // Declare the query string.
             try
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE [User] SET FName=@newFName, " +
-                    "LName=@newLName, MI=@newMI, Email=@newEmail, Username=@newUsername, Admin=@newAdmin WHERE UserID=@userID", sc);
-<<<<<<< HEAD
-                del.Parameters.AddWithValue("@newFName", (grdUsers.Rows[e.RowIndex].FindControl("txtFName") as TextBox).Text.ToString().ToLower());
-                del.Parameters.AddWithValue("@newLName", (grdUsers.Rows[e.RowIndex].FindControl("txtLName") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newMI", (grdUsers.Rows[e.RowIndex].FindControl("txtMI") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newEmail", (grdUsers.Rows[e.RowIndex].FindControl("txtEmail") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newUsername", (grdUsers.Rows[e.RowIndex].FindControl("txtUsername") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newAdmin", (grdUsers.Rows[e.RowIndex].FindControl("txtAdmin") as TextBox).Text.ToString());
-=======
-                del.Parameters.AddWithValue("@newFName", (grdUsers.Rows[e.RowIndex].FindControl("txtgvFName") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newLName", (grdUsers.Rows[e.RowIndex].FindControl("txtgvLName") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newMI", (grdUsers.Rows[e.RowIndex].FindControl("txtgvMI") as TextBox).Text.ToString());              
+                    "LName=@newLName, MI=@newMI, Email=@newEmail, Username=@newUsername, Admin=@newAdmin, EmployedStatus=@employedStatus WHERE UserID=@userID", sc);
+                del.Parameters.AddWithValue("@newFName", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtFName") as TextBox).Text[0])
+                    + (grdUsers.Rows[e.RowIndex].FindControl("txtFName") as TextBox).Text.Substring(1)));
+                del.Parameters.AddWithValue("@newLName", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtLName") as TextBox).Text[0])
+                    + (grdUsers.Rows[e.RowIndex].FindControl("txtLName") as TextBox).Text.Substring(1)));
+                del.Parameters.AddWithValue("@newMI", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtMI") as TextBox).Text[0])));
                 del.Parameters.AddWithValue("@newEmail", (grdUsers.Rows[e.RowIndex].FindControl("txtgvEmail") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@newUsername", (grdUsers.Rows[e.RowIndex].FindControl("txtgvUsername") as TextBox).Text.ToString());
-<<<<<<< HEAD
-                del.Parameters.AddWithValue("@newAdmin", (grdUsers.Rows[e.RowIndex].FindControl("txtgvAdmin") as TextBox).Text.ToString());
->>>>>>> master
-=======
                 del.Parameters.AddWithValue("@newAdmin", ddl.SelectedValue);
->>>>>>> master
+                del.Parameters.AddWithValue("@employedStatus", ddlEmployed.SelectedValue);
                 del.Parameters.AddWithValue("@userID", Convert.ToInt32(grdUsers.DataKeys[e.RowIndex].Value.ToString()));
                 del.ExecuteNonQuery();
                 sc.Close();
                 grdUsers.EditIndex = -1;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
                 fillGridView();
-=======
-                fillGridView();
-                
->>>>>>> master
-=======
-                fillGridView();                
->>>>>>> master
             }
             catch
             {
@@ -323,8 +255,6 @@ public partial class UserOptions : System.Web.UI.Page
         grdUsers.EditIndex = -1;
         fillGridView();
     }
-<<<<<<< HEAD
-=======
 
     protected void btnAutoFillUser_Click(object sender, EventArgs e)
     {
@@ -334,5 +264,4 @@ public partial class UserOptions : System.Web.UI.Page
         txtEmail.Text = "Carey_Cole@jmu.edu";
         txtUsername.Text = "CCole";
     }
->>>>>>> master
 }

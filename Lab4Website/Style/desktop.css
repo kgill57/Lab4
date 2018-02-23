@@ -2,7 +2,6 @@ body {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    width: 50%;
     background-color: lightyellow;
 }
 
@@ -16,8 +15,7 @@ h1 {
     width: 30%;
 }
 
-<<<<<<< HEAD
-=======
+
 .footer {
     position: fixed;
     left: 0;
@@ -28,48 +26,57 @@ h1 {
     text-align: center;
 }
 
->>>>>>> master
+/** {
 * {
     margin: 0px 0px 0px 6px;
     padding: 0px;
     font-family: sans-serif;
-}
+}*/
 
 #sidebar {
     position: fixed;
+    top: 0px;
     width: 200px;
     height: 100%;
     background: #151719;
     left: -200px;
-    transition: all 500ms linear;
+    transition: all 350ms linear;
 }
 
-    #sidebar.active {
-        left: 0px;
-    }
+#sidebar.active {
+    left: 0px;
+    top: 0px;
+}
 
-    #sidebar ul li {
-        color: rgba(230, 230, 230, 0.9);
-        list-style: none;
-        padding: 15px 10px;
-        border-bottom: 1px solid rgba(100,100,100,0.3);
-    }
+#sidebar ul li {
+    color: rgba(230, 230, 230, 0.9);
+    list-style: none;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(100,100,100,0.3);
+}
 
-    #sidebar .toggle-btn {
-        position: absolute;
-        left: 230px;
-        top: 20px;
-    }
+#sidebar .toggle-btn {
+    position: absolute;
+    left: 230px;
+    top: 5px;
+}
 
-        #sidebar .toggle-btn span {
-            display: block;
-            width: 30px;
-            height: 5px;
-            background: #151719;
-            margin: 5px 0px;
-        }
-<<<<<<< HEAD
-=======
+#sidebar .toggle-btn span {
+    display: block;
+    width: 30px;
+    height: 5px;
+    background: #151719;
+    margin: 5px 0px;
+}
+
+#sidebar .toggle-btn span {
+    display: block;
+    width: 30px;
+    height: 5px;
+    background: #151719;
+    margin: 5px 0px;
+}
+
 
 .postCSS {
     margin-top: 4px;
@@ -77,4 +84,41 @@ h1 {
     background-color:white;
     text-align:left;
 }
->>>>>>> master
+
+@keyframes fade-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes grow-left {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.agent-1, .agent-3 {
+    opacity: 0;
+    animation: fade-in-right ease 1.5s forwards;
+}
+
+.agent-2 {
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: grow-left cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.5s forwards;
+    animation-delay: 0.4s;
+}
+
+.agent-3 {
+    animation-delay: 0.5s;
+}

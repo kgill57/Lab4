@@ -7,20 +7,11 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-
+using System.Configuration;
 public partial class TeamMemberPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-<<<<<<< HEAD
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
-
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-        con.Open();
-
-        SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION]", con);
-=======
         try
         {
             lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
@@ -31,11 +22,14 @@ public partial class TeamMemberPage : System.Web.UI.Page
         }
 
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
+<<<<<<< HEAD
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+=======
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+>>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] ORDER BY [TransID] DESC", con);
->>>>>>> master
 
         //Create Scaler to see how many transactions there are
         SqlCommand scaler = new SqlCommand("SELECT COUNT(TransID) FROM [dbo].[TRANSACTION]", con);
@@ -48,33 +42,6 @@ public partial class TeamMemberPage : System.Web.UI.Page
         while (reader.Read())
         {
             transaction[arrayCounter] = new Post(Convert.ToInt32(reader.GetValue(0)), Convert.ToString(reader.GetValue(1)), 
-<<<<<<< HEAD
-                Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(3)), Convert.ToDouble(reader.GetValue(4)), Convert.ToString(reader.GetValue(5)), Convert.ToBoolean(reader.GetValue(6)), Convert.ToInt32(reader.GetValue(7)), Convert.ToInt32(reader.GetValue(8)));
-            arrayCounter++;
-        }
-        con.Close();
-        Label[] test = new Label[arraySize];
-
-        for (int i = 0; i < arraySize; i++)
-        {
-            test[i] = new Label();
-
-            if (transaction[i].getIsPrivate() == true)
-            {
-                test[i].Text = ("Anonymous" + " gifted " + "Anonymous");
-            }
-
-            else if (transaction[i].getIsPrivate() == false)
-            {
-                test[i].Text = (transaction[i].getGiverID() + " gifted " + transaction[i].getReceiverUsername(transaction[i].getReceiverID()));
-            }
-
-            Panel1.Controls.Add(test[i]);
-            Panel1.Controls.Add(new LiteralControl("<br />"));
-        }
-        
-
-=======
                 Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(3)), Convert.ToDouble(reader.GetValue(4)), Convert.ToDateTime(reader.GetValue(5)), Convert.ToBoolean(reader.GetValue(6)), Convert.ToInt32(reader.GetValue(7)), Convert.ToInt32(reader.GetValue(8)));
             arrayCounter++;
         }
@@ -92,7 +59,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
             if (transaction[i].getIsPrivate() == true)
             {
-                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
+                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
             }
             else
             {
@@ -144,7 +111,6 @@ public partial class TeamMemberPage : System.Web.UI.Page
         }
 
         con.Close();
->>>>>>> master
 
     }
 

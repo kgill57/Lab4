@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Configuration;
 public class Post
 {
     private int PID;
@@ -12,11 +12,7 @@ public class Post
     private String category;
     private String description;
     private double rewardValue;
-<<<<<<< HEAD
-    private String postDate;
-=======
     private DateTime postDate;
->>>>>>> master
     private bool isPrivate;
     private int giverID;
     private int receiverID;
@@ -25,11 +21,7 @@ public class Post
     {
 
     }
-<<<<<<< HEAD
-    public Post(int pID, String value, String category, String description, double rewardValue, String postDate, bool isPrivate, int giverID, int receiverID)
-=======
     public Post(int pID, String value, String category, String description, double rewardValue, DateTime postDate, bool isPrivate, int giverID, int receiverID)
->>>>>>> master
     {
         setPID(pID);
         setValue(value);
@@ -69,11 +61,7 @@ public class Post
         this.rewardValue = rewardValue;
     }
 
-<<<<<<< HEAD
-    public void setPostDate(String postDate)
-=======
     public void setPostDate(DateTime postDate)
->>>>>>> master
     {
         this.postDate = postDate;
     }
@@ -119,11 +107,7 @@ public class Post
         return this.rewardValue;
     }
 
-<<<<<<< HEAD
-    public String getPostDate()
-=======
     public DateTime getPostDate()
->>>>>>> master
     {
         return this.postDate;
     }
@@ -149,8 +133,9 @@ public class Post
 <<<<<<< HEAD
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 =======
-        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
->>>>>>> master
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+>>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
+
         con.Open();
 
         SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);
@@ -166,8 +151,8 @@ public class Post
 <<<<<<< HEAD
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 =======
-        con.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
->>>>>>> master
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+>>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
         con.Open();
 
         SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);

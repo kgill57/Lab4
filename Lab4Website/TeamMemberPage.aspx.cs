@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-
+using System.Configuration;
 public partial class TeamMemberPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -22,7 +22,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
         }
 
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] ORDER BY [TransID] DESC", con);

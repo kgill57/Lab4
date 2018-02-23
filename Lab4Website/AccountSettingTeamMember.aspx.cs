@@ -7,13 +7,14 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Configuration;
 public partial class AccountSettingTeamMember : System.Web.UI.Page
 {
     SqlConnection con;
     protected void Page_Load(object sender, EventArgs e)
     {
         con = new SqlConnection();
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         con.Open();
         //Load Profile Picture

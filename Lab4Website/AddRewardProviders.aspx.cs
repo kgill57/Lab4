@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class AddRewardProviders : System.Web.UI.Page
 {
@@ -29,7 +30,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
 
             sc.Open();
@@ -66,7 +67,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
 
         //Check if the project name Text box is empty
@@ -119,7 +120,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
             //Declare the query string.
@@ -157,7 +158,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
     protected void btnAdd_Click1(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
 
         sc.Open();
@@ -181,7 +182,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab4;Integrated Security=True";
+                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
 
                 sc.Open();
@@ -205,7 +206,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
 
-                SqlConnection sc = new SqlConnection(@"Data Source=DESKTOP-CCFVS7L\SQLEXPRESS;Initial Catalog=lab4;Integrated Security=True");
+                SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
                 sc.Open();
                 // Declare the query string.
 

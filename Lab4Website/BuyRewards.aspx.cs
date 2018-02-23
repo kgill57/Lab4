@@ -7,7 +7,6 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Configuration;
 
 public partial class BuyRewards : System.Web.UI.Page
 {
@@ -17,13 +16,133 @@ public partial class BuyRewards : System.Web.UI.Page
     public static int arraySize;
     protected void Page_Load(object sender, EventArgs e)
     {
+        createRewardFeed();
+    }
+
+    // Only for testing btnBuy functionality
+    void GreetingBtn_Click(Object sender,
+                           EventArgs e)
+    {
+        // When the button is clicked,
+        // change the button text, and disable it.
+
+        Button clickedButton = (Button)sender;
+        clickedButton.Text = "...button clicked...";
+        clickedButton.Enabled = false;
+
+        //testing update to the database
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.Open();
+
+        SqlCommand cmd = new SqlCommand("UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @rewardID", con);
+        cmd.Parameters.AddWithValue("@rewardID", 3);
+
+        cmd.ExecuteNonQuery();
+
+        con.Close();
+
+
+    }
+
+    public Boolean checkFunds()
+    {
+        Boolean valid = true;
 
         SqlConnection con = new SqlConnection();
-<<<<<<< HEAD
+
+
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
-        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
+        con.Open();
+
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = con;
+
+        cmd.CommandText = "SELECT AccountBalance FROM [User] WHERE UserID = @userID";
+        cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
+        double balance = Convert.ToDouble(cmd.ExecuteScalar());
+
+        for (int i = 0; i < reward.Length; i++)
+        {
+            if(chkBuy[i].Checked == true)
+            {
+                if (balance < reward[i].getRewardAmount())
+                {
+                    btnBuy.Enabled = false;
+                    lblResult.Text = "insufficient Funds.";
+                    valid = false;
+                }
+            }
+            
+        }
+
+        con.Close();
+
+        return valid;
+    }
+
+
+    protected void btnBuy_Click(object sender, EventArgs e)
+    {
+
+        if (checkFunds() == false)
+            return;
+
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.Open();
+
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = con;
+        cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
+
+        for (int i = 0; i < arraySize; i++)
+        {
+            if (chkBuy[i].Checked == true)
+            {
+                cmd.CommandText = "INSERT INTO RewardEarned (UserID, RewardID, DateClaimed) VALUES (@userID, @rewardID, @dateClaimed)";
+                cmd.Parameters.AddWithValue("@rewardID", reward[i].getRewardID());
+                cmd.Parameters.AddWithValue("@dateClaimed", DateTime.Today.Date);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
+
+        for (int i = 0; i < arraySize; i++)
+        {
+            if (chkBuy[i].Checked == true)
+            {
+                cmd.CommandText = "UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @reward";
+                cmd.Parameters.AddWithValue("@reward", reward[i].getRewardID());
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        for(int i = 0; i < arraySize; i++)
+        {
+            if(chkBuy[i].Checked == true)
+            {
+                cmd.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance - @rewardAmount WHERE UserID = @userID";
+                cmd.Parameters.AddWithValue("@rewardAmount", reward[i].getRewardAmount());
+                //cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
+                cmd.ExecuteNonQuery();
+
+                Session["AccountBalance"] = (decimal)Session["AccountBalance"] - Convert.ToDecimal(reward[i].getRewardAmount());
+            }
+        }
+
+        lblResult.Text = "Reward Claimed!";
+
+        con.Close();
+
+
+    }
+
+    public void createRewardFeed()
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[Reward] ORDER BY [RewardID] DESC", con);
@@ -82,9 +201,6 @@ public partial class BuyRewards : System.Web.UI.Page
             chkBuy[i].AutoPostBack = true;
             panelPost[i].Controls.Add(chkBuy[i]);
 
-            //if (chkBuy[i].Checked == true)
-            //    System.Diagnostics.Debug.WriteLine("hello");
-
             panelPost[i].Controls.Add(new LiteralControl("<br />"));
 
 
@@ -95,136 +211,5 @@ public partial class BuyRewards : System.Web.UI.Page
             Panel1.Controls.Add(panelPost[i]);
         }
         con.Close();
-        //checkFunds();
-    }
-
-    // Only for testing btnBuy functionality
-    void GreetingBtn_Click(Object sender,
-                           EventArgs e)
-    {
-        // When the button is clicked,
-        // change the button text, and disable it.
-
-        Button clickedButton = (Button)sender;
-        clickedButton.Text = "...button clicked...";
-        clickedButton.Enabled = false;
-
-        //testing update to the database
-        SqlConnection con = new SqlConnection();
-<<<<<<< HEAD
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
-        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
-        con.Open();
-
-        SqlCommand cmd = new SqlCommand("UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @rewardID", con);
-        cmd.Parameters.AddWithValue("@rewardID", 3);
-
-        cmd.ExecuteNonQuery();
-
-        con.Close();
-
-
-    }
-
-    public Boolean checkFunds()
-    {
-        Boolean valid = true;
-
-        SqlConnection con = new SqlConnection();
-
-
-<<<<<<< HEAD
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
-        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
-        con.Open();
-
-        SqlCommand cmd = new SqlCommand();
-        cmd.Connection = con;
-
-        cmd.CommandText = "SELECT AccountBalance FROM [User] WHERE UserID = @userID";
-        cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
-        double balance = Convert.ToDouble(cmd.ExecuteScalar());
-
-        for (int i = 0; i < reward.Length; i++)
-        {
-            if(chkBuy[i].Checked == true)
-            {
-                if (balance < reward[i].getRewardAmount())
-                {
-                    btnBuy.Enabled = false;
-                    lblResult.Text = "insufficient Funds.";
-                    valid = false;
-                }
-            }
-            
-        }
-
-        con.Close();
-
-        return valid;
-    }
-
-
-    protected void btnBuy_Click(object sender, EventArgs e)
-    {
-
-        if (checkFunds() == false)
-            return;
-
-        SqlConnection con = new SqlConnection();
-<<<<<<< HEAD
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
-        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
-        con.Open();
-
-        SqlCommand cmd = new SqlCommand();
-
-        cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
-
-        for (int i = 0; i < arraySize; i++)
-        {
-            if (chkBuy[i].Checked == true)
-            {
-                cmd.CommandText = "INSERT INTO RewardEarned (UserID, RewardID, DateClaimed) VALUES (@userID, @rewardID, @dateClaimed)";
-                cmd.Parameters.AddWithValue("@rewardID", reward[i].getRewardID());
-                cmd.Parameters.AddWithValue("@dateClaimed", DateTime.Today.Date);
-                cmd.ExecuteNonQuery();
-            }
-        }
-
-
-
-        for (int i = 0; i < arraySize; i++)
-        {
-            if (chkBuy[i].Checked == true)
-            {
-                cmd.CommandText = "UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @reward";
-                cmd.Parameters.AddWithValue("@reward", reward[i].getRewardID());
-                cmd.ExecuteNonQuery();
-            }
-        }
-
-        for(int i = 0; i < arraySize; i++)
-        {
-            if(chkBuy[i].Checked == true)
-            {
-                cmd.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance - @rewardAmount WHERE UserID = @userID";
-                cmd.Parameters.AddWithValue("@rewardAmount", reward[i].getRewardAmount());
-                //cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
-                cmd.ExecuteNonQuery();
-            }
-        }
-
-        lblResult.Text = "Reward Claimed!";
-
-        con.Close();
-
-
     }
 }

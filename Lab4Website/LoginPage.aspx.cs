@@ -8,7 +8,6 @@ using System.Collections;
 using System.Windows.Input;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 public partial class LoginPage : System.Web.UI.Page
 {
@@ -28,11 +27,7 @@ public partial class LoginPage : System.Web.UI.Page
         String password = txtPassword.Text;
 
         SqlConnection con = new SqlConnection();
-<<<<<<< HEAD
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
-        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
         con.Open();
 
         SqlCommand select = new SqlCommand();
@@ -86,11 +81,7 @@ public partial class LoginPage : System.Web.UI.Page
     public void getUser(string username)
     {
         SqlConnection con = new SqlConnection();
-<<<<<<< HEAD
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
-        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
         con.Open();
 
         SqlCommand select = new SqlCommand();
@@ -139,11 +130,7 @@ public partial class LoginPage : System.Web.UI.Page
     protected void btnCreateAdmin_Click(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection();
-<<<<<<< HEAD
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
-        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
         con.Open();
 
         SqlCommand select = new SqlCommand();

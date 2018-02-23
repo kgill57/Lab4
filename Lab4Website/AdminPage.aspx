@@ -4,9 +4,8 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-<center>
+    
     <link href="Style/desktop.css" rel="stylesheet" />
-    <link href="Style/bootstrap.min.css" rel="stylesheet" />
     <script src="Scripts/Sidebar.js"></script>
     <div id ="sidebar">
         <div class="toggle-btn" onclick="toggleSidebar();">
@@ -25,14 +24,11 @@
         </ul>
     </div>
     <asp:Image id = "headerIMG" runat ="server" ImageUrl ="~/Images/Header.png" width ="100%"/>
+    <h1>Elk Logistics Rewards System</h1>
+    <asp:Panel ID="Panel1" runat="server"></asp:Panel>
 
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">News Feed</h1>
-            <asp:Panel ID="Panel1" runat="server"></asp:Panel>
-        </div>
-    </div>
-</center>
+    
+
 </asp:Content>
 
 

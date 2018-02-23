@@ -130,7 +130,7 @@ public class Post
     public string getGiverUsername(int giverID)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
         con.Open();
 
@@ -144,7 +144,7 @@ public class Post
     public string getReceiverUsername(int receiverID)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);

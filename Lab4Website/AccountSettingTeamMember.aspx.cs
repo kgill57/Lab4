@@ -13,7 +13,7 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         con = new SqlConnection();
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
         con.Open();
         //Load Profile Picture

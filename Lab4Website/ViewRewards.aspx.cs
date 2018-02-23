@@ -21,7 +21,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
 
-            SqlConnection sc = new SqlConnection(@"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;");
+            SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
             sc.Open();
             // Declare the query string.
 
@@ -41,7 +41,7 @@ public partial class ViewRewards : System.Web.UI.Page
 
     protected void fillDropDown()
     {
-        SqlConnection sc = new SqlConnection(@"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;");
+        SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
         sc.Open();
         // Declare the query string.
 
@@ -70,7 +70,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
             sc.Open();
             //Declare the query string.
@@ -92,7 +92,7 @@ public partial class ViewRewards : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.ToString()))
@@ -111,7 +111,8 @@ public partial class ViewRewards : System.Web.UI.Page
         }
 
         Reward newReward = new Reward();
-        newReward.setRewardName((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.ToString().ToLower());
+        newReward.setRewardName(char.ToUpper((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text[0])
+                    + (grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.Substring(1));
         newReward.setRewardQuantity(Convert.ToInt32((grdRewards.Rows[e.RowIndex].FindControl("txtRewardQuantity") as TextBox).ToString()));
         newReward.setRewardID(Convert.ToInt32(grdRewards.DataKeys[e.RowIndex].Value.ToString()));
 
@@ -156,7 +157,7 @@ public partial class ViewRewards : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+                sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
                 sc.Open();
                 //Declare the query string.
 
@@ -179,7 +180,7 @@ public partial class ViewRewards : System.Web.UI.Page
             {
 
 
-                SqlConnection sc = new SqlConnection(@"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;");
+                SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
 
                 sc.Open();
                 // Declare the query string.
@@ -216,7 +217,7 @@ public partial class ViewRewards : System.Web.UI.Page
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
 
-        sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
 
 
         sc.Open();
@@ -224,7 +225,7 @@ public partial class ViewRewards : System.Web.UI.Page
 
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("INSERT INTO Reward (RewardName, RewardQuantity, RewardAmount, " +
             "ProviderID, AdminID, DateAdded) VALUES (@rewardName, @rewardQuantity, @rewardAmount, @providerID, @adminID, @dateAdded)", sc);
-        insert.Parameters.AddWithValue("@rewardName", txtRewardName.Text);
+        insert.Parameters.AddWithValue("@rewardName", char.ToUpper(txtRewardName.Text[0]) + txtRewardName.Text.Substring(1));
         insert.Parameters.AddWithValue("@rewardQuantity", Convert.ToInt32(txtRewardQuantity.Text));
         insert.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(txtRewardAmount.Text));
         insert.Parameters.AddWithValue("@providerID", findProviderID(drpRewardProvider.SelectedItem.Text));
@@ -239,7 +240,7 @@ public partial class ViewRewards : System.Web.UI.Page
     public int findProviderID(string providerName)
     {
         SqlConnection sc = new SqlConnection();
-        sc.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         sc.Open();
         SqlCommand select = new SqlCommand("SELECT ProviderID FROM RewardProvider WHERE ProviderName LIKE '%' + @providerName", sc);
         select.Parameters.AddWithValue("@providerName", providerName);

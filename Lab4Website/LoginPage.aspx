@@ -3,29 +3,29 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:Image id = "headerIMG" runat ="server" ImageUrl ="~/Images/Header.png" width ="100%"/>
-    <h1>Elk Logistics Rewards System</h1>
+    <h1 class="agent-3">Elk Logistics Rewards System</h1>
     <header>
         <link href="Style/desktop.css" rel="stylesheet" />
         
     </header>
     <div class="table">
-        <table class="auto-style1">
+        <table>
             <tr>
                 <td class="auto-style2">
-                    <asp:Label ID="lblUsername" runat="server" Text="Username:"></asp:Label>
+                    <asp:Label ID="lblUsername" runat="server" Text="Username:" CssClass="agent-1"></asp:Label>
                 </td>
                 <td class="auto-style2">
-                    <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtUsername" runat="server" CssClass="agent-1"></asp:TextBox>
                 </td>
                 <td class="auto-style2"></td>
                 <td class="auto-style2"></td>
             </tr>
             <tr>
                 <td>
-                    <asp:Label ID="lblPassword" runat="server" Text="Password:"></asp:Label>
+                    <asp:Label ID="lblPassword" runat="server" Text="Password:" CssClass="agent-1"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="agent-1"></asp:TextBox>
                 </td>
             </tr>
         </table>

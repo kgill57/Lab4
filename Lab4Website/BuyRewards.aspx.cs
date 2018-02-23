@@ -18,7 +18,7 @@ public partial class BuyRewards : System.Web.UI.Page
     {
 
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[Reward] ORDER BY [RewardID] DESC", con);
@@ -106,7 +106,7 @@ public partial class BuyRewards : System.Web.UI.Page
 
         //testing update to the database
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand cmd = new SqlCommand("UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @rewardID", con);
@@ -126,7 +126,7 @@ public partial class BuyRewards : System.Web.UI.Page
         SqlConnection con = new SqlConnection();
 
 
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand cmd = new SqlCommand();
@@ -163,7 +163,7 @@ public partial class BuyRewards : System.Web.UI.Page
             return;
 
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand cmd = new SqlCommand();

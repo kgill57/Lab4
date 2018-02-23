@@ -22,7 +22,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
         }
 
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=DESKTOP-CCFVS7L\SQLEXPRESS;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] ORDER BY [TransID] DESC", con);
@@ -55,7 +55,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
             if (transaction[i].getIsPrivate() == true)
             {
-                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
+                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
             }
             else
             {

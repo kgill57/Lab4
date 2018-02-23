@@ -14,8 +14,8 @@
     </div>
     </form>
 
-    <footer class="footer">
-        <p style="margin-top: 0px; margin-bottom: 0px">Kyle McGill</p>
+    <footer class="footer" style="bottom:0; width:100%; position:fixed; text-align: center;">
+        <p style="margin-top: 0px; margin-bottom: 0px">Created By FCL Consulting&copy;</p>
 
     </footer>
 </body>

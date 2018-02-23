@@ -7,13 +7,18 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Configuration;
 public partial class AccountSettingTeamMember : System.Web.UI.Page
 {
     SqlConnection con;
     protected void Page_Load(object sender, EventArgs e)
     {
         con = new SqlConnection();
+<<<<<<< HEAD
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+=======
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+>>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
 
         con.Open();
         //Load Profile Picture

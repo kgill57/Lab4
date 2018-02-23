@@ -42,7 +42,7 @@ public partial class AdminPage : System.Web.UI.Page
         {
             test[i] = new Label();
 
-            test[i].Text = (transaction[i].getGiverUsername(transaction[i].getGiverID()) + " gifted " + transaction[i].getReceiverUsername(transaction[i].getReceiverID()));
+            //test[i].Text = (transaction[i].getGiverUsername(transaction[i].getGiverID()) + " gifted " + transaction[i].getReceiverUsername(transaction[i].getReceiverID()));
 
             Panel1.Controls.Add(test[i]);
             Panel1.Controls.Add(new LiteralControl("<br />"));

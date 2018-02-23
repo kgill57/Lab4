@@ -2,6 +2,8 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:Image id = "headerIMG" runat ="server" ImageUrl ="~/Images/Header.png" width ="100%"/>
+    <h1>Elk Logistics Rewards System</h1>
     <header>
         <link href="Style/desktop.css" rel="stylesheet" />
         

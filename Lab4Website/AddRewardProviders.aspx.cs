@@ -69,7 +69,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         //Check if the project name Text box is empty
-        if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString()))
+        if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text.ToString()))
         {
             //projectNameError.Visible = true;
             //projectNameError.Text = "The project name cannot be empty";
@@ -77,7 +77,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         }
 
         //Check if the Project Description Text box is empty
-        if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtProviderEmail") as TextBox).Text.ToString()))
+        if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderEmail") as TextBox).Text.ToString()))
         {
             //projectDescriptionErrror.Visible = true;
             //projectDescriptionErrror.Text = "Field cannot be empty";
@@ -92,14 +92,13 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE RewardProvider SET ProviderName=@newProvName, " +
                     "ProviderEmail=@newProvEmail WHERE ProviderID=@providerID", sc);
-                del.Parameters.AddWithValue("@newProvName", char.ToUpper((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text[0]) 
-                    + (grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.Substring(1));
-                del.Parameters.AddWithValue("@projectDescription", (grdProviders.Rows[e.RowIndex].FindControl("txtProviderEmail") as TextBox).Text.ToString());
+                del.Parameters.AddWithValue("@newProvName", char.ToUpper((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text[0]) 
+                    + (grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text.Substring(1));
+                del.Parameters.AddWithValue("@newProvEmail", (grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderEmail") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
                 del.ExecuteNonQuery();
                 sc.Close();
                 grdProviders.EditIndex = -1;
-
                 fillGridView();
             }
             catch

@@ -11,14 +11,17 @@ public partial class UserOptions : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Show admin's name
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
 
+        // On initial page load, fill the gridview with all users in the database
         if (!IsPostBack)
             fillGridView();
     }
 
     protected void btnInsertUser_Click(object sender, EventArgs e)
     {
+        // Instantiate SQL objects, set up a SQL connection
         SqlConnection con = new SqlConnection();
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
@@ -27,58 +30,71 @@ public partial class UserOptions : System.Web.UI.Page
         SqlCommand select = new SqlCommand();
         select.Connection = con;
 
+        // Get the username the admin wants to insert into the database
         select.CommandText = "SELECT UserName FROM [dbo].[User] WHERE UserName = @UserName";
 
         select.Parameters.Add(new SqlParameter("@UserName", SqlDbType.VarChar));
         select.Parameters["@UserName"].Value = txtUsername.Text;
 
+        // Check if the desired username is already in the database
         String existingUserName = (String)select.ExecuteScalar();
         if (existingUserName == null)
         {
             int adminBit;
             adminBit = Convert.ToInt32(ddlAccountType.SelectedItem.Value);
 
-
             String insertString;
 
+            // Insert the new user into the database
             insertString = "INSERT INTO [dbo].[User] VALUES(@FName, ";
+
+            // Check if the TextBox for the Middle Initial is empty or has white space
+            // Pass a null value for MI if the user didn't fill out the TextBox
             if (String.IsNullOrWhiteSpace(txtMI.Text) == true)
             {
                 insertString += "NULL,";
             }
+
             else
             {
                 insertString += "@MI, ";
             }
 
+            // SQL insert statement
             insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, @AccountBalance, 1, '" + (String)Session["LName"] + "', '2018-01-01')";
 
             select.CommandText = insertString;
 
+            // Make the first letter in the First Name TextBox uppercase
             select.Parameters.Add(new SqlParameter("@FName", SqlDbType.VarChar));
             select.Parameters["@FName"].Value = char.ToUpper(txtFName.Text[0]) + txtFName.Text.Substring(1);
 
+            // Check if TextBox for MI was filled out
             if (String.IsNullOrWhiteSpace(txtMI.Text) == false)
             {
+                // Make the character in the TextBox for MI uppercase
                 select.Parameters.Add(new SqlParameter("@MI", SqlDbType.Char));
                 select.Parameters["@MI"].Value = char.ToUpper(txtMI.Text[0]);
             }
 
+            // Make the first letter in the Last Name TextBox uppercase
             select.Parameters.Add(new SqlParameter("@LName", SqlDbType.VarChar));
             select.Parameters["@LName"].Value = char.ToUpper(txtLName.Text[0]) + txtLName.Text.Substring(1);
 
             select.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar));
             select.Parameters["@Email"].Value = txtEmail.Text;
 
+            // Set the EmployerID equal to the selected index of the corresponding drop down list + 1 to avoid indexing errors
             select.Parameters.Add(new SqlParameter("@EmployerID", SqlDbType.Int));
             select.Parameters["@EmployerID"].Value = CompanyDropdown.SelectedIndex + 1;
 
+            // Set the new user's account balance equal to $0
             select.Parameters.Add(new SqlParameter("@AccountBalance", SqlDbType.Money));
             select.Parameters["@AccountBalance"].Value = 0;
 
             select.ExecuteNonQuery();
 
-            //Create Password
+            // Create a password and password hash for the new user
             string password = "password";
 
             string passwordHashNew =
@@ -90,13 +106,14 @@ public partial class UserOptions : System.Web.UI.Page
             
             
         }
+
+        // Display an error message if the username already exists within the database
         else
         {
-
             lblError.Text = "This username is already taken";
-
         }
 
+        // Close the SQL connection and update the gridview
         con.Close();
         fillGridView();
     }
@@ -105,7 +122,6 @@ public partial class UserOptions : System.Web.UI.Page
     {
         try
         {
-
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
             sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
@@ -201,25 +217,36 @@ public partial class UserOptions : System.Web.UI.Page
             textError = false;
         }
 
-
-        
-
         if (textError)
         {
+            // Declare var variables to store the row currently being edited
             var ddl = grdUsers.Rows[e.RowIndex].FindControl("ddlgvAdmin") as DropDownList;
             var ddlEmployed = grdUsers.Rows[e.RowIndex].FindControl("drpStatus") as DropDownList;
-         
+            var newMI = grdUsers.Rows[e.RowIndex].FindControl("txtgvMI") as TextBox;
+
             sc.Open();
-            // Declare the query string.
+
+            // Declare the query string
             try
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE [User] SET FName=@newFName, " +
                     "LName=@newLName, MI=@newMI, Email=@newEmail, Username=@newUsername, Admin=@newAdmin, EmployedStatus=@employedStatus WHERE UserID=@userID", sc);
-                del.Parameters.AddWithValue("@newFName", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtFName") as TextBox).Text[0])
-                    + (grdUsers.Rows[e.RowIndex].FindControl("txtFName") as TextBox).Text.Substring(1)));
-                del.Parameters.AddWithValue("@newLName", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtLName") as TextBox).Text[0])
-                    + (grdUsers.Rows[e.RowIndex].FindControl("txtLName") as TextBox).Text.Substring(1)));
-                del.Parameters.AddWithValue("@newMI", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtMI") as TextBox).Text[0])));
+                del.Parameters.AddWithValue("@newFName", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtgvFName") as TextBox).Text[0])
+                    + (grdUsers.Rows[e.RowIndex].FindControl("txtgvFName") as TextBox).Text.Substring(1)));
+                del.Parameters.AddWithValue("@newLName", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtgvLName") as TextBox).Text[0])
+                    + (grdUsers.Rows[e.RowIndex].FindControl("txtgvLName") as TextBox).Text.Substring(1)));
+
+                // Check if gridview column for MI is empty or not
+                if (String.IsNullOrWhiteSpace(newMI.Text) == true)
+                {
+                    del.Parameters.AddWithValue("@newMI", DBNull.Value);
+                }
+
+                else if (String.IsNullOrWhiteSpace(newMI.Text) == false)
+                {
+                    del.Parameters.AddWithValue("@newMI", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtgvMI") as TextBox).Text[0])));
+                }
+
                 del.Parameters.AddWithValue("@newEmail", (grdUsers.Rows[e.RowIndex].FindControl("txtgvEmail") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@newUsername", (grdUsers.Rows[e.RowIndex].FindControl("txtgvUsername") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@newAdmin", ddl.SelectedValue);
@@ -230,6 +257,7 @@ public partial class UserOptions : System.Web.UI.Page
                 grdUsers.EditIndex = -1;
                 fillGridView();
             }
+
             catch
             {
 

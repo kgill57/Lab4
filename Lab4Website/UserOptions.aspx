@@ -146,7 +146,7 @@
                 </asp:TemplateField>
             </Columns>
             <EmptyDataTemplate>
-                <asp:Label ID="lblEmptly" runat="server" Text="No Records Available"></asp:Label>
+                <asp:Label ID="lblEmpty" runat="server" Text="No Records Available"></asp:Label>
             </EmptyDataTemplate>
             </asp:GridView>
         </div>

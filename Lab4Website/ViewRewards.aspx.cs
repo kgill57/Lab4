@@ -95,7 +95,7 @@ public partial class ViewRewards : System.Web.UI.Page
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         //Check if the project name Text box is empty
-        if (String.IsNullOrEmpty((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.ToString()))
+        if (String.IsNullOrEmpty((grdRewards.Rows[e.RowIndex].FindControl("txtgvRewardName") as TextBox).Text.ToString()))
         {
             //projectNameError.Visible = true;
             //projectNameError.Text = "The project name cannot be empty";
@@ -103,17 +103,18 @@ public partial class ViewRewards : System.Web.UI.Page
         }
 
         //Check if the Project Description Text box is empty
-        if (String.IsNullOrEmpty((grdRewards.Rows[e.RowIndex].FindControl("txtRewardQuantity") as TextBox).Text.ToString()))
+        if (String.IsNullOrEmpty((grdRewards.Rows[e.RowIndex].FindControl("txtgvRewardQuantity") as TextBox).Text.ToString()))
         {
             //projectDescriptionErrror.Visible = true;
             //projectDescriptionErrror.Text = "Field cannot be empty";
             textError = false;
         }
+        var newQuantity = grdRewards.Rows[e.RowIndex].FindControl("txtgvRewardQuantity") as TextBox;
 
         Reward newReward = new Reward();
-        newReward.setRewardName(char.ToUpper((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text[0])
-                    + (grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.Substring(1));
-        newReward.setRewardQuantity(Convert.ToInt32((grdRewards.Rows[e.RowIndex].FindControl("txtRewardQuantity") as TextBox).ToString()));
+        newReward.setRewardName(char.ToUpper((grdRewards.Rows[e.RowIndex].FindControl("txtgvRewardName") as TextBox).Text[0])
+                    + (grdRewards.Rows[e.RowIndex].FindControl("txtgvRewardName") as TextBox).Text.Substring(1));
+        newReward.setRewardQuantity(Convert.ToInt32((newQuantity.Text)));
         newReward.setRewardID(Convert.ToInt32(grdRewards.DataKeys[e.RowIndex].Value.ToString()));
 
         if (textError)
@@ -122,10 +123,12 @@ public partial class ViewRewards : System.Web.UI.Page
             // Declare the query string.
             try
             {
-                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE Reward SET RewardName=@RewardName, " +
+                var newAmount = grdRewards.Rows[e.RowIndex].FindControl("txtgvRewardAmount") as TextBox;
+                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE Reward SET RewardName=@rewardName, RewardAmount=@rewardAmount, " +
                     "RewardQuantity=@rewardQuantity WHERE RewardID=@rewardID", sc);
                 del.Parameters.AddWithValue("@rewardName", newReward.getRewardName());
                 del.Parameters.AddWithValue("@rewardQuantity", newReward.getRewardQuantity());
+                del.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(newAmount.Text));
                 del.Parameters.AddWithValue("@rewardID", newReward.getRewardID());
                 del.ExecuteNonQuery();
                 sc.Close();

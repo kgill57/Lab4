@@ -61,9 +61,11 @@
             <div style="float: left;">
                 <asp:Button ID="btnInsertUser" runat="server" CssClass="btn btn-primary" OnClick="btnInsertUser_Click" Text="Insert User" />
                 <asp:Button ID="btnAutoFillUser" CssClass="btn btn-secondary" runat="server" OnClick="btnAutoFillUser_Click" Text="AutoFill User" CausesValidation="False" />
+                <br />
                 <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
             </div>
         </div>
+        <br />
         <br />
         <br />
         <div>

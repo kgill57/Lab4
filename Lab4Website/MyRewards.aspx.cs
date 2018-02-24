@@ -18,11 +18,7 @@ public partial class MyRewards : System.Web.UI.Page
     protected void fillGridView()
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-<<<<<<< HEAD
-        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
 
         sc.Open();
 

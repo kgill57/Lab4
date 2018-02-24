@@ -19,11 +19,7 @@ public partial class BuyRewards : System.Web.UI.Page
     {
 
         SqlConnection con = new SqlConnection();
-<<<<<<< HEAD
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[Reward] ORDER BY [RewardID] DESC", con);
@@ -111,11 +107,7 @@ public partial class BuyRewards : System.Web.UI.Page
 
         //testing update to the database
         SqlConnection con = new SqlConnection();
-<<<<<<< HEAD
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
         con.Open();
 
         SqlCommand cmd = new SqlCommand("UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @rewardID", con);
@@ -135,11 +127,7 @@ public partial class BuyRewards : System.Web.UI.Page
         SqlConnection con = new SqlConnection();
 
 
-<<<<<<< HEAD
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
         con.Open();
 
         SqlCommand cmd = new SqlCommand();
@@ -176,11 +164,7 @@ public partial class BuyRewards : System.Web.UI.Page
             return;
 
         SqlConnection con = new SqlConnection();
-<<<<<<< HEAD
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-=======
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
->>>>>>> aefeafdec146ea02fab448fb4369b93f1aa3ab6a
         con.Open();
 
         SqlCommand cmd = new SqlCommand();

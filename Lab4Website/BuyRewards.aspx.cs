@@ -69,7 +69,6 @@ public partial class BuyRewards : System.Web.UI.Page
             {
                 if (balance < reward[i].getRewardAmount())
                 {
-                    btnBuy.Enabled = false;
                     lblResult.Text = "insufficient Funds.";
                     valid = false;
                 }

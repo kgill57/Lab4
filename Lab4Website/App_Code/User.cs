@@ -17,6 +17,13 @@ public class User
     private String lastUpdatedBy;
     private DateTime lastUpdated;
 
+
+    public User()
+    {
+
+
+
+    }
     // Setters
     public void setUserID(int userID)
     {
@@ -119,10 +126,5 @@ public class User
         return this.lastUpdated;
     }
 
-    public User()
-    {
-        
-
-
-    }
+    
 }

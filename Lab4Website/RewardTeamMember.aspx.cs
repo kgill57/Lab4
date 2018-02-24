@@ -6,6 +6,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net;
+using System.Net.Mail;
+using System.Configuration;
+
 public partial class RewardTeamMember : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -31,7 +35,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
     public void loadDropDown()
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         sc.Open();
 
@@ -74,7 +78,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
 
@@ -82,8 +86,8 @@ public partial class RewardTeamMember : System.Web.UI.Page
             cmdInsert.Connection = sc;
 
 
-            //if (checkTransactionDate(post.getGiverID()) == true)
-            //{
+            if (checkTransactionDate(post.getGiverID()) == true)
+            {
 
                 cmdInsert.CommandText = "INSERT INTO [dbo].[Transaction] (CompanyValue, Category, Description, RewardValue, TransactionDate,"
                     + " Private, GiverID, ReceiverID) VALUES (@CompanyValue, @Category, @Description, @RewardValue, @TransactionDate, @Private," +
@@ -108,6 +112,60 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
 
                 sc.Close();
+
+                //        try
+                //        {
+                //            System.Data.SqlClient.SqlDataReader readerEmail;
+                //            SqlConnection checkemail = new SqlConnection();
+                //            checkemail.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+                //            checkemail.Open();
+
+                //            SqlCommand reademail = new SqlCommand("SELECT TotalBalance FROM Employer WHERE CompanyName='ElkLogistics'"
+                //                    , checkemail);
+                //            readerEmail = reademail.ExecuteReader();
+
+                //            Decimal totalBalance = 0;
+
+                //            while (readerEmail.Read())
+                //            {
+                //                totalBalance = readerEmail.GetDecimal(0);
+                //            }
+                //            checkemail.Close();
+
+                //            if (totalBalance < 500)
+                //            {
+                //                var fromAddress = new MailAddress("elklogisticsmanagement@gmail.com", "Johnathon Hoyns");
+                //                var toAddress = new MailAddress("johnathonhoyns@gmail.com", "Administrator");
+                //                const string fromPassword = "Daisydoo#1pet";
+                //                const string subject = "Reward balance is below 500 dollars";
+                //                const string body = "Dear Administrator, It seems that"
+                //                    + " the company account balance is below 500 dollars. Please consider adding additional"
+                //                    + " money to the account some time today.";
+
+                //                var smtp = new SmtpClient
+                //                {
+                //                    Host = "smtp.aol.com",
+                //                    Port = 587,
+                //                    EnableSsl = true,
+                //                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                //                    UseDefaultCredentials = false,
+                //                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                //                };
+                //                using (var message = new MailMessage(fromAddress, toAddress)
+                //                {
+                //                    Subject = subject,
+                //                    Body = body
+                //                })
+                //                {
+                //                    smtp.Send(message);
+                //                }
+                //            }
+                //        }
+                //        catch
+                //        {
+
+                //        }
+
                 loadDropDown();
             }
         }
@@ -119,13 +177,13 @@ public partial class RewardTeamMember : System.Web.UI.Page
     }
 
 
+
     public Boolean checkTransactionDate(int giverID)
     {
 
         Boolean valid = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         sc.Open();
 
         System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
@@ -154,7 +212,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
     public int getRecieverID(String username)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         sc.Open();
 
@@ -169,7 +227,6 @@ public partial class RewardTeamMember : System.Web.UI.Page
         sc.Close();
         return userID;
     }
-
 
     protected void AutoFillRewardSendID_Click(object sender, EventArgs e)
     {

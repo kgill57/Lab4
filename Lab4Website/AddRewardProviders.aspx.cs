@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class AddRewardProviders : System.Web.UI.Page
 {
@@ -13,6 +14,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
     public static string oldProvEmail;
     public static string newProvName;
     public static string newProvEmail;
+    int count = 1;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -28,7 +30,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
             // Declare the query string.
@@ -64,8 +66,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString()))
@@ -91,7 +92,8 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE RewardProvider SET ProviderName=@newProvName, " +
                     "ProviderEmail=@newProvEmail WHERE ProviderID=@providerID", sc);
-                del.Parameters.AddWithValue("@newProvName", (grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString().ToLower());
+                del.Parameters.AddWithValue("@newProvName", char.ToUpper((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text[0]) 
+                    + (grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.Substring(1));
                 del.Parameters.AddWithValue("@projectDescription", (grdProviders.Rows[e.RowIndex].FindControl("txtProviderEmail") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
                 del.ExecuteNonQuery();
@@ -117,8 +119,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
             sc.Open();
             //Declare the query string.
 
@@ -157,11 +158,12 @@ public partial class AddRewardProviders : System.Web.UI.Page
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
+
         sc.Open();
         //Declare the query string.
 
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("INSERT INTO RewardProvider (ProviderName, ProviderEmail) VALUES (@providerName, @providerEmail)", sc);
-        insert.Parameters.AddWithValue("@providerName", txtNewProviderName.Text);
+        insert.Parameters.AddWithValue("@providerName", char.ToUpper(txtNewProviderName.Text[0]) + txtNewProviderName.Text.Substring(1));
         insert.Parameters.AddWithValue("@providerEmail", txtNewProviderEmail.Text);
 
         insert.ExecuteNonQuery();
@@ -179,6 +181,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
                 sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+
 
                 sc.Open();
                 //Declare the query string.
@@ -226,123 +229,11 @@ public partial class AddRewardProviders : System.Web.UI.Page
         Response.Redirect(Request.RawUrl);
     }
 
-    protected void grdProviders_RowDeleting(object sender, GridViewDeleteEventArgs e)
-    {
-        try
-        {
-            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
 
-            sc.Open();
-            //Declare the query string.
-
-            System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("DELETE" +
-                " FROM RewardProvider WHERE ProviderID = @providerID;", sc);
-            del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
-            del.ExecuteNonQuery();
-            sc.Close();
-            fillGridView();
-        }
-        catch
-        {
-
-        }
-    }
-
-    protected void btnAddProvider_Click1(object sender, EventArgs e)
-    {
-        lblProviderName.Visible = true;
-        lblProviderEmail.Visible = true;
-        txtNewProviderName.Visible = true;
-        txtNewProviderEmail.Visible = true;
-        btnAdd.Visible = true;
-    }
-
-    
-
-    protected void btnClear_Click(object sender, EventArgs e)
-    {
-        Response.Redirect(Request.RawUrl);
-    }
-
-
-    protected void btnAdd_Click1(object sender, EventArgs e)
-    {
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-
-        sc.Open();
-        //Declare the query string.
-
-        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("INSERT INTO RewardProvider (ProviderName, ProviderEmail) VALUES (@providerName, @providerEmail)", sc);
-        insert.Parameters.AddWithValue("@providerName", txtNewProviderName.Text);
-        insert.Parameters.AddWithValue("@providerEmail", txtNewProviderEmail.Text);
-
-        insert.ExecuteNonQuery();
-
-        fillGridView();
-    }
-
-    protected void btnSearch_Click(object sender, EventArgs e)
-    {
-        Boolean textError = true;
-        //Check if the project name Text box is empty
-        if (String.IsNullOrEmpty(txtSearch.Text))
-        {
-            try
-            {
-                System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
-
-                sc.Open();
-                //Declare the query string.
-
-                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT *" +
-                    " FROM RewardProvider;", sc);
-                del.ExecuteNonQuery();
-
-                grdProviders.DataSource = del.ExecuteReader();
-                grdProviders.DataBind();
-                sc.Close();
-            }
-            catch
-            {
-
-            }
-        }
-        else
-        {
-            try
-            {
-
-                SqlConnection sc = new SqlConnection(@"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;");
-                sc.Open();
-                // Declare the query string.
-
-                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM RewardProvider WHERE LOWER(ProviderName) LIKE LOWER('%' + @ProviderName + '%');", sc);
-                del.Parameters.AddWithValue("@ProviderName", txtSearch.Text);
-                del.ExecuteNonQuery();
-
-                grdProviders.DataSource = del.ExecuteReader();
-                grdProviders.DataBind();
-                sc.Close();
-
-            }
-            catch
-            {
-
-            }
-        }
-    }
-
-    protected void btnClear_Click1(object sender, EventArgs e)
-    {
-        Response.Redirect(Request.RawUrl);
-    }
 
     protected void AutoFillRewardProviderID_Click(object sender, EventArgs e)
     {
-        txtNewProviderName.Text = "Starbucks";
-        txtNewProviderEmail.Text = "Starbucks@gmail.com";
+        txtNewProviderName.Text = "Provider" + count;
+        txtNewProviderEmail.Text = "provider" + count + "@gmail.com";
     }
 }

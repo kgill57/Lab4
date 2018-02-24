@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public class Post
 {
@@ -130,7 +131,7 @@ public class Post
     public string getGiverUsername(int giverID)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         con.Open();
 
@@ -144,7 +145,7 @@ public class Post
     public string getReceiverUsername(int receiverID)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
         SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);

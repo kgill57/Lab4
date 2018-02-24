@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Configuration;
 public partial class UserOptions : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -21,6 +21,7 @@ public partial class UserOptions : System.Web.UI.Page
     {
         SqlConnection con = new SqlConnection();
         con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
         SqlCommand select = new SqlCommand();
@@ -55,16 +56,16 @@ public partial class UserOptions : System.Web.UI.Page
             select.CommandText = insertString;
 
             select.Parameters.Add(new SqlParameter("@FName", SqlDbType.VarChar));
-            select.Parameters["@FName"].Value = txtFName.Text;
+            select.Parameters["@FName"].Value = char.ToUpper(txtFName.Text[0]) + txtFName.Text.Substring(1);
 
             if (String.IsNullOrWhiteSpace(txtMI.Text) == false)
             {
                 select.Parameters.Add(new SqlParameter("@MI", SqlDbType.Char));
-                select.Parameters["@MI"].Value = txtMI.Text;
+                select.Parameters["@MI"].Value = char.ToUpper(txtMI.Text[0]);
             }
 
             select.Parameters.Add(new SqlParameter("@LName", SqlDbType.VarChar));
-            select.Parameters["@LName"].Value = txtLName.Text;
+            select.Parameters["@LName"].Value = char.ToUpper(txtLName.Text[0]) + txtLName.Text.Substring(1);
 
             select.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar));
             select.Parameters["@Email"].Value = txtEmail.Text;
@@ -108,6 +109,7 @@ public partial class UserOptions : System.Web.UI.Page
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
             sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
             // Declare the query string.
@@ -142,6 +144,7 @@ public partial class UserOptions : System.Web.UI.Page
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
             sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
             //Declare the query string.
@@ -165,7 +168,8 @@ public partial class UserOptions : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=bennskychlab4.ct7g1o0ekjxl.us-east-1.rds.amazonaws.com;Database=Lab4;User Id=bennskych;Password=lab4password;";
+        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvFName") as TextBox).Text.ToString()))
@@ -197,12 +201,6 @@ public partial class UserOptions : System.Web.UI.Page
             textError = false;
         }
 
-        if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvAdmin") as TextBox).Text.ToString()))
-        {
-            //projectDescriptionErrror.Visible = true;
-            //projectDescriptionErrror.Text = "Field cannot be empty";
-            textError = false;
-        }
 
         
 
@@ -217,20 +215,20 @@ public partial class UserOptions : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE [User] SET FName=@newFName, " +
                     "LName=@newLName, MI=@newMI, Email=@newEmail, Username=@newUsername, Admin=@newAdmin, EmployedStatus=@employedStatus WHERE UserID=@userID", sc);
-                del.Parameters.AddWithValue("@newFName", (grdUsers.Rows[e.RowIndex].FindControl("txtFName") as TextBox).Text.ToString().ToLower());
-                del.Parameters.AddWithValue("@newLName", (grdUsers.Rows[e.RowIndex].FindControl("txtLName") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newMI", (grdUsers.Rows[e.RowIndex].FindControl("txtMI") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newEmail", (grdUsers.Rows[e.RowIndex].FindControl("txtEmail") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newUsername", (grdUsers.Rows[e.RowIndex].FindControl("txtUsername") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@newAdmin", (grdUsers.Rows[e.RowIndex].FindControl("txtAdmin") as TextBox).Text.ToString());
-                del.Parameters.AddWithValue("@employedStatus", ddlEmployed.SelectedValue);
+                del.Parameters.AddWithValue("@newFName", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtFName") as TextBox).Text[0])
+                    + (grdUsers.Rows[e.RowIndex].FindControl("txtFName") as TextBox).Text.Substring(1)));
+                del.Parameters.AddWithValue("@newLName", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtLName") as TextBox).Text[0])
+                    + (grdUsers.Rows[e.RowIndex].FindControl("txtLName") as TextBox).Text.Substring(1)));
+                del.Parameters.AddWithValue("@newMI", (char.ToUpper((grdUsers.Rows[e.RowIndex].FindControl("txtMI") as TextBox).Text[0])));
+                del.Parameters.AddWithValue("@newEmail", (grdUsers.Rows[e.RowIndex].FindControl("txtgvEmail") as TextBox).Text.ToString());
+                del.Parameters.AddWithValue("@newUsername", (grdUsers.Rows[e.RowIndex].FindControl("txtgvUsername") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@newAdmin", ddl.SelectedValue);
+                del.Parameters.AddWithValue("@employedStatus", ddlEmployed.SelectedValue);
                 del.Parameters.AddWithValue("@userID", Convert.ToInt32(grdUsers.DataKeys[e.RowIndex].Value.ToString()));
                 del.ExecuteNonQuery();
                 sc.Close();
                 grdUsers.EditIndex = -1;
                 fillGridView();
-                
             }
             catch
             {

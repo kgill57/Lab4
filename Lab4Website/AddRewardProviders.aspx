@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AddRewardProviders.aspx.cs" Inherits="AddRewardProviders" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-
+    
     <link href="Style/desktop.css" rel="stylesheet" />
     <script src="Scripts/Sidebar.js"></script>
     <div id ="sidebar">
@@ -17,10 +17,11 @@
             <li> <a href="/ViewRewards.aspx">View Rewards</a></li>
             <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
             <li>Add Community Events</li>
-            <li><a href="LoginPage.aspx">Logout</a></li>
+            <li><a href="/LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
-
+    <asp:Image id = "headerIMG" runat ="server" ImageUrl ="~/Images/Header.png" width ="100%"/>
+    <h1>Elk Logistics Rewards System</h1>
 
     <table style="width: 100%">
         <tr>
@@ -99,11 +100,8 @@
                     </td>
                     <td>
                         <asp:Button ID="btnClear" runat="server" Text="Clear" CausesValidation="False" OnClick="btnClear_Click1" />
-<<<<<<< HEAD
-=======
                     &nbsp;&nbsp;
                         <asp:Button ID="AutoFillRewardProviderID" runat="server" OnClick="AutoFillRewardProviderID_Click" Text="AutoFillRewardProvider" Width="167px" />
->>>>>>> master
                     </td>
                 </tr>
                 <tr>

@@ -21,6 +21,10 @@ public partial class UserOptions : System.Web.UI.Page
     protected void btnInsertUser_Click(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection();
+<<<<<<< HEAD
+=======
+        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+>>>>>>> SeungBranch
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
@@ -108,6 +112,10 @@ public partial class UserOptions : System.Web.UI.Page
 
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+<<<<<<< HEAD
+=======
+            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+>>>>>>> SeungBranch
             sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
@@ -142,6 +150,10 @@ public partial class UserOptions : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+<<<<<<< HEAD
+=======
+            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+>>>>>>> SeungBranch
             sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
@@ -166,6 +178,10 @@ public partial class UserOptions : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+<<<<<<< HEAD
+=======
+        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+>>>>>>> SeungBranch
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         //Check if the project name Text box is empty

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+
 public partial class ViewRewards : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -111,8 +112,7 @@ public partial class ViewRewards : System.Web.UI.Page
         }
 
         Reward newReward = new Reward();
-        newReward.setRewardName(char.ToUpper((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text[0])
-                    + (grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.Substring(1));
+        newReward.setRewardName((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.ToString().ToLower());
         newReward.setRewardQuantity(Convert.ToInt32((grdRewards.Rows[e.RowIndex].FindControl("txtRewardQuantity") as TextBox).ToString()));
         newReward.setRewardID(Convert.ToInt32(grdRewards.DataKeys[e.RowIndex].Value.ToString()));
 
@@ -225,7 +225,7 @@ public partial class ViewRewards : System.Web.UI.Page
 
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("INSERT INTO Reward (RewardName, RewardQuantity, RewardAmount, " +
             "ProviderID, AdminID, DateAdded) VALUES (@rewardName, @rewardQuantity, @rewardAmount, @providerID, @adminID, @dateAdded)", sc);
-        insert.Parameters.AddWithValue("@rewardName", char.ToUpper(txtRewardName.Text[0]) + txtRewardName.Text.Substring(1));
+        insert.Parameters.AddWithValue("@rewardName", txtRewardName.Text);
         insert.Parameters.AddWithValue("@rewardQuantity", Convert.ToInt32(txtRewardQuantity.Text));
         insert.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(txtRewardAmount.Text));
         insert.Parameters.AddWithValue("@providerID", findProviderID(drpRewardProvider.SelectedItem.Text));

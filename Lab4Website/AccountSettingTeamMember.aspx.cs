@@ -15,6 +15,7 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
     {
         con = new SqlConnection();
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+
         con.Open();
         //Load Profile Picture
         try

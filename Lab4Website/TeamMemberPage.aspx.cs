@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Configuration;
+
 public partial class TeamMemberPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -55,7 +56,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
             if (transaction[i].getIsPrivate() == true)
             {
-                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
+                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
             }
             else
             {

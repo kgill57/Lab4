@@ -7,6 +7,7 @@
     <br />
     <asp:Image id = "headerIMG" runat ="server" ImageUrl ="~/Images/elk-logo.png" />
     <header>
+        <link href="Style/desktop.css" rel="stylesheet" />
         <link href="Style/bootstrap.min.css" rel="stylesheet" />
     </header>
     
@@ -32,15 +33,6 @@
         </div>
     <asp:Label ID="lblError" runat="server"></asp:Label>
         <br />
-</center>
-
-
-
-        
-        
-        
-       
-        
-    
+</center>    
 </asp:Content>
 

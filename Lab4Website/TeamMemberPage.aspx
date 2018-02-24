@@ -30,9 +30,15 @@
     <div style="height: 610px">
 
         <br /><br />
-
+        
         <h2><asp:Label ID="lblPostFeed" runat="server" style="font-weight: 700; font-size: xx-large;" Text="Recent Posts"></asp:Label></h2>        
-
+        <p>
+            <asp:DropDownList ID="giverAndReceiver" runat="server" OnSelectedIndexChanged="giverAndReceiver_SelectedIndexChanged" AutoPostBack="True">
+                <asp:ListItem>Show All Your Rewards</asp:ListItem>
+                <asp:ListItem>Show All your Rewards Given</asp:ListItem>
+                <asp:ListItem>Show All Your Rewards Received</asp:ListItem>
+            </asp:DropDownList>
+        </p>
         <div>
 
             <asp:Panel ID="Panel1" runat="server">
@@ -43,4 +49,3 @@
 
 
 </asp:Content>
-

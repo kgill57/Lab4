@@ -19,6 +19,7 @@
             <a href="RewardTeamMember.aspx"><li>Reward Team Member</li></a>
             <a href="BuyRewards.aspx"><li>Buy Rewards</li></a>
             <a href="MyRewards.aspx"><li>My Rewards</li></a>
+            <a href="CommunityPostFeed.aspx"><li>Community Post Feed</li></a>
             <a href="AccountSettingTeamMember.aspx"><li>Account Settings</li></a>
             <a href="LoginPage.aspx"><li>Logout</li></a>
         </ul>
@@ -34,6 +35,7 @@
         <h2><asp:Label ID="lblPostFeed" runat="server" style="font-weight: 700; font-size: xx-large;" Text="Recent Posts"></asp:Label></h2>        
         <p>
             <asp:DropDownList ID="giverAndReceiver" runat="server" OnSelectedIndexChanged="giverAndReceiver_SelectedIndexChanged" AutoPostBack="True">
+                <asp:ListItem>Show All Elk Logistics Rewards</asp:ListItem>
                 <asp:ListItem>Show All Your Rewards</asp:ListItem>
                 <asp:ListItem>Show All your Rewards Given</asp:ListItem>
                 <asp:ListItem>Show All Your Rewards Received</asp:ListItem>

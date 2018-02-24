@@ -24,12 +24,10 @@
             <li><a href="/LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
-    <asp:Image id = "headerIMG" runat ="server" ImageUrl ="~/Images/Header.png" width ="100%"/>
-
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">News Feed</h1>
-            <asp:Panel ID="Panel1" runat="server"></asp:Panel>
+    <h1 class="display-4" style="color:white; font: bold;">News Feed</h1>
+    <div class="jumbotron jumbotron-fluid" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px;">
+        <div class="container" style="padding-top: -20px;">
+            <asp:Panel ID="Panel1" runat="server" ></asp:Panel>
         </div>
     </div>
 </center>

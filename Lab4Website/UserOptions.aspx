@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     
     <link href="Style/desktop.css" rel="stylesheet" />
+    <link href="Style/bootstrap.min.css" rel="stylesheet" />
     <script src="Scripts/Sidebar.js"></script>
     <div id ="sidebar">
         <div class="toggle-btn" onclick="toggleSidebar();">
@@ -20,159 +21,154 @@
             <li><a href="/LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
-    <div>
-    <asp:Image id = "headerIMG" runat ="server" ImageUrl ="~/Images/Header.png" width ="100%"/>
-    <h1>Elk Logistics Rewards System</h1>
-        <table style="width: 100%">
-            <tr>
-                <td style="width: 151px">First Name</td>
-                <td>
-                    <asp:TextBox ID="txtFName" runat="server" MaxLength="30"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqFName" ControlToValidate="txtFName" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 151px">MI</td>
-                <td>
-                    <asp:TextBox ID="txtMI" runat="server" MaxLength="1"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 151px">Last Name</td>
-                <td>
-                    <asp:TextBox ID="txtLName" runat="server" MaxLength="30"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqLName" ControlToValidate="txtLName" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 151px">Email</td>
-                <td>
-                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" MaxLength="50"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 151px; height: 20px">Username</td>
-                <td style="height: 20px">
-                    <asp:TextBox ID="txtUsername" runat="server" MaxLength="50"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqUsername" ControlToValidate="txtUsername" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 151px">Account Type</td>
-                <td>
-                    <asp:DropDownList ID="ddlAccountType" runat="server">
-                        <asp:ListItem Value="0">User</asp:ListItem>
-                        <asp:ListItem Value="1">Admin</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 151px">Company</td>
-                <td>
-                    <%--                    <asp:TextBox ID="txtCompany" runat="server" TextMode="Number" ValidationGroup="validEmp"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqCompany" ControlToValidate="txtCompany" Text="(Required)" runat="server"></asp:RequiredFieldValidator>--%>
-                    <asp:DropDownList ID="CompanyDropdown" runat="server" DataSourceID="SqlDataSource1" DataTextField="CompanyName" DataValueField="CompanyName">
-                    </asp:DropDownList>
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:lab4ConnectionString %>" SelectCommand="SELECT [CompanyName] FROM [Employer]"></asp:SqlDataSource>
-                </td>
-            </tr>
-            
-            </table>
-            <div>
-
-                <asp:Button ID="btnInsertUser" runat="server" OnClick="btnInsertUser_Click" Text="Insert User" />
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="btnAutoFillUser" runat="server" OnClick="btnAutoFillUser_Click" Text="AutoFill User" CausesValidation="False" />
-
+    
+<center>
+    <h1 class="display-4" style="color:white; font: bold;">User Options</h1>
+    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+        <div style="width:50%">
+            <div class="form-group">
+            <asp:TextBox ID="txtFName" class="form-control" runat="server" placeholder="First Name" MaxLength="30"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="reqFName" ControlToValidate="txtFName" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
             </div>
-        <div>
-            <asp:Label ID="lblError" runat="server" Text="No Error"></asp:Label>
+            <div class="form-group">
+                <asp:TextBox ID="txtMI" CssClass="form-control" runat="server" placeholder="Middle Initial" MaxLength="1"></asp:TextBox>
+            </div>
+            <div class="form-group">
+                <asp:TextBox ID="txtLName" placeholder="Last Name" CssClass="form-control" runat="server" MaxLength="30"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqLName" ControlToValidate="txtLName" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
+            </div>
+            <div class="form-group">
+                <asp:TextBox ID="txtEmail" placeholder="Email" CssClass="form-control" runat="server" TextMode="Email" MaxLength="50"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
+            </div>
+            <div class="form-group">
+                <asp:TextBox ID="txtUsername" placeholder="Username" CssClass="form-control" runat="server" MaxLength="50"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqUsername" ControlToValidate="txtUsername" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
+            </div>
+            <div style="float:left;">
+                <asp:DropDownList ID="ddlAccountType" placeholder="Account Type" runat="server">
+                    <asp:ListItem Value="0">User</asp:ListItem>
+                    <asp:ListItem Value="1">Admin</asp:ListItem>
+                </asp:DropDownList>
+            </div>
+            <div style="float:left;">
+                <asp:DropDownList ID="CompanyDropdown" runat="server" DataSourceID="SqlDataSource1" DataTextField="CompanyName" DataValueField="CompanyName">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:lab4ConnectionString %>" SelectCommand="SELECT [CompanyName] FROM [Employer]"></asp:SqlDataSource>
+            </div>
+            <br />
+            <br />
+            <div style="float: left;">
+                <asp:Button ID="btnInsertUser" runat="server" CssClass="btn btn-primary" OnClick="btnInsertUser_Click" Text="Insert User" />
+                <asp:Button ID="btnAutoFillUser" CssClass="btn btn-secondary" runat="server" OnClick="btnAutoFillUser_Click" Text="AutoFill User" CausesValidation="False" />
+                <br />
+                <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
+            </div>
         </div>
-
+        <br />
+        <br />
+        <br />
+        <div>
+            <asp:GridView ID="grdUsers" ValidationGroup="validNewEmp" runat="server" AutoGenerateColumns="False" DataKeyNames="UserID" OnRowCancelingEdit="grdUsers_RowCancelingEdit" OnRowDeleting="grdUsers_RowDeleting" OnRowEditing="grdUsers_RowEditing" OnRowUpdating="grdUsers_RowUpdating">
+            <Columns>
+                <asp:CommandField ShowEditButton="true" CausesValidation="true" ValidationGroup="validNewEmp"/>
+                <asp:TemplateField HeaderText="User ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUserID" runat="server" Text='<%# Eval("UserID") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="First Name">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtgvFName" runat="server" MaxLength="30" Text='<%# Eval("FName") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="reqgvFName" ControlToValidate="txtgvFName" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblFName" runat="server" Text='<%# Eval("FName") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Last Name">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtgvLName" runat="server" MaxLength="30" Text='<%# Eval("LName") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="reqgvLName" ControlToValidate="txtgvLName" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblLName" runat="server" Text='<%# Eval("LName") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MI">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtgvMI" runat="server" MaxLength="1" Text='<%# Eval("MI") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblMI" runat="server" Text='<%# Eval("MI") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Email">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtgvEmail" runat="server" MaxLength="50" Text='<%# Eval("Email") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="reqgvEmail" ControlToValidate="txtgvEmail" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("Email") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Username">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtgvUsername" runat="server" MaxLength="50" Text='<%# Eval("Username") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="reqgvUsername" ControlToValidate="txtgvUsername" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblUsername" runat="server" Text='<%# Eval("Username") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Admin">
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddlgvAdmin" runat="server" SelectedValue='<%# Bind("Admin") %>'>
+                            <asp:ListItem Value="0">User</asp:ListItem>
+                            <asp:ListItem Value="1">Admin</asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="reqgvAdmin" ControlToValidate="ddlgvAdmin" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblAdmin" runat="server" Text='<%# Eval("Admin") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Employed Status">
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="drpStatus" runat="server" SelectedValue='<%# Bind("EmployedStatus") %>'>
+                            <asp:ListItem value="1">Employed</asp:ListItem>
+                            <asp:ListItem Value="0">Not Employed</asp:ListItem>
+                        </asp:DropDownList>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("EmployedStatus") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+            <EmptyDataTemplate>
+                <asp:Label ID="lblEmptly" runat="server" Text="No Records Available"></asp:Label>
+            </EmptyDataTemplate>
+            </asp:GridView>
+        </div>
     </div>
-    <br />
-    <br />
-    <asp:GridView ID="grdUsers" ValidationGroup="validNewEmp" runat="server" AutoGenerateColumns="False" DataKeyNames="UserID" OnRowCancelingEdit="grdUsers_RowCancelingEdit" OnRowDeleting="grdUsers_RowDeleting" OnRowEditing="grdUsers_RowEditing" OnRowUpdating="grdUsers_RowUpdating">
-        <Columns>
-            <asp:CommandField ShowEditButton="true" CausesValidation="true" ValidationGroup="validNewEmp"/>
-            <asp:TemplateField HeaderText="User ID">
-                <ItemTemplate>
-                    <asp:Label ID="lblUserID" runat="server" Text='<%# Eval("UserID") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="First Name">
-                <EditItemTemplate>
-                    <asp:TextBox ID="txtgvFName" runat="server" MaxLength="30" Text='<%# Eval("FName") %>'></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqgvFName" ControlToValidate="txtgvFName" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="lblFName" runat="server" Text='<%# Eval("FName") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Last Name">
-                <EditItemTemplate>
-                    <asp:TextBox ID="txtgvLName" runat="server" MaxLength="30" Text='<%# Eval("LName") %>'></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqgvLName" ControlToValidate="txtgvLName" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="lblLName" runat="server" Text='<%# Eval("LName") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="MI">
-                <EditItemTemplate>
-                    <asp:TextBox ID="txtgvMI" runat="server" MaxLength="1" Text='<%# Eval("MI") %>'></asp:TextBox>
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="lblMI" runat="server" Text='<%# Eval("MI") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Email">
-                <EditItemTemplate>
-                    <asp:TextBox ID="txtgvEmail" runat="server" MaxLength="50" Text='<%# Eval("Email") %>'></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqgvEmail" ControlToValidate="txtgvEmail" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("Email") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Username">
-                <EditItemTemplate>
-                    <asp:TextBox ID="txtgvUsername" runat="server" MaxLength="50" Text='<%# Eval("Username") %>'></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqgvUsername" ControlToValidate="txtgvUsername" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="lblUsername" runat="server" Text='<%# Eval("Username") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Admin">
-                <EditItemTemplate>
-                    <asp:DropDownList ID="ddlgvAdmin" runat="server" SelectedValue='<%# Bind("Admin") %>'>
-                        <asp:ListItem Value="0">User</asp:ListItem>
-                        <asp:ListItem Value="1">Admin</asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="reqgvAdmin" ControlToValidate="ddlgvAdmin" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="lblAdmin" runat="server" Text='<%# Eval("Admin") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Employed Status">
-                <EditItemTemplate>
-                    <asp:DropDownList ID="drpStatus" runat="server" SelectedValue='<%# Bind("EmployedStatus") %>'>
-                        <asp:ListItem value="1">Employed</asp:ListItem>
-                        <asp:ListItem Value="0">Not Employed</asp:ListItem>
-                    </asp:DropDownList>
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("EmployedStatus") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-        </Columns>
-        <EmptyDataTemplate>
-            <asp:Label ID="lblEmptly" runat="server" Text="No Records Available"></asp:Label>
-        </EmptyDataTemplate>
-    </asp:GridView>
+        
+
+        
+</center>
+    
+        
+                
+                    
+                
+
+               
+
+                
+
+            
+            
+
+    
+    
 </asp:Content>
 

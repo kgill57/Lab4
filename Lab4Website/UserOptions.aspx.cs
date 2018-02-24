@@ -110,7 +110,8 @@ public partial class UserOptions : System.Web.UI.Page
         // Display an error message if the username already exists within the database
         else
         {
-            lblError.Text = "This username is already taken";
+            Page.ClientScript.RegisterStartupScript(GetType(), "popup",
+                       "alert('This username is already taken.');", true);
         }
 
         // Close the SQL connection and update the gridview

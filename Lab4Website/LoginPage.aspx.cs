@@ -44,7 +44,9 @@ public partial class LoginPage : System.Web.UI.Page
         bool status = Convert.ToBoolean(select.ExecuteScalar());
         if (status == false)
         {
-            lblError.Text = "Username does not exist";
+            Page.VerifyRenderingInServerForm(this);
+            Page.ClientScript.RegisterStartupScript(GetType(), "popup",
+                       "alert('Username does not exist.');", true);
             return;
         }
 
@@ -57,13 +59,13 @@ public partial class LoginPage : System.Web.UI.Page
         admin = Convert.ToBoolean(select.ExecuteScalar());
         con.Close();
 
-        bool verify = SimpleHash.VerifyHash(password, "MD5", hash);
+        bool verify = SimpleHash.VerifyHash(txtPassword.Text, "MD5", hash);
 
         if (verify)
         {
             getUser(txtUsername.Text);
 
-            if(admin)
+            if (admin)
             {
                 Response.Redirect("AdminPage.aspx");
             }
@@ -72,9 +74,11 @@ public partial class LoginPage : System.Web.UI.Page
                 Response.Redirect("TeamMemberPage.aspx");
             }
         }
+
         else
         {
-            lblError.Text = "Invalid username and/or password.";
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "Pop",
+                       "alert('Invalid username and/or password.');", true);
         }
 
     }
@@ -158,7 +162,8 @@ public partial class LoginPage : System.Web.UI.Page
         }
         else
         {
-            lblError.Text = "This username is already taken";
+            Page.ClientScript.RegisterStartupScript(GetType(), "popup",
+                       "alert('This username is already taken.');", true);
         }
         
         

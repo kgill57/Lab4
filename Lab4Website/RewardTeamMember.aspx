@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="RewardTeamMember.aspx.cs" Inherits="RewardTeamMember" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="RewardTeamMember.aspx.cs" Inherits="RewardTeamMember" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    
     <header>        
         <link href="Style/desktop.css" rel="stylesheet" />       
         <script src="Scripts/Sidebar.js"></script>
@@ -13,15 +14,18 @@
             <span></span>
         </div>
         <ul>
-            <li><asp:Label ID="lblUser" runat="server" Text="Label"></asp:Label></li>
+            <li><asp:Image ID ="profilePicture" Height ="200px" Width ="150px" runat ="server"/></li>
+            <li><asp:Label ID="lblUser" runat="server" Text=""></asp:Label></li>
             <a href="TeamMemberPage.aspx"><li>Home</li></a>
             <a href="RewardTeamMember.aspx"><li>Reward Team Member</li></a>
             <a href="BuyRewards.aspx"><li>Buy Rewards</li></a>
+            <a href="MyRewards.aspx"><li>My Rewards</li></a>
+            <a href="AccountSettingTeamMember.aspx"><li>Account Settings</li></a>
             <a href="LoginPage.aspx"><li>Logout</li></a>
         </ul>
-        </ul>
     </div>
-
+    <asp:Image id = "headerIMG" runat ="server" ImageUrl ="~/Images/Header.png" width ="100%"/>
+    <h1>Elk Logistics Rewards System</h1>
     <div style="height: 610px">
 
         <br /><br />
@@ -67,7 +71,7 @@
         <br /><br />
 
         <asp:Label ID="lblDescription" runat="server" Text="Description: " style="font-weight: 700"></asp:Label>      
-        <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine">Very good job with your suggested driver safety guidelines.</asp:TextBox>
+        <asp:TextBox ID="txtDescription" runat="server"></asp:TextBox>
 
         <br /><br />
 
@@ -90,12 +94,14 @@
 
         <asp:Label ID="lblReceiver" runat="server" Text="Team Member Being Rewarded: " style="font-weight: 700"></asp:Label>      
 
-        <asp:TextBox ID="txtReceiver" runat="server"></asp:TextBox>
+        <asp:DropDownList ID="drpUsernames" runat="server">
+        </asp:DropDownList>
 
         <br /><br /><br /><br /><br />
           
         &nbsp;&nbsp;&nbsp;
-                  
+        <asp:Button ID="AutoFillRewardSendID" runat="server" OnClick="AutoFillRewardSendID_Click" Text="AutoFillRewardSend" />
+          
         <asp:Button ID="btnSubmit" runat="server" Text="Submit Reward" OnClick="btnSubmit_Click" />
 
         <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>

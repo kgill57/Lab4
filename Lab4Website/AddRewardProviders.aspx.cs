@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class AddRewardProviders : System.Web.UI.Page
 {
@@ -13,10 +14,11 @@ public partial class AddRewardProviders : System.Web.UI.Page
     public static string oldProvEmail;
     public static string newProvName;
     public static string newProvEmail;
+    int count = 1;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if(!IsPostBack)
             fillGridView();
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
     }
@@ -28,7 +30,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server =LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
             // Declare the query string.
@@ -64,8 +66,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
-
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString()))
@@ -91,7 +92,8 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE RewardProvider SET ProviderName=@newProvName, " +
                     "ProviderEmail=@newProvEmail WHERE ProviderID=@providerID", sc);
-                del.Parameters.AddWithValue("@newProvName", (grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString().ToLower());
+                del.Parameters.AddWithValue("@newProvName", char.ToUpper((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text[0]) 
+                    + (grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.Substring(1));
                 del.Parameters.AddWithValue("@projectDescription", (grdProviders.Rows[e.RowIndex].FindControl("txtProviderEmail") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
                 del.ExecuteNonQuery();
@@ -105,10 +107,33 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
             }
 
+
         }
 
 
 
+    }
+
+    protected void grdProviders_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        try
+        {
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+            sc.Open();
+            //Declare the query string.
+
+            System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("DELETE" +
+                " FROM RewardProvider WHERE ProviderID = @providerID;", sc);
+            del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
+            del.ExecuteNonQuery();
+            sc.Close();
+            fillGridView();
+        }
+        catch
+        {
+
+        }
     }
 
     protected void btnAddProvider_Click1(object sender, EventArgs e)
@@ -120,7 +145,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         btnAdd.Visible = true;
     }
 
-
+    
 
     protected void btnClear_Click(object sender, EventArgs e)
     {
@@ -133,11 +158,12 @@ public partial class AddRewardProviders : System.Web.UI.Page
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
 
+
         sc.Open();
         //Declare the query string.
 
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("INSERT INTO RewardProvider (ProviderName, ProviderEmail) VALUES (@providerName, @providerEmail)", sc);
-        insert.Parameters.AddWithValue("@providerName", txtNewProviderName.Text);
+        insert.Parameters.AddWithValue("@providerName", char.ToUpper(txtNewProviderName.Text[0]) + txtNewProviderName.Text.Substring(1));
         insert.Parameters.AddWithValue("@providerEmail", txtNewProviderEmail.Text);
 
         insert.ExecuteNonQuery();
@@ -155,6 +181,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
                 sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+
 
                 sc.Open();
                 //Declare the query string.
@@ -181,7 +208,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
                 sc.Open();
                 // Declare the query string.
 
-                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM RewardProvider WHERE LOWER(ProviderName) LIKE LOWER('%' + @ProviderName + '%');", sc);
+                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM RewardProvider WHERE ProviderName LIKE '%' + @ProviderName;", sc);
                 del.Parameters.AddWithValue("@ProviderName", txtSearch.Text);
                 del.ExecuteNonQuery();
 
@@ -200,5 +227,13 @@ public partial class AddRewardProviders : System.Web.UI.Page
     protected void btnClear_Click1(object sender, EventArgs e)
     {
         Response.Redirect(Request.RawUrl);
+    }
+
+
+
+    protected void AutoFillRewardProviderID_Click(object sender, EventArgs e)
+    {
+        txtNewProviderName.Text = "Provider" + count;
+        txtNewProviderEmail.Text = "provider" + count + "@gmail.com";
     }
 }

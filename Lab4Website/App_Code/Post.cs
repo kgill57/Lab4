@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public class Post
 {
@@ -12,7 +13,7 @@ public class Post
     private String category;
     private String description;
     private double rewardValue;
-    private String postDate;
+    private DateTime postDate;
     private bool isPrivate;
     private int giverID;
     private int receiverID;
@@ -21,7 +22,7 @@ public class Post
     {
 
     }
-    public Post(int pID, String value, String category, String description, double rewardValue, String postDate, bool isPrivate, int giverID, int receiverID)
+    public Post(int pID, String value, String category, String description, double rewardValue, DateTime postDate, bool isPrivate, int giverID, int receiverID)
     {
         setPID(pID);
         setValue(value);
@@ -61,7 +62,7 @@ public class Post
         this.rewardValue = rewardValue;
     }
 
-    public void setPostDate(String postDate)
+    public void setPostDate(DateTime postDate)
     {
         this.postDate = postDate;
     }
@@ -107,7 +108,7 @@ public class Post
         return this.rewardValue;
     }
 
-    public String getPostDate()
+    public DateTime getPostDate()
     {
         return this.postDate;
     }
@@ -130,7 +131,8 @@ public class Post
     public string getGiverUsername(int giverID)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+
         con.Open();
 
         SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);
@@ -143,7 +145,7 @@ public class Post
     public string getReceiverUsername(int receiverID)
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
         SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE UserID = @userID", con);

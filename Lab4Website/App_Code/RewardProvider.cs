@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -41,8 +41,11 @@ public class RewardProvider
         return this.email;
     }
 
-    public RewardProvider()
+    public RewardProvider(int providerID, String name, String email)
     {
-        
+        setProviderID(providerID);
+        setName(name);
+        setEmail(email);
     }
+
 }

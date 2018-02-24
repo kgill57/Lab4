@@ -4,21 +4,19 @@
     
 </head>
 <html>
-<body>
-    <h1>Elk Logistics Rewards System</h1>
+
+<body style="margin-bottom: 0px">
     <form id="form1" runat="server">
-    <div>
+    <div style="height: 19px; margin-top: 0px">
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
             
         </asp:ContentPlaceHolder>
     </div>
     </form>
-    <br />
-    <br />
-    <br />
-    <footer>
-        <p>Kyle McGill</p>
-    </footer>
+
+    <%--<footer class="footer">
+        <p style="margin-top: 0px; margin-bottom: 0px">Created By FCL Consulting&copy;</p>
+    </footer>--%>
 </body>
     
 </html>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Configuration;
 public partial class ViewRewards : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -21,7 +21,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
 
-            SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+            SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString);
             sc.Open();
             // Declare the query string.
 
@@ -41,7 +41,7 @@ public partial class ViewRewards : System.Web.UI.Page
 
     protected void fillDropDown()
     {
-        SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+        SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString);
         sc.Open();
         // Declare the query string.
 
@@ -70,7 +70,7 @@ public partial class ViewRewards : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+            sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
             //Declare the query string.
@@ -92,7 +92,7 @@ public partial class ViewRewards : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         //Check if the project name Text box is empty
         if (String.IsNullOrEmpty((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.ToString()))
@@ -111,7 +111,8 @@ public partial class ViewRewards : System.Web.UI.Page
         }
 
         Reward newReward = new Reward();
-        newReward.setRewardName((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.ToString().ToLower());
+        newReward.setRewardName(char.ToUpper((grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text[0])
+                    + (grdRewards.Rows[e.RowIndex].FindControl("txtRewardName") as TextBox).Text.Substring(1));
         newReward.setRewardQuantity(Convert.ToInt32((grdRewards.Rows[e.RowIndex].FindControl("txtRewardQuantity") as TextBox).ToString()));
         newReward.setRewardID(Convert.ToInt32(grdRewards.DataKeys[e.RowIndex].Value.ToString()));
 
@@ -156,8 +157,7 @@ public partial class ViewRewards : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
-
+                sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
                 sc.Open();
                 //Declare the query string.
 
@@ -178,12 +178,12 @@ public partial class ViewRewards : System.Web.UI.Page
         {
             try
             {
-
-                SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+                SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString);
                 sc.Open();
                 // Declare the query string.
 
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM Reward WHERE LOWER(RewardName) LIKE LOWER('%' + @rewardName + '%');", sc);
+
                 del.Parameters.AddWithValue("@rewardName", txtSearch.Text);
                 del.ExecuteNonQuery();
 
@@ -213,20 +213,19 @@ public partial class ViewRewards : System.Web.UI.Page
     protected void btnAdd_Click(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         sc.Open();
         //Declare the query string.
 
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("INSERT INTO Reward (RewardName, RewardQuantity, RewardAmount, " +
             "ProviderID, AdminID, DateAdded) VALUES (@rewardName, @rewardQuantity, @rewardAmount, @providerID, @adminID, @dateAdded)", sc);
-        insert.Parameters.AddWithValue("@rewardName", txtRewardName.Text);
+        insert.Parameters.AddWithValue("@rewardName", char.ToUpper(txtRewardName.Text[0]) + txtRewardName.Text.Substring(1));
         insert.Parameters.AddWithValue("@rewardQuantity", Convert.ToInt32(txtRewardQuantity.Text));
         insert.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(txtRewardAmount.Text));
         insert.Parameters.AddWithValue("@providerID", findProviderID(drpRewardProvider.SelectedItem.Text));
         insert.Parameters.AddWithValue("@adminID", (int)Session["UserID"]);
         insert.Parameters.AddWithValue("@dateAdded", DateTime.Today);
-
 
         insert.ExecuteNonQuery();
 
@@ -236,7 +235,7 @@ public partial class ViewRewards : System.Web.UI.Page
     public int findProviderID(string providerName)
     {
         SqlConnection sc = new SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         sc.Open();
         SqlCommand select = new SqlCommand("SELECT ProviderID FROM RewardProvider WHERE ProviderName LIKE '%' + @providerName", sc);
         select.Parameters.AddWithValue("@providerName", providerName);

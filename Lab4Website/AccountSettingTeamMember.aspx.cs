@@ -25,11 +25,16 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
             Response.Redirect("LoginPage.aspx");
         }
 
+        
+    }
+
+    protected void loadProfilePicture()
+    {
         con.Open();
-        //Load Profile Picture
+
         try
         {
-            
+
             SqlCommand select = new SqlCommand();
             select.Connection = con;
 
@@ -44,6 +49,7 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
         {
 
         }
+
         con.Close();
     }
 

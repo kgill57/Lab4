@@ -14,6 +14,9 @@ public partial class MyRewards : System.Web.UI.Page
     {
         if (!IsPostBack)
             fillRewards();
+
+        loadProfilePicture();
+        
     }
 
     public void fillRewards()
@@ -30,6 +33,7 @@ public partial class MyRewards : System.Web.UI.Page
         SqlDataReader reader = read.ExecuteReader();
         Panel[] panel = new Panel[size];
         int counter = 0;
+        
         while (reader.Read())
         {
             panel[counter] = new Panel();
@@ -69,6 +73,8 @@ public partial class MyRewards : System.Web.UI.Page
 
 
         }
+
+
 
 
 
@@ -130,5 +136,31 @@ public partial class MyRewards : System.Web.UI.Page
 
 
         //    Panel1.Controls.Add(panelPost[i]);
+    }
+
+    protected void loadProfilePicture()
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+        con.Open();
+
+        try
+        {
+
+            SqlCommand select = new SqlCommand();
+            select.Connection = con;
+
+            select.CommandText = "SELECT ProfilePicture FROM [dbo].[User] WHERE UserID =" + Convert.ToString((int)Session["UserID"]);
+            string currentPicture = (String)select.ExecuteScalar();
+
+            profilePicture.ImageUrl = "~/Images/" + currentPicture;
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+
+        }
+        catch (Exception)
+        {
+
+        }
+        con.Close();
     }
 }

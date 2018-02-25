@@ -11,6 +11,20 @@ public class EventPost
     private String postedBy;
     private DateTime datePosted;
 
+    //Event Post Constructor
+
+    public EventPost(int eventPostID, String eventTitle, String eventDesc,
+        DateTime datePosted, String postedBy)
+    {
+        setEventPostID(eventPostID);
+        setEventTitle(eventTitle);
+        setEventDesc(eventDesc);
+        setPostedBy(postedBy);
+        setDatePosted(datePosted);
+    }
+
+
+
     // Setters
     public void setEventPostID(int eventPostID)
     {
@@ -65,6 +79,6 @@ public class EventPost
 
     public EventPost()
     {
-        
+
     }
 }

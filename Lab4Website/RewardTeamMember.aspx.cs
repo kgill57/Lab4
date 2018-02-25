@@ -14,6 +14,8 @@ public partial class RewardTeamMember : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        loadProfilePicture();
+
         try
         {
             lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + Session["AccountBalance"];
@@ -30,6 +32,32 @@ public partial class RewardTeamMember : System.Web.UI.Page
             Response.Redirect("LoginPage.aspx");
         }
 
+    }
+
+    protected void loadProfilePicture()
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+        con.Open();
+
+        try
+        {
+
+            SqlCommand select = new SqlCommand();
+            select.Connection = con;
+
+            select.CommandText = "SELECT ProfilePicture FROM [dbo].[User] WHERE UserID =" + Convert.ToString((int)Session["UserID"]);
+            string currentPicture = (String)select.ExecuteScalar();
+
+            profilePicture.ImageUrl = "~/Images/" + currentPicture;
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+
+        }
+        catch (Exception)
+        {
+
+        }
+        con.Close();
     }
 
     public void loadDropDown()
@@ -57,6 +85,8 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
+        sendNotification();
+
         Post post = new Post();
         post.setValue(ddlCompanyValue.SelectedValue);
         post.setCategory(ddlCategory.SelectedValue);
@@ -113,58 +143,58 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
                 sc.Close();
 
-                //        try
-                //        {
-                //            System.Data.SqlClient.SqlDataReader readerEmail;
-                //            SqlConnection checkemail = new SqlConnection();
-                //            checkemail.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
-                //            checkemail.Open();
+                try
+                {
+                    System.Data.SqlClient.SqlDataReader readerEmail;
+                    SqlConnection checkemail = new SqlConnection();
+                    checkemail.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+                    checkemail.Open();
 
-                //            SqlCommand reademail = new SqlCommand("SELECT TotalBalance FROM Employer WHERE CompanyName='ElkLogistics'"
-                //                    , checkemail);
-                //            readerEmail = reademail.ExecuteReader();
+                    SqlCommand reademail = new SqlCommand("SELECT TotalBalance FROM Employer WHERE CompanyName='ElkLogistics'"
+                            , checkemail);
+                    readerEmail = reademail.ExecuteReader();
 
-                //            Decimal totalBalance = 0;
+                    Decimal totalBalance = 0;
 
-                //            while (readerEmail.Read())
-                //            {
-                //                totalBalance = readerEmail.GetDecimal(0);
-                //            }
-                //            checkemail.Close();
+                    while (readerEmail.Read())
+                    {
+                        totalBalance = readerEmail.GetDecimal(0);
+                    }
+                    checkemail.Close();
 
-                //            if (totalBalance < 500)
-                //            {
-                //                var fromAddress = new MailAddress("elklogisticsmanagement@gmail.com", "Johnathon Hoyns");
-                //                var toAddress = new MailAddress("johnathonhoyns@gmail.com", "Administrator");
-                //                const string fromPassword = "Daisydoo#1pet";
-                //                const string subject = "Reward balance is below 500 dollars";
-                //                const string body = "Dear Administrator, It seems that"
-                //                    + " the company account balance is below 500 dollars. Please consider adding additional"
-                //                    + " money to the account some time today.";
+                    if (totalBalance < 500)
+                    {
+                        var fromAddress = new MailAddress("elklogisticsmanagement@gmail.com", "Johnathon Hoyns");
+                        var toAddress = new MailAddress("johnathonhoyns@gmail.com", "Administrator");
+                        const string fromPassword = "Daisydoo#1pet";
+                        const string subject = "Reward balance is below 500 dollars";
+                        const string body = "Dear Administrator, It seems that"
+                            + " the company account balance is below 500 dollars. Please consider adding additional"
+                            + " money to the account some time today.";
 
-                //                var smtp = new SmtpClient
-                //                {
-                //                    Host = "smtp.aol.com",
-                //                    Port = 587,
-                //                    EnableSsl = true,
-                //                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                //                    UseDefaultCredentials = false,
-                //                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-                //                };
-                //                using (var message = new MailMessage(fromAddress, toAddress)
-                //                {
-                //                    Subject = subject,
-                //                    Body = body
-                //                })
-                //                {
-                //                    smtp.Send(message);
-                //                }
-                //            }
-                //        }
-                //        catch
-                //        {
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.aol.com",
+                            Port = 587,
+                            EnableSsl = true,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                        };
+                        using (var message = new MailMessage(fromAddress, toAddress)
+                        {
+                            Subject = subject,
+                            Body = body
+                        })
+                        {
+                            smtp.Send(message);
+                        }
+                    }
+                }
+                catch
+                {
 
-                //        }
+                }
 
                 loadDropDown();
             }
@@ -173,6 +203,41 @@ public partial class RewardTeamMember : System.Web.UI.Page
         catch
         {
 
+        }
+    }
+
+    public void sendNotification()
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+
+        con.Open();
+        SqlCommand cmd = new SqlCommand("SELECT Email FROM [User] WHERE Username=@username", con);
+        cmd.Parameters.AddWithValue("@username", drpUsernames.SelectedValue);
+
+        var fromAddress = new MailAddress("sdbasketball96@aol.com", "Elk Logistics Rewards");
+        var toAddress = new MailAddress((String)cmd.ExecuteScalar(), "Test");
+        const string fromPassword = "Daisydoo#1pet";
+        const string subject = "You Received a Reward From a Co-Worker!";
+        const string body = "Dear Team Member, You have received a reward from a fellow Team member. Login to find out who rewarded you!";
+            
+
+        var smtp = new SmtpClient
+        {
+            Host = "smtp.aol.com",
+            Port = 587,
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            UseDefaultCredentials = false,
+            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+        };
+        using (var message = new MailMessage(fromAddress, toAddress)
+        {
+            Subject = subject,
+            Body = body
+        })
+        {
+            smtp.Send(message);
         }
     }
 

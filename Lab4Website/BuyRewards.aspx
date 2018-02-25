@@ -11,12 +11,14 @@
             <span></span>
         </div>
         <ul>
+            <li><asp:Image ID ="profilePicture" Height ="120px" Width ="120px" runat ="server"/></li>
             <li> <asp:Label ID="lblUser" runat="server" Text=""></asp:Label></li>
             <li><a href="TeamMemberPage.aspx">Home</a></li>
             <li> <a href="RewardTeamMember.aspx">Reward Team Member</a></li>
             <li> <a href="BuyRewards.aspx">Buy Rewards</a></li>
             <li> <a href="MyRewards.aspx">My Rewards</a></li>
             <li><a href="AccountSettingTeamMember.aspx">Account Settings</a></li>
+            <li><a href="CommunityPostFeed.aspx">Community Events</a></li>
             <li><a href="/LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
@@ -24,10 +26,11 @@
 <center>
     <h1 class="display-4">Purchase Rewards</h1>
     <div class="jumbotron" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px; height:1000px;">
-        <asp:Button ID="btnBuy" runat="server" Text="Buy Items" OnClick="btnBuy_Click" />
+        <br />
+        <asp:Button ID="btnBuy" CssClass="btn btn-primary" runat="server" Text="Buy Items" OnClick="btnBuy_Click" />
         <br />
         <br />
-        <asp:Label ID="lblResult" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+        <asp:Label ID="lblResult" runat="server"></asp:Label>
         <div class="container">
             <asp:Panel ID="Panel1" runat="server"></asp:Panel>
         </div>

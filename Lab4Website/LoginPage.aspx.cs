@@ -151,7 +151,7 @@ public partial class LoginPage : System.Web.UI.Page
             select.CommandText = "INSERT INTO [dbo].[Employer] VALUES('Elk Logistics', 5000)";
             select.ExecuteNonQuery();
 
-            select.CommandText = "INSERT INTO [dbo].[User] VALUES('Chris', 'J', 'Bennsky', 'Bennskych@gmail.com', 'admin', NULL, 1, NULL, 1, 100, 1, 'Bennsky', '2018-01-01')";
+            select.CommandText = "INSERT INTO [dbo].[User] VALUES('Chris', 'J', 'Bennsky', 'Bennskych@gmail.com', 'admin', 'elk-logo.png', 1, NULL, 1, 100, 1, 'Bennsky', '2018-01-01')";
             select.ExecuteNonQuery();
 
             string password = "password";

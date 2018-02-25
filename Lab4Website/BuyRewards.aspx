@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Buy Rewards" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="BuyRewards.aspx.cs" Inherits="BuyRewards" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-   <link href="Style/desktop.css" rel="stylesheet" />
+    <link href="Style/desktop.css" rel="stylesheet" />
     <link href="Style/bootstrap.min.css" rel="stylesheet" />
     <script src="Scripts/Sidebar.js"></script>
     <div id ="sidebar">

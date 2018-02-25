@@ -122,15 +122,6 @@ public partial class BuyRewards : System.Web.UI.Page
     protected void btnBuy_Click(object sender, EventArgs e)
     {
 
-        for (int i = 0; i < arraySize; i++)
-        {
-            if (chkBuy[i].Checked == false)
-            {
-                lblResult.Text = "You must choose a reward to claim first.";
-                return;
-            }
-        }
-
         if (checkFunds() == false)
         {
             return;
@@ -217,7 +208,6 @@ public partial class BuyRewards : System.Web.UI.Page
         {
             panelPost[i] = new Panel();
             Label[] labelPost = new Label[4];
-
 
             labelPost[0] = new Label();
             labelPost[0].Text = "Reward Name: " + reward[i].getRewardName();

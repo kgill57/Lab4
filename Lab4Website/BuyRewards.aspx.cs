@@ -17,6 +17,16 @@ public partial class BuyRewards : System.Web.UI.Page
     public static int arraySize;
     protected void Page_Load(object sender, EventArgs e)
     {
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+
+        catch (Exception)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
+
         createRewardFeed();
         loadProfilePicture();
     }
@@ -112,8 +122,19 @@ public partial class BuyRewards : System.Web.UI.Page
     protected void btnBuy_Click(object sender, EventArgs e)
     {
 
+        for (int i = 0; i < arraySize; i++)
+        {
+            if (chkBuy[i].Checked == false)
+            {
+                lblResult.Text = "You must choose a reward to claim first.";
+                return;
+            }
+        }
+
         if (checkFunds() == false)
+        {
             return;
+        }
 
         SqlConnection con = new SqlConnection();
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
@@ -124,7 +145,7 @@ public partial class BuyRewards : System.Web.UI.Page
         cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
 
         for (int i = 0; i < arraySize; i++)
-        {
+        {         
             if (chkBuy[i].Checked == true)
             {
                 cmd.CommandText = "INSERT INTO RewardEarned (UserID, RewardID, DateClaimed) VALUES (@userID, @rewardID, @dateClaimed)";
@@ -158,11 +179,8 @@ public partial class BuyRewards : System.Web.UI.Page
                 Session["AccountBalance"] = (decimal)Session["AccountBalance"] - Convert.ToDecimal(reward[i].getRewardAmount());
             }
         }
-
         lblResult.Text = "Reward Claimed!";
-
         con.Close();
-
 
     }
 
@@ -225,7 +243,6 @@ public partial class BuyRewards : System.Web.UI.Page
             panelPost[i].Controls.Add(new LiteralControl("<br />"));
 
             chkBuy[i] = new CheckBox();
-            chkBuy[i].AutoPostBack = true;
             panelPost[i].Controls.Add(chkBuy[i]);
 
             panelPost[i].Controls.Add(new LiteralControl("<br />"));

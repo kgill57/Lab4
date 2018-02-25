@@ -92,12 +92,12 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
             labelPost[0] = new Label();
 
-            if (transaction[i].getIsPrivate() == true)
-            {
-                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
-            }
-            else
-            {
+           if (transaction[i].getIsPrivate() == true)
+              {
+                  labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
+              }
+              else
+              {
 
                 SqlCommand select = new SqlCommand("SELECT [FName] + ' ' + [LName] FROM [dbo].[User] WHERE [UserID] = " + transaction[i].getGiverID(), con);
                 String giver = (String)select.ExecuteScalar();
@@ -188,7 +188,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
                 if (transaction[i].getIsPrivate() == true)
                 {
-                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
+                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
                 }
                 else
                 {
@@ -281,7 +281,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
                 if (transaction[i].getIsPrivate() == true)
                 {
-                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
+                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
                 }
                 else
                 {
@@ -370,7 +370,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
                 if (transaction[i].getIsPrivate() == true)
                 {
-                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
+                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
                 }
                 else
                 {
@@ -459,7 +459,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
                 if (transaction[i].getIsPrivate() == true)
                 {
-                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
+                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
                 }
                 else
                 {

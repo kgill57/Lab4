@@ -18,7 +18,8 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
         try
         {
-            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + Session["AccountBalance"];
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+
             if (!IsPostBack)
             {
                 ddlCompanyValue.ClearSelection();
@@ -27,6 +28,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
                 loadDropDown();
             }
         }
+
         catch (Exception)
         {
             Response.Redirect("LoginPage.aspx");

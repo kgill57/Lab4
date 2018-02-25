@@ -16,8 +16,36 @@ public partial class AddRewardProviders : System.Web.UI.Page
         if (!IsPostBack)
             fillGridView();
 
+        loadProfilePicture();
+
         //load the nav bar with the admin's first and last name
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+    }
+
+    protected void loadProfilePicture()
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+        con.Open();
+
+        try
+        {
+
+            SqlCommand select = new SqlCommand();
+            select.Connection = con;
+
+            select.CommandText = "SELECT ProfilePicture FROM [dbo].[User] WHERE UserID =" + Convert.ToString((int)Session["UserID"]);
+            string currentPicture = (String)select.ExecuteScalar();
+
+            profilePicture.ImageUrl = "~/Images/" + currentPicture;
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+
+        }
+        catch (Exception)
+        {
+
+        }
+        con.Close();
     }
 
     protected void fillGridView()
@@ -31,6 +59,10 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
             sc.Open();
             // Declare the query string.
+            SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", sc);
+            double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
+
+            lblBalance.Text = totalBalance.ToString("$#.00");
 
             System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM RewardProvider;", sc);
             del.ExecuteNonQuery();

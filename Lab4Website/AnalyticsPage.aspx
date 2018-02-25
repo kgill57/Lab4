@@ -32,7 +32,7 @@
         <div>
             <asp:DropDownList ID="giverAndReceiver" runat="server" OnSelectedIndexChanged="giverAndReceiver_SelectedIndexChanged" AutoPostBack="True" Width="476px">
                 <asp:ListItem>Amount of each Reward</asp:ListItem>
-                <asp:ListItem>Number of Event Posts per Day</asp:ListItem>
+                <asp:ListItem>Account Balance per User</asp:ListItem>
             </asp:DropDownList>
         </div>
         <br />
@@ -49,13 +49,13 @@
             
             <asp:Chart ID="Chart2" runat="server" DataSourceID="SqlDataSource1"  Height="489px" Width="1020px">
                 <Series>
-                    <asp:Series Name="Series1" XValueMember="DatePosted" YValueMembers="EventPostID" ChartType="Area"></asp:Series>
+                    <asp:Series Name="Series1" XValueMember="UserName" YValueMembers="AccountBalance"></asp:Series>
                 </Series>
                 <ChartAreas>
                     <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
                 </ChartAreas>
             </asp:Chart>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:lab4ConnectionString %>" SelectCommand="SELECT [EventPostID], [DatePosted] FROM [EventPost]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:lab4ConnectionString %>" SelectCommand="SELECT [AccountBalance], [UserName] FROM [User]"></asp:SqlDataSource>
            
         </div>
     </div>

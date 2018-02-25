@@ -12,6 +12,16 @@ public partial class MyRewards : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+
+        catch (Exception)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
+
         if (!IsPostBack)
             fillRewards();
     }
@@ -82,7 +92,7 @@ public partial class MyRewards : System.Web.UI.Page
 
         //    if (transaction[i].getIsPrivate() == true)
         //    {
-        //        labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
+        //        labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
         //    }
         //    else
         //    {

@@ -25,7 +25,7 @@
 
 <center>
     <h1 class="display-4">Reward Options</h1>
-    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <div class="jumbotron agent-1" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
         <div style="float:left;">
             <asp:Button ID="btnAddReward" runat="server" Text="Add Reward" OnClick="btnAddReward_Click" CausesValidation="False" />
             <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" CausesValidation="False" />

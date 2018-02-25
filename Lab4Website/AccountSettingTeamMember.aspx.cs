@@ -26,10 +26,10 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
         }
 
         con.Open();
-        //Load Profile Picture
+        // Load Profile Picture
         try
         {
-            
+
             SqlCommand select = new SqlCommand();
             select.Connection = con;
 
@@ -51,12 +51,15 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
 
     protected void btnChangePass_Click(object sender, EventArgs e)
     {
-        lblCurrentPassMSG.Visible = false;
-        lblNewPass1MSG.Visible = false;
-        lblNewPass2MSG.Visible = false;
-
-        //Check if current password is real password
+        // Check if current password is real password
         String currentPass = txtCurrentPass.Text;
+
+        if (txtNewPass1.Text == txtCurrentPass.Text || txtNewPass2.Text == txtCurrentPass.Text)
+        {
+            lblResult.Text = "Your new password cannot be the same as your current password.";
+            return;
+        }
+
         con.Open();
         SqlCommand select = new SqlCommand();
         select.Connection = con;
@@ -66,34 +69,30 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
 
         bool correctHash = SimpleHash.VerifyHash(currentPass, "MD5", currentHash);
         if (correctHash)
-        {
-            if(txtNewPass1.Text == "")
+        {          
+            if (String.IsNullOrWhiteSpace(txtNewPass1.Text) == true)
             {
-                lblNewPass1MSG.Text = "(Must Enter A New Password)";
+                lblResult.Text = "You must enter a new password.";
             }
+
             else if (txtNewPass1.Text == txtNewPass2.Text)
             {
                 String newPassHash = SimpleHash.ComputeHash(txtNewPass1.Text, "MD5", null);
                 select.CommandText = "UPDATE [dbo].[Password] SET [PasswordHash] = @PasswordHash WHERE [UserID] =" + Convert.ToString((int)Session["UserID"]);
                 select.Parameters.AddWithValue("@PasswordHash", newPassHash);
                 select.ExecuteNonQuery();
+                lblResult.Text = "New password confirmed!";
             }
+
             else
             {
-                lblNewPass1MSG.Visible = true;
-                lblNewPass2MSG.Visible = true;
-                lblNewPass1MSG.Text = "(New Passwords Don't Match)";
-                lblNewPass2MSG.Text = "(New Passwords Don't Match)";
-
-                lblNewPass1MSG.ForeColor = System.Drawing.Color.Red;
-                lblNewPass2MSG.ForeColor = System.Drawing.Color.Red;
+                lblResult.Text = "New passwords do not match.";
             }
             
         }
         else
         {
-            lblCurrentPassMSG.Text = "(Incorrect Password)";
-            lblCurrentPassMSG.ForeColor = System.Drawing.Color.Red;
+            lblResult.Text = "Incorrect password.";
         }
 
         con.Close();
@@ -102,9 +101,16 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
 
     protected void btnUpload_Click(object sender, EventArgs e)
     {
-        //gets the name of the file
+        // Get the name of the file
         string fileName = Path.GetFileName(UploadPicture.PostedFile.FileName);
-        //saves file to server map
+
+        if (String.IsNullOrWhiteSpace(fileName) == true)
+        {
+            lblResult.Text = "You must choose a picture to upload.";
+            return;
+        }
+
+        // Save file to server map
         UploadPicture.PostedFile.SaveAs(Server.MapPath("~/Images/") + fileName);
         
 

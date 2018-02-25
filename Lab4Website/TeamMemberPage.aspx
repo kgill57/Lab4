@@ -21,7 +21,7 @@
             <li><a href="/LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
-    <h1 class="display-4" style="color:white; font: bold;">News Feed</h1>
+    <h1 class="display-4" style="color:white; font: bold;" runat="server">News Feed</h1>
     <div class="jumbotron jumbotron-fluid" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px; height:1000px;">
         <br />
         <br />
@@ -34,8 +34,8 @@
             </asp:DropDownList>
         </div>
         <br />
-        <div class="container" style="padding-top: -20px;">
-            <asp:Panel ID="Panel1" runat="server"></asp:Panel>
+        <div runat="server" class="container" style="padding-top: -20px;">
+            <asp:Panel ID="Panel1" runat="server" CssClass="agent-1"></asp:Panel>
         </div>
     </div>
 </center>

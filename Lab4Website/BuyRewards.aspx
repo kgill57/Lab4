@@ -23,8 +23,9 @@
 
 <center>
     <h1 class="display-4">Purchase Rewards</h1>
-    <div class="jumbotron" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px; height:1000px;">
-        <asp:Button ID="btnBuy" runat="server" Text="Buy Items" OnClick="btnBuy_Click" />
+    <div class="jumbotron agent-1" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px; height:1000px;" runat="server">
+        <br />
+        <asp:Button ID="btnBuy" runat="server" Text="Buy Items" OnClick="btnBuy_Click" BorderColor="Black" BorderStyle="Inset" Height="35px" Width="180px" />
         <br />
         <br />
         <asp:Label ID="lblResult" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>

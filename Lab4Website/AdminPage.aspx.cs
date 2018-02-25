@@ -68,7 +68,7 @@ public partial class AdminPage : System.Web.UI.Page
 
             if (transaction[i].getIsPrivate() == true)
             {
-                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
+                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
             }
             else
             {

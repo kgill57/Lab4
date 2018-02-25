@@ -4,7 +4,7 @@
     <link href="Style/desktop.css" rel="stylesheet" />
     <link href="Style/bootstrap.min.css" rel="stylesheet" />
     <script src="Scripts/Sidebar.js"></script>
-    <div id ="sidebar">
+    <div id="sidebar">
         <div class="toggle-btn" onclick="toggleSidebar();">
             <span></span>
             <span></span>
@@ -22,8 +22,8 @@
     </div>
 
 <center>
-    <h1 class="display-4">Reward A Team Member</h1>
-    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <h1 class="display-4" runat="server">Reward A Team Member</h1>
+    <div class="jumbotron agent-1" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
         <div style="width:50%; text-align:left; padding-left:70px;">
             <div class="form-group">
                 <asp:Label ID="lblReceiver" runat="server" Text="Team Member Being Rewarded: " style="font-weight: 700"></asp:Label>      
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <asp:Label ID="lblRewardValue" runat="server" Text="Reward Value: " style="font-weight: 700"></asp:Label>      
-                <asp:DropDownList ID="ddlRewardValue" runat="server" AutoPostBack="true">
+                <asp:DropDownList ID="ddlRewardValue" runat="server">
                     <asp:ListItem Value="10">$10</asp:ListItem>
                     <asp:ListItem Value="25">$25</asp:ListItem>
                     <asp:ListItem Value="50">$50</asp:ListItem>
@@ -41,7 +41,7 @@
             </div>
             <div class="form-group">
                 <asp:Label ID="lblCompanyValue" runat="server" style="font-weight: 700" Text="Company Value: "></asp:Label>
-                <asp:DropDownList ID="ddlCompanyValue" runat="server" AutoPostBack="true">
+                <asp:DropDownList ID="ddlCompanyValue" runat="server">
                     <asp:ListItem Value="Health, Well Being and Safety of Team Members">Health, Well Being and Safety of Team Members</asp:ListItem>
                     <asp:ListItem>Community Involvement</asp:ListItem>
                     <asp:ListItem>Customer Service and Retention/Attracting New Customers</asp:ListItem>
@@ -52,7 +52,7 @@
             </div>
             <div class="form-group">
                 <asp:Label ID="lblCategory" runat="server" style="font-weight: 700" Text="Category: "></asp:Label>
-                <asp:DropDownList ID="ddlCategory" runat="server" AutoPostBack="true">
+                <asp:DropDownList ID="ddlCategory" runat="server">
                     <asp:ListItem>Creative</asp:ListItem>
                     <asp:ListItem>Distinguished</asp:ListItem>
                     <asp:ListItem>Exceptional</asp:ListItem>
@@ -69,13 +69,15 @@
             </div>
             <div class="form-group">
                 <asp:TextBox ID="txtDescription" style="height:200px; width:400px;" textmode="MultiLine" placeholder="Description" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqDescription" ControlToValidate="txtDescription" Text="(Required)" Display="Dynamic" runat ="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
             </div>
             <div class="form-group">
-                <asp:CheckBox ID="chkPrivate" runat="server" AutoPostBack="True" style="font-weight: 700" Text="Should Transaction Be Private?" />
+                <asp:CheckBox ID="chkPrivate" runat="server" style="font-weight: 700" Text="Should Transaction Be Private?" />
             </div>
             <asp:Button ID="AutoFillRewardSendID" runat="server" OnClick="AutoFillRewardSendID_Click" Text="AutoFillRewardSend" />
             <asp:Button ID="btnSubmit" runat="server" Text="Submit Reward" OnClick="btnSubmit_Click" />
-            <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+            <br /><br />
+            <asp:Label ID="lblResult" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
         </div>
         
     </div>

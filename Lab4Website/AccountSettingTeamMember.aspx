@@ -39,13 +39,13 @@
                 </table>
             </div>
             <div class="form-group">
-                <asp:TextBox ID="txtCurrentPass" CssClass="form-control" placeholder="Current Password" runat="server" Width="200px"></asp:TextBox>
+                <asp:TextBox ID="txtCurrentPass" CssClass="form-control" placeholder="Current Password" runat="server" Width="200px" MaxLength="200"></asp:TextBox>
             </div>
             <div class="form-group">
-                 <asp:TextBox ID="txtNewPass1" CssClass="form-control" placeholder="New Password" runat="server" Width="200px"></asp:TextBox>
+                 <asp:TextBox ID="txtNewPass1" CssClass="form-control" placeholder="New Password" runat="server" Width="200px" MaxLength="200"></asp:TextBox>
             </div>
             <div class="form-group">
-                <asp:TextBox ID="txtNewPass2" CssClass="form-control" placeholder="Confirm New Password" runat="server" Width="200px"></asp:TextBox>
+                <asp:TextBox ID="txtNewPass2" CssClass="form-control" placeholder="Confirm New Password" runat="server" Width="200px" MaxLength="200"></asp:TextBox>
             </div>
             <div>
                 <asp:Button ID="btnChangePass" CssClass="btn btn-primary" runat="server" OnClick="btnChangePass_Click" Text="Confirm Password Change" Width="200px" />

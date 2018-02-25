@@ -31,12 +31,12 @@
         <br />
         <div style="width:50%;">
             <div class="form-group">
-                <asp:TextBox ID="txtFName" CssClass="form-control" placeholder="Event Title" runat="server" Width="419px" MaxLength="30"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="reqFName" ControlToValidate="txtFName" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
+                <asp:TextBox ID="txtEventName" CssClass="form-control" placeholder="Event Title" runat="server" Width="419px" MaxLength="50"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqName" ControlToValidate="txtEventName" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
             </div>
             <div class="form-group"> 
-                <asp:TextBox ID="txtLName" runat="server" CssClass="form-control" placeholder="Event Description" MaxLength="30" Height="99px" TextMode="MultiLine" Width="419px"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="reqLName" ControlToValidate="txtLName" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
+                <asp:TextBox ID="txtEventDesc" runat="server" CssClass="form-control" placeholder="Event Description" MaxLength="200" Height="99px" TextMode="MultiLine" Width="419px"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqDesc" ControlToValidate="txtEventDesc" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
             </div>
             <br />
             <asp:Button ID="btnInsertEvent" CssClass="btn btn-primary" runat="server" OnClick="btnInsertUser_Click" Text="Insert Event" />

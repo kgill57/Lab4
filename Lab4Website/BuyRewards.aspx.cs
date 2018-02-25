@@ -225,7 +225,7 @@ public partial class BuyRewards : System.Web.UI.Page
             panelPost[i].Controls.Add(labelPost[1]);
 
             labelPost[2] = new Label();
-            labelPost[2].Text = "Reward Amount: " + reward[i].getRewardAmount();
+            labelPost[2].Text = "Reward Value: $" + reward[i].getRewardAmount();
 
             panelPost[i].Controls.Add(new LiteralControl("<br />"));
 

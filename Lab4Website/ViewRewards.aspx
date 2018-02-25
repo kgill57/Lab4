@@ -37,17 +37,17 @@
         <asp:Panel ID="rewardPanel" runat="server" Visible="False">
             <div style="width:50%;">
                 <div class="form-group">
-                    <asp:TextBox ID="txtRewardName" MaxLength="50" CssClass="form-control" placeholder="Reward Name" runat="server" ></asp:TextBox>
-                    <asp:RequiredFieldValidator id="reqRewardName" ControlToValidate="txtRewardName" Text="(Required)" runat="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtRewardName" CssClass="form-control" placeholder="Reward Name" runat="server" MaxLength="50" ></asp:TextBox>
+                    <asp:RequiredFieldValidator id="reqRewardName" ControlToValidate="txtRewardName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
-                    <asp:TextBox ID="txtRewardQuantity" MaxLength="8" CssClass="form-control" placeholder="Reward Quantity" runat="server" TextMode="Number"  ></asp:TextBox>
-                    <asp:RequiredFieldValidator id="reqRewardQuantity" ControlToValidate="txtRewardQuantity" Text="(Required)" runat="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtRewardQuantity" CssClass="form-control" placeholder="Reward Quantity" runat="server" TextMode="Number"  ></asp:TextBox>
+                    <asp:RequiredFieldValidator id="reqRewardQuantity" ControlToValidate="txtRewardQuantity" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
-                    <asp:TextBox ID="txtRewardAmount" MaxLength="8" CssClass="form-control" placeholder="Reward Amount ($)" runat="server" TextMode="Number" ></asp:TextBox>
-                    <asp:RequiredFieldValidator id="reqRewardAmount" ControlToValidate="txtRewardAmount" Text="(Required)" runat="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
-                    <asp:CompareValidator ID="cmpRewardAmount" ControlToValidate="txtRewardAmount" Type="Currency" Operator="DatatypeCheck" Text="(Invalid Format)" runat="server" Font-Bold="true" ForeColor="Red"></asp:CompareValidator>
+                    <asp:TextBox ID="txtRewardAmount" CssClass="form-control" placeholder="Reward Amount ($)" runat="server" TextMode="Number" ></asp:TextBox>
+                    <asp:RequiredFieldValidator id="reqRewardAmount" ControlToValidate="txtRewardAmount" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
+                    <asp:CompareValidator ID="cmpRewardAmount" ControlToValidate="txtRewardAmount" Type="Currency" Operator="DatatypeCheck" Text="(Invalid Format)" runat="server"></asp:CompareValidator>
                 </div>
                 <div style="float:left;">
                     <asp:DropDownList ID="drpRewardProvider" runat="server" ></asp:DropDownList>
@@ -80,7 +80,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Reward Name">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtgvRewardName" MaxLength="50" runat="server" Text='<%# Eval("RewardName") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtgvRewardName" runat="server" Text='<%# Eval("RewardName") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqgvRewardName" ControlToValidate="txtgvRewardName" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewReward"></asp:RequiredFieldValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -89,7 +89,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Reward Quantity">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtgvRewardQuantity" MaxLength="8" runat="server" Text='<%# Eval("RewardQuantity") %>' TextMode="SingleLine"></asp:TextBox>
+                    <asp:TextBox ID="txtgvRewardQuantity" runat="server" Text='<%# Eval("RewardQuantity") %>' TextMode="SingleLine"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqgvRewardQuantity" ControlToValidate="txtgvRewardQuantity" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewReward"></asp:RequiredFieldValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -98,7 +98,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Reward Amount">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtgvRewardAmount" MaxLength="8" runat="server" Text='<%# "$" + Eval("RewardAmount", "{0:0.00}") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtgvRewardAmount" runat="server" Text='<%# "$" + Eval("RewardAmount", "{0:0.00}") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqgvRewardAmount" ControlToValidate="txtgvRewardAmount" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewReward"></asp:RequiredFieldValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -107,7 +107,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Provider ID">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtgvProviderID" MaxLength="8" runat="server" Text='<%# Eval("ProviderID") %>' ></asp:TextBox>
+                    <asp:TextBox ID="txtgvProviderID" runat="server" Text='<%# Eval("ProviderID") %>' ></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqgvProviderID" ControlToValidate="txtgvProviderID" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewReward"></asp:RequiredFieldValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -119,7 +119,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Admin ID">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtgvAdminID" MaxLength="8" runat="server" Text='<%# Eval("AdminID") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtgvAdminID" runat="server" Text='<%# Eval("AdminID") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqgvAdminID" ControlToValidate="txtgvAdminID" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewReward"></asp:RequiredFieldValidator>
                 </EditItemTemplate>     
                 <ItemTemplate>

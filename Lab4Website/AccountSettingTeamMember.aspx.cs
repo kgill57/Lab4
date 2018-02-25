@@ -139,5 +139,8 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
         upload.ExecuteNonQuery();
         con.Close();
 
+        lblResult.Text = "Picture uploaded";
+        loadProfilePicture();
+        
     }
 }

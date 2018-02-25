@@ -68,10 +68,10 @@ public partial class ManageCommunityPost : System.Web.UI.Page
                 " @EventDesc, '" + DateTime.Today.ToString() + "', " + (int)Session["UserID"] + ")";
 
             select.Parameters.Add(new SqlParameter("@EventTitle", SqlDbType.VarChar));
-            select.Parameters["@EventTitle"].Value = txtFName.Text;
+            select.Parameters["@EventTitle"].Value = txtEventName.Text;
 
             select.Parameters.Add(new SqlParameter("@EventDesc", SqlDbType.VarChar));
-            select.Parameters["@EventDesc"].Value = txtLName.Text;
+            select.Parameters["@EventDesc"].Value = txtEventDesc.Text;
 
             select.ExecuteNonQuery();
 
@@ -211,7 +211,7 @@ public partial class ManageCommunityPost : System.Web.UI.Page
 
     protected void btnAutoFillUser_Click(object sender, EventArgs e)
     {
-        txtFName.Text = "Test Event";
-        txtLName.Text = "Test Event Description";
+        txtEventName.Text = "Test Event";
+        txtEventDesc.Text = "Test Event Description";
     }
 }

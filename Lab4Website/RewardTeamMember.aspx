@@ -70,7 +70,7 @@
                 <asp:RequiredFieldValidator ID="reqCategory" ControlToValidate="ddlCategory" Text="(Required)" Display="Dynamic" runat ="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
             </div>
             <div class="form-group">
-                <asp:TextBox ID="txtDescription" style="height:200px; width:400px;" textmode="MultiLine" placeholder="Description" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtDescription" style="height:200px; width:400px;" textmode="MultiLine" placeholder="Description" runat="server" MaxLength="200"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="reqDescription" ControlToValidate="txtDescription" Text="(Required)" Display="Dynamic" runat ="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
             </div>
             <div class="form-group">

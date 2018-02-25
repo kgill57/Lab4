@@ -36,12 +36,12 @@
         <asp:Panel ID="providerPanel" runat="server" Visible="false">
             <div>
                 <div class="form-group">
-                    <asp:TextBox ID="txtNewProviderName" MaxLength="50" placeholder="Provider Name" runat="server"  ></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqProviderName" ControlToValidate="txtNewProviderName" Text="(Required)" runat="server" Font-Bold="true" ForeColor="red"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtNewProviderName" placeholder="Provider Name" runat="server" MaxLength="50"  ></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqProviderName"  ControlToValidate="txtNewProviderName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
-                    <asp:TextBox ID="txtNewProviderEmail" MaxLength="50" placeholder="Provider Email" runat="server" TextMode="Email"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqProviderEmail" ControlToValidate="txtNewProviderEmail" Text="(Required)" runat="server" Font-Bold="true" ForeColor="red"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtNewProviderEmail" placeholder="Provider Email" runat="server"  TextMode="Email" MaxLength="50"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqProviderEmail" ControlToValidate="txtNewProviderEmail" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </div>
                 <div>
                     <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click1" Text="Add"  />
@@ -69,7 +69,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Provider Name">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtgvProviderName" MaxLength="50" runat="server" Text='<%# Eval("ProviderName") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtgvProviderName" runat="server" Text='<%# Eval("ProviderName") %>'></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqgvProviderName" ControlToValidate="txtgvProviderName" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewProvider"></asp:RequiredFieldValidator>
                                 </EditItemTemplate>
                                 <ItemTemplate>
@@ -78,7 +78,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Provider Email">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtgvProviderEmail" MaxLength="50" runat="server" Text='<%# Eval("ProviderEmail") %>' TextMode="SingleLine"></asp:TextBox>
+                                    <asp:TextBox ID="txtgvProviderEmail" runat="server" Text='<%# Eval("ProviderEmail") %>' TextMode="SingleLine"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqgvProviderEmail" ControlToValidate="txtgvProviderEmail" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewProvider"></asp:RequiredFieldValidator>
                                 </EditItemTemplate>
                                 <ItemTemplate>

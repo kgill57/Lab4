@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Configuration;
 
 public partial class TeamMemberPage : System.Web.UI.Page
 {
@@ -24,7 +25,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
         if (!IsPostBack)
         {
             SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=localhost;Initial Catalog=lab4;Integrated Security=True";
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
             con.Open();
 
             SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] ORDER BY [TransID] DESC", con);
@@ -120,7 +121,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
         if (giverAndReceiver.SelectedIndex == 0)
         {
             SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=localhost;Initial Catalog=lab4;Integrated Security=True";
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
             con.Open();
 
             SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] ORDER BY [TransID] DESC", con);
@@ -211,7 +212,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
         else if (giverAndReceiver.SelectedIndex == 1)
         {
             SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=localhost;Initial Catalog=lab4;Integrated Security=True";
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
             con.Open();
 
             SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] WHERE GiverID=" + (int)Session["UserID"] + " OR " +
@@ -303,7 +304,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
         else if (giverAndReceiver.SelectedIndex == 2)
         {
             SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=localhost;Initial Catalog=lab4;Integrated Security=True";
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
             con.Open();
 
             SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] WHERE GiverID=" + (int)Session["UserID"] + " ORDER BY [TransID] DESC", con);
@@ -392,7 +393,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
         else if (giverAndReceiver.SelectedIndex == 3)
         {
             SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=localhost;Initial Catalog=lab4;Integrated Security=True";
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
             con.Open();
 
             SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] WHERE ReceiverID=" + (int)Session["UserID"] + " ORDER BY [TransID] DESC", con);

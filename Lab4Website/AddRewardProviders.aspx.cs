@@ -151,7 +151,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
     protected void btnAdd_Click1(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
 
         sc.Open();
@@ -175,7 +175,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+                sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
 
                 sc.Open();
@@ -199,7 +199,8 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
 
-                SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+                SqlConnection sc = new SqlConnection();
+                sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
                 sc.Open();
                 // Declare the query string.
 

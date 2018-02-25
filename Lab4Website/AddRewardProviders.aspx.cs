@@ -13,12 +13,14 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        // On initial page load, fill the gridview
         if (!IsPostBack)
             fillGridView();
 
+        // Load the user's profile picture in sidebar
         loadProfilePicture();
 
-        //load the nav bar with the admin's first and last name
+        // Load the nav bar with the admin's first and last name
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
     }
 
@@ -30,10 +32,10 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
         try
         {
-
             SqlCommand select = new SqlCommand();
             select.Connection = con;
-
+            
+            // Get the user's current profile picture
             select.CommandText = "SELECT ProfilePicture FROM [dbo].[User] WHERE UserID =" + Convert.ToString((int)Session["UserID"]);
             string currentPicture = (String)select.ExecuteScalar();
 
@@ -41,6 +43,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
 
         }
+
         catch (Exception)
         {
 
@@ -52,18 +55,17 @@ public partial class AddRewardProviders : System.Web.UI.Page
     {
         try
         {
-
-
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
             sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
-            // Declare the query string.
+            // Declare the query string
             SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", sc);
             double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
 
             lblBalance.Text = totalBalance.ToString("$#.00");
 
+            // Show all reward providers in the database
             System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM RewardProvider;", sc);
             del.ExecuteNonQuery();
 
@@ -97,28 +99,26 @@ public partial class AddRewardProviders : System.Web.UI.Page
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
-        //Check if the project name Text box is empty
+        // Check if the Provider Name TextBox is empty
         if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text.ToString()))
-        {
-            //projectNameError.Visible = true;
-            //projectNameError.Text = "The project name cannot be empty";
+        {         
             textError = false;
         }
 
-        //Check if the Project Description Text box is empty
+        // Check if the Provider Email TextBox is empty
         if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderEmail") as TextBox).Text.ToString()))
-        {
-            //projectDescriptionErrror.Visible = true;
-            //projectDescriptionErrror.Text = "Field cannot be empty";
+        {            
             textError = false;
         }
 
         if (textError)
         {
             sc.Open();
-            // Declare the query string.
+
+            // Declare the query string
             try
             {
+                // Get the new values from the gridview and put them in the parameterized query
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE RewardProvider SET ProviderName=@newProvName, " +
                     "ProviderEmail=@newProvEmail WHERE ProviderID=@providerID", sc);
                 del.Parameters.AddWithValue("@newProvName", char.ToUpper((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text[0])
@@ -130,6 +130,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
                 grdProviders.EditIndex = -1;
                 fillGridView();
             }
+
             catch
             {
 
@@ -137,9 +138,6 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
 
         }
-
-
-
     }
 
     protected void grdProviders_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -149,7 +147,8 @@ public partial class AddRewardProviders : System.Web.UI.Page
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
             sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
             sc.Open();
-            //Declare the query string.
+
+            // Declare the query string
 
             System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("DELETE" +
                 " FROM RewardProvider WHERE ProviderID = @providerID;", sc);
@@ -158,6 +157,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             sc.Close();
             fillGridView();
         }
+
         catch
         {
 
@@ -181,10 +181,9 @@ public partial class AddRewardProviders : System.Web.UI.Page
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
-
-
         sc.Open();
-        //Declare the query string.
+
+        // Declare the query string
 
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("INSERT INTO RewardProvider (ProviderName, ProviderEmail) VALUES (@providerName, @providerEmail)", sc);
         insert.Parameters.AddWithValue("@providerName", char.ToUpper(txtNewProviderName.Text[0]) + txtNewProviderName.Text.Substring(1));
@@ -198,17 +197,16 @@ public partial class AddRewardProviders : System.Web.UI.Page
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         Boolean textError = true;
-        //Check if the project name Text box is empty
+        // Check if the Provider Search Name TextBox is empty
         if (String.IsNullOrEmpty(txtSearch.Text))
         {
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
                 sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
-
-
                 sc.Open();
-                //Declare the query string.
+
+                // Declare the query string
 
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT *" +
                     " FROM RewardProvider;", sc);
@@ -218,11 +216,14 @@ public partial class AddRewardProviders : System.Web.UI.Page
                 grdProviders.DataBind();
                 sc.Close();
             }
+
             catch
             {
 
             }
+
         }
+
         else
         {
             try
@@ -231,7 +232,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
                 SqlConnection sc = new SqlConnection();
                 sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
                 sc.Open();
-                // Declare the query string.
+                // Declare the query string
 
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM RewardProvider WHERE ProviderName LIKE '%' + @ProviderName;", sc);
                 del.Parameters.AddWithValue("@ProviderName", txtSearch.Text);
@@ -242,6 +243,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
                 sc.Close();
 
             }
+
             catch
             {
 
@@ -253,8 +255,6 @@ public partial class AddRewardProviders : System.Web.UI.Page
     {
         Response.Redirect(Request.RawUrl);
     }
-
-
 
     protected void AutoFillRewardProviderID_Click(object sender, EventArgs e)
     {

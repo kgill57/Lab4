@@ -12,7 +12,7 @@ public partial class AdminPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Calls the method to load the news feed
+        // Calls the method to load the news feed
         loadNewsFeed();
         loadProfilePicture();
     }
@@ -45,12 +45,12 @@ public partial class AdminPage : System.Web.UI.Page
 
     protected void loadNewsFeed()
     {
-        //Populates the nav bar with the admin's first and last name
+        // Populates the nav bar with the admin's first and last name
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
 
         
 
-        //sql connection
+        // SQL connection
         SqlConnection con = new SqlConnection();
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
@@ -61,7 +61,7 @@ public partial class AdminPage : System.Web.UI.Page
 
         lblBalance.Text = totalBalance.ToString("$#.00");
 
-        //Create Scaler to see how many transactions there are
+        // Create Scaler to see how many transactions there are
         SqlCommand scaler = new SqlCommand("SELECT COUNT(TransID) FROM [dbo].[TRANSACTION]", con);
         int arraySize = (int)scaler.ExecuteScalar();
 

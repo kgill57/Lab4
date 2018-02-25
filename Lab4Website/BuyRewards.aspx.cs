@@ -17,6 +17,7 @@ public partial class BuyRewards : System.Web.UI.Page
     public static int arraySize;
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Show the user's name and account balance in sidebar
         try
         {
             lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
@@ -183,7 +184,7 @@ public partial class BuyRewards : System.Web.UI.Page
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[Reward] ORDER BY [RewardID] DESC", con);
 
-        //Create Scaler to see how many rewards there are
+        // Create Scaler to see how many rewards there are
         SqlCommand scaler = new SqlCommand("SELECT COUNT(RewardID) FROM [dbo].[Reward]", con);
         arraySize = (int)scaler.ExecuteScalar();
 

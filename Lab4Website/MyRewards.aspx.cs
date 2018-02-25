@@ -12,6 +12,7 @@ public partial class MyRewards : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Show the user's name and current balance in sidebar
         try
         {
             lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
@@ -21,10 +22,12 @@ public partial class MyRewards : System.Web.UI.Page
         {
             Response.Redirect("LoginPage.aspx");
         }
-
+        
+        // On initial page load, fill the gridview
         if (!IsPostBack)
             fillRewards();
 
+        // Get the user's current profile picture
         loadProfilePicture();
         
     }
@@ -35,15 +38,18 @@ public partial class MyRewards : System.Web.UI.Page
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
+        // Get all rewards earned
         SqlCommand scaler = new SqlCommand("SELECT Count(RewardEarned.DateClaimed) FROM RewardEarned WHERE RewardEarned.UserID = 2", con);
         int size = (int)scaler.ExecuteScalar();
 
+        // Get attributes for rewards
         SqlCommand read = new SqlCommand("SELECT Reward.RewardName, Reward.RewardAmount, RewardEarned.DateClaimed FROM Reward, RewardEarned WHERE RewardEarned.UserID = @UserID", con);
         read.Parameters.AddWithValue("@UserID", (int)Session["UserID"]);
         SqlDataReader reader = read.ExecuteReader();
         Panel[] panel = new Panel[size];
         int counter = 0;
         
+        // Create panels and labels to show rewards professionally
         while (reader.Read())
         {
             panel[counter] = new Panel();
@@ -156,7 +162,7 @@ public partial class MyRewards : System.Web.UI.Page
 
         try
         {
-
+            // Get user's profile picture
             SqlCommand select = new SqlCommand();
             select.Connection = con;
 

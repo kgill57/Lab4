@@ -16,10 +16,12 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
         con = new SqlConnection();
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
+        // Show user's name and balance in sidebar
         try
         {
             lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
         }
+
         catch (Exception)
         {
             Response.Redirect("LoginPage.aspx");
@@ -32,6 +34,7 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
     {
         con.Open();
 
+        // Load user's current profile picture in sidebar
         try
         {
 
@@ -45,6 +48,7 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
             lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
 
         }
+
         catch (Exception)
         {
 
@@ -69,11 +73,15 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
         con.Open();
         SqlCommand select = new SqlCommand();
         select.Connection = con;
+
+        // Get the hash for the current user's password
         select.CommandText = "SELECT PasswordHash FROM [dbo].[Password] WHERE UserID =" + Convert.ToString((int)Session["UserID"]);
         
         String currentHash = (String)select.ExecuteScalar();
 
         bool correctHash = SimpleHash.VerifyHash(currentPass, "MD5", currentHash);
+
+        // Check if current password and new password TextBoxes are filled out correctly
         if (correctHash)
         {          
             if (String.IsNullOrWhiteSpace(txtNewPass1.Text) == true)
@@ -110,6 +118,7 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
         // Get the name of the file
         string fileName = Path.GetFileName(UploadPicture.PostedFile.FileName);
 
+        // Check if a picture was chosen
         if (String.IsNullOrWhiteSpace(fileName) == true)
         {
             lblResult.Text = "You must choose a picture to upload.";
@@ -123,6 +132,8 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
         con.Open();
         SqlCommand upload = new SqlCommand();
         upload.Connection = con;
+
+        // Change the user's profile picture
         upload.CommandText = "UPDATE [dbo].[user] SET [ProfilePicture] = @ProfilePicture WHERE [UserID] =" + Convert.ToString((int)Session["UserID"]);
         upload.Parameters.AddWithValue("@ProfilePicture", fileName);
         upload.ExecuteNonQuery();

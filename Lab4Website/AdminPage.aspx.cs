@@ -14,6 +14,33 @@ public partial class AdminPage : System.Web.UI.Page
     {
         //Calls the method to load the news feed
         loadNewsFeed();
+        loadProfilePicture();
+    }
+
+    protected void loadProfilePicture()
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+        con.Open();
+
+        try
+        {
+
+            SqlCommand select = new SqlCommand();
+            select.Connection = con;
+
+            select.CommandText = "SELECT ProfilePicture FROM [dbo].[User] WHERE UserID =" + Convert.ToString((int)Session["UserID"]);
+            string currentPicture = (String)select.ExecuteScalar();
+
+            profilePicture.ImageUrl = "~/Images/" + currentPicture;
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+
+        }
+        catch (Exception)
+        {
+
+        }
+        con.Close();
     }
 
     protected void loadNewsFeed()
@@ -21,12 +48,18 @@ public partial class AdminPage : System.Web.UI.Page
         //Populates the nav bar with the admin's first and last name
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
 
+        
+
         //sql connection
         SqlConnection con = new SqlConnection();
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] ORDER BY [TransID] DESC", con);
+        SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", con);
+        double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
+
+        lblBalance.Text = totalBalance.ToString("$#.00");
 
         //Create Scaler to see how many transactions there are
         SqlCommand scaler = new SqlCommand("SELECT COUNT(TransID) FROM [dbo].[TRANSACTION]", con);

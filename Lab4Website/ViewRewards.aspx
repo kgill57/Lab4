@@ -11,12 +11,14 @@
             <span></span>
         </div>
         <ul>
+            <li><asp:Image ID ="profilePicture" Height ="120px" Width ="120px" runat ="server"/></li>
             <li> <asp:Label ID="lblUser" runat="server" Text=""></asp:Label></li>
+            <li><asp:Label ID="lblBalance" runat="server" ></asp:Label></li>
             <li><a href="AdminPage.aspx">Home</a></li>
             <li> <a href ="/UserOptions.aspx">User Options</a></li>
             <li> <a href="/ViewRewards.aspx">View Rewards</a></li>
             <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
-            <li>Add Community Events</li>
+            <li><a href="/ManageCommunityPost.aspx">Community Events</a></li>
             <li><a href="/LoginPage.aspx">Logout</a></li>
         </ul>
     </div>

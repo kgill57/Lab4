@@ -9,17 +9,14 @@ using System.Data.SqlClient;
 using System.Configuration;
 
 public partial class AddRewardProviders : System.Web.UI.Page
-{
-    public static string oldProvName;
-    public static string oldProvEmail;
-    public static string newProvName;
-    public static string newProvEmail;
-    int count = 1;
+{   
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
             fillGridView();
+
+        //load the nav bar with the admin's first and last name
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
     }
 
@@ -229,7 +226,8 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     protected void AutoFillRewardProviderID_Click(object sender, EventArgs e)
     {
-        txtNewProviderName.Text = "Provider" + count;
-        txtNewProviderEmail.Text = "provider" + count + "@gmail.com";
+        txtNewProviderName.Text = "Test Provider";
+        txtNewProviderEmail.Text = "testprovider@gmail.com";
+        
     }
 }

@@ -13,6 +13,8 @@ public partial class ViewRewards : System.Web.UI.Page
     {
         if (!IsPostBack)
             fillGridView();
+
+        //loads the admin's first and last name into the news feed
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
     }
 
@@ -23,12 +25,12 @@ public partial class ViewRewards : System.Web.UI.Page
 
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString);
             sc.Open();
+
             // Declare the query string.
+            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand("SELECT * FROM Reward;", sc);
+            select.ExecuteNonQuery();
 
-            System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM Reward;", sc);
-            del.ExecuteNonQuery();
-
-            grdRewards.DataSource = del.ExecuteReader();
+            grdRewards.DataSource = select.ExecuteReader();
             grdRewards.DataBind();
             sc.Close();
 
@@ -164,11 +166,11 @@ public partial class ViewRewards : System.Web.UI.Page
                 sc.Open();
                 //Declare the query string.
 
-                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT *" +
+                System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand("SELECT *" +
                     " FROM Reward;", sc);
-                del.ExecuteNonQuery();
+                select.ExecuteNonQuery();
 
-                grdRewards.DataSource = del.ExecuteReader();
+                grdRewards.DataSource = select.ExecuteReader();
                 grdRewards.DataBind();
                 sc.Close();
             }
@@ -185,12 +187,12 @@ public partial class ViewRewards : System.Web.UI.Page
                 sc.Open();
                 // Declare the query string.
 
-                System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT * FROM Reward WHERE LOWER(RewardName) LIKE LOWER('%' + @rewardName + '%');", sc);
+                System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand("SELECT * FROM Reward WHERE LOWER(RewardName) LIKE LOWER('%' + @rewardName + '%');", sc);
 
-                del.Parameters.AddWithValue("@rewardName", txtSearch.Text);
-                del.ExecuteNonQuery();
+                select.Parameters.AddWithValue("@rewardName", txtSearch.Text);
+                select.ExecuteNonQuery();
 
-                grdRewards.DataSource = del.ExecuteReader();
+                grdRewards.DataSource = select.ExecuteReader();
                 grdRewards.DataBind();
                 sc.Close();
 

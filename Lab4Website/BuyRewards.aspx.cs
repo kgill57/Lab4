@@ -28,6 +28,7 @@ public partial class BuyRewards : System.Web.UI.Page
         }
 
         createRewardFeed();
+        loadProfilePicture();
     }
 
     // Only for testing btnBuy functionality
@@ -56,6 +57,32 @@ public partial class BuyRewards : System.Web.UI.Page
 
     }
 
+    protected void loadProfilePicture()
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+        con.Open();
+
+        try
+        {
+
+            SqlCommand select = new SqlCommand();
+            select.Connection = con;
+
+            select.CommandText = "SELECT ProfilePicture FROM [dbo].[User] WHERE UserID =" + Convert.ToString((int)Session["UserID"]);
+            string currentPicture = (String)select.ExecuteScalar();
+
+            profilePicture.ImageUrl = "~/Images/" + currentPicture;
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+
+        }
+        catch (Exception)
+        {
+
+        }
+        con.Close();
+    }
+
     public Boolean checkFunds()
     {
         Boolean valid = true;
@@ -75,15 +102,15 @@ public partial class BuyRewards : System.Web.UI.Page
 
         for (int i = 0; i < reward.Length; i++)
         {
-            if (chkBuy[i].Checked == true)
+            if(chkBuy[i].Checked == true)
             {
                 if (balance < reward[i].getRewardAmount())
                 {
-                    lblResult.Text = "Insufficient funds.";
+                    lblResult.Text = "insufficient Funds.";
                     valid = false;
                 }
             }
-
+            
         }
 
         con.Close();
@@ -140,9 +167,9 @@ public partial class BuyRewards : System.Web.UI.Page
             }
         }
 
-        for (int i = 0; i < arraySize; i++)
+        for(int i = 0; i < arraySize; i++)
         {
-            if (chkBuy[i].Checked == true)
+            if(chkBuy[i].Checked == true)
             {
                 cmd.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance - @rewardAmount WHERE UserID = @userID";
                 cmd.Parameters.AddWithValue("@rewardAmount", reward[i].getRewardAmount());
@@ -207,7 +234,7 @@ public partial class BuyRewards : System.Web.UI.Page
             panelPost[i].Controls.Add(labelPost[1]);
 
             labelPost[2] = new Label();
-            labelPost[2].Text = "Reward Amount: $" + reward[i].getRewardAmount();
+            labelPost[2].Text = "Reward Amount: " + reward[i].getRewardAmount();
 
             panelPost[i].Controls.Add(new LiteralControl("<br />"));
 

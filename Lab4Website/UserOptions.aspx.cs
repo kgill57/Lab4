@@ -18,6 +18,34 @@ public partial class UserOptions : System.Web.UI.Page
         // On initial page load, fill the gridview with all users in the database
         if (!IsPostBack)
             fillGridView();
+
+        loadProfilePicture();
+    }
+
+    protected void loadProfilePicture()
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+        con.Open();
+
+        try
+        {
+
+            SqlCommand select = new SqlCommand();
+            select.Connection = con;
+
+            select.CommandText = "SELECT ProfilePicture FROM [dbo].[User] WHERE UserID =" + Convert.ToString((int)Session["UserID"]);
+            string currentPicture = (String)select.ExecuteScalar();
+
+            profilePicture.ImageUrl = "~/Images/" + currentPicture;
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+
+        }
+        catch (Exception)
+        {
+
+        }
+        con.Close();
     }
 
     protected void btnInsertUser_Click(object sender, EventArgs e)
@@ -26,6 +54,8 @@ public partial class UserOptions : System.Web.UI.Page
         SqlConnection con = new SqlConnection();
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
+
+        
 
         SqlCommand select = new SqlCommand();
         select.Connection = con;
@@ -128,6 +158,10 @@ public partial class UserOptions : System.Web.UI.Page
 
             sc.Open();
             // Declare the query string.
+            SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", sc);
+            double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
+
+            lblBalance.Text = totalBalance.ToString("$#.00");
 
             System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT UserID, FName, LName, MI, Email, " +
                 "Username, Admin, EmployedStatus FROM [User];", sc);

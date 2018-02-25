@@ -25,8 +25,13 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
             Response.Redirect("LoginPage.aspx");
         }
 
+        
+    }
+
+    protected void loadProfilePicture()
+    {
         con.Open();
-        // Load Profile Picture
+
         try
         {
 
@@ -44,6 +49,7 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
         {
 
         }
+
         con.Close();
     }
 

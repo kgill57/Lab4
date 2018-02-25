@@ -14,8 +14,36 @@ public partial class ViewRewards : System.Web.UI.Page
         if (!IsPostBack)
             fillGridView();
 
+        loadProfilePicture();
+
         //loads the admin's first and last name into the news feed
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+    }
+
+    protected void loadProfilePicture()
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+        con.Open();
+
+        try
+        {
+
+            SqlCommand select = new SqlCommand();
+            select.Connection = con;
+
+            select.CommandText = "SELECT ProfilePicture FROM [dbo].[User] WHERE UserID =" + Convert.ToString((int)Session["UserID"]);
+            string currentPicture = (String)select.ExecuteScalar();
+
+            profilePicture.ImageUrl = "~/Images/" + currentPicture;
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+
+        }
+        catch (Exception)
+        {
+
+        }
+        con.Close();
     }
 
     protected void fillGridView()
@@ -25,6 +53,11 @@ public partial class ViewRewards : System.Web.UI.Page
 
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString);
             sc.Open();
+
+            SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", sc);
+            double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
+
+            lblBalance.Text = totalBalance.ToString("$#.00");
 
             // Declare the query string.
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand("SELECT * FROM Reward;", sc);
@@ -227,7 +260,7 @@ public partial class ViewRewards : System.Web.UI.Page
             "ProviderID, AdminID, DateAdded) VALUES (@rewardName, @rewardQuantity, @rewardAmount, @providerID, @adminID, @dateAdded)", sc);
         insert.Parameters.AddWithValue("@rewardName", char.ToUpper(txtRewardName.Text[0]) + txtRewardName.Text.Substring(1));
         insert.Parameters.AddWithValue("@rewardQuantity", Convert.ToInt32(txtRewardQuantity.Text));
-        insert.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(txtRewardAmount.Text));
+        insert.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(txtRewardAmount.Text).ToString("#.00"));
         insert.Parameters.AddWithValue("@providerID", findProviderID(drpRewardProvider.SelectedItem.Text));
         insert.Parameters.AddWithValue("@adminID", (int)Session["UserID"]);
         insert.Parameters.AddWithValue("@dateAdded", DateTime.Today);

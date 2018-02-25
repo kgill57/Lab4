@@ -26,7 +26,8 @@
 <center>
     <h1 class="display-4">Purchase Rewards</h1>
     <div class="jumbotron" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px; height:1000px;">
-        <asp:Button ID="btnBuy" runat="server" Text="Buy Items" OnClick="btnBuy_Click" />
+        <br />
+        <asp:Button ID="btnBuy" CssClass="btn btn-primary" runat="server" Text="Buy Items" OnClick="btnBuy_Click" />
         <br />
         <br />
         <asp:Label ID="lblResult" runat="server"></asp:Label>

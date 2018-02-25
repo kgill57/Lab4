@@ -27,11 +27,11 @@
 
 <center>
     <h1 class="display-4">Reward Options</h1>
-    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <div class="jumbotron agent-1" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
         <div style="float:left;">
-            <asp:Button ID="btnAddReward" runat="server" Text="Add Reward" OnClick="btnAddReward_Click" CausesValidation="False" />
-            <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" CausesValidation="False" />
-            <asp:Button ID="RewardAutoFillID" runat="server" OnClick="RewardAutoFillID_Click" Text="AutoFill Reward" CausesValidation="false" />
+            <asp:Button ID="btnAddReward" CssClass="btn btn-primary" runat="server" Text="Add Reward" OnClick="btnAddReward_Click" CausesValidation="False" />
+            <asp:Button ID="btnClear" CssClass="btn btn-secondary" runat="server" Text="Clear" OnClick="btnClear_Click" CausesValidation="False" />
+            <asp:Button ID="RewardAutoFillID" CssClass="btn btn-secondary" runat="server" OnClick="RewardAutoFillID_Click" Text="AutoFill Reward" CausesValidation="false" />
         </div>
         
         <asp:Panel ID="rewardPanel" runat="server" Visible="False">
@@ -65,7 +65,7 @@
         <br />
         <br />
         <asp:TextBox ID="txtSearch" placeholder="Search" runat="server"  ></asp:TextBox>
-        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CausesValidation="False" />
+        <asp:Button ID="btnSearch" CssClass="btn btn-primary" runat="server" Text="Search" OnClick="btnSearch_Click" CausesValidation="False" />
 
         <br />
         <br />
@@ -98,11 +98,11 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Reward Amount">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtgvRewardAmount" runat="server" Text='<%# Eval("RewardAmount") %>' ></asp:TextBox>
+                    <asp:TextBox ID="txtgvRewardAmount" runat="server" Text='<%# Eval("RewardAmount", "{0:c}") %>' ></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqgvRewardAmount" ControlToValidate="txtgvRewardAmount" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewReward"></asp:RequiredFieldValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="lblgvRewardAmount" runat="server" Text='<%# Eval("RewardAmount") %>'></asp:Label>
+                    <asp:Label ID="lblgvRewardAmount" runat="server" Text='<%# Eval("RewardAmount", "{0:c}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Provider ID">

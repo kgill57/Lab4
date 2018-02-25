@@ -25,11 +25,11 @@
     
 <center>
     <h1 class="display-4">Reward Provider Options</h1>
-    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <div class="jumbotron agent-1" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
         <div style="float:left;">
-            <asp:Button ID="btnAddProvider" runat="server" OnClick="btnAddProvider_Click1" Text="Add Reward Provider" CausesValidation="False" />
-            <asp:Button ID="btnClear" runat="server" Text="Clear" CausesValidation="False" OnClick="btnClear_Click1" />
-            <asp:Button ID="AutoFillRewardProviderID" runat="server" OnClick="AutoFillRewardProviderID_Click" CausesValidation="false" Text="AutoFillRewardProvider"  />
+            <asp:Button ID="btnAddProvider" CssClass="btn btn-primary" runat="server" OnClick="btnAddProvider_Click1" Text="Add Reward Provider" CausesValidation="False" />
+            <asp:Button ID="btnClear" CssClass="btn btn-secondary" runat="server" Text="Clear" CausesValidation="False" OnClick="btnClear_Click1" />
+            <asp:Button ID="AutoFillRewardProviderID" CssClass="btn btn-secondary" runat="server" OnClick="AutoFillRewardProviderID_Click" CausesValidation="false" Text="AutoFillRewardProvider"  />
         </div>
         <br />
         <br />
@@ -50,8 +50,8 @@
         </asp:Panel>
         <br />
         <br />
-        <asp:TextBox ID="txtSearch" placeholder="Search" runat="server"></asp:TextBox>
-        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CausesValidation="False" />
+        <asp:TextBox ID="txtSearch"  placeholder="Search" runat="server"></asp:TextBox>
+        <asp:Button ID="btnSearch" CssClass="btn btn-primary" runat="server" Text="Search" OnClick="btnSearch_Click" CausesValidation="False" />
         <br />
         <br />
 

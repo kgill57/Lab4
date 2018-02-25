@@ -23,7 +23,7 @@
     </div>
 <center>
     <h1 class="display-4">Account Settings</h1>
-    <div class="jumbotron" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px; height:1000px;">
+    <div class="jumbotron agent-1" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px; height:1000px;">
         <br />
         <br />
         <div>
@@ -33,7 +33,7 @@
                         <td style="width: 160px">Upload Profile Picture:</td>
                         <td>   
                             <asp:FileUpload ID ="UploadPicture" runat ="server" />
-                            <asp:Button ID ="btnUpload" runat ="server" Text ="Upload" OnClick="btnUpload_Click" />
+                            <asp:Button ID ="btnUpload" CssClass="btn btn-primary" runat ="server" Text ="Upload" OnClick="btnUpload_Click" />
                         </td>
                     </tr>
                 </table>
@@ -48,68 +48,15 @@
                 <asp:TextBox ID="txtNewPass2" CssClass="form-control" placeholder="Confirm New Password" runat="server" Width="200px"></asp:TextBox>
             </div>
             <div>
-                <asp:Button ID="btnChangePass" runat="server" OnClick="btnChangePass_Click" Text="Confirm Password Change" Width="200px" />
+                <asp:Button ID="btnChangePass" CssClass="btn btn-primary" runat="server" OnClick="btnChangePass_Click" Text="Confirm Password Change" Width="200px" />
             </div>
         </div>
-    </div>
-</center>
-    
-        <h2><asp:Label ID="lblPostFeed" runat="server" style="font-weight: 700; font-size: xx-large;" Text="Account Settings"></asp:Label></h2>        
-    <div>
-        
-        
-    </div>
-    <div>
+
+        <br />
+
+        <asp:Label ID="lblResult" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
 
     </div>
-    <div>
-
-        <table style="width: 100%">
-            <tr>
-                <td style="width: 160px">Change Password</td>
-                <td>&nbsp;</td>
-            </tr>
-        </table>
-
-    </div>
-    <div>
-        
-        <table style="width: 100%">
-            <tr>
-                <td style="width: 161px">Current Password:</td>
-                <td>
-                    
-&nbsp;<asp:Label ID="lblCurrentPassMSG" runat="server" Text="Label" Visible="False"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 161px; height: 20px"></td>
-                <td style="height: 20px"></td>
-            </tr>
-            <tr>
-                <td style="width: 161px; height: 20px">New Password:</td>
-                <td style="height: 20px">
-                   
-&nbsp;<asp:Label ID="lblNewPass1MSG" runat="server" Text="Label" Visible="False"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 161px">Re-Enter Password:</td>
-                <td>
-                    
-&nbsp;<asp:Label ID="lblNewPass2MSG" runat="server" Text="Label" Visible="False"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 161px">&nbsp;</td>
-                <td>
-                    
-                </td>
-            </tr>
-        </table>
-        
-    </div>
-    
-    
-
+</center>         
+           
 </asp:Content>

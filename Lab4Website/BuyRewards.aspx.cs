@@ -92,7 +92,7 @@ public partial class BuyRewards : System.Web.UI.Page
 
         for (int i = 0; i < reward.Length; i++)
         {
-            if(chkBuy[i].Checked == true)
+            if (chkBuy[i].Checked == true)
             {
                 if (balance < reward[i].getRewardAmount())
                 {
@@ -100,7 +100,7 @@ public partial class BuyRewards : System.Web.UI.Page
                     valid = false;
                 }
             }
-            
+
         }
 
         con.Close();
@@ -146,9 +146,9 @@ public partial class BuyRewards : System.Web.UI.Page
             }
         }
 
-        for(int i = 0; i < arraySize; i++)
+        for (int i = 0; i < arraySize; i++)
         {
-            if(chkBuy[i].Checked == true)
+            if (chkBuy[i].Checked == true)
             {
                 cmd.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance - @rewardAmount WHERE UserID = @userID";
                 cmd.Parameters.AddWithValue("@rewardAmount", reward[i].getRewardAmount());

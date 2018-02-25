@@ -260,7 +260,7 @@ public partial class ViewRewards : System.Web.UI.Page
             "ProviderID, AdminID, DateAdded) VALUES (@rewardName, @rewardQuantity, @rewardAmount, @providerID, @adminID, @dateAdded)", sc);
         insert.Parameters.AddWithValue("@rewardName", char.ToUpper(txtRewardName.Text[0]) + txtRewardName.Text.Substring(1));
         insert.Parameters.AddWithValue("@rewardQuantity", Convert.ToInt32(txtRewardQuantity.Text));
-        insert.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(txtRewardAmount.Text));
+        insert.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(txtRewardAmount.Text).ToString("#.00"));
         insert.Parameters.AddWithValue("@providerID", findProviderID(drpRewardProvider.SelectedItem.Text));
         insert.Parameters.AddWithValue("@adminID", (int)Session["UserID"]);
         insert.Parameters.AddWithValue("@dateAdded", DateTime.Today);

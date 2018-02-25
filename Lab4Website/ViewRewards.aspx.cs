@@ -163,7 +163,17 @@ public partial class ViewRewards : System.Web.UI.Page
                     "RewardQuantity=@rewardQuantity WHERE RewardID=@rewardID", sc);
                 del.Parameters.AddWithValue("@rewardName", newReward.getRewardName());
                 del.Parameters.AddWithValue("@rewardQuantity", newReward.getRewardQuantity());
-                del.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(newAmount.Text));
+
+                if (newAmount.Text.StartsWith("$"))
+                {
+                    del.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(newAmount.Text.Substring(1)));
+                }
+
+                else if (newAmount.Text.StartsWith("$") == false)
+                {
+                    del.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(newAmount.Text));
+                }
+
                 del.Parameters.AddWithValue("@rewardID", newReward.getRewardID());
                 del.ExecuteNonQuery();
                 sc.Close();

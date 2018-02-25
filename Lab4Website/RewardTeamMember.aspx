@@ -77,8 +77,8 @@
                 <asp:CheckBox ID="chkPrivate" runat="server" style="font-weight: 700" Text="Should Transaction Be Private?" />
             </div>
             <asp:Button ID="btnSubmit" CssClass="btn btn-primary" runat="server" Text="Submit Reward" OnClick="btnSubmit_Click" />
-            <asp:Button ID="AutoFillRewardSendID" CssClass="btn btn-secondary" runat="server" OnClick="AutoFillRewardSendID_Click" Text="AutoFillRewardSend" />
-            <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+            <asp:Button ID="AutoFillRewardSendID" CssClass="btn btn-secondary" runat="server" OnClick="AutoFillRewardSendID_Click" Text="AutoFillRewardSend" CausesValidation="False" />
+            <asp:Label ID="lblResult" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
         </div>
         
     </div>

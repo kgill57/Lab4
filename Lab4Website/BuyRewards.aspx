@@ -30,7 +30,7 @@
         <asp:Button ID="btnBuy" CssClass="btn btn-primary" runat="server" Text="Buy Items" OnClick="btnBuy_Click" />
         <br />
         <br />
-        <asp:Label ID="lblResult" runat="server"></asp:Label>
+        <asp:Label ID="lblResult" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
         <div class="container">
             <asp:Panel ID="Panel1" runat="server"></asp:Panel>
         </div>

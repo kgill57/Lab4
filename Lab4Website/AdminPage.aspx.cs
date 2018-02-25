@@ -62,7 +62,6 @@ public partial class AdminPage : System.Web.UI.Page
             panelPost[i] = new Panel();
 
             Label[] labelPost = new Label[5];
-            
 
 
             labelPost[0] = new Label();

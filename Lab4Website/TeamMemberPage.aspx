@@ -21,29 +21,10 @@
             <li><a href="/LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
-<<<<<<< HEAD
-
-    <asp:Image id = "headerIMG" runat ="server" ImageUrl ="~/Images/Header.png" width ="100%"/>
-    <h1>Elk Logistics Rewards System</h1>
-
-    <div style="height: 610px">
-
-        <br /><br />
-        
-        <h2><asp:Label ID="lblPostFeed" runat="server" style="font-weight: 700; font-size: xx-large;" Text="Recent Posts"></asp:Label></h2>        
-        <p>
-            <asp:DropDownList ID="giverAndReceiver" runat="server" OnSelectedIndexChanged="giverAndReceiver_SelectedIndexChanged" AutoPostBack="True">
-                <asp:ListItem>Show All Rewards</asp:ListItem>
-                <asp:ListItem>Show Your Rewards Given</asp:ListItem>
-                <asp:ListItem>Show Your Rewards Received</asp:ListItem>
-            </asp:DropDownList>
-        </p>
-=======
     <h1 class="display-4" style="color:white; font: bold;">News Feed</h1>
     <div class="jumbotron jumbotron-fluid" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px; height:1000px;">
         <br />
         <br />
->>>>>>> master
         <div>
             <asp:DropDownList ID="giverAndReceiver" runat="server" OnSelectedIndexChanged="giverAndReceiver_SelectedIndexChanged" AutoPostBack="True">
                 <asp:ListItem>All Transactions</asp:ListItem>

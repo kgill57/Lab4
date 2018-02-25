@@ -32,11 +32,7 @@
         </div>
         <div class="col-lg-4"></div>
         </div>
-<<<<<<< HEAD
-    <asp:Label ID="lblError" runat="server"></asp:Label>
-=======
     
->>>>>>> master
         <br />
 </center>    
 </asp:Content>

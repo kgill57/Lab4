@@ -2,13 +2,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-<<<<<<< HEAD
-    background-image: url('../Images/background.jpg');
-    height: 100%;
-=======
     height: 100%;
     background-image: url('../Images/best.jpg');
->>>>>>> master
 }
 
 
@@ -23,19 +18,12 @@ body {
     font: bold;
 }
 
-<<<<<<< HEAD
-/*center {
-    background-image: url('../Images/background.jpg');
-}*/
-    
-=======
 /*.jumbotron {
     width:78%; 
     height:1000px; 
     background-color:lightblue; 
     opacity:0.88;
 }*/
->>>>>>> master
 
 .footer {
     position: fixed;

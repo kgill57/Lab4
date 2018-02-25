@@ -89,11 +89,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE RewardProvider SET ProviderName=@newProvName, " +
                     "ProviderEmail=@newProvEmail WHERE ProviderID=@providerID", sc);
-<<<<<<< HEAD
-                del.Parameters.AddWithValue("@newProvName", char.ToUpper((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text[0]) 
-=======
                 del.Parameters.AddWithValue("@newProvName", char.ToUpper((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text[0])
->>>>>>> master
                     + (grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text.Substring(1));
                 del.Parameters.AddWithValue("@newProvEmail", (grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderEmail") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));

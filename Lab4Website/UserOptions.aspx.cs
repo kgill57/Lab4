@@ -61,11 +61,7 @@ public partial class UserOptions : System.Web.UI.Page
             }
 
             // SQL insert statement
-<<<<<<< HEAD
-            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, @AccountBalance, 1, '" + (String)Session["LName"] + "', '2018-01-01')";
-=======
             insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", " + (int)Session["UserID"] + ", @EmployerID, @AccountBalance, 1, '" + (String)Session["LName"] + "', '2018-01-01')";
->>>>>>> master
 
             select.CommandText = insertString;
 
@@ -114,12 +110,7 @@ public partial class UserOptions : System.Web.UI.Page
         // Display an error message if the username already exists within the database
         else
         {
-<<<<<<< HEAD
-            Page.ClientScript.RegisterStartupScript(GetType(), "popup",
-                       "alert('This username is already taken.');", true);
-=======
             lblError.Text = "This username is already taken";
->>>>>>> master
         }
 
         // Close the SQL connection and update the gridview

@@ -21,19 +21,6 @@
         </ul>
     </div>
 
-<<<<<<< HEAD
-    <h3>My Rewards</h3>
-    <div>
-
-        <asp:Panel ID="Panel1" runat="server">
-        </asp:Panel>
-
-    </div>
-
-    
-    
-     
-=======
 <center>
     <h1 class="display-4">Your Rewards</h1>
     <div class="jumbotron" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px; height:1000px;">       
@@ -43,7 +30,6 @@
     </div>
 </center>
     
->>>>>>> master
 
     
 

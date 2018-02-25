@@ -67,7 +67,11 @@ public partial class MyRewards : System.Web.UI.Page
 
             counter++;
 
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> master
         }
 
 

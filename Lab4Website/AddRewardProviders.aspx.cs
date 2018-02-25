@@ -9,17 +9,14 @@ using System.Data.SqlClient;
 using System.Configuration;
 
 public partial class AddRewardProviders : System.Web.UI.Page
-{
-    public static string oldProvName;
-    public static string oldProvEmail;
-    public static string newProvName;
-    public static string newProvEmail;
-    int count = 1;
+{   
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
             fillGridView();
+
+        //load the nav bar with the admin's first and last name
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
     }
 
@@ -92,7 +89,11 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE RewardProvider SET ProviderName=@newProvName, " +
                     "ProviderEmail=@newProvEmail WHERE ProviderID=@providerID", sc);
+<<<<<<< HEAD
                 del.Parameters.AddWithValue("@newProvName", char.ToUpper((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text[0]) 
+=======
+                del.Parameters.AddWithValue("@newProvName", char.ToUpper((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text[0])
+>>>>>>> master
                     + (grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text.Substring(1));
                 del.Parameters.AddWithValue("@newProvEmail", (grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderEmail") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
@@ -137,14 +138,10 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     protected void btnAddProvider_Click1(object sender, EventArgs e)
     {
-        lblProviderName.Visible = true;
-        lblProviderEmail.Visible = true;
-        txtNewProviderName.Visible = true;
-        txtNewProviderEmail.Visible = true;
-        btnAdd.Visible = true;
+        providerPanel.Visible = true;
     }
 
-    
+
 
     protected void btnClear_Click(object sender, EventArgs e)
     {
@@ -155,7 +152,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
     protected void btnAdd_Click1(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
 
         sc.Open();
@@ -179,7 +176,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+                sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
 
                 sc.Open();
@@ -203,7 +200,8 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
 
-                SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+                SqlConnection sc = new SqlConnection();
+                sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
                 sc.Open();
                 // Declare the query string.
 
@@ -232,7 +230,8 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     protected void AutoFillRewardProviderID_Click(object sender, EventArgs e)
     {
-        txtNewProviderName.Text = "Provider" + count;
-        txtNewProviderEmail.Text = "provider" + count + "@gmail.com";
+        txtNewProviderName.Text = "Test Provider";
+        txtNewProviderEmail.Text = "testprovider@gmail.com";
+        
     }
 }

@@ -41,6 +41,10 @@ public partial class RewardTeamMember : System.Web.UI.Page
         // Setting up a SQL connection and command
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         sc.Open();
 
         System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();
@@ -89,6 +93,10 @@ public partial class RewardTeamMember : System.Web.UI.Page
             // Instantiate SQL objects, set up a connection
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
             sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
             sc.Open();
 
             System.Data.SqlClient.SqlCommand cmdInsert = new System.Data.SqlClient.SqlCommand();

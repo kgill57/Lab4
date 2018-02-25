@@ -15,6 +15,18 @@ public partial class AccountSettingTeamMember : System.Web.UI.Page
     {
         con = new SqlConnection();
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+<<<<<<< HEAD
+=======
+
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+        catch (Exception)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
+>>>>>>> master
 
         con.Open();
         //Load Profile Picture

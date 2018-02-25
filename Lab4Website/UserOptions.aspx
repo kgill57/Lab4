@@ -23,7 +23,11 @@
     </div>
     
 <center>
+<<<<<<< HEAD
     <h1 class="display-4" style="color:white; font: bold;">User Options</h1>
+=======
+    <h1 class="display-4">User Options</h1>
+>>>>>>> master
     <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
         <div style="width:50%">
             <div class="form-group">
@@ -146,7 +150,11 @@
                 </asp:TemplateField>
             </Columns>
             <EmptyDataTemplate>
+<<<<<<< HEAD
                 <asp:Label ID="lblEmpty" runat="server" Text="No Records Available"></asp:Label>
+=======
+                <asp:Label ID="lblEmptly" runat="server" Text="No Records Available"></asp:Label>
+>>>>>>> master
             </EmptyDataTemplate>
             </asp:GridView>
         </div>

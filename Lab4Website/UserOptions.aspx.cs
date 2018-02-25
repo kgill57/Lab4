@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+
 public partial class UserOptions : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -23,7 +24,6 @@ public partial class UserOptions : System.Web.UI.Page
     {
         // Instantiate SQL objects, set up a SQL connection
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
@@ -61,7 +61,11 @@ public partial class UserOptions : System.Web.UI.Page
             }
 
             // SQL insert statement
+<<<<<<< HEAD
             insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", "+ (int)Session["UserID"] +", @EmployerID, @AccountBalance, 1, '" + (String)Session["LName"] + "', '2018-01-01')";
+=======
+            insertString += "@LName, @Email, @UserName, NULL, " + adminBit + ", " + (int)Session["UserID"] + ", @EmployerID, @AccountBalance, 1, '" + (String)Session["LName"] + "', '2018-01-01')";
+>>>>>>> master
 
             select.CommandText = insertString;
 
@@ -101,17 +105,21 @@ public partial class UserOptions : System.Web.UI.Page
                        SimpleHash.ComputeHash(password, "MD5", null);
             select.CommandText = "SELECT [UserID] FROM [USER] WHERE [UserName] = @UserName";
             int userID = (int)select.ExecuteScalar();
-            select.CommandText = "INSERT INTO[dbo].[Password] Values ("+ userID +", '" + passwordHashNew + "')";
+            select.CommandText = "INSERT INTO[dbo].[Password] Values (" + userID + ", '" + passwordHashNew + "')";
             select.ExecuteNonQuery();
-            
-            
+
+
         }
 
         // Display an error message if the username already exists within the database
         else
         {
+<<<<<<< HEAD
             Page.ClientScript.RegisterStartupScript(GetType(), "popup",
                        "alert('This username is already taken.');", true);
+=======
+            lblError.Text = "This username is already taken";
+>>>>>>> master
         }
 
         // Close the SQL connection and update the gridview
@@ -125,7 +133,6 @@ public partial class UserOptions : System.Web.UI.Page
         {
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
             sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
@@ -160,7 +167,6 @@ public partial class UserOptions : System.Web.UI.Page
         try
         {
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
             sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
@@ -185,7 +191,6 @@ public partial class UserOptions : System.Web.UI.Page
     {
         Boolean textError = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Server=LOCALHOST;Database=Lab4;Trusted_Connection=Yes;";
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         //Check if the project name Text box is empty

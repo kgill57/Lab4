@@ -17,7 +17,7 @@
         <div class="container" style="top:150px">
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
-            <div class="jumbotron">
+            <div class="jumbotron" >
                 <div class="form-group">
                     <asp:TextBox ID="txtUsername" runat="server" placeholder="Username"></asp:TextBox>
                 </div>
@@ -27,11 +27,16 @@
                 <asp:Button CssClass="btn btn-primary" runat="server" Text="Login" OnClick="btnLogin_Click" />
                 <asp:Button CssClass="btn btn-secondary" runat="server" OnClick="btnExit_Click" Text="Exit" />
                 <asp:Button CssClass="btn btn-secondary" runat="server" OnClick="btnCreateAdmin_Click" Text="Create Admin" />
+                <asp:Label ID="lblError" runat="server"></asp:Label>
             </div>
         </div>
         <div class="col-lg-4"></div>
         </div>
+<<<<<<< HEAD
     <asp:Label ID="lblError" runat="server"></asp:Label>
+=======
+    
+>>>>>>> master
         <br />
 </center>    
 </asp:Content>

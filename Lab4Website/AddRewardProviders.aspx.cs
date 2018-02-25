@@ -18,7 +18,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
             fillGridView();
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
     }
@@ -69,7 +69,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
         //Check if the project name Text box is empty
-        if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.ToString()))
+        if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text.ToString()))
         {
             //projectNameError.Visible = true;
             //projectNameError.Text = "The project name cannot be empty";
@@ -77,7 +77,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
         }
 
         //Check if the Project Description Text box is empty
-        if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtProviderEmail") as TextBox).Text.ToString()))
+        if (String.IsNullOrEmpty((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderEmail") as TextBox).Text.ToString()))
         {
             //projectDescriptionErrror.Visible = true;
             //projectDescriptionErrror.Text = "Field cannot be empty";
@@ -92,14 +92,13 @@ public partial class AddRewardProviders : System.Web.UI.Page
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE RewardProvider SET ProviderName=@newProvName, " +
                     "ProviderEmail=@newProvEmail WHERE ProviderID=@providerID", sc);
-                del.Parameters.AddWithValue("@newProvName", char.ToUpper((grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text[0]) 
-                    + (grdProviders.Rows[e.RowIndex].FindControl("txtProviderName") as TextBox).Text.Substring(1));
-                del.Parameters.AddWithValue("@projectDescription", (grdProviders.Rows[e.RowIndex].FindControl("txtProviderEmail") as TextBox).Text.ToString());
+                del.Parameters.AddWithValue("@newProvName", char.ToUpper((grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text[0])
+                    + (grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderName") as TextBox).Text.Substring(1));
+                del.Parameters.AddWithValue("@newProvEmail", (grdProviders.Rows[e.RowIndex].FindControl("txtgvProviderEmail") as TextBox).Text.ToString());
                 del.Parameters.AddWithValue("@providerID", Convert.ToInt32(grdProviders.DataKeys[e.RowIndex].Value.ToString()));
                 del.ExecuteNonQuery();
                 sc.Close();
                 grdProviders.EditIndex = -1;
-
                 fillGridView();
             }
             catch
@@ -138,14 +137,10 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     protected void btnAddProvider_Click1(object sender, EventArgs e)
     {
-        lblProviderName.Visible = true;
-        lblProviderEmail.Visible = true;
-        txtNewProviderName.Visible = true;
-        txtNewProviderEmail.Visible = true;
-        btnAdd.Visible = true;
+        providerPanel.Visible = true;
     }
 
-    
+
 
     protected void btnClear_Click(object sender, EventArgs e)
     {
@@ -156,7 +151,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
     protected void btnAdd_Click1(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+        sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
 
         sc.Open();
@@ -180,7 +175,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = @"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True";
+                sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
 
                 sc.Open();
@@ -204,7 +199,8 @@ public partial class AddRewardProviders : System.Web.UI.Page
             try
             {
 
-                SqlConnection sc = new SqlConnection(@"Data Source=LOCALHOST;Initial Catalog=lab4;Integrated Security=True");
+                SqlConnection sc = new SqlConnection();
+                sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
                 sc.Open();
                 // Declare the query string.
 

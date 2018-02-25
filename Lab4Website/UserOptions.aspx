@@ -23,7 +23,7 @@
     </div>
     
 <center>
-    <h1 class="display-4" style="color:white; font: bold;">User Options</h1>
+    <h1 class="display-4">User Options</h1>
     <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
         <div style="width:50%">
             <div class="form-group">

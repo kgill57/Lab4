@@ -12,10 +12,16 @@ public partial class AdminPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-       
+        //Calls the method to load the news feed
+        loadNewsFeed();
+    }
 
+    protected void loadNewsFeed()
+    {
+        //Populates the nav bar with the admin's first and last name
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
 
+        //sql connection
         SqlConnection con = new SqlConnection();
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
@@ -43,12 +49,10 @@ public partial class AdminPage : System.Web.UI.Page
         {
             test[i] = new Label();
 
-            //test[i].Text = (transaction[i].getGiverUsername(transaction[i].getGiverID()) + " gifted " + transaction[i].getReceiverUsername(transaction[i].getReceiverID()));
-
             Panel1.Controls.Add(test[i]);
             Panel1.Controls.Add(new LiteralControl("<br />"));
         }
-                
+
         con.Close();
         Panel[] panelPost = new Panel[arraySize];
         con.Open();
@@ -58,7 +62,7 @@ public partial class AdminPage : System.Web.UI.Page
             panelPost[i] = new Panel();
 
             Label[] labelPost = new Label[5];
-            
+
 
             labelPost[0] = new Label();
 
@@ -119,6 +123,5 @@ public partial class AdminPage : System.Web.UI.Page
         }
 
         con.Close();
-
     }
 }

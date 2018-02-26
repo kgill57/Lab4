@@ -25,7 +25,7 @@
 
 <center>
     <h1 class="display-4">Reward A Team Member</h1>
-    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <div class="jumbotron agent-1" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
         <div style="width:50%; text-align:left; padding-left:70px;">
             <div class="form-group">
                 <asp:Label ID="lblReceiver" runat="server" Text="Team Member Being Rewarded: " style="font-weight: 700"></asp:Label>      

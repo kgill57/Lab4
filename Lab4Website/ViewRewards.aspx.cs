@@ -11,13 +11,22 @@ public partial class ViewRewards : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        }
+        catch (Exception)
+        {
+            Response.Redirect("Default.aspx");
+        }
+
         if (!IsPostBack)
             fillGridView();
 
         loadProfilePicture();
 
-        //loads the admin's first and last name into the news feed
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        
     }
 
     protected void loadProfilePicture()
@@ -54,7 +63,7 @@ public partial class ViewRewards : System.Web.UI.Page
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString);
             sc.Open();
 
-            SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", sc);
+            SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer WHERE EmployerID =" + Convert.ToString((int)Session["EmployerID"]), sc);
             double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
 
             lblBalance.Text = totalBalance.ToString("$#.00");
@@ -163,7 +172,17 @@ public partial class ViewRewards : System.Web.UI.Page
                     "RewardQuantity=@rewardQuantity WHERE RewardID=@rewardID", sc);
                 del.Parameters.AddWithValue("@rewardName", newReward.getRewardName());
                 del.Parameters.AddWithValue("@rewardQuantity", newReward.getRewardQuantity());
-                del.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(newAmount.Text));
+
+                if (newAmount.Text.StartsWith("$"))
+                {
+                    del.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(newAmount.Text.Substring(1)));
+                }
+
+                else if (newAmount.Text.StartsWith("$") == false)
+                {
+                    del.Parameters.AddWithValue("@rewardAmount", Convert.ToDouble(newAmount.Text));
+                }
+
                 del.Parameters.AddWithValue("@rewardID", newReward.getRewardID());
                 del.ExecuteNonQuery();
                 sc.Close();
@@ -268,6 +287,11 @@ public partial class ViewRewards : System.Web.UI.Page
         insert.ExecuteNonQuery();
 
         fillGridView();
+
+        txtRewardAmount.Text = "";
+        txtRewardName.Text = "";
+        txtRewardQuantity.Text = "";
+        txtSearch.Text = "";
     }
 
     public int findProviderID(string providerName)
@@ -285,9 +309,9 @@ public partial class ViewRewards : System.Web.UI.Page
 
     protected void RewardAutoFillID_Click(object sender, EventArgs e)
     {
-        txtRewardName.Text = "Hardworking";
+        txtRewardName.Text = "Test Reward";
         txtRewardQuantity.Text = "50";
-        txtRewardAmount.Text = "50";
+        txtRewardAmount.Text = "25";
 
     }
 }

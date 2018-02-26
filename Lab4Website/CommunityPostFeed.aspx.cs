@@ -19,7 +19,7 @@ public partial class CommunityPostFeed : System.Web.UI.Page
         }
         catch (Exception)
         {
-            Response.Redirect("LoginPage.aspx");
+            Response.Redirect("Default.aspx");
         }
 
         if (!IsPostBack)
@@ -81,6 +81,9 @@ public partial class CommunityPostFeed : System.Web.UI.Page
         }
         con.Close();
         Panel[] panelPost = new Panel[arraySize];
+        Panel[] panelHeader = new Panel[arraySize];
+        Panel[] mainPanels = new Panel[arraySize];
+
         con.Open();
         DateTime dt;
         String adminName;
@@ -88,13 +91,14 @@ public partial class CommunityPostFeed : System.Web.UI.Page
         for (int i = 0; i < arraySize; i++)
         {
             panelPost[i] = new Panel();
+            panelHeader[i] = new Panel();
+            mainPanels[i] = new Panel();
 
             Label[] labelPost = new Label[3];
 
             labelPost[0] = new Label();
             labelPost[0].Text = ("Event Title: " + transaction[i].getEventTitle());
-            panelPost[i].Controls.Add(labelPost[0]);
-            panelPost[i].Controls.Add(new LiteralControl("<br />"));
+            panelHeader[i].Controls.Add(labelPost[0]);
 
 
             labelPost[1] = new Label();
@@ -111,14 +115,24 @@ public partial class CommunityPostFeed : System.Web.UI.Page
             adminName = (String)UserName.ExecuteScalar();
             labelPost[2].Text = ("Posted By " + adminName + " on " + String.Format("{0:dddd, MMMM d, yyyy}", dt));
             panelPost[i].Controls.Add(labelPost[2]);
-            panelPost[i].Controls.Add(new LiteralControl("<br />"));
 
-            panelPost[i].BorderStyle = BorderStyle.Solid;
+            mainPanels[i].CssClass = "w3 - card - 4";
+            panelHeader[i].CssClass = "w3-container w3-blue";
+            panelPost[i].CssClass = "w3-container";
 
-            panelPost[i].CssClass = "postCSS";
+            mainPanels[i].Style.Add("text-align", "left");
+            panelHeader[i].Style.Add("text-align", "left");
+
+            mainPanels[i].Style.Add("margin-top", "4px");
+            mainPanels[i].Style.Add("margin-bottom", "16px");
+            panelHeader[i].Style.Add("font-size", "200%");
+
+            Panel1.Controls.Add(mainPanels[i]);
+            mainPanels[i].Controls.Add(panelHeader[i]);
+            mainPanels[i].Controls.Add(panelPost[i]);
 
 
-            Panel1.Controls.Add(panelPost[i]);
+            
 
         }
 

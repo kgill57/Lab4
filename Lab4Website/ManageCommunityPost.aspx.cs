@@ -11,7 +11,14 @@ public partial class ManageCommunityPost : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        }
+        catch (Exception)
+        {
+            Response.Redirect("Default.aspx");
+        }
 
         if (!IsPostBack)
             fillGridView();
@@ -25,7 +32,7 @@ public partial class ManageCommunityPost : System.Web.UI.Page
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
-        SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", con);
+        SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer WHERE EmployerID =" + Convert.ToString((int)Session["EmployerID"]), con);
         double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
 
         lblBalance.Text = totalBalance.ToString("$#.00");
@@ -65,10 +72,10 @@ public partial class ManageCommunityPost : System.Web.UI.Page
                 " @EventDesc, '" + DateTime.Today.ToString() + "', " + (int)Session["UserID"] + ")";
 
             select.Parameters.Add(new SqlParameter("@EventTitle", SqlDbType.VarChar));
-            select.Parameters["@EventTitle"].Value = txtFName.Text;
+            select.Parameters["@EventTitle"].Value = txtEventName.Text;
 
             select.Parameters.Add(new SqlParameter("@EventDesc", SqlDbType.VarChar));
-            select.Parameters["@EventDesc"].Value = txtLName.Text;
+            select.Parameters["@EventDesc"].Value = txtEventDesc.Text;
 
 
 
@@ -81,6 +88,9 @@ public partial class ManageCommunityPost : System.Web.UI.Page
             Console.WriteLine();
         }
         fillGridView();
+
+        txtEventName.Text = "";
+        txtEventDesc.Text = "";
     }
 
     protected void fillGridView()
@@ -148,36 +158,6 @@ public partial class ManageCommunityPost : System.Web.UI.Page
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
-        ////Check if the project name Text box is empty
-        //if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvFName") as TextBox).Text.ToString()))
-        //{
-        //    //projectNameError.Visible = true;
-        //    //projectNameError.Text = "The project name cannot be empty";
-        //    textError = false;
-        //}
-
-        ////Check if the Project Description Text box is empty
-        //if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvLName") as TextBox).Text.ToString()))
-        //{
-        //    //projectDescriptionErrror.Visible = true;
-        //    //projectDescriptionErrror.Text = "Field cannot be empty";
-        //    textError = false;
-        //}
-
-        //if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvEmail") as TextBox).Text.ToString()))
-        //{
-        //    //projectDescriptionErrror.Visible = true;
-        //    //projectDescriptionErrror.Text = "Field cannot be empty";
-        //    textError = false;
-        //}
-
-        //if (String.IsNullOrEmpty((grdUsers.Rows[e.RowIndex].FindControl("txtgvUsername") as TextBox).Text.ToString()))
-        //{
-        //    //projectDescriptionErrror.Visible = true;
-        //    //projectDescriptionErrror.Text = "Field cannot be empty";
-        //    textError = false;
-        //}
-
 
         if (textError)
         {
@@ -212,8 +192,8 @@ public partial class ManageCommunityPost : System.Web.UI.Page
 
     protected void btnAutoFillUser_Click(object sender, EventArgs e)
     {
-        txtFName.Text = "Test Event";
-        txtLName.Text = "Test Event Description";
+        txtEventName.Text = "Test Event";
+        txtEventDesc.Text = "Test Event Description";
 
     }
 }

@@ -20,12 +20,12 @@
             <li> <a href="MyRewards.aspx">My Rewards</a></li>
             <li><a href="AccountSettingTeamMember.aspx">Account Settings</a></li>
             <li><a href="CommunityPostFeed.aspx">Community Events</a></li>
-            <li><a href="/LoginPage.aspx">Logout</a></li>
+            <li><a href="/Default.aspx">Logout</a></li>
         </ul>
     </div>
 <center>
     <h1 class="display-4">My Rewards</h1>
-    <div class="jumbotron jumbotron-fluid" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px;">
+    <div class="jumbotron agent-1" style="width:78%; background-color:lightblue; opacity:0.88; border-radius:25px; padding-top:1px;">
         <div class="container" Style ="width:75%; padding-top: 50px;">
             <asp:Panel ID="Panel1" runat="server"></asp:Panel>
         </div>

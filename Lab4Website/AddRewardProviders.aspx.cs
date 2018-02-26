@@ -13,13 +13,21 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        }
+        catch (Exception)
+        {
+            Response.Redirect("Default.aspx");
+        }
+
         if (!IsPostBack)
             fillGridView();
 
         loadProfilePicture();
 
-        //load the nav bar with the admin's first and last name
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        
     }
 
     protected void loadProfilePicture()
@@ -59,7 +67,7 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
             sc.Open();
             // Declare the query string.
-            SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", sc);
+            SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer WHERE EmployerID =" + Convert.ToString((int)Session["EmployerID"]), sc);
             double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
 
             lblBalance.Text = totalBalance.ToString("$#.00");
@@ -193,6 +201,9 @@ public partial class AddRewardProviders : System.Web.UI.Page
         insert.ExecuteNonQuery();
 
         fillGridView();
+
+        txtNewProviderName.Text = "";
+        txtNewProviderEmail.Text = "";
     }
 
     protected void btnSearch_Click(object sender, EventArgs e)

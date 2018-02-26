@@ -18,7 +18,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
         try
         {
-            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + Session["AccountBalance"];
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
             if (!IsPostBack)
             {
                 ddlCompanyValue.ClearSelection();
@@ -29,7 +29,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
         }
         catch (Exception)
         {
-            Response.Redirect("LoginPage.aspx");
+            Response.Redirect("Default.aspx");
         }
 
     }
@@ -208,45 +208,37 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
     public void sendNotification()
     {
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+        //SqlConnection con = new SqlConnection();
+        //con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
-        con.Open();
-        SqlCommand cmd = new SqlCommand("SELECT Email FROM [User] WHERE Username=@username", con);
-        cmd.Parameters.AddWithValue("@username", drpUsernames.SelectedValue);
+        //con.Open();
+        //SqlCommand cmd = new SqlCommand("SELECT Email FROM [User] WHERE Username=@username", con);
+        //cmd.Parameters.AddWithValue("@username", drpUsernames.SelectedValue);
 
-        var fromAddress = new MailAddress("sdbasketball96@aol.com", "Elk Logistics Rewards");
-        var toAddress = new MailAddress((String)cmd.ExecuteScalar(), "Test");
-        const string fromPassword = "Daisydoo#1pet";
-        const string subject = "You Received a Reward From a Co-Worker!";
-        const string body = "Dear Team Member, You have received a reward from a fellow Team member. Login to find out who rewarded you!";
-            
+        //var fromAddress = new MailAddress("sdbasketball96@aol.com", "Elk Logistics Rewards");
+        //var toAddress = new MailAddress((String)cmd.ExecuteScalar(), "Test");
+        //const string fromPassword = "Daisydoo#1pet";
+        //const string subject = "You Received a Reward From a Co-Worker!";
+        //const string body = "Dear Team Member, You have received a reward from a fellow Team member. Login to find out who rewarded you!";
 
-        var smtp = new SmtpClient
-        {
-            Host = "smtp.aol.com",
-            Port = 587,
-            EnableSsl = true,
-            DeliveryMethod = SmtpDeliveryMethod.Network,
-            UseDefaultCredentials = false,
-            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-        };
-        using (var message = new MailMessage(fromAddress, toAddress)
-        {
-            Subject = subject,
-            Body = body
-        })
-        {
-            try
-            {
-                smtp.Send(message);
-            }
-            catch
-            {
 
-            }
-            
-        }
+        //var smtp = new SmtpClient
+        //{
+        //    Host = "smtp.aol.com",
+        //    Port = 587,
+        //    EnableSsl = true,
+        //    DeliveryMethod = SmtpDeliveryMethod.Network,
+        //    UseDefaultCredentials = false,
+        //    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+        //};
+        //using (var message = new MailMessage(fromAddress, toAddress)
+        //{
+        //    Subject = subject,
+        //    Body = body
+        //})
+        //{
+        //    smtp.Send(message);
+        //}
     }
 
 

@@ -19,13 +19,16 @@
             <li> <a href="MyRewards.aspx">My Rewards</a></li>
             <li><a href="AccountSettingTeamMember.aspx">Account Settings</a></li>
             <li><a href="CommunityPostFeed.aspx">Community Events</a></li>
-            <li><a href="/LoginPage.aspx">Logout</a></li>
+            <li><a href="/Default.aspx">Logout</a></li>
         </ul>
     </div>
 
 <center>
     <h1 class="display-4">Reward A Team Member</h1>
-    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <div class="jumbotron agent-1" style="width:78%; background-color:lightblue; opacity:0.88; border-radius:25px; padding-top:1px;">
+        <asp:Label ID="lblResult" runat="server" Text="" style="color:green; font:bold"></asp:Label>
+        <br />
+        <br />
         <div style="width:50%; text-align:left; padding-left:70px;">
             <div class="form-group">
                 <asp:Label ID="lblReceiver" runat="server" Text="Team Member Being Rewarded: " style="font-weight: 700"></asp:Label>      
@@ -71,13 +74,13 @@
             </div>
             <div class="form-group">
                 <asp:TextBox ID="txtDescription" style="height:200px; width:400px;" textmode="MultiLine" placeholder="Description" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqDesc" ControlToValidate="txtDescription" runat="server" Text="(Required)" Display="Dynamic" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
             </div>
             <div class="form-group">
                 <asp:CheckBox ID="chkPrivate" runat="server" AutoPostBack="True" style="font-weight: 700" Text="Should Transaction Be Private?" />
             </div>
             <asp:Button ID="btnSubmit" CssClass="btn btn-primary" runat="server" Text="Submit Reward" OnClick="btnSubmit_Click" />
-            <asp:Button ID="AutoFillRewardSendID" CssClass="btn btn-secondary" runat="server" OnClick="AutoFillRewardSendID_Click" Text="AutoFillRewardSend" />
-            <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+            <asp:Button ID="AutoFillRewardSendID" CssClass="btn btn-secondary" runat="server" OnClick="AutoFillRewardSendID_Click" CausesValidation="false" Text="AutoFillRewardSend" />
         </div>
         
     </div>

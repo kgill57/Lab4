@@ -12,8 +12,14 @@ public partial class UserOptions : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Show admin's name
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        }
+        catch (Exception)
+        {
+            Response.Redirect("Default.aspx");
+        }
 
         // On initial page load, fill the gridview with all users in the database
         if (!IsPostBack)
@@ -55,7 +61,7 @@ public partial class UserOptions : System.Web.UI.Page
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
-        
+
 
         SqlCommand select = new SqlCommand();
         select.Connection = con;
@@ -134,7 +140,13 @@ public partial class UserOptions : System.Web.UI.Page
             select.CommandText = "INSERT INTO[dbo].[Password] Values (" + userID + ", '" + passwordHashNew + "')";
             select.ExecuteNonQuery();
 
-
+            txtFName.Text = "";
+            txtLName.Text = "";
+            txtEmail.Text = "";
+            txtMI.Text = "";
+            txtUsername.Text = "";
+            ddlAccountType.SelectedIndex = 0;
+            CompanyDropdown.SelectedIndex = 0;
         }
 
         // Display an error message if the username already exists within the database
@@ -158,13 +170,13 @@ public partial class UserOptions : System.Web.UI.Page
 
             sc.Open();
             // Declare the query string.
-            SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", sc);
+            SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer WHERE EmployerID =" + Convert.ToString((int)Session["EmployerID"]), sc);
             double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
 
             lblBalance.Text = totalBalance.ToString("$#.00");
 
             System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT UserID, FName, LName, MI, Email, " +
-                "Username, Admin, EmployedStatus FROM [User];", sc);
+                "Username, Admin, EmployedStatus, AccountBalance FROM [User];", sc);
             del.ExecuteNonQuery();
 
             grdUsers.DataSource = del.ExecuteReader();
@@ -305,10 +317,10 @@ public partial class UserOptions : System.Web.UI.Page
 
     protected void btnAutoFillUser_Click(object sender, EventArgs e)
     {
-        txtFName.Text = "Carey";
+        txtFName.Text = "Test";
         txtMI.Text = "";
-        txtLName.Text = "Cole";
-        txtEmail.Text = "Carey_Cole@jmu.edu";
-        txtUsername.Text = "CCole";
+        txtLName.Text = "User";
+        txtEmail.Text = "test@gmail.com";
+        txtUsername.Text = "testUser";
     }
 }

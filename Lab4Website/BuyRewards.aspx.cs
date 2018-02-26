@@ -19,8 +19,22 @@ public partial class BuyRewards : System.Web.UI.Page
     {
         createRewardFeed();
         loadProfilePicture();
+
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+
+        // Show user's name and balance in sidebar
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+
+        catch (Exception)
+        {
+            Response.Redirect("Default.aspx");
+        }
     }
-    
+
 
     protected void loadProfilePicture()
     {
@@ -67,11 +81,11 @@ public partial class BuyRewards : System.Web.UI.Page
         double transactionTotal = 0;
         for (int i = 0; i < reward.Length; i++)
         {
-            if(chkBuy[i].Checked == true)
+            if (chkBuy[i].Checked == true)
             {
                 transactionTotal += reward[i].getRewardAmount();
             }
-            
+
         }
         if (balance < transactionTotal)
         {
@@ -94,7 +108,7 @@ public partial class BuyRewards : System.Web.UI.Page
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
-        
+
         bool itemSelected = false;
 
         for (int i = 0; i < arraySize; i++)
@@ -126,9 +140,9 @@ public partial class BuyRewards : System.Web.UI.Page
             }
         }
 
-        for(int i = 0; i < arraySize; i++)
+        for (int i = 0; i < arraySize; i++)
         {
-            if(chkBuy[i].Checked == true)
+            if (chkBuy[i].Checked == true)
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
@@ -141,7 +155,7 @@ public partial class BuyRewards : System.Web.UI.Page
             }
         }
 
-        if(itemSelected == true)
+        if (itemSelected == true)
         {
             lblResult.Text = "Reward Claimed!";
             createRewardFeed();
@@ -150,7 +164,7 @@ public partial class BuyRewards : System.Web.UI.Page
         {
             lblResult.Text = "Please Select An Item";
         }
-        
+
 
         con.Close();
 
@@ -176,10 +190,10 @@ public partial class BuyRewards : System.Web.UI.Page
         reward = new Reward[arraySize];
         int arrayCounter = 0;
 
-        if(arraySize != 0)
+        if (arraySize != 0)
         {
 
-        
+
             while (reader.Read())
             {
                 reward[arrayCounter] = new Reward(Convert.ToInt32(reader.GetValue(0)), Convert.ToString(reader.GetValue(1)),

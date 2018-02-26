@@ -14,38 +14,93 @@ public partial class AnalyticsPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //try
-        //{
-        //    lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
-        //}
-        //catch (Exception)
-        //{
-        //    Response.Redirect("LoginPage.aspx");
-        //}
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        }
+        catch (Exception)
+        {
+            Response.Redirect("Default.aspx");
+        }
 
         if (!IsPostBack)
         {
-            Chart2.Visible = false;
-            Chart1.Visible = true;
+            rewardsReceived.Visible = true;
+            rewardsGiven.Visible = false;
+            topSales.Visible = false;
+            RewardsPerMonth.Visible = false;
 
         }
 
+        loadProfilePicture();
+
 
     }
+
+    protected void loadProfilePicture()
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+        con.Open();
+
+        SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer WHERE EmployerID =" + Convert.ToString((int)Session["EmployerID"]), con);
+        double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
+
+        lblBalance.Text = totalBalance.ToString("$#.00");
+
+        try
+        {
+
+            SqlCommand select = new SqlCommand();
+            select.Connection = con;
+
+            select.CommandText = "SELECT ProfilePicture FROM [dbo].[User] WHERE UserID =" + Convert.ToString((int)Session["UserID"]);
+            string currentPicture = (String)select.ExecuteScalar();
+
+            profilePicture.ImageUrl = "~/Images/" + currentPicture;
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+
+        }
+        catch (Exception)
+        {
+
+        }
+        con.Close();
+    }
+
 
 
     protected void giverAndReceiver_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (giverAndReceiver.SelectedIndex == 0)
         {
-            Chart2.Visible = false;
-            Chart1.Visible = true;
+            rewardsReceived.Visible = true;
+            rewardsGiven.Visible = false;
+            topSales.Visible = false;
+            RewardsPerMonth.Visible = false;
         }
 
         else if (giverAndReceiver.SelectedIndex == 1)
         {
-            Chart1.Visible = false;
-            Chart2.Visible = true;
+            rewardsReceived.Visible = false;
+            rewardsGiven.Visible = true;
+            topSales.Visible = false;
+            RewardsPerMonth.Visible = false;
         }
+        else if(giverAndReceiver.SelectedIndex == 2)
+        {
+            rewardsReceived.Visible = false;
+            rewardsGiven.Visible = false;
+            topSales.Visible = true;
+            RewardsPerMonth.Visible = false;
+        }
+        else if(giverAndReceiver.SelectedIndex == 3)
+        {
+            rewardsReceived.Visible = false;
+            rewardsGiven.Visible = false;
+            topSales.Visible = false;
+            RewardsPerMonth.Visible = true;
+        }
+        
     }
 }

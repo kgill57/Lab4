@@ -16,7 +16,7 @@ public partial class MyRewards : System.Web.UI.Page
             fillRewards();
 
         loadProfilePicture();
-        
+
     }
 
     public void fillRewards()
@@ -25,7 +25,7 @@ public partial class MyRewards : System.Web.UI.Page
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
-        SqlCommand scaler = new SqlCommand("SELECT Count(RewardEarned.DateClaimed) FROM RewardEarned WHERE RewardEarned.UserID = " + Convert.ToString((int)Session["UserID"]) , con);
+        SqlCommand scaler = new SqlCommand("SELECT Count(RewardEarned.DateClaimed) FROM RewardEarned WHERE RewardEarned.UserID = " + Convert.ToString((int)Session["UserID"]), con);
         int size = (int)scaler.ExecuteScalar();
 
         SqlCommand read = new SqlCommand("SELECT Reward.RewardName, Reward.RewardAmount, RewardEarned.DateClaimed FROM Reward inner join RewardEarned ON Reward.[RewardID] = RewardEarned.RewardID WHERE RewardEarned.[UserID] = @UserID", con);
@@ -35,7 +35,7 @@ public partial class MyRewards : System.Web.UI.Page
         Panel[] panelHeader = new Panel[size];
         Panel[] panelText = new Panel[size];
         int counter = 0;
-        
+
         while (reader.Read())
         {
             panel[counter] = new Panel();
@@ -75,7 +75,7 @@ public partial class MyRewards : System.Web.UI.Page
             panel[counter].Style.Add("margin-bottom", "16px");
             panelHeader[counter].Style.Add("font-size", "200%");
 
-            
+
 
             Panel1.Controls.Add(panel[counter]);
             panel[counter].Controls.Add(panelHeader[counter]);

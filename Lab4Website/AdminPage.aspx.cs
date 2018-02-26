@@ -48,7 +48,7 @@ public partial class AdminPage : System.Web.UI.Page
         //Populates the nav bar with the admin's first and last name
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
 
-        
+
 
         //sql connection
         SqlConnection con = new SqlConnection();
@@ -56,7 +56,7 @@ public partial class AdminPage : System.Web.UI.Page
         con.Open();
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[TRANSACTION] ORDER BY [TransID] DESC", con);
-        SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", con);
+        SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer WHERE EmployerID =" + Convert.ToString((int)Session["EmployerID"]), con);
         double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
 
         lblBalance.Text = totalBalance.ToString("$#.00");
@@ -76,17 +76,8 @@ public partial class AdminPage : System.Web.UI.Page
             arrayCounter++;
         }
         con.Close();
-        Label[] test = new Label[arraySize];
-
-        for (int i = 0; i < arraySize; i++)
-        {
-            test[i] = new Label();
-
-            Panel1.Controls.Add(test[i]);
-            Panel1.Controls.Add(new LiteralControl("<br />"));
-        }
-
-        con.Close();
+        
+        
         Panel[] panelHeader = new Panel[arraySize];
         Panel[] panelPost = new Panel[arraySize];
         Panel[] mainPanels = new Panel[arraySize];

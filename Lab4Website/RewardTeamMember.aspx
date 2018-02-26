@@ -71,6 +71,7 @@
             </div>
             <div class="form-group">
                 <asp:TextBox ID="txtDescription" style="height:200px; width:400px;" textmode="MultiLine" placeholder="Description" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqDesc" ControlToValidate="txtDescription" runat="server" Text="(Required)" Display="Dynamic" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
             </div>
             <div class="form-group">
                 <asp:CheckBox ID="chkPrivate" runat="server" AutoPostBack="True" style="font-weight: 700" Text="Should Transaction Be Private?" />

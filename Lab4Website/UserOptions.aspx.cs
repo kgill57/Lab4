@@ -55,7 +55,7 @@ public partial class UserOptions : System.Web.UI.Page
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
-        
+
 
         SqlCommand select = new SqlCommand();
         select.Connection = con;
@@ -134,7 +134,13 @@ public partial class UserOptions : System.Web.UI.Page
             select.CommandText = "INSERT INTO[dbo].[Password] Values (" + userID + ", '" + passwordHashNew + "')";
             select.ExecuteNonQuery();
 
-
+            txtFName.Text = "";
+            txtLName.Text = "";
+            txtEmail.Text = "";
+            txtMI.Text = "";
+            txtUsername.Text = "";
+            ddlAccountType.SelectedIndex = 0;
+            CompanyDropdown.SelectedIndex = 0;
         }
 
         // Display an error message if the username already exists within the database

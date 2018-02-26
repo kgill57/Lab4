@@ -44,7 +44,7 @@
                     <asp:RequiredFieldValidator ID="reqProviderEmail" ControlToValidate="txtNewProviderEmail" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </div>
                 <div>
-                    <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click1" Text="Add"  />
+                    <asp:Button ID="btnAdd" CssClass="btn btn-primary" runat="server" OnClick="btnAdd_Click1" Text="Add"  />
                 </div>
             </div>
         </asp:Panel>

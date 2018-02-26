@@ -193,6 +193,9 @@ public partial class AddRewardProviders : System.Web.UI.Page
         insert.ExecuteNonQuery();
 
         fillGridView();
+
+        txtNewProviderName.Text = "";
+        txtNewProviderEmail.Text = "";
     }
 
     protected void btnSearch_Click(object sender, EventArgs e)

@@ -19,7 +19,17 @@ public partial class BuyRewards : System.Web.UI.Page
     {
         createRewardFeed();
         loadProfilePicture();
+
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+        catch (Exception)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
     }
+
 
     // Only for testing btnBuy functionality
     void GreetingBtn_Click(Object sender,
@@ -92,15 +102,15 @@ public partial class BuyRewards : System.Web.UI.Page
 
         for (int i = 0; i < reward.Length; i++)
         {
-            if(chkBuy[i].Checked == true)
+            if (chkBuy[i].Checked == true)
             {
                 if (balance < reward[i].getRewardAmount())
                 {
-                    lblResult.Text = "insufficient Funds.";
+                    lblResult.Text = "Insufficient funds.";
                     valid = false;
                 }
             }
-            
+
         }
 
         con.Close();
@@ -148,9 +158,9 @@ public partial class BuyRewards : System.Web.UI.Page
             }
         }
 
-        for(int i = 0; i < arraySize; i++)
+        for (int i = 0; i < arraySize; i++)
         {
-            if(chkBuy[i].Checked == true)
+            if (chkBuy[i].Checked == true)
             {
                 cmd.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance - @rewardAmount WHERE UserID = @userID";
                 cmd.Parameters.AddWithValue("@rewardAmount", reward[i].getRewardAmount());
@@ -161,16 +171,16 @@ public partial class BuyRewards : System.Web.UI.Page
             }
         }
 
-        if(itemSelected == true)
+        if (itemSelected == true)
         {
-            lblResult.Text = "Reward Claimed!";
+            lblResult.Text = "Reward claimed!";
             createRewardFeed();
         }
         else
         {
-            lblResult.Text = "Please Select An Item";
+            lblResult.Text = "Please select an item";
         }
-        
+
 
         con.Close();
 
@@ -196,10 +206,10 @@ public partial class BuyRewards : System.Web.UI.Page
         reward = new Reward[arraySize];
         int arrayCounter = 0;
 
-        if(arraySize != 0)
+        if (arraySize != 0)
         {
 
-        
+
             while (reader.Read())
             {
                 reward[arrayCounter] = new Reward(Convert.ToInt32(reader.GetValue(0)), Convert.ToString(reader.GetValue(1)),
@@ -233,7 +243,7 @@ public partial class BuyRewards : System.Web.UI.Page
                 panelPost[i].Controls.Add(labelPost[1]);
 
                 labelPost[2] = new Label();
-                labelPost[2].Text = "Reward Amount: " + reward[i].getRewardAmount();
+                labelPost[2].Text = "Reward Value: $" + reward[i].getRewardAmount();
 
                 panelPost[i].Controls.Add(new LiteralControl("<br />"));
 

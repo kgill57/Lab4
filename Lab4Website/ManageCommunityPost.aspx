@@ -31,12 +31,12 @@
         <br />
         <div style="width:50%;">
             <div class="form-group">
-                <asp:TextBox ID="txtFName" CssClass="form-control" placeholder="Event Title" runat="server" Width="419px" MaxLength="30"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="reqFName" ControlToValidate="txtFName" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
+                <asp:TextBox ID="txtEventName" CssClass="form-control" placeholder="Event Title" runat="server" Width="419px" MaxLength="30"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqFName" ControlToValidate="txtEventName" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
             </div>
             <div class="form-group"> 
-                <asp:TextBox ID="txtLName" runat="server" CssClass="form-control" placeholder="Event Description" MaxLength="30" Height="99px" TextMode="MultiLine" Width="419px"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="reqLName" ControlToValidate="txtLName" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
+                <asp:TextBox ID="txtEventDesc" runat="server" CssClass="form-control" placeholder="Event Description" MaxLength="30" Height="99px" TextMode="MultiLine" Width="419px"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqLName" ControlToValidate="txtEventDesc" Display="Dynamic" Text="(Required)" Font-Bold="true" ForeColor="Red" runat="server"></asp:RequiredFieldValidator>
             </div>
             <br />
             <asp:Button ID="btnInsertEvent" CssClass="btn btn-primary" runat="server" OnClick="btnInsertUser_Click" Text="Insert Event" />
@@ -51,8 +51,7 @@
                      <asp:TemplateField HeaderText="EventID">
                         <EditItemTemplate>
                             <asp:Label ID="txtgvFName" runat="server" MaxLength="30" Text='<%# Eval("EventPostID") %>' Height="22px" Width="136px" ReadOnly="True"></asp:Label>
-                            <%--<asp:RequiredFieldValidator ID="reqgvFName" ControlToValidate="txtgvFName" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
-                      --%>  </EditItemTemplate>
+                        </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="lblFName" runat="server" Text='<%# Eval("EventPostID") %>'></asp:Label>
                         </ItemTemplate>
@@ -60,8 +59,8 @@
                     <asp:TemplateField HeaderText="Event Title">
                         <EditItemTemplate>
                             <asp:TextBox ID="EventTitleEdit" runat="server" MaxLength="30" Text='<%# Eval("EventTitle") %>' Height="22px" Width="122px"></asp:TextBox>
-                            <%--<asp:RequiredFieldValidator ID="reqgvFName" ControlToValidate="txtgvFName" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
-                      --%>  </EditItemTemplate>
+                            <asp:RequiredFieldValidator ID="reqgvTitle" ControlToValidate="EventTitleEdit" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+                        </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="lblFName" runat="server" Text='<%# Eval("EventTitle") %>'></asp:Label>
                         </ItemTemplate>
@@ -69,8 +68,8 @@
                     <asp:TemplateField HeaderText="Event Description">
                         <EditItemTemplate>
                             <asp:TextBox ID="EventDescEdit" runat="server" MaxLength="30" Text='<%# Eval("EventDesc") %>' Height="113px" TextMode="MultiLine" Width="400px"></asp:TextBox>
-                           <%-- <asp:RequiredFieldValidator ID="reqgvLName" ControlToValidate="txtgvLName" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
-                     --%>   </EditItemTemplate>
+                            <asp:RequiredFieldValidator ID="reqgvDesc" ControlToValidate="EventDescEdit" Text="(Required)" Display="Dynamic" Runat="server" Font-Bold="True" ForeColor="Red" ValidationGroup="validNewEmp"></asp:RequiredFieldValidator>
+                        </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="lblLName" runat="server" Text='<%# Eval("EventDesc") %>'></asp:Label>
                         </ItemTemplate>

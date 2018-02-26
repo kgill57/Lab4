@@ -81,23 +81,27 @@ public partial class TeamMemberPage : System.Web.UI.Page
             arrayCounter++;
         }
         con.Close();
+        Panel[] panelHeader = new Panel[arraySize];
         Panel[] panelPost = new Panel[arraySize];
+        Panel[] mainPanels = new Panel[arraySize];
         con.Open();
 
         for (int i = 0; i < arraySize; i++)
         {
+            mainPanels[i] = new Panel();
             panelPost[i] = new Panel();
+            panelHeader[i] = new Panel();
 
             Label[] labelPost = new Label[5];
 
             labelPost[0] = new Label();
 
-           if (transaction[i].getIsPrivate() == true)
-              {
-                  labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
-              }
-              else
-              {
+            if (transaction[i].getIsPrivate() == true)
+            {
+                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
+            }
+            else
+            {
 
                 SqlCommand select = new SqlCommand("SELECT [FName] + ' ' + [LName] FROM [dbo].[User] WHERE [UserID] = " + transaction[i].getGiverID(), con);
                 String giver = (String)select.ExecuteScalar();
@@ -107,9 +111,8 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
                 labelPost[0].Text = (giver + " gifted " + reciever + " $" + transaction[i].getRewardValue());
             }
-            panelPost[i].Controls.Add(labelPost[0]);
-
-            panelPost[i].Controls.Add(new LiteralControl("<br />"));
+            
+            panelHeader[i].Controls.Add(labelPost[0]);
 
             labelPost[1] = new Label();
             labelPost[1].Text = ("Value: " + transaction[i].getValue());
@@ -136,12 +139,22 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
             panelPost[i].Controls.Add(labelPost[4]);
 
-            panelPost[i].BorderStyle = BorderStyle.Solid;
+            
 
-            panelPost[i].CssClass = "postCSS";
+            mainPanels[i].CssClass = "w3 - card - 4";
+            panelHeader[i].CssClass = "w3-container w3-blue";
+            panelPost[i].CssClass = "w3-container";
 
+            mainPanels[i].Style.Add("text-align", "left");
+            panelHeader[i].Style.Add("text-align", "left");
 
-            Panel1.Controls.Add(panelPost[i]);
+            mainPanels[i].Style.Add("margin-top", "4px");
+            mainPanels[i].Style.Add("margin-bottom", "4px");
+            panelHeader[i].Style.Add("font-size", "200%");
+ 
+            Panel1.Controls.Add(mainPanels[i]);
+            mainPanels[i].Controls.Add(panelHeader[i]);
+            mainPanels[i].Controls.Add(panelPost[i]);
 
         }
 
@@ -188,7 +201,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
                 if (transaction[i].getIsPrivate() == true)
                 {
-                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
+                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
                 }
                 else
                 {
@@ -281,7 +294,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
                 if (transaction[i].getIsPrivate() == true)
                 {
-                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
+                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
                 }
                 else
                 {
@@ -370,7 +383,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
                 if (transaction[i].getIsPrivate() == true)
                 {
-                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
+                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
                 }
                 else
                 {
@@ -459,7 +472,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
                 if (transaction[i].getIsPrivate() == true)
                 {
-                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
+                    labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
                 }
                 else
                 {

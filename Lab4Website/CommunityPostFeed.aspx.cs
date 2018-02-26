@@ -64,7 +64,7 @@ public partial class CommunityPostFeed : System.Web.UI.Page
 
         SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[EventPost] ORDER BY [EventPostID] DESC", con);
 
-        // Create Scaler to see how many transactions there are
+        //Create Scaler to see how many transactions there are
         SqlCommand scaler = new SqlCommand("SELECT COUNT(EventPostID) FROM [dbo].[EventPost]", con);
 
         int arraySize = (int)scaler.ExecuteScalar();
@@ -104,7 +104,7 @@ public partial class CommunityPostFeed : System.Web.UI.Page
 
             labelPost[2] = new Label();
             dt = transaction[i].getDatePosted();
-            // Create Scaler to see how many transactions there are
+            //Create Scaler to see how many transactions there are
             SqlCommand UserName = new SqlCommand("SELECT [dbo].[User].[FName] + ' ' + [dbo].[User].[LName]  FROM [dbo].[EventPost], [dbo].[User] WHERE [dbo].[EventPost].AdminID=[dbo].[User].[UserID]"
                 + " AND [dbo].[EventPost].EventPostID=" + transaction[i].getEventPostID(), con);
 

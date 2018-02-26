@@ -133,10 +133,6 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
                 cmdInsert.ExecuteNonQuery();
 
-                cmdInsert.CommandText = "UPDATE [Employer] SET TotalBalance = TotalBalance - @RewardValue WHERE EmployerID=1";
-                cmdInsert.ExecuteNonQuery();
-                cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance + @RewardValue WHERE UserID=@ReceiverID";
-                cmdInsert.ExecuteNonQuery();
 
                 lblResult.Text = "Reward Sent.";
 

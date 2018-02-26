@@ -34,26 +34,24 @@ public partial class LoginPage : System.Web.UI.Page
         SqlCommand select = new SqlCommand();
         select.Connection = con;
 
-        // Get whether the user is currently employed or not
+        
         select.Parameters.Add(new System.Data.SqlClient.SqlParameter("@UserName", System.Data.SqlDbType.VarChar));
         select.Parameters["@UserName"].Value = txtUsername.Text;
 
         select.CommandText = "SELECT EmployedStatus FROM [User] WHERE Username = @UserName";
 
-        bool status = Convert.ToBoolean(select.ExecuteScalar());
 
+        bool status = Convert.ToBoolean(select.ExecuteScalar());
         if (status == false)
         {
             lblError.Text = "Username does not exist";
             return;
         }
 
-        // Get the user's hash for the password
         select.CommandText = "SELECT [PasswordHash] FROM [dbo].[Password] WHERE [UserID] = (SELECT [UserID] FROM [dbo].[User] WHERE [UserName] = @UserName)";
 
         String hash = (String)select.ExecuteScalar();
 
-        // Get the admin bit for the user to see if they're an admin or not
         bool admin;
         select.CommandText = "(SELECT [Admin] FROM [dbo].[User] WHERE [UserName] = @UserName)";
         admin = Convert.ToBoolean(select.ExecuteScalar());
@@ -61,17 +59,14 @@ public partial class LoginPage : System.Web.UI.Page
 
         bool verify = SimpleHash.VerifyHash(password, "MD5", hash);
 
-        // Check if the user is in the database
         if (verify)
         {
             getUser(txtUsername.Text);
 
-            // Redirect the user to a different page based on what kind of user they are
-            if (admin)
+            if(admin)
             {
                 Response.Redirect("AdminPage.aspx");
             }
-
             else
             {
                 Response.Redirect("TeamMemberPage.aspx");
@@ -95,8 +90,7 @@ public partial class LoginPage : System.Web.UI.Page
 
         select.Parameters.AddWithValue("@username", username);
 
-        // Get all the relevant attributes for the current user
-        select.CommandText = "SELECT UserID FROM [User] WHERE UserName = @username";
+        select.CommandText = "SELECT UserID  FROM [User] WHERE UserName = @username";
         Session["UserID"] = (int)select.ExecuteScalar();
 
         select.CommandText = "SELECT FName FROM [User] WHERE UserName = @username";
@@ -131,6 +125,7 @@ public partial class LoginPage : System.Web.UI.Page
         select.CommandText = "SELECT AccountBalance FROM [User] WHERE UserName = @username";
         Session["AccountBalance"] = (Convert.ToDecimal(select.ExecuteScalar()));
 
+
     }
 
     protected void btnCreateAdmin_Click(object sender, EventArgs e)
@@ -142,7 +137,6 @@ public partial class LoginPage : System.Web.UI.Page
         SqlCommand select = new SqlCommand();
         select.Connection = con;
 
-        // Make the current user an admin
         select.CommandText = "SELECT UserName FROM [dbo].[User] WHERE UserName = 'admin'";
         String existingUserName;
         existingUserName = (String)select.ExecuteScalar();
@@ -151,7 +145,7 @@ public partial class LoginPage : System.Web.UI.Page
             select.CommandText = "INSERT INTO [dbo].[Employer] VALUES('Elk Logistics', 5000)";
             select.ExecuteNonQuery();
 
-            select.CommandText = "INSERT INTO [dbo].[User] VALUES('Chris', 'J', 'Bennsky', 'Bennskych@gmail.com', 'admin', 'elk-logo.png', 1, NULL, 1, 100, 1, 'Bennsky', '2018-01-01')";
+            select.CommandText = "INSERT INTO [dbo].[User] VALUES('Chris', 'J', 'Bennsky', 'Bennskych@gmail.com', 'admin', NULL, 1, NULL, 1, 100, 1, 'Bennsky', '2018-01-01')";
             select.ExecuteNonQuery();
 
             string password = "password";

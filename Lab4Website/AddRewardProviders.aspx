@@ -19,14 +19,13 @@
             <li> <a href="/ViewRewards.aspx">View Rewards</a></li>
             <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
             <li><a href="/ManageCommunityPost.aspx">Community Events</a></li>
-            <li><a href="/AnalyticsPage.aspx"</a>View Analytics</li>
             <li><a href="/LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
     
 <center>
     <h1 class="display-4">Reward Provider Options</h1>
-    <div class="jumbotron agent-1" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
         <div style="float:left;">
             <asp:Button ID="btnAddProvider" CssClass="btn btn-primary" runat="server" OnClick="btnAddProvider_Click1" Text="Add Reward Provider" CausesValidation="False" />
             <asp:Button ID="btnClear" CssClass="btn btn-secondary" runat="server" Text="Clear" CausesValidation="False" OnClick="btnClear_Click1" />
@@ -37,11 +36,11 @@
         <asp:Panel ID="providerPanel" runat="server" Visible="false">
             <div>
                 <div class="form-group">
-                    <asp:TextBox ID="txtNewProviderName" placeholder="Provider Name" runat="server" MaxLength="50"  ></asp:TextBox>
+                    <asp:TextBox ID="txtNewProviderName" placeholder="Provider Name" runat="server"  ></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqProviderName"  ControlToValidate="txtNewProviderName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
-                    <asp:TextBox ID="txtNewProviderEmail" placeholder="Provider Email" runat="server"  TextMode="Email" MaxLength="50"></asp:TextBox>
+                    <asp:TextBox ID="txtNewProviderEmail" placeholder="Provider Email" runat="server"  TextMode="Email"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqProviderEmail" ControlToValidate="txtNewProviderEmail" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
                 </div>
                 <div>

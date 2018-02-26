@@ -20,14 +20,13 @@
             <li> <a href="/ViewRewards.aspx">View Rewards</a></li>
             <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
             <li><a href="/ManageCommunityPost.aspx">Community Events</a></li>
-            <li><a href="/AnalyticsPage.aspx"</a>View Analytics</li>
             <li><a href="/LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
     
 <center>
     <h1 class="display-4">User Options</h1>
-    <div class="jumbotron agent-1" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
         <div style="width:50%">
             <div class="form-group">
             <asp:TextBox ID="txtFName" class="form-control" runat="server" placeholder="First Name" MaxLength="30"></asp:TextBox>

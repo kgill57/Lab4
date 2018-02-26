@@ -25,6 +25,18 @@ body {
     opacity:0.88;
 }*/
 
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 80%;
+    background-color: lightblue;
+    color: white;
+    text-align: center;
+    opacity: 0.85;
+    left:186px;
+}
+
+
 #sidebar {
     position: fixed;
     top: 0px;
@@ -95,18 +107,17 @@ body {
 }
 
 .agent-1, .agent-3 {
-    opacity: inherit;
-    animation: fade-in-right ease-in-out 0.5s forwards;
+    opacity: 0;
+    animation: fade-in-right ease 1.5s forwards;
 }
 
 .agent-2 {
     transform: scaleX(0);
     transform-origin: left;
     animation: grow-left cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.5s forwards;
-    animation-delay: 0.05s;
+    animation-delay: 0.4s;
 }
 
 .agent-3 {
     animation-delay: 0.5s;
 }
-

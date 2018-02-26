@@ -17,17 +17,6 @@ public partial class BuyRewards : System.Web.UI.Page
     public static int arraySize;
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Show the user's name and account balance in sidebar
-        try
-        {
-            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
-        }
-
-        catch (Exception)
-        {
-            Response.Redirect("LoginPage.aspx");
-        }
-
         createRewardFeed();
         loadProfilePicture();
     }
@@ -124,9 +113,7 @@ public partial class BuyRewards : System.Web.UI.Page
     {
 
         if (checkFunds() == false)
-        {
             return;
-        }
 
         SqlConnection con = new SqlConnection();
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
@@ -135,11 +122,13 @@ public partial class BuyRewards : System.Web.UI.Page
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = con;
         cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
+        bool itemSelected = false;
 
         for (int i = 0; i < arraySize; i++)
-        {         
+        {
             if (chkBuy[i].Checked == true)
             {
+                itemSelected = true;
                 cmd.CommandText = "INSERT INTO RewardEarned (UserID, RewardID, DateClaimed) VALUES (@userID, @rewardID, @dateClaimed)";
                 cmd.Parameters.AddWithValue("@rewardID", reward[i].getRewardID());
                 cmd.Parameters.AddWithValue("@dateClaimed", DateTime.Today.Date);
@@ -171,21 +160,35 @@ public partial class BuyRewards : System.Web.UI.Page
                 Session["AccountBalance"] = (decimal)Session["AccountBalance"] - Convert.ToDecimal(reward[i].getRewardAmount());
             }
         }
-        lblResult.Text = "Reward Claimed!";
+
+        if(itemSelected == true)
+        {
+            lblResult.Text = "Reward Claimed!";
+            createRewardFeed();
+        }
+        else
+        {
+            lblResult.Text = "Please Select An Item";
+        }
+        
+
         con.Close();
+
 
     }
 
     public void createRewardFeed()
     {
+        Panel1.Controls.Clear();
+
         SqlConnection con = new SqlConnection();
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
-        SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[Reward] ORDER BY [RewardID] DESC", con);
+        SqlCommand read = new SqlCommand("SELECT * FROM [dbo].[Reward] WHERE [RewardQuantity] > 0 ORDER BY [RewardID] DESC", con);
 
-        // Create Scaler to see how many rewards there are
-        SqlCommand scaler = new SqlCommand("SELECT COUNT(RewardID) FROM [dbo].[Reward]", con);
+        //Create Scaler to see how many rewards there are
+        SqlCommand scaler = new SqlCommand("SELECT COUNT(RewardID) FROM [dbo].[Reward] WHERE [RewardQuantity] > 0", con);
         arraySize = (int)scaler.ExecuteScalar();
 
         SqlDataReader reader = read.ExecuteReader();
@@ -193,58 +196,65 @@ public partial class BuyRewards : System.Web.UI.Page
         reward = new Reward[arraySize];
         int arrayCounter = 0;
 
-        while (reader.Read())
+        if(arraySize != 0)
         {
-            reward[arrayCounter] = new Reward(Convert.ToInt32(reader.GetValue(0)), Convert.ToString(reader.GetValue(1)),
-                Convert.ToInt32(reader.GetValue(2)), Convert.ToDouble(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4)), Convert.ToInt32(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6)));
-            arrayCounter++;
+
+        
+            while (reader.Read())
+            {
+                reward[arrayCounter] = new Reward(Convert.ToInt32(reader.GetValue(0)), Convert.ToString(reader.GetValue(1)),
+                    Convert.ToInt32(reader.GetValue(2)), Convert.ToDouble(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4)), Convert.ToInt32(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6)));
+                arrayCounter++;
+            }
+
+            con.Close();
+            panelPost = new Panel[arraySize];
+            chkBuy = new CheckBox[arraySize];
+            con.Open();
+
+            for (int i = 0; i < arraySize; i++)
+            {
+                panelPost[i] = new Panel();
+                Label[] labelPost = new Label[4];
+
+
+                labelPost[0] = new Label();
+                labelPost[0].Text = "Reward Name: " + reward[i].getRewardName();
+
+                panelPost[i].Controls.Add(labelPost[0]);
+
+                panelPost[i].Controls.Add(new LiteralControl("<br />"));
+
+                labelPost[1] = new Label();
+                labelPost[1].Text = "Reward Quantity: " + reward[i].getRewardQuantity();
+
+                panelPost[i].Controls.Add(new LiteralControl("<br />"));
+
+                panelPost[i].Controls.Add(labelPost[1]);
+
+                labelPost[2] = new Label();
+                labelPost[2].Text = "Reward Amount: " + reward[i].getRewardAmount();
+
+                panelPost[i].Controls.Add(new LiteralControl("<br />"));
+
+                panelPost[i].Controls.Add(labelPost[2]);
+
+                panelPost[i].Controls.Add(new LiteralControl("<br />"));
+
+                chkBuy[i] = new CheckBox();
+                chkBuy[i].AutoPostBack = true;
+                panelPost[i].Controls.Add(chkBuy[i]);
+
+                panelPost[i].Controls.Add(new LiteralControl("<br />"));
+
+
+                panelPost[i].BorderStyle = BorderStyle.Solid;
+
+                panelPost[i].CssClass = "postCSS";
+
+                Panel1.Controls.Add(panelPost[i]);
+            }
+            con.Close();
         }
-
-        con.Close();
-        panelPost = new Panel[arraySize];
-        chkBuy = new CheckBox[arraySize];
-        con.Open();
-
-        for (int i = 0; i < arraySize; i++)
-        {
-            panelPost[i] = new Panel();
-            Label[] labelPost = new Label[4];
-
-            labelPost[0] = new Label();
-            labelPost[0].Text = "Reward Name: " + reward[i].getRewardName();
-
-            panelPost[i].Controls.Add(labelPost[0]);
-
-            panelPost[i].Controls.Add(new LiteralControl("<br />"));
-
-            labelPost[1] = new Label();
-            labelPost[1].Text = "Reward Quantity: " + reward[i].getRewardQuantity();
-
-            panelPost[i].Controls.Add(new LiteralControl("<br />"));
-
-            panelPost[i].Controls.Add(labelPost[1]);
-
-            labelPost[2] = new Label();
-            labelPost[2].Text = "Reward Value: $" + reward[i].getRewardAmount();
-
-            panelPost[i].Controls.Add(new LiteralControl("<br />"));
-
-            panelPost[i].Controls.Add(labelPost[2]);
-
-            panelPost[i].Controls.Add(new LiteralControl("<br />"));
-
-            chkBuy[i] = new CheckBox();
-            panelPost[i].Controls.Add(chkBuy[i]);
-
-            panelPost[i].Controls.Add(new LiteralControl("<br />"));
-
-
-            panelPost[i].BorderStyle = BorderStyle.Solid;
-
-            panelPost[i].CssClass = "postCSS";
-
-            Panel1.Controls.Add(panelPost[i]);
-        }
-        con.Close();
     }
 }

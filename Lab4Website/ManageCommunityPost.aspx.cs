@@ -11,14 +11,11 @@ public partial class ManageCommunityPost : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Show the user's name in sidebar
         lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
 
-        // On initial page load, fill the gridview
         if (!IsPostBack)
             fillGridView();
 
-        // Show the user's profile picture in sidebar
         loadProfilePicture();
     }
 
@@ -35,9 +32,10 @@ public partial class ManageCommunityPost : System.Web.UI.Page
 
         try
         {
+
             SqlCommand select = new SqlCommand();
             select.Connection = con;
-            // Get the user's current profile picture
+
             select.CommandText = "SELECT ProfilePicture FROM [dbo].[User] WHERE UserID =" + Convert.ToString((int)Session["UserID"]);
             string currentPicture = (String)select.ExecuteScalar();
 
@@ -63,15 +61,16 @@ public partial class ManageCommunityPost : System.Web.UI.Page
             SqlCommand select = new SqlCommand();
             select.Connection = con;
 
-            // Insert a new community post
             select.CommandText = "INSERT INTO [dbo].[EventPost] VALUES(@EventTitle, " +
                 " @EventDesc, '" + DateTime.Today.ToString() + "', " + (int)Session["UserID"] + ")";
 
             select.Parameters.Add(new SqlParameter("@EventTitle", SqlDbType.VarChar));
-            select.Parameters["@EventTitle"].Value = txtEventName.Text;
+            select.Parameters["@EventTitle"].Value = txtFName.Text;
 
             select.Parameters.Add(new SqlParameter("@EventDesc", SqlDbType.VarChar));
-            select.Parameters["@EventDesc"].Value = txtEventDesc.Text;
+            select.Parameters["@EventDesc"].Value = txtLName.Text;
+
+
 
             select.ExecuteNonQuery();
 
@@ -88,11 +87,13 @@ public partial class ManageCommunityPost : System.Web.UI.Page
     {
         try
         {
+
+
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
             sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
-            // Declare the query string
+            // Declare the query string.
 
             System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT " +
                 "* FROM [EventPost];", sc);
@@ -126,8 +127,8 @@ public partial class ManageCommunityPost : System.Web.UI.Page
             sc.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
             sc.Open();
+            //Declare the query string.
 
-            // Declare the query string
             System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("DELETE" +
                 " FROM [EventPost] WHERE EventPostID = @EventPostID;", sc);
             del.Parameters.AddWithValue("@EventPostID", Convert.ToInt32(grdUsers.DataKeys[e.RowIndex].Value.ToString()));
@@ -182,7 +183,7 @@ public partial class ManageCommunityPost : System.Web.UI.Page
         {
 
             sc.Open();
-            // Declare the query string
+            // Declare the query string.
             try
             {
                 System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("UPDATE [EventPost] SET EventTitle=@EventTitle, " +
@@ -211,7 +212,8 @@ public partial class ManageCommunityPost : System.Web.UI.Page
 
     protected void btnAutoFillUser_Click(object sender, EventArgs e)
     {
-        txtEventName.Text = "Test Event";
-        txtEventDesc.Text = "Test Event Description";
+        txtFName.Text = "Test Event";
+        txtLName.Text = "Test Event Description";
+
     }
 }

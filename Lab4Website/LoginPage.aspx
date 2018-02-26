@@ -27,7 +27,8 @@
                 <asp:Button CssClass="btn btn-primary" runat="server" Text="Login" OnClick="btnLogin_Click" />
                 <asp:Button CssClass="btn btn-secondary" runat="server" OnClick="btnExit_Click" Text="Exit" />
                 <asp:Button CssClass="btn btn-secondary" runat="server" OnClick="btnCreateAdmin_Click" Text="Create Admin" />
-                <asp:Label ID="lblError" runat="server"></asp:Label>
+                <br /><br />
+                <asp:Label ID="lblError" Font-Bold="true" ForeColor="Red" runat="server"></asp:Label>
             </div>
         </div>
         <div class="col-lg-4"></div>

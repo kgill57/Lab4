@@ -155,10 +155,11 @@ public partial class LoginPage : System.Web.UI.Page
 
             select.CommandText = "INSERT INTO[dbo].[Password] Values (1, '" + passwordHashNew + "')";
             select.ExecuteNonQuery();
+            lblError.Text = "Admin created!";
         }
         else
         {
-            lblError.Text = "This username is already taken";
+            lblError.Text = "An admin has already been created.";
         }
         
         

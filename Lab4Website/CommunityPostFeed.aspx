@@ -25,7 +25,7 @@
 
 <center>
     <h1 class="display-4">Community Events</h1>
-    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <div class="jumbotron jumbotron-fluid agent-1" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
         <div>
             <asp:Panel ID="Panel1" runat="server">
             </asp:Panel>

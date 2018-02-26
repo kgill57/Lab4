@@ -27,7 +27,7 @@
     
 <center>
     <h1 class="display-4">Community Events</h1>
-    <div class="jumbotron jumbotron-fluid" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px;">
+    <div class="jumbotron agent-1" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px;">
         <br />
         <br />
         <div style="width:50%;">

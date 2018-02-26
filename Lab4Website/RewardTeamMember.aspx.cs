@@ -237,7 +237,15 @@ public partial class RewardTeamMember : System.Web.UI.Page
             Body = body
         })
         {
-            smtp.Send(message);
+            try
+            {
+                smtp.Send(message);
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 

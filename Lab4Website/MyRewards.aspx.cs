@@ -32,110 +32,60 @@ public partial class MyRewards : System.Web.UI.Page
         read.Parameters.AddWithValue("@UserID", (int)Session["UserID"]);
         SqlDataReader reader = read.ExecuteReader();
         Panel[] panel = new Panel[size];
+        Panel[] panelHeader = new Panel[size];
+        Panel[] panelText = new Panel[size];
         int counter = 0;
         
         while (reader.Read())
         {
             panel[counter] = new Panel();
+            panelHeader[counter] = new Panel();
+            panelText[counter] = new Panel();
 
             Label[] lblArray = new Label[3];
 
             lblArray[0] = new Label();
 
             lblArray[0].Text = "Reward: " + (String)reader.GetValue(0);
-            panel[counter].Controls.Add(lblArray[0]);
-
-            panel[counter].Controls.Add(new LiteralControl("<br />"));
+            panelHeader[counter].Controls.Add(lblArray[0]);
 
             lblArray[1] = new Label();
 
             lblArray[1].Text = "Value: $" + ((Decimal)reader.GetValue(1)).ToString("0.##");
 
-            panel[counter].Controls.Add(lblArray[1]);
+            panelText[counter].Controls.Add(lblArray[1]);
 
-            panel[counter].Controls.Add(new LiteralControl("<br />"));
+            panelText[counter].Controls.Add(new LiteralControl("<br />"));
 
             lblArray[2] = new Label();
 
             DateTime date = (DateTime)reader.GetValue(2);
 
             lblArray[2].Text = "Purchase Date: " + Convert.ToString(date.Month) + "/" + Convert.ToString(date.Day) + "/" + Convert.ToString(date.Year);
+            panelText[counter].Controls.Add(lblArray[2]);
 
-            panel[counter].Controls.Add(lblArray[2]);
+            panel[counter].CssClass = "w3 - card - 4";
+            panelHeader[counter].CssClass = "w3-container w3-blue";
+            panelText[counter].CssClass = "w3-container";
+
+            panelText[counter].Style.Add("text-align", "left");
+            panelHeader[counter].Style.Add("text-align", "left");
+
+            panel[counter].Style.Add("margin-top", "4px");
+            panel[counter].Style.Add("margin-bottom", "16px");
+            panelHeader[counter].Style.Add("font-size", "200%");
+
+            
 
             Panel1.Controls.Add(panel[counter]);
-
-            panel[counter].BorderStyle = BorderStyle.Solid;
-
-            panel[counter].CssClass = "postCSS";
+            panel[counter].Controls.Add(panelHeader[counter]);
+            panel[counter].Controls.Add(panelText[counter]);
 
             counter++;
 
 
         }
 
-
-
-
-
-        //for (int i = 0; i < arraySize; i++)
-        //{
-        //    panelPost[i] = new Panel();
-
-        //    Label[] labelPost = new Label[5];
-
-        //    labelPost[0] = new Label();
-
-        //    if (transaction[i].getIsPrivate() == true)
-        //    {
-        //        labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
-        //    }
-        //    else
-        //    {
-
-        //        SqlCommand select = new SqlCommand("SELECT [FName] + ' ' + [LName] FROM [dbo].[User] WHERE [UserID] = " + transaction[i].getGiverID(), con);
-        //        String giver = (String)select.ExecuteScalar();
-
-        //        select.CommandText = "SELECT [FName] + ' ' + [LName] FROM [dbo].[User] WHERE [UserID] = " + transaction[i].getReceiverID();
-        //        String reciever = (String)select.ExecuteScalar();
-
-        //        labelPost[0].Text = (giver + " gifted " + reciever + " $" + transaction[i].getRewardValue());
-        //    }
-        //    panelPost[i].Controls.Add(labelPost[0]);
-
-        //    panelPost[i].Controls.Add(new LiteralControl("<br />"));
-
-        //    labelPost[1] = new Label();
-        //    labelPost[1].Text = ("Value: " + transaction[i].getValue());
-        //    panelPost[i].Controls.Add(labelPost[1]);
-
-        //    panelPost[i].Controls.Add(new LiteralControl("<br />"));
-
-        //    labelPost[2] = new Label();
-        //    labelPost[2].Text = ("Category: " + transaction[i].getCategory());
-        //    panelPost[i].Controls.Add(labelPost[2]);
-
-        //    panelPost[i].Controls.Add(new LiteralControl("<br />"));
-
-        //    labelPost[3] = new Label();
-        //    labelPost[3].Text = ("Description: " + transaction[i].getDescription());
-        //    panelPost[i].Controls.Add(labelPost[3]);
-
-        //    panelPost[i].Controls.Add(new LiteralControl("<br />"));
-
-        //    labelPost[4] = new Label();
-
-        //    TimeSpan difference = DateTime.Now - transaction[i].getPostDate();
-        //    labelPost[4].Text = "Posted " + Convert.ToString((int)difference.TotalMinutes) + " Minutes Ago";
-
-        //    panelPost[i].Controls.Add(labelPost[4]);
-
-        //    panelPost[i].BorderStyle = BorderStyle.Solid;
-
-        //    panelPost[i].CssClass = "postCSS";
-
-
-        //    Panel1.Controls.Add(panelPost[i]);
     }
 
     protected void loadProfilePicture()

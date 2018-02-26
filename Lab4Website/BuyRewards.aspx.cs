@@ -20,32 +20,7 @@ public partial class BuyRewards : System.Web.UI.Page
         createRewardFeed();
         loadProfilePicture();
     }
-
-    // Only for testing btnBuy functionality
-    void GreetingBtn_Click(Object sender,
-                           EventArgs e)
-    {
-        // When the button is clicked,
-        // change the button text, and disable it.
-
-        Button clickedButton = (Button)sender;
-        clickedButton.Text = "...button clicked...";
-        clickedButton.Enabled = false;
-
-        //testing update to the database
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
-        con.Open();
-
-        SqlCommand cmd = new SqlCommand("UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @rewardID", con);
-        cmd.Parameters.AddWithValue("@rewardID", 3);
-
-        cmd.ExecuteNonQuery();
-
-        con.Close();
-
-
-    }
+    
 
     protected void loadProfilePicture()
     {
@@ -89,20 +64,20 @@ public partial class BuyRewards : System.Web.UI.Page
         cmd.CommandText = "SELECT AccountBalance FROM [User] WHERE UserID = @userID";
         cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
         double balance = Convert.ToDouble(cmd.ExecuteScalar());
-
+        double transactionTotal = 0;
         for (int i = 0; i < reward.Length; i++)
         {
             if(chkBuy[i].Checked == true)
             {
-                if (balance < reward[i].getRewardAmount())
-                {
-                    lblResult.Text = "insufficient Funds.";
-                    valid = false;
-                }
+                transactionTotal += reward[i].getRewardAmount();
             }
             
         }
-
+        if (balance < transactionTotal)
+        {
+            lblResult.Text = "insufficient Funds.";
+            valid = false;
+        }
         con.Close();
 
         return valid;
@@ -119,9 +94,7 @@ public partial class BuyRewards : System.Web.UI.Page
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
-        SqlCommand cmd = new SqlCommand();
-        cmd.Connection = con;
-        cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
+        
         bool itemSelected = false;
 
         for (int i = 0; i < arraySize; i++)
@@ -129,7 +102,10 @@ public partial class BuyRewards : System.Web.UI.Page
             if (chkBuy[i].Checked == true)
             {
                 itemSelected = true;
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
                 cmd.CommandText = "INSERT INTO RewardEarned (UserID, RewardID, DateClaimed) VALUES (@userID, @rewardID, @dateClaimed)";
+                cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
                 cmd.Parameters.AddWithValue("@rewardID", reward[i].getRewardID());
                 cmd.Parameters.AddWithValue("@dateClaimed", DateTime.Today.Date);
                 cmd.ExecuteNonQuery();
@@ -142,6 +118,8 @@ public partial class BuyRewards : System.Web.UI.Page
         {
             if (chkBuy[i].Checked == true)
             {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
                 cmd.CommandText = "UPDATE [Reward] SET RewardQuantity = RewardQuantity - 1 WHERE RewardID = @reward";
                 cmd.Parameters.AddWithValue("@reward", reward[i].getRewardID());
                 cmd.ExecuteNonQuery();
@@ -152,9 +130,11 @@ public partial class BuyRewards : System.Web.UI.Page
         {
             if(chkBuy[i].Checked == true)
             {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
                 cmd.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance - @rewardAmount WHERE UserID = @userID";
+                cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
                 cmd.Parameters.AddWithValue("@rewardAmount", reward[i].getRewardAmount());
-                //cmd.Parameters.AddWithValue("@userID", (int)Session["UserID"]);
                 cmd.ExecuteNonQuery();
 
                 Session["AccountBalance"] = (decimal)Session["AccountBalance"] - Convert.ToDecimal(reward[i].getRewardAmount());
@@ -210,49 +190,66 @@ public partial class BuyRewards : System.Web.UI.Page
             con.Close();
             panelPost = new Panel[arraySize];
             chkBuy = new CheckBox[arraySize];
+            Panel[] panelText = new Panel[arraySize];
+            Panel[] panelHeader = new Panel[arraySize];
+            Panel[] panelFooter = new Panel[arraySize];
             con.Open();
 
             for (int i = 0; i < arraySize; i++)
             {
                 panelPost[i] = new Panel();
+                panelHeader[i] = new Panel();
+                panelFooter[i] = new Panel();
+                panelText[i] = new Panel();
                 Label[] labelPost = new Label[4];
 
 
                 labelPost[0] = new Label();
                 labelPost[0].Text = "Reward Name: " + reward[i].getRewardName();
 
-                panelPost[i].Controls.Add(labelPost[0]);
+                panelHeader[i].Controls.Add(labelPost[0]);
 
-                panelPost[i].Controls.Add(new LiteralControl("<br />"));
 
                 labelPost[1] = new Label();
-                labelPost[1].Text = "Reward Quantity: " + reward[i].getRewardQuantity();
+                labelPost[1].Text = "Reward Quantity: " + reward[i].getRewardQuantity() + " available";
 
-                panelPost[i].Controls.Add(new LiteralControl("<br />"));
 
-                panelPost[i].Controls.Add(labelPost[1]);
+                panelText[i].Controls.Add(labelPost[1]);
 
                 labelPost[2] = new Label();
-                labelPost[2].Text = "Reward Amount: " + reward[i].getRewardAmount();
+                labelPost[2].Text = "Reward Amount: $" + reward[i].getRewardAmount();
 
-                panelPost[i].Controls.Add(new LiteralControl("<br />"));
+                panelText[i].Controls.Add(new LiteralControl("<br />"));
 
-                panelPost[i].Controls.Add(labelPost[2]);
-
-                panelPost[i].Controls.Add(new LiteralControl("<br />"));
+                panelText[i].Controls.Add(labelPost[2]);
 
                 chkBuy[i] = new CheckBox();
                 chkBuy[i].AutoPostBack = true;
-                panelPost[i].Controls.Add(chkBuy[i]);
+                panelFooter[i].Controls.Add(chkBuy[i]);
 
-                panelPost[i].Controls.Add(new LiteralControl("<br />"));
+                labelPost[3] = new Label();
+                labelPost[3].Text = " Check The Box To Select Item";
+                panelFooter[i].Controls.Add(labelPost[3]);
 
+                panelText[i].CssClass = "w3-container";
+                panelHeader[i].CssClass = "w3-container w3-blue";
+                panelFooter[i].CssClass = "w3-container w3-blue";
+                panelPost[i].CssClass = "w3 - card - 4";
 
-                panelPost[i].BorderStyle = BorderStyle.Solid;
+                panelPost[i].Style.Add("text-align", "left");
+                panelHeader[i].Style.Add("text-align", "left");
+                panelFooter[i].Style.Add("text-align", "left");
 
-                panelPost[i].CssClass = "postCSS";
+                panelPost[i].Style.Add("margin-top", "4px");
+                panelPost[i].Style.Add("margin-bottom", "16px");
+                panelHeader[i].Style.Add("font-size", "200%");
+                panelFooter[i].Style.Add("padding", "4px");
+                panelFooter[i].Style.Add("padding-left", "15px");
 
                 Panel1.Controls.Add(panelPost[i]);
+                panelPost[i].Controls.Add(panelHeader[i]);
+                panelPost[i].Controls.Add(panelText[i]);
+                panelPost[i].Controls.Add(panelFooter[i]);
             }
             con.Close();
         }

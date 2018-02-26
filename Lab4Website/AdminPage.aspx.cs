@@ -87,12 +87,16 @@ public partial class AdminPage : System.Web.UI.Page
         }
 
         con.Close();
+        Panel[] panelHeader = new Panel[arraySize];
         Panel[] panelPost = new Panel[arraySize];
+        Panel[] mainPanels = new Panel[arraySize];
         con.Open();
 
         for (int i = 0; i < arraySize; i++)
         {
+            mainPanels[i] = new Panel();
             panelPost[i] = new Panel();
+            panelHeader[i] = new Panel();
 
             Label[] labelPost = new Label[5];
 
@@ -114,45 +118,50 @@ public partial class AdminPage : System.Web.UI.Page
 
                 labelPost[0].Text = (giver + " gifted " + reciever + " $" + transaction[i].getRewardValue());
             }
-            panelPost[i].Controls.Add(labelPost[0]);
-            labelPost[0].Style.Add("padding-left", "10px");
 
-            panelPost[i].Controls.Add(new LiteralControl("<br />"));
+            panelHeader[i].Controls.Add(labelPost[0]);
 
             labelPost[1] = new Label();
             labelPost[1].Text = ("Value: " + transaction[i].getValue());
             panelPost[i].Controls.Add(labelPost[1]);
-            labelPost[1].Style.Add("padding-left", "10px");
 
             panelPost[i].Controls.Add(new LiteralControl("<br />"));
 
             labelPost[2] = new Label();
             labelPost[2].Text = ("Category: " + transaction[i].getCategory());
             panelPost[i].Controls.Add(labelPost[2]);
-            labelPost[2].Style.Add("padding-left", "10px");
 
             panelPost[i].Controls.Add(new LiteralControl("<br />"));
 
             labelPost[3] = new Label();
             labelPost[3].Text = ("Description: " + transaction[i].getDescription());
             panelPost[i].Controls.Add(labelPost[3]);
-            labelPost[3].Style.Add("padding-left", "10px");
 
             panelPost[i].Controls.Add(new LiteralControl("<br />"));
 
             labelPost[4] = new Label();
+
             TimeSpan difference = DateTime.Now - transaction[i].getPostDate();
             labelPost[4].Text = "Posted " + Convert.ToString((int)difference.TotalMinutes) + " Minutes Ago";
+
             panelPost[i].Controls.Add(labelPost[4]);
-            labelPost[4].Style.Add("padding-left", "10px");
-
-            panelPost[i].BorderStyle = BorderStyle.Solid;
-            panelPost[i].Style.Add("padding", "10px");
-
-            panelPost[i].CssClass = "postCSS";
 
 
-            Panel1.Controls.Add(panelPost[i]);
+
+            mainPanels[i].CssClass = "w3 - card - 4";
+            panelHeader[i].CssClass = "w3-container w3-blue";
+            panelPost[i].CssClass = "w3-container";
+
+            mainPanels[i].Style.Add("text-align", "left");
+            panelHeader[i].Style.Add("text-align", "left");
+
+            mainPanels[i].Style.Add("margin-top", "4px");
+            mainPanels[i].Style.Add("margin-bottom", "16px");
+            panelHeader[i].Style.Add("font-size", "200%");
+
+            Panel1.Controls.Add(mainPanels[i]);
+            mainPanels[i].Controls.Add(panelHeader[i]);
+            mainPanels[i].Controls.Add(panelPost[i]);
         }
 
         con.Close();

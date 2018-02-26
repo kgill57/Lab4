@@ -3,6 +3,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <link href="Style/desktop.css" rel="stylesheet" />
     <link href="Style/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="Scripts/Sidebar.js"></script>
     <div id ="sidebar">
         <div class="toggle-btn" onclick="toggleSidebar();">
@@ -25,7 +26,7 @@
 <center>
     <h1 class="display-4">My Rewards</h1>
     <div class="jumbotron jumbotron-fluid" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px;">
-        <div Style ="width:75%; padding-top: 50px;">
+        <div class="container" Style ="width:75%; padding-top: 50px;">
             <asp:Panel ID="Panel1" runat="server"></asp:Panel>
         </div>
     </div>

@@ -44,7 +44,7 @@ public partial class LoginPage : System.Web.UI.Page
         bool status = Convert.ToBoolean(select.ExecuteScalar());
         if (status == false)
         {
-            lblError.Text = "Username does not exist";
+            lblError.Text = "Username does not exist.";
             return;
         }
 

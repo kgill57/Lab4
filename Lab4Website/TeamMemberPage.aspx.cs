@@ -41,7 +41,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
         }
         catch (Exception)
         {
-            Response.Redirect("LoginPage.aspx");
+            Response.Redirect("Default.aspx");
         }
 
 
@@ -110,7 +110,7 @@ public partial class TeamMemberPage : System.Web.UI.Page
 
             if (transaction[i].getIsPrivate() == true)
             {
-                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous");
+                labelPost[0].Text = ("Anonymous" + " gifted " + "Anonymous $" + transaction[i].getRewardValue());
             }
             else
             {

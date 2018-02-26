@@ -18,7 +18,7 @@ public partial class UserOptions : System.Web.UI.Page
         }
         catch (Exception)
         {
-            Response.Redirect("LoginPage.aspx");
+            Response.Redirect("Default.aspx");
         }
 
         // On initial page load, fill the gridview with all users in the database

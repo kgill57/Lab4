@@ -19,7 +19,7 @@ public partial class CommunityPostFeed : System.Web.UI.Page
         }
         catch (Exception)
         {
-            Response.Redirect("LoginPage.aspx");
+            Response.Redirect("Default.aspx");
         }
 
         if (!IsPostBack)

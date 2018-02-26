@@ -19,6 +19,20 @@ public partial class BuyRewards : System.Web.UI.Page
     {
         createRewardFeed();
         loadProfilePicture();
+
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+
+        // Show user's name and balance in sidebar
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+
+        catch (Exception)
+        {
+            Response.Redirect("Default.aspx");
+        }
     }
 
 

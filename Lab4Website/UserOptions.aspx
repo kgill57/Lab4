@@ -21,7 +21,7 @@
             <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
             <li><a href="AnalyticsPage.aspx">View Analytics</a></li>
             <li><a href="/ManageCommunityPost.aspx">Community Events</a></li>
-            <li><a href="/LoginPage.aspx">Logout</a></li>
+            <li><a href="/Default.aspx">Logout</a></li>
         </ul>
     </div>
     

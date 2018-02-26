@@ -14,13 +14,15 @@
             <span></span>
         </div>
         <ul>
+            <li><asp:Image ID ="profilePicture" Height ="120px" Width ="120px" runat ="server"/></li>
             <li> <asp:Label ID="lblUser" runat="server" Text=""></asp:Label></li>
-            <li><a href="TeamMemberPage.aspx">Home</a></li>
-            <li> <a href="RewardTeamMember.aspx">Reward Team Member</a></li>
-            <li> <a href="BuyRewards.aspx">Buy Rewards</a></li>
-            <li> <a href="MyRewards.aspx">My Rewards</a></li>
-            <li><a href="CommunityPostFeed.aspx">Commuity Post Feed</a></li>
-            <li><a href="AccountSettingTeamMember.aspx">Account Settings</a></li>
+            <li><asp:Label ID="lblBalance" runat="server" ></asp:Label></li>
+            <li><a href="AdminPage.aspx">Home</a></li>
+            <li> <a href ="/UserOptions.aspx">User Options</a></li>
+            <li> <a href="/ViewRewards.aspx">View Rewards</a></li>
+            <li> <a href ="/AddRewardProviders.aspx">View Reward Providers</a></li>
+            <li><a href="AnalyticsPage.aspx">View Analytics</a></li>
+            <li><a href="/ManageCommunityPost.aspx">Community Events</a></li>
             <li><a href="/LoginPage.aspx">Logout</a></li>
         </ul>
     </div>
@@ -31,21 +33,22 @@
         <br />
         <div>
             <asp:DropDownList ID="giverAndReceiver" runat="server" OnSelectedIndexChanged="giverAndReceiver_SelectedIndexChanged" AutoPostBack="True" Width="476px">
-                <asp:ListItem>Amount of each Reward</asp:ListItem>
+                <asp:ListItem>Sales per Reward</asp:ListItem>
                 <asp:ListItem>Account Balance per User</asp:ListItem>
+                <asp:ListItem>Top Reward's Received</asp:ListItem>
             </asp:DropDownList>
         </div>
         <br />
         <div class="container" style="padding-top: -20px;">
             <asp:Chart ID="Chart1" runat="server" DataSourceID="lab4ConnectionString" Height="489px" Width="1020px"> 
                 <Series>
-                    <asp:Series Name="Series1" XValueMember="RewardName" YValueMembers="RewardQuantity"></asp:Series>
+                    <asp:Series Name="Series1" XValueMember="RewardName" YValueMembers="Sales"></asp:Series>
                 </Series>
                 <ChartAreas>
                     <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
                 </ChartAreas>
             </asp:Chart>
-            <asp:SqlDataSource ID="lab4connectionstring" runat="server" ConnectionString="<%$ ConnectionStrings:lab4ConnectionString %>" SelectCommand="SELECT [RewardName], [RewardQuantity] FROM [Reward]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="lab4connectionstring" runat="server" ConnectionString="<%$ ConnectionStrings:lab4ConnectionString %>" SelectCommand="SELECT Reward.RewardName, COUNT(RewardEarned.RewardID) AS Sales FROM Reward, RewardEarned GROUP BY Reward.RewardName"></asp:SqlDataSource>
             
             <asp:Chart ID="Chart2" runat="server" DataSourceID="SqlDataSource1"  Height="489px" Width="1020px">
                 <Series>
@@ -57,6 +60,15 @@
             </asp:Chart>
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:lab4ConnectionString %>" SelectCommand="SELECT [AccountBalance], [UserName] FROM [User]"></asp:SqlDataSource>
            
+            <asp:Chart ID="Chart3" runat="server" DataSourceID="lab4ConnectionString" Height="489px" Width="1020px">
+                <Series>
+                    <asp:Series Name="Series1" XValueMember="TeamMember" YValueMembers="RewardsReceived"></asp:Series>
+                </Series>
+                <ChartAreas>
+                    <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+                </ChartAreas>
+            </asp:Chart>
+            <asp:SqlDataSource ID="lab4ConnectionString1" runat="server" ConnectionString="<%$ ConnectionStrings:lab4ConnectionString %>" SelectCommand="SELECT CONCAT([User].FName, + ' ' + [User].LName) AS TeamMember, COUNT([Transaction].ReceiverID) AS RewardsReceived FROM [User], [Transaction] GROUP BY [User].FName, [User].LName"></asp:SqlDataSource>
         </div>
     </div>
 </center>

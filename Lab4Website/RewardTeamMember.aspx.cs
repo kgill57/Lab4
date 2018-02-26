@@ -220,7 +220,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
         const string fromPassword = "Daisydoo#1pet";
         const string subject = "You Received a Reward From a Co-Worker!";
         const string body = "Dear Team Member, You have received a reward from a fellow Team member. Login to find out who rewarded you!";
-            
+
 
         var smtp = new SmtpClient
         {

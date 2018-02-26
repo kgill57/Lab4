@@ -27,6 +27,7 @@ public partial class AnalyticsPage : System.Web.UI.Page
         {
             Chart2.Visible = false;
             Chart1.Visible = true;
+            Chart3.Visible = false;
 
         }
 
@@ -40,12 +41,20 @@ public partial class AnalyticsPage : System.Web.UI.Page
         {
             Chart2.Visible = false;
             Chart1.Visible = true;
+            Chart3.Visible = false;
         }
 
         else if (giverAndReceiver.SelectedIndex == 1)
         {
             Chart1.Visible = false;
             Chart2.Visible = true;
+            Chart3.Visible = false;
+        }
+        else if(giverAndReceiver.SelectedIndex == 2)
+        {
+            Chart1.Visible = false;
+            Chart2.Visible = false;
+            Chart3.Visible = true;
         }
     }
 }

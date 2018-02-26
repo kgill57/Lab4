@@ -178,7 +178,7 @@ public partial class BuyRewards : System.Web.UI.Page
         }
         else
         {
-            lblResult.Text = "Please select an item";
+            lblResult.Text = "Please select an item.";
         }
 
 

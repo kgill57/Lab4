@@ -38,11 +38,11 @@
             <div>
                 <div class="form-group">
                     <asp:TextBox ID="txtNewProviderName" placeholder="Provider Name" runat="server"  ></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqProviderName"  ControlToValidate="txtNewProviderName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="reqProviderName"  ControlToValidate="txtNewProviderName" Text="(Required)" runat="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
                     <asp:TextBox ID="txtNewProviderEmail" placeholder="Provider Email" runat="server"  TextMode="Email"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqProviderEmail" ControlToValidate="txtNewProviderEmail" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="reqProviderEmail" ControlToValidate="txtNewProviderEmail" Text="(Required)" runat="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div>
                     <asp:Button ID="btnAdd" CssClass="btn btn-primary" runat="server" OnClick="btnAdd_Click1" Text="Add"  />

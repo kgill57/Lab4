@@ -39,20 +39,20 @@
             <div style="width:50%;">
                 <div class="form-group">
                     <asp:TextBox ID="txtRewardName" CssClass="form-control" placeholder="Reward Name" runat="server" ></asp:TextBox>
-                    <asp:RequiredFieldValidator id="reqRewardName" ControlToValidate="txtRewardName" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator id="reqRewardName" ControlToValidate="txtRewardName" Text="(Required)" runat="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
                     <asp:TextBox ID="txtRewardQuantity" CssClass="form-control" placeholder="Reward Quantity" runat="server" TextMode="Number"  ></asp:TextBox>
-                    <asp:RequiredFieldValidator id="reqRewardQuantity" ControlToValidate="txtRewardQuantity" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator id="reqRewardQuantity" ControlToValidate="txtRewardQuantity" Text="(Required)" runat="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
                     <asp:TextBox ID="txtRewardAmount" CssClass="form-control" placeholder="Reward Amount ($)" runat="server" TextMode="Number" ></asp:TextBox>
-                    <asp:RequiredFieldValidator id="reqRewardAmount" ControlToValidate="txtRewardAmount" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
-                    <asp:CompareValidator ID="cmpRewardAmount" ControlToValidate="txtRewardAmount" Type="Currency" Operator="DatatypeCheck" Text="(Invalid Format)" runat="server"></asp:CompareValidator>
+                    <asp:RequiredFieldValidator id="reqRewardAmount" ControlToValidate="txtRewardAmount" Text="(Required)" runat="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:CompareValidator ID="cmpRewardAmount" ControlToValidate="txtRewardAmount" Type="Currency" Operator="DatatypeCheck" Text="(Invalid Format)" runat="server" Font-Bold="true" ForeColor="Red"></asp:CompareValidator>
                 </div>
                 <div style="float:left;">
                     <asp:DropDownList ID="drpRewardProvider" runat="server" ></asp:DropDownList>
-                    <asp:RequiredFieldValidator id="reqRewardProvider" ControlToValidate="drpRewardProvider" Text="(Required)" runat="server"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator id="reqRewardProvider" ControlToValidate="drpRewardProvider" Text="(Required)" runat="server" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div>
                     <asp:Button ID="btnAdd" CssClass="btn btn-primary" runat="server" Text="Add" OnClick="btnAdd_Click" />

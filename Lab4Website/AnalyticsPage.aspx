@@ -68,7 +68,7 @@
                     <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
                 </ChartAreas>
             </asp:Chart>
-            <asp:SqlDataSource ID="lab4ConnectionString1" runat="server" ConnectionString="<%$ ConnectionStrings:lab4ConnectionString %>" SelectCommand="SELECT CONCAT([User].FName, + ' ' + [User].LName) AS TeamMember, COUNT([Transaction].ReceiverID) AS RewardsReceived FROM [User], [Transaction] GROUP BY [User].FName, [User].LName"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="lab4ConnectionString1" runat="server" ConnectionString="<%$ ConnectionStrings:lab4ConnectionString %>" SelectCommand="SELECT [User].UserName AS TeamMember, COUNT([Transaction].ReceiverID) AS RewardsReceived FROM [User] LEFT OUTER JOIN [Transaction] ON [User].UserID = [Transaction].ReceiverID GROUP BY [User].UserName"></asp:SqlDataSource>
         </div>
     </div>
 </center>

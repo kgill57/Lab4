@@ -27,7 +27,10 @@
     
 <center>
     <h1 class="display-4">User Options</h1>
-    <div class="jumbotron agent-1" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+        <asp:Label ID="lblError" runat="server" Text="" style="color:red; font:bold"></asp:Label>
+        <br />
+        <br />
         <div style="width:50%">
             <div class="form-group">
             <asp:TextBox ID="txtFName" class="form-control" runat="server" placeholder="First Name" MaxLength="30"></asp:TextBox>
@@ -65,7 +68,7 @@
                 <asp:Button ID="btnInsertUser" runat="server" CssClass="btn btn-primary" OnClick="btnInsertUser_Click" Text="Insert User" />
                 <asp:Button ID="btnAutoFillUser" CssClass="btn btn-secondary" runat="server" OnClick="btnAutoFillUser_Click" Text="AutoFill User" CausesValidation="False" />
                 <br />
-                <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
+                
             </div>
         </div>
         <br />
@@ -75,11 +78,6 @@
             <asp:GridView ID="grdUsers" ValidationGroup="validNewEmp" runat="server" AutoGenerateColumns="False" DataKeyNames="UserID" OnRowCancelingEdit="grdUsers_RowCancelingEdit" OnRowDeleting="grdUsers_RowDeleting" OnRowEditing="grdUsers_RowEditing" OnRowUpdating="grdUsers_RowUpdating">
             <Columns>
                 <asp:CommandField ShowEditButton="true" CausesValidation="true" ValidationGroup="validNewEmp"/>
-                <asp:TemplateField HeaderText="User ID">
-                    <ItemTemplate>
-                        <asp:Label ID="lblUserID" runat="server" Text='<%# Eval("UserID") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
                 <asp:TemplateField HeaderText="First Name">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtgvFName" runat="server" MaxLength="30" Text='<%# Eval("FName") %>'></asp:TextBox>
@@ -145,6 +143,14 @@
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("EmployedStatus") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Account Balance">
+                    <EditItemTemplate>
+                        <asp:Label ID="lblAcctBal" runat="server" Text='<%# Eval("AccountBalance", "{0:c}") %>'></asp:Label>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblAcctBal" runat="server" Text='<%# Eval("AccountBalance", "{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

@@ -17,7 +17,7 @@
         <div class="container" style="top:150px">
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
-            <div class="jumbotron">
+            <div class="jumbotron" >
                 <div class="form-group">
                     <asp:TextBox ID="txtUsername" runat="server" placeholder="Username"></asp:TextBox>
                 </div>
@@ -37,4 +37,3 @@
         <br />
 </center>    
 </asp:Content>
-

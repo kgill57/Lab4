@@ -14,20 +14,21 @@ public partial class AnalyticsPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //try
-        //{
-        //    lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
-        //}
-        //catch (Exception)
-        //{
-        //    Response.Redirect("LoginPage.aspx");
-        //}
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+        catch (Exception)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
 
         if (!IsPostBack)
         {
-            Chart2.Visible = false;
-            Chart1.Visible = true;
-            Chart3.Visible = false;
+            rewardsReceived.Visible = true;
+            rewardsGiven.Visible = false;
+            topSales.Visible = false;
+            RewardsPerMonth.Visible = false;
 
         }
 
@@ -39,22 +40,33 @@ public partial class AnalyticsPage : System.Web.UI.Page
     {
         if (giverAndReceiver.SelectedIndex == 0)
         {
-            Chart2.Visible = false;
-            Chart1.Visible = true;
-            Chart3.Visible = false;
+            rewardsReceived.Visible = true;
+            rewardsGiven.Visible = false;
+            topSales.Visible = false;
+            RewardsPerMonth.Visible = false;
         }
 
         else if (giverAndReceiver.SelectedIndex == 1)
         {
-            Chart1.Visible = false;
-            Chart2.Visible = true;
-            Chart3.Visible = false;
+            rewardsReceived.Visible = false;
+            rewardsGiven.Visible = true;
+            topSales.Visible = false;
+            RewardsPerMonth.Visible = false;
         }
         else if(giverAndReceiver.SelectedIndex == 2)
         {
-            Chart1.Visible = false;
-            Chart2.Visible = false;
-            Chart3.Visible = true;
+            rewardsReceived.Visible = false;
+            rewardsGiven.Visible = false;
+            topSales.Visible = true;
+            RewardsPerMonth.Visible = false;
         }
+        else if(giverAndReceiver.SelectedIndex == 3)
+        {
+            rewardsReceived.Visible = false;
+            rewardsGiven.Visible = false;
+            topSales.Visible = false;
+            RewardsPerMonth.Visible = true;
+        }
+        
     }
 }

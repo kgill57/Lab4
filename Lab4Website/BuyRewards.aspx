@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="Buy Rewards" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="BuyRewards.aspx.cs" Inherits="BuyRewards" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <link href="Style/desktop.css" rel="stylesheet" />
+   <link href="Style/desktop.css" rel="stylesheet" />
     <link href="Style/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="Scripts/Sidebar.js"></script>
     <div id ="sidebar">
         <div class="toggle-btn" onclick="toggleSidebar();">
@@ -25,7 +26,7 @@
 
 <center>
     <h1 class="display-4">Purchase Rewards</h1>
-    <div class="jumbotron agent-1" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px; height:1000px;">
+    <div class="jumbotron" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px;">
         <br />
         <asp:Button ID="btnBuy" CssClass="btn btn-primary" runat="server" Text="Buy Items" OnClick="btnBuy_Click" />
         <br />
@@ -47,3 +48,4 @@
 
     
 </asp:Content>
+

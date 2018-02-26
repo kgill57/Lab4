@@ -13,13 +13,21 @@ public partial class AddRewardProviders : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+        catch (Exception)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
+
         if (!IsPostBack)
             fillGridView();
 
         loadProfilePicture();
 
-        //load the nav bar with the admin's first and last name
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        
     }
 
     protected void loadProfilePicture()

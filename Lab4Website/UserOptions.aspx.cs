@@ -12,8 +12,14 @@ public partial class UserOptions : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Show admin's name
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+        catch (Exception)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
 
         // On initial page load, fill the gridview with all users in the database
         if (!IsPostBack)
@@ -146,7 +152,7 @@ public partial class UserOptions : System.Web.UI.Page
         // Display an error message if the username already exists within the database
         else
         {
-            lblError.Text = "This username is already taken.";
+            lblError.Text = "This username is already taken";
         }
 
         // Close the SQL connection and update the gridview
@@ -170,7 +176,7 @@ public partial class UserOptions : System.Web.UI.Page
             lblBalance.Text = totalBalance.ToString("$#.00");
 
             System.Data.SqlClient.SqlCommand del = new System.Data.SqlClient.SqlCommand("SELECT UserID, FName, LName, MI, Email, " +
-                "Username, Admin, EmployedStatus FROM [User];", sc);
+                "Username, Admin, EmployedStatus, AccountBalance FROM [User];", sc);
             del.ExecuteNonQuery();
 
             grdUsers.DataSource = del.ExecuteReader();
@@ -311,10 +317,10 @@ public partial class UserOptions : System.Web.UI.Page
 
     protected void btnAutoFillUser_Click(object sender, EventArgs e)
     {
-        txtFName.Text = "Carey";
+        txtFName.Text = "Test";
         txtMI.Text = "";
-        txtLName.Text = "Cole";
-        txtEmail.Text = "Carey_Cole@jmu.edu";
-        txtUsername.Text = "CCole";
+        txtLName.Text = "User";
+        txtEmail.Text = "test@gmail.com";
+        txtUsername.Text = "testUser";
     }
 }

@@ -11,7 +11,14 @@ public partial class ManageCommunityPost : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+        catch (Exception)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
 
         if (!IsPostBack)
             fillGridView();

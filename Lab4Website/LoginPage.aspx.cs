@@ -44,7 +44,7 @@ public partial class LoginPage : System.Web.UI.Page
         bool status = Convert.ToBoolean(select.ExecuteScalar());
         if (status == false)
         {
-            lblError.Text = "Username does not exist.";
+            lblError.Text = "Username does not exist";
             return;
         }
 
@@ -155,11 +155,10 @@ public partial class LoginPage : System.Web.UI.Page
 
             select.CommandText = "INSERT INTO[dbo].[Password] Values (1, '" + passwordHashNew + "')";
             select.ExecuteNonQuery();
-            lblError.Text = "Admin created!";
         }
         else
         {
-            lblError.Text = "An admin has already been created.";
+            lblError.Text = "This username is already taken";
         }
         
         

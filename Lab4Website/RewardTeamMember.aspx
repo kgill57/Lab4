@@ -25,7 +25,10 @@
 
 <center>
     <h1 class="display-4">Reward A Team Member</h1>
-    <div class="jumbotron agent-1" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+        <asp:Label ID="lblResult" runat="server" Text="" style="color:green; font:bold"></asp:Label>
+        <br />
+        <br />
         <div style="width:50%; text-align:left; padding-left:70px;">
             <div class="form-group">
                 <asp:Label ID="lblReceiver" runat="server" Text="Team Member Being Rewarded: " style="font-weight: 700"></asp:Label>      
@@ -77,8 +80,7 @@
                 <asp:CheckBox ID="chkPrivate" runat="server" AutoPostBack="True" style="font-weight: 700" Text="Should Transaction Be Private?" />
             </div>
             <asp:Button ID="btnSubmit" CssClass="btn btn-primary" runat="server" Text="Submit Reward" OnClick="btnSubmit_Click" />
-            <asp:Button ID="AutoFillRewardSendID" CssClass="btn btn-secondary" runat="server" OnClick="AutoFillRewardSendID_Click" Text="AutoFillRewardSend" />
-            <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+            <asp:Button ID="AutoFillRewardSendID" CssClass="btn btn-secondary" runat="server" OnClick="AutoFillRewardSendID_Click" CausesValidation="false" Text="AutoFillRewardSend" />
         </div>
         
     </div>

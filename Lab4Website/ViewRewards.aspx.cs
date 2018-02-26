@@ -11,13 +11,22 @@ public partial class ViewRewards : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        try
+        {
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+        }
+        catch (Exception)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
+
         if (!IsPostBack)
             fillGridView();
 
         loadProfilePicture();
 
-        //loads the admin's first and last name into the news feed
-        lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
+        
     }
 
     protected void loadProfilePicture()
@@ -300,9 +309,9 @@ public partial class ViewRewards : System.Web.UI.Page
 
     protected void RewardAutoFillID_Click(object sender, EventArgs e)
     {
-        txtRewardName.Text = "Hardworking";
+        txtRewardName.Text = "Test Reward";
         txtRewardQuantity.Text = "50";
-        txtRewardAmount.Text = "50";
+        txtRewardAmount.Text = "25";
 
     }
 }

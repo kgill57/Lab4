@@ -13,7 +13,7 @@ public partial class ManageCommunityPost : System.Web.UI.Page
     {
         try
         {
-            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
         }
         catch (Exception)
         {
@@ -32,7 +32,7 @@ public partial class ManageCommunityPost : System.Web.UI.Page
         con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
         con.Open();
 
-        SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", con);
+        SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer WHERE EmployerID =" + Convert.ToString((int)Session["EmployerID"]), con);
         double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
 
         lblBalance.Text = totalBalance.ToString("$#.00");

@@ -2,7 +2,7 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-<center>
+    <center>
     <br />
     <br />
     <asp:Image id = "headerIMG" runat ="server" ImageUrl ="~/Images/elk-logo.png" />
@@ -26,7 +26,6 @@
                 </div>
                 <asp:Button CssClass="btn btn-primary" runat="server" Text="Login" OnClick="btnLogin_Click" />
                 <asp:Button CssClass="btn btn-secondary" runat="server" OnClick="btnExit_Click" Text="Exit" />
-                <asp:Button CssClass="btn btn-secondary" runat="server" OnClick="btnCreateAdmin_Click" Text="Create Admin" />
                 <br /><br />
                 <asp:Label ID="lblError" Font-Bold="true" ForeColor="Red" runat="server"></asp:Label>
             </div>

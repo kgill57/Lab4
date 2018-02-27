@@ -14,7 +14,7 @@ public partial class UserOptions : System.Web.UI.Page
     {
         try
         {
-            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"] + "  $" + ((Decimal)Session["AccountBalance"]).ToString("0.##");
+            lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
         }
         catch (Exception)
         {
@@ -170,7 +170,7 @@ public partial class UserOptions : System.Web.UI.Page
 
             sc.Open();
             // Declare the query string.
-            SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer", sc);
+            SqlCommand balance = new SqlCommand("SELECT TotalBalance FROM Employer WHERE EmployerID =" + Convert.ToString((int)Session["EmployerID"]), sc);
             double totalBalance = Convert.ToDouble(balance.ExecuteScalar());
 
             lblBalance.Text = totalBalance.ToString("$#.00");

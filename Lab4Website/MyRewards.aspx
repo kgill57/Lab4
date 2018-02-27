@@ -25,7 +25,7 @@
     </div>
 <center>
     <h1 class="display-4">My Rewards</h1>
-    <div class="jumbotron jumbotron-fluid" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px;">
+    <div class="jumbotron agent-1" style="width:78%; background-color:lightblue; opacity:0.88; border-radius:25px; padding-top:1px;">
         <div class="container" Style ="width:75%; padding-top: 50px;">
             <asp:Panel ID="Panel1" runat="server"></asp:Panel>
         </div>

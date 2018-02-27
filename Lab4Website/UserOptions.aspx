@@ -27,7 +27,7 @@
     
 <center>
     <h1 class="display-4">User Options</h1>
-    <div class="jumbotron" style="width:78%; height:1000px; background-color:lightblue; opacity:0.88;">
+    <div class="jumbotron agent-1" style="width:78%; background-color:lightblue; opacity:0.88; border-radius:25px; padding-top:1px;">
         <asp:Label ID="lblError" runat="server" Text="" style="color:red; font:bold"></asp:Label>
         <br />
         <br />

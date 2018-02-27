@@ -133,10 +133,6 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
                 cmdInsert.ExecuteNonQuery();
 
-                cmdInsert.CommandText = "UPDATE [Employer] SET TotalBalance = TotalBalance - @RewardValue WHERE EmployerID=1";
-                cmdInsert.ExecuteNonQuery();
-                cmdInsert.CommandText = "UPDATE [User] SET AccountBalance = AccountBalance + @RewardValue WHERE UserID=@ReceiverID";
-                cmdInsert.ExecuteNonQuery();
 
                 lblResult.Text = "Reward Sent.";
 
@@ -165,7 +161,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
                     if (totalBalance < 500)
                     {
                         var fromAddress = new MailAddress("elklogisticsmanagement@gmail.com", "Johnathon Hoyns");
-                        var toAddress = new MailAddress("johnathonhoyns@gmail.com", "Administrator");
+                        var toAddress = new MailAddress("bennskych@gmail.com", "Administrator");
                         const string fromPassword = "Daisydoo#1pet";
                         const string subject = "Reward balance is below 500 dollars";
                         const string body = "Dear Administrator, It seems that"
@@ -208,37 +204,37 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
     public void sendNotification()
     {
-        //SqlConnection con = new SqlConnection();
-        //con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
 
-        //con.Open();
-        //SqlCommand cmd = new SqlCommand("SELECT Email FROM [User] WHERE Username=@username", con);
-        //cmd.Parameters.AddWithValue("@username", drpUsernames.SelectedValue);
+        con.Open();
+        SqlCommand cmd = new SqlCommand("SELECT Email FROM [User] WHERE Username=@username", con);
+        cmd.Parameters.AddWithValue("@username", drpUsernames.SelectedValue);
 
-        //var fromAddress = new MailAddress("sdbasketball96@aol.com", "Elk Logistics Rewards");
-        //var toAddress = new MailAddress((String)cmd.ExecuteScalar(), "Test");
-        //const string fromPassword = "Daisydoo#1pet";
-        //const string subject = "You Received a Reward From a Co-Worker!";
-        //const string body = "Dear Team Member, You have received a reward from a fellow Team member. Login to find out who rewarded you!";
+        var fromAddress = new MailAddress("sdbasketball96@aol.com", "Elk Logistics Rewards");
+        var toAddress = new MailAddress((String)cmd.ExecuteScalar(), "Test");
+        const string fromPassword = "Daisydoo#1pet";
+        const string subject = "You Received a Reward From a Co-Worker!";
+        const string body = "Dear Team Member, You have received a reward from a fellow Team member. Login to find out who rewarded you!";
 
 
-        //var smtp = new SmtpClient
-        //{
-        //    Host = "smtp.aol.com",
-        //    Port = 587,
-        //    EnableSsl = true,
-        //    DeliveryMethod = SmtpDeliveryMethod.Network,
-        //    UseDefaultCredentials = false,
-        //    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-        //};
-        //using (var message = new MailMessage(fromAddress, toAddress)
-        //{
-        //    Subject = subject,
-        //    Body = body
-        //})
-        //{
-        //    smtp.Send(message);
-        //}
+        var smtp = new SmtpClient
+        {
+            Host = "smtp.aol.com",
+            Port = 587,
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            UseDefaultCredentials = false,
+            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+        };
+        using (var message = new MailMessage(fromAddress, toAddress)
+        {
+            Subject = subject,
+            Body = body
+        })
+        {
+            smtp.Send(message);
+        }
     }
 
 

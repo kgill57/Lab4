@@ -128,41 +128,41 @@ public partial class LoginPage : System.Web.UI.Page
 
     }
 
-    protected void btnCreateAdmin_Click(object sender, EventArgs e)
-    {
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
-        con.Open();
+    //protected void btnCreateAdmin_Click(object sender, EventArgs e)
+    //{
+    //    SqlConnection con = new SqlConnection();
+    //    con.ConnectionString = ConfigurationManager.ConnectionStrings["lab4ConnectionString"].ConnectionString;
+    //    con.Open();
 
-        SqlCommand select = new SqlCommand();
-        select.Connection = con;
+    //    SqlCommand select = new SqlCommand();
+    //    select.Connection = con;
 
-        select.CommandText = "SELECT UserName FROM [dbo].[User] WHERE UserName = 'admin'";
-        String existingUserName;
-        existingUserName = (String)select.ExecuteScalar();
-        if (existingUserName == null)
-        {
-            select.CommandText = "INSERT INTO [dbo].[Employer] VALUES('Elk Logistics', 5000)";
-            select.ExecuteNonQuery();
+    //    select.CommandText = "SELECT UserName FROM [dbo].[User] WHERE UserName = 'admin'";
+    //    String existingUserName;
+    //    existingUserName = (String)select.ExecuteScalar();
+    //    if (existingUserName == null)
+    //    {
+    //        select.CommandText = "INSERT INTO [dbo].[Employer] VALUES('Elk Logistics', 5000)";
+    //        select.ExecuteNonQuery();
 
-            select.CommandText = "INSERT INTO [dbo].[User] VALUES('Chris', 'J', 'Bennsky', 'Bennskych@gmail.com', 'admin', 'elk-logo.png', 1, NULL, 1, 100, 1, 'Bennsky', '2018-01-01')";
-            select.ExecuteNonQuery();
+    //        select.CommandText = "INSERT INTO [dbo].[User] VALUES('Chris', 'J', 'Bennsky', 'Bennskych@gmail.com', 'admin', 'elk-logo.png', 1, NULL, 1, 100, 1, 'Bennsky', '2018-01-01')";
+    //        select.ExecuteNonQuery();
 
-            string password = "password";
+    //        string password = "password";
 
-            string passwordHashNew =
-                       SimpleHash.ComputeHash(password, "MD5", null);
+    //        string passwordHashNew =
+    //                   SimpleHash.ComputeHash(password, "MD5", null);
 
-            select.CommandText = "INSERT INTO[dbo].[Password] Values (1, '" + passwordHashNew + "')";
-            select.ExecuteNonQuery();
-        }
-        else
-        {
-            lblError.Text = "This username is already taken";
-        }
+    //        select.CommandText = "INSERT INTO[dbo].[Password] Values (1, '" + passwordHashNew + "')";
+    //        select.ExecuteNonQuery();
+    //    }
+    //    else
+    //    {
+    //        lblError.Text = "This username is already taken";
+    //    }
         
         
-        con.Close();
+    //    con.Close();
 
-    }
+    //}
 }

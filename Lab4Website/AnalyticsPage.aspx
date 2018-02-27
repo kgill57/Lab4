@@ -28,13 +28,13 @@
     </div>
     <center>
     <h1 class="display-4" style="color:white; font: bold;">News Feed</h1>
-    <div class="jumbotron jumbotron-fluid" style="width:78%; background-color:lightblue; opacity: 0.83; border-radius:25px; padding-top:1px; height:1000px;">
+    <div class="jumbotron agent-1" style="width:78%; background-color:lightblue; opacity:0.88; border-radius:25px; padding-top:1px;">
         <br />
         <br />
         <div>
             <asp:DropDownList ID="giverAndReceiver" runat="server" OnSelectedIndexChanged="giverAndReceiver_SelectedIndexChanged" AutoPostBack="True" Width="476px">
-                <asp:ListItem>Top Reward's Received</asp:ListItem>
-                <asp:ListItem>Top Reward's Given</asp:ListItem>
+                <asp:ListItem>Top Rewards Received</asp:ListItem>
+                <asp:ListItem>Top Rewards Given</asp:ListItem>
                 <asp:ListItem>Top Reward Sales</asp:ListItem>
                 <asp:ListItem>Total Rewards by Month</asp:ListItem>
             </asp:DropDownList>

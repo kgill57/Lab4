@@ -160,7 +160,7 @@ public partial class RewardTeamMember : System.Web.UI.Page
 
                     if (totalBalance < 500)
                     {
-                        var fromAddress = new MailAddress("elklogisticsmanagement@gmail.com", "Johnathon Hoyns");
+                        var fromAddress = new MailAddress("sdbasketball96@aol.com", "Elk Logistics");
                         var toAddress = new MailAddress("bennskych@gmail.com", "Administrator");
                         const string fromPassword = "Daisydoo#1pet";
                         const string subject = "Reward balance is below 500 dollars";

@@ -14,6 +14,10 @@ public partial class AnalyticsPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        rewardsGiven.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+        RewardsPerMonth.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+        rewardsReceived.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+        topSales.ChartAreas["ChartArea1"].AxisX.Interval = 1;
         try
         {
             lblUser.Text = (String)Session["FName"] + " " + (String)Session["LName"];
